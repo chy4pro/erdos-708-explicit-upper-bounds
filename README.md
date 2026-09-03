@@ -23,12 +23,15 @@ $100, whether g(n) ≤ (2+o(1))n or even 2n — [erdosproblems.com/708](https://
   and the two-sided count of multiples in an interval); through the LP duality this gives **g(n) ≤ (17 + 149e·ln(1+ln(8n³)))·n**,
   the first bound linear up to a ln ln n factor. The constant ≈ 405 is poor (the bound beats the √ bound only for astronomically large n);
   the conjectured 2n, and the threshold-2 hinge inequality that would give 18n, remain open.
+* (v6) **Improved constant**: the hinge inequality holds for all weights and all m ≥ 3 with threshold 20 ln ln m (geometric levels of
+  ratio 51/50 + a factorial inversion with arbitrary gain, so the ln ln L baseline is paid once); hence g(n) ≤ (16 + 20 ln ln(8n³))·n for all n,
+  below the √ bound for every n and below the log bound for n ≳ 10^35. Budget verified independently (`src/r9_budget_check.py`: sup (B_L+3)/h = 17.90 < 19.24).
 
 To our knowledge these are the first upper bounds for g(n) depending on n alone (none is recorded in Erdős's 1992
 paper or on the problem's page; the 1959 original, in Hungarian, was not accessible to us). The conjectured 2n is
 **not** proved; the problem remains open. We also record g(4) ≥ 5 and g(5) ≥ 6 (exact computation).
 
-**Paper.** `paper/main.pdf` (source `paper/main.tex`, v5); archived at Zenodo: v5 DOI [10.5281/zenodo.22287131](https://doi.org/10.5281/zenodo.22287131) (v4: [10.5281/zenodo.22286559](https://doi.org/10.5281/zenodo.22286559) (v3: [10.5281/zenodo.22284511](https://doi.org/10.5281/zenodo.22284511) (v2: [10.5281/zenodo.22270923](https://doi.org/10.5281/zenodo.22270923); v1: [10.5281/zenodo.22267396](https://doi.org/10.5281/zenodo.22267396); concept DOI [10.5281/zenodo.22267395](https://doi.org/10.5281/zenodo.22267395) always resolves to the latest version).
+**Paper.** `paper/main.pdf` (source `paper/main.tex`, v6); archived at Zenodo: v6 DOI [10.5281/zenodo.22287949](https://doi.org/10.5281/zenodo.22287949) (v5: [10.5281/zenodo.22287131](https://doi.org/10.5281/zenodo.22287131); v4: [10.5281/zenodo.22286559](https://doi.org/10.5281/zenodo.22286559) (v3: [10.5281/zenodo.22284511](https://doi.org/10.5281/zenodo.22284511) (v2: [10.5281/zenodo.22270923](https://doi.org/10.5281/zenodo.22270923); v1: [10.5281/zenodo.22267396](https://doi.org/10.5281/zenodo.22267396); concept DOI [10.5281/zenodo.22267395](https://doi.org/10.5281/zenodo.22267395) always resolves to the latest version).
 
 ## Verification
 * `src/gn_dp.py` — exact minimum |B| for a concrete (A, x) by dynamic programming over capped valuation vectors; reproduces
@@ -73,3 +76,7 @@ An independent Claude Opus referee run checked the new section line by line; its
 weighted ordering identity supplied by the coordinating seat; a second independent Claude Opus referee run verified every step (with
 numerical checks up to L = 2^200000) and found no gap; a Qwen3.8-Max run (`run15_…`) proved a special case independently.
 No human supplied any mathematics. License: CC0.
+(v6) The improved constant 20 ln ln m is due to a GPT-5.6 Pro run of 61 minutes (`run16_constant20_pro*.md`), following a Qwen3.8-Max
+micro-lemma on the thinning probability (`run17_theta_budget_qwen*.md`) and the coordinator's exact budget computation (`src/constant_check.py`);
+the proof was checked item by item by an independent Claude Opus referee run (one transcription slip, a spurious square root in s(A), was
+corrected; every constant recomputed) and the budget by `src/r9_budget_check.py`.
