@@ -12,7 +12,7 @@ To our knowledge these are the first upper bounds for g(n) depending on n alone 
 paper or on the problem's page; the 1959 original, in Hungarian, was not accessible to us). The conjectured 2n is
 **not** proved; the problem remains open. We also record g(4) ≥ 5 and g(5) ≥ 6 (exact computation).
 
-**Paper.** `paper/main.pdf` (source `paper/main.tex`).
+**Paper.** `paper/main.pdf` (source `paper/main.tex`); archived at Zenodo, DOI [10.5281/zenodo.22267396](https://doi.org/10.5281/zenodo.22267396).
 
 ## Verification
 * `src/gn_dp.py` — exact minimum |B| for a concrete (A, x) by dynamic programming over capped valuation vectors; reproduces
