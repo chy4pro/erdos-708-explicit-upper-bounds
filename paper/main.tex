@@ -30,7 +30,7 @@ seven million random instances, and every numerical inequality in
 the explicit parameter choices was checked by machine (scripts in the accompanying repository). No human
 supplied a definition, a lemma, a proof idea, or a correction. The problem itself remains open: the
 conjectured bound $g(n)\le 2n$ is not proved here.}}
-\date{September 4, 2026 (v3; v1: September 3, v2: September 4)}
+\date{September 4, 2026 (v4; v1: September 3, v2, v3: September 4)}
 
 \begin{document}
 \maketitle
@@ -129,7 +129,10 @@ The gap between $n\sqrt{\ln n/\ln\ln n}$ and $2n$ is discussed in Section~\ref{s
 Finally, Section~\ref{sec:linear} reduces a linear bound to a single inequality about additive functions on
 intervals (Conjecture~\ref{conj:TH}): if it holds, then $g(n)\le18n$ (Theorem~\ref{thm:cond}). We prove the
 inequality in two special cases and show, with explicit certificates, that three natural strengthenings of it are
-false because intervals can contain more integers free of small primes than $[1,m]$ does.
+false because intervals can contain more integers free of small primes than $[1,m]$ does. Section~\ref{sec:counting} shows that the inequality follows, by linear-programming duality, from
+the two-sided count $\lfloor m/d\rfloor\le N_I(d)\le\lfloor m/d\rfloor+1$ of multiples alone in every instance we could compute,
+gives an explicit certificate for 0/1 weights valid up to about $10^{40}$, and proves the 0/1 case for all $m$ with the
+threshold $2$ replaced by $20\ln\ln m$ (Theorem~\ref{thm:A}).
 
 \section{The common construction}\label{sec:construction}
 
@@ -662,6 +665,151 @@ the remaining step; the failures in Proposition~\ref{prop:false} show that it ca
 or single-threshold argument.
 \end{remark}
 
+\section{Counting certificates and the 0/1 case}\label{sec:counting}
+
+All three failures in Proposition~\ref{prop:false} have a common feature: they use only the lower bound
+$N_I(d)\ge\lfloor m/d\rfloor$ on the number $N_I(d):=\#\{b\in I:d\mid b\}$ of multiples of $d$ in the interval. The
+upper bound $N_I(d)\le\lfloor m/d\rfloor+1$, which is exactly what the dense windows violate in spirit, was never
+used. Using both bounds, linear programming duality turns the hinge inequality into a finite question, and this
+question has a positive answer in every case we could compute; for 0/1 weights it also has an explicit answer with a
+slightly larger threshold.
+
+\subsection*{The certificate principle}
+
+\begin{proposition}[counting certificates]\label{prop:cert}
+Let $z$ be a weight and let $(c_d)$ be real numbers, finitely many nonzero, indexed by positive integers $d$, such that
+\begin{equation}\label{eq:F}
+\sum_{d\mid n}c_d\le\bigl(w_z(n)-1\bigr)^+\qquad\text{for every positive integer $n$.}
+\end{equation}
+Put $V(c):=\sum_{c_d>0}c_d\lfloor m/d\rfloor-\sum_{c_d<0}|c_d|\,(\lfloor m/d\rfloor+1)$. Then for every $x\ge0$,
+$\sum_{b\in I}(w_z(b)-1)^+\ge V(c)$. In particular \eqref{eq:TH} holds for $(m,z)$ and every $x$ as soon as
+$V(c)\ge W(m,z):=\sum_{k\le m}(w_z(k)-2)^+$ for some $c$ satisfying~\eqref{eq:F}.
+\end{proposition}
+\begin{proof}
+Summing \eqref{eq:F} over $b\in I$ gives $\sum_{b\in I}(w_z(b)-1)^+\ge\sum_d c_dN_I(d)$, and
+$\lfloor m/d\rfloor\le N_I(d)\le\lfloor m/d\rfloor+1$ for every $d$ because $I$ consists of $m$ consecutive integers.
+\end{proof}
+
+The best certificate is the optimum of a linear programme: the dual of minimising $\sum_t n_t(w_z(t)-1)^+$ over
+nonnegative real ``multisets'' $(n_t)$ of valuation patterns $t$ subject to $\lfloor m/d\rfloor\le\sum_{t:d\mid t}n_t\le
+\lfloor m/d\rfloor+1$ for all $d$. We solved this programme (for general weights with the exponents capped at
+$\lfloor\log_pm\rfloor+1$, which is legitimate because a certificate supported on capped $d$ satisfies \eqref{eq:F} for all $n$; for 0/1 weights with $c$ supported on pairs and triples of primes, adding the constraints
+\eqref{eq:F} by separation) and found $V\ge W$ in every instance: for all weights $z\in\{1,0.7,0.4\}^P$ and mixed weights
+with $P$ the primes up to $17$ and $m\le200$ (e.g.\ $V=114$ against $W=64$ for $m=100$, $z\equiv1$), and for 0/1 weights
+with $P$ the set of all primes up to $m$ for $m\in\{300,500,1000\}$ ($V=223.5,\,407.4,\,907.0$ against the distinct-prime
+targets $W_\omega=59,\,124,\,321$ defined below)
+as well as for various subsets of the primes at $m=400$. The optimal certificates are small: $c_{p^j}=1$ for prime powers with $j\ge2$,
+$c_{pq}=1$ for pairs containing $2$, $3$ or $5$, and $c_{pqr}=-1$ for a few triples (no coefficient at $d=1$ or at single primes). The scripts are in the repository.
+
+\subsection*{An explicit family for 0/1 weights}
+
+For 0/1 weights $z=\mathbf 1_P$ write $\omega_P(n)$ for the number of primes of $P$ dividing $n$, $\Omega_P(n)=\sum_{p\in P}\vp_p(n)$
+and $E_P:=\Omega_P-\omega_P=\sum_{p\in P}\sum_{j\ge2}[p^j\mid n]$. Since $(\Omega_P-1)^+=E_P+(\omega_P-1)^+$,
+$(\Omega_P-c)^+\le E_P+(\omega_P-c)^+$ for every $c\ge0$, and $\sum_{b\in I}E_P(b)\ge\sum_{k\le m}E_P(k)$ (count the multiples
+of each $p^j$), it suffices to certify the distinct-prime inequality $\sum_{k\le m}(\omega_P(k)-2)^+\le\sum_{b\in I}(\omega_P(b)-1)^+$, whose
+left side we denote $W_\omega(m)$ (for $z=\mathbf 1_P$ one has $W(m,z)\ge W_\omega(m)$, and the certificates below are for the
+distinct-prime version).
+
+\begin{lemma}\label{lem:family}
+Let $R$ be the set of the $r$ smallest primes of $P$. Put $c_d:=(-1)^{|A|}$ for $d=\prod A$ with $A\subseteq R$, $|A|\ge2$,
+and $c_d:=(-1)^{|A|+1}$ for $d=q\prod A$ with $q\in P\setminus R$ and $\emptyset\ne A\subseteq R$; all other $c_d=0$. Then
+\eqref{eq:F} holds with $(\omega_P(n)-1)^+$ on the right, and it keeps holding if all coefficients belonging to any fixed
+$q\in P\setminus R$ are set to $0$. For $r=2$, $R=\{2,3\}$ and the coefficients of the primes $q>m/2$ removed, the value is
+\begin{equation}\label{eq:V2}
+V_2(m):=\Bigl\lfloor\frac m6\Bigr\rfloor+\sum_{\substack{q\in P\\5\le q\le m/2}}\Bigl(\Bigl\lfloor\frac m{2q}\Bigr\rfloor+\Bigl\lfloor\frac m{3q}\Bigr\rfloor-\Bigl\lfloor\frac m{6q}\Bigr\rfloor-1\Bigr).
+\end{equation}
+\end{lemma}
+\begin{proof}
+Let $n$ have prime set $T=A_0\cup Q_0$ with $A_0\subseteq R$, $Q_0\subseteq P\setminus R$. Then
+$\sum_{d\mid n}c_d=\sum_{A\subseteq A_0,|A|\ge2}(-1)^{|A|}+\sum_{q\in Q_0}\sum_{\emptyset\ne A\subseteq A_0}(-1)^{|A|+1}
+=(|A_0|-1)^++|Q_0|\,[A_0\ne\emptyset]\le(|T|-1)^+$, using $\sum_{A\subseteq A_0}(-1)^{|A|}=[A_0=\emptyset]$. Removing the terms
+of one $q$ removes a nonnegative contribution. The value follows from the definition of $V$.
+\end{proof}
+
+With $\mathcal A(x):=\sum_{p\le x}\lfloor x/p\rfloor=\sum_{n\le x}\omega(n)$ and $P$ the set of all primes up to $m$ one has the
+exact identities $W_\omega(m)=\mathcal A(m)-2m+2+\#\{\text{prime powers}\le m\}$ and
+$V_2(m)=\mathcal A(m/2)+\mathcal A(m/3)-\mathcal A(m/6)-\lfloor m/4\rfloor-\lfloor m/6\rfloor-\lfloor m/9\rfloor+\lfloor m/12\rfloor+\lfloor m/18\rfloor-\pi(m/2)+2$,
+so $V_2(m)\ge W_\omega(m)$ was checked exactly for every $m\le10^7$ (at $m=10^3,\dots,10^7$ the ratio $V_2/W_\omega$ is $2.72,\,2.00,\,1.71,\,1.55,\,1.44$). Since
+$\mathcal A(x)=x\ln\ln x+Mx+O(x/\ln x)$ \cite[Thm.~430]{HW}, $V_2(m)-W_\omega(m)=-\tfrac13m\ln\ln m+(\tfrac{29}{18}-\tfrac M3)m+o(m)$,
+so this single certificate proves the 0/1 case of \eqref{eq:TH} for every $m\le10^7$ (checked exactly for each $m$) and fails
+for all sufficiently large $m$ (the leading-order crossing is at $\ln\ln m=\tfrac{29}6-M\approx4.57$, i.e.\ $m\approx10^{42}$; in
+between the inequality is expected but has not been verified); the linear programme shows that better certificates exist ($907$ against $873$ at
+$m=1000$), and whether they exist for every $m$ is open. The number of anchors must depend on $P$: for $P$ the primes in $[53,653]$ and
+$m=10^8$ the two-anchor certificate gives $1{,}595{,}615<W_\omega=1{,}602{,}217$, while three anchors give $2{,}266{,}053$.
+
+\subsection*{The 0/1 case with a larger threshold}
+
+\begin{theorem}\label{thm:A}
+Let $P$ be a finite set of primes, $m\ge3$, $x\ge0$, and
+$c^*(m):=5+\max\bigl(2,\lceil2e^2\ln(1+\tfrac{\ln m}6)\rceil\bigr)$. Then
+\begin{equation}\label{eq:thmA}
+\sum_{n\le m}\bigl(\Omega_P(n)-c^*(m)\bigr)^+\le\sum_{b\in I}\bigl(\Omega_P(b)-1\bigr)^+,
+\end{equation}
+and $c^*(m)\le20\ln\ln m$ for $m\ge30$.
+\end{theorem}
+
+The proof rests on an elementary sieve lemma which, in the language of Proposition~\ref{prop:cert}, is a certificate with
+positive coefficients on single primes and negative coefficients on pairs.
+
+\begin{lemma}\label{lem:sumrecip}
+For $y\ge2$, $\sum_{p\le y}1/p\le e\ln(1+\ln y)$.
+\end{lemma}
+\begin{proof}
+With $\sigma=1+1/\ln y$ one has $p^{\sigma-1}\le e$ for $p\le y$, so $1/p\le e\,p^{-\sigma}$; and
+$\sum_pp^{-\sigma}\le\ln\zeta(\sigma)\le\ln(1+1/(\sigma-1))=\ln(1+\ln y)$.
+\end{proof}
+
+\begin{lemma}[sieve lemma]\label{lem:sieve}
+Let $L\ge64$, let $Q$ be a finite set of primes, let $J$ be any set of $L$ consecutive integers and
+$s(L):=\max(2,\lceil2e^2\ln(1+\tfrac{\ln L}6)\rceil)$. Then
+\[
+\#\{n\le L:\omega_Q(n)\ge s(L)+5\}\le\#\{n\in J:\omega_Q(n)\ge1\}.
+\]
+\end{lemma}
+\begin{proof}
+Put $y=L^{1/6}$, $R=\{q\in Q:q\le y\}$, $H=\sum_{q\in R}1/q$ and $s=s(L)$. An integer $n\le L$ has at most five prime
+factors exceeding $y$, so $\omega_Q(n)\ge s+5$ forces $\omega_R(n)\ge s$, and
+$N_s:=\#\{n\le L:\omega_R(n)\ge s\}\le\sum_{S\subseteq R,|S|=s}\lfloor L/\prod S\rfloor\le L\,H^s/s!$ by the bound
+$s!\,e_s\le H^s$ on elementary symmetric functions. By Lemma~\ref{lem:sumrecip}, $H\le e\ln(1+\tfrac{\ln L}6)$, so $s\ge2eH$
+and, with $s!\ge(s/e)^s$, $N_s\le L(eH/s)^s\le L2^{-s}\le L/4$.
+
+For the right-hand side we use that any set $J$ of $L$ consecutive integers satisfies $L/d-1<N_J(d)<L/d+1$. If $H\ge1/2$,
+add primes of $R$ one at a time until the reciprocal sum first reaches $1/2$; the resulting $R'$ has $1/2\le H'\le1$ (the last
+prime added contributes at most $1/2$) and $t'=|R'|\le y$. By the two-term Bonferroni inequality,
+$\#\{n\in J:\omega_{Q}(n)\ge1\}\ge\#\{n\in J:\omega_{R'}(n)\ge1\}\ge\sum_{q\in R'}N_J(q)-\sum_{q<q'}N_J(qq')\ge L(H'-H'^2/2)-t'(t'+1)/2\ge\tfrac38L-\tfrac34y^2\ge\tfrac38L-\tfrac18L=\tfrac14L\ge N_s$,
+using $y(y+1)/2\le\tfrac34y^2$ for $y\ge2$ and $\tfrac34L^{1/3}\le L/8$ for $L\ge64$. If $0<H<1/2$, the same estimate with
+$R'=R$ and $H-H^2/2\ge\tfrac34H$ gives $\#\{n\in J:\omega_R(n)\ge1\}\ge\tfrac34LH-\tfrac34y^2\ge\tfrac14LH$ (because $H\ge1/y$ and
+$\tfrac34y^2\le L/(2y)$ for $L\ge64$), while $N_s\le LH^2/2\le LH/4$. If $H=0$ then $N_s=0$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:A}]
+Order $P$ increasingly and let $\omega_{<p}(n)$ count the primes of $P$ below $p$ dividing $n$. For every integer $c\ge0$,
+\begin{equation}\label{eq:order}
+(\omega_P(n)-c)^+=\sum_{p\in P,\ p\mid n}[\omega_{<p}(n)\ge c],
+\end{equation}
+since the right side counts all but the $c$ smallest primes of $P$ dividing $n$. Fix $p\in P$ and put $L=\lfloor m/p\rfloor$.
+The multiples $n=pi\le m$ of $p$ have $\omega_{<p}(pi)=\omega_{<p}(i)$ with $i\le L$, and the multiples $b=pi$ of $p$ in $I$
+have $i$ ranging over a set $J_p$ of $L$ or $L+1$ consecutive integers. If $L\ge64$, Lemma~\ref{lem:sieve} applied to
+$Q=\{q\in P:q<p\}$ and to $L$ consecutive elements of $J_p$ gives $\#\{i\le L:\omega_{<p}(i)\ge c^*(m)\}\le\#\{i\in J_p:\omega_{<p}(i)\ge1\}$,
+because $c^*(m)\ge s(L)+5$. If $L<64$ the left side is $0$, as $\omega_{<p}(i)\le3<7\le c^*(m)$ for $i\le63$. Summing over
+$p$ and using \eqref{eq:order} with $c=c^*(m)$ on the left and $c=1$ on the right proves \eqref{eq:thmA} with $\omega_P$ in
+place of $\Omega_P$; the peeling identities stated before Lemma~\ref{lem:family} then give \eqref{eq:thmA}. Finally
+$G(t):=20\ln t-7-2e^2\ln(1+t/6)$ is increasing for $t>0$ (as $2e^2<20$) and $G(\ln30)>0$, which gives $c^*(m)\le20\ln\ln m$
+for $m\ge30$.
+\end{proof}
+
+\begin{remark}[fractional weights]
+Theorem~\ref{thm:A} does not imply \eqref{eq:TH} for fractional weights, and integrating it over weight thresholds cannot
+(Proposition~\ref{prop:false} and the identity $\int_0^1(\#\{p\mid n:z_p>t\}-1)^+dt=\sum_{p\mid n}z_p-\max_{p\mid n}z_p$). Writing
+$w_z=E+S$ with $S(n)=\sum_p\min(z_p\vp_p(n),1)$ and $E=\sum_p(z_p\vp_p(n)-1)^+$, one has $(w_z-1)^+=E+(S-1)^+$ (if $S<1$ then every $z_p\vp_p<1$, so $E=0$),
+$(w_z-c)^+\le E+(S-c)^+$, and $\sum_IE\ge\sum_KE$ because $(z_p\vp_p(n)-1)^+=\sum_{j\ge1}\Delta_{p,j}[p^j\mid n]$ with nonnegative
+increments $\Delta_{p,j}=(z_pj-1)^+-(z_p(j-1)-1)^+$, so \eqref{eq:TH} for all weights follows from its analogue for the bounded
+function $S$; for rational weights $z_p=a_p/N$ this is the integer statement $\sum_{k\le m}(R(k)-2N)^+\le\sum_{b\in I}(R(b)-N)^+$
+with $R(n)=\sum_p\min(a_p\vp_p(n),N)$, of which the 0/1 case ($a_p\in\{0,N\}$) is the one treated above. The linear programme
+of Proposition~\ref{prop:cert} certifies the fractional inequality in every instance we solved; an explicit certificate for all
+$m$ and all weights would complete the proof of $g(n)\le18n$.
+\end{remark}
+
 \begin{thebibliography}{9}
 \bibitem{ES59} P.~Erd\H{o}s and J.~Sur\'anyi, Megjegyz\'esek egy versenyfeladathoz (Remarks on a problem of a
 mathematical competition), \emph{Mat.\ Lapok} 10 (1959), 39--48 (in Hungarian).
@@ -672,5 +820,6 @@ mathematical competition), \emph{Mat.\ Lapok} 10 (1959), 39--48 (in Hungarian).
 to distinct multiples, arXiv:2603.28636 (2026).
 \bibitem{HR74} D.~Hensley and I.~Richards, Primes in intervals, \emph{Acta Arith.} 25 (1974), 375--391.
 \bibitem{GR98} D.~M.~Gordon and G.~Rodemich, Dense admissible sets, in: \emph{Algorithmic Number Theory (ANTS-III)}, Lecture Notes in Comput. Sci. 1423, Springer, 1998, 216--225.
+\bibitem{HW} G.~H.~Hardy and E.~M.~Wright, \emph{An Introduction to the Theory of Numbers}, 6th ed., Oxford University Press, 2008.
 \end{thebibliography}
 \end{document}

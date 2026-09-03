@@ -13,12 +13,17 @@ $100, whether g(n) ≤ (2+o(1))n or even 2n — [erdosproblems.com/708](https://
   and rounding. The inequality is proved for a single prime and in an explicit large-parameter regime, has no counterexample
   among 2.1·10⁶ instances, and three natural strengthenings of it are shown to be **false** with explicit certificates
   (windows of length up to 10⁶ containing more integers free of small primes than [1,m]; Hensley–Richards). It remains open.
+* (v4) **counting certificates and the 0/1 case**: the hinge inequality follows from the two-sided count ⌊m/d⌋ ≤ N_I(d) ≤ ⌊m/d⌋+1 of
+  multiples alone via LP duality in every instance we could compute (fractional weights, m ≤ 200; 0/1 weights, all primes ≤ m, m ≤ 1000);
+  an explicit certificate family proves the 0/1 case for every m ≤ 10⁷ (and, by the asymptotics, up to about 10⁴² but not beyond);
+  and **Theorem A**: for 0/1 weights the hinge inequality holds for ALL m with the threshold 2 replaced by c*(m) ≤ 20 ln ln m
+  (an explicit, elementary sieve lemma). Fractional weights — the case the linear bound needs — reduce to an explicit integer statement.
 
 To our knowledge these are the first upper bounds for g(n) depending on n alone (none is recorded in Erdős's 1992
 paper or on the problem's page; the 1959 original, in Hungarian, was not accessible to us). The conjectured 2n is
 **not** proved; the problem remains open. We also record g(4) ≥ 5 and g(5) ≥ 6 (exact computation).
 
-**Paper.** `paper/main.pdf` (source `paper/main.tex`, v3); archived at Zenodo: v3 DOI [10.5281/zenodo.22284511](https://doi.org/10.5281/zenodo.22284511) (v2: [10.5281/zenodo.22270923](https://doi.org/10.5281/zenodo.22270923); v1: [10.5281/zenodo.22267396](https://doi.org/10.5281/zenodo.22267396); concept DOI [10.5281/zenodo.22267395](https://doi.org/10.5281/zenodo.22267395) always resolves to the latest version).
+**Paper.** `paper/main.pdf` (source `paper/main.tex`, v4); archived at Zenodo: v4 DOI PENDING (v3: [10.5281/zenodo.22284511](https://doi.org/10.5281/zenodo.22284511) (v2: [10.5281/zenodo.22270923](https://doi.org/10.5281/zenodo.22270923); v1: [10.5281/zenodo.22267396](https://doi.org/10.5281/zenodo.22267396); concept DOI [10.5281/zenodo.22267395](https://doi.org/10.5281/zenodo.22267395) always resolves to the latest version).
 
 ## Verification
 * `src/gn_dp.py` — exact minimum |B| for a concrete (A, x) by dynamic programming over capped valuation vectors; reproduces
@@ -38,6 +43,10 @@ paper or on the problem's page; the 1959 original, in Hungarian, was not accessi
   build the dense windows of Proposition 7.7 by a centred sieve + CRT and verify the failures from x; `src/bigwindow_eval.py`, `src/lap_window.py`
   evaluate all inequalities on a stored window. The windows themselves are in `certificates/` (see `certificates/README.md`).
 
+* (v4) `src/abstract_count_lp2.py`, `src/abstract_count_cert.py` — the counting-certificate LP for general weights (needs scipy);
+  `src/graph_cert.py` — 0/1 weights, pairs/triples with constraint generation (needs scipy); `src/cert_family.py` — the explicit family C_r;
+  `src/thmA_check.py` — numerical checks of Theorem A and its sieve lemma; `src/af_flow_test.py` — flow relaxation of the forest-transfer statement.
+
 Run: `python3 src/es_bound.py`, `python3 src/es_bound2.py`, `python3 src/gn_dp.py 3`.
 
 ## Provenance (honest)
@@ -51,5 +60,8 @@ matching that van Doorn–Li–Tang (arXiv:2603.28636) show to be false; they ar
 (v3) The LP reduction of a linear bound to the hinge inequality is due to a GPT-5.6 Pro run (4 h); the matching and forest reformulations
 and the large-parameter case to two further Pro runs (2.4 h and 3.7 h); the one-prime case to Qwen3.8-Max; the per-prime-power sufficient
 condition, the counterexample constructions and all verification code to the coordinating Claude Fable 5.1 seat, which also refuted the two
-reduction targets and the Laplace candidate proposed by the engines. Transcripts: `engine_transcripts/run5_…` to `run9_…`.
+reduction targets and the Laplace candidate proposed by the engines. Transcripts: `engine_transcripts/run5_…` to `run9_…`. (v4) Theorem A and its sieve lemma are due to a GPT-5.6 Pro run (93 min, `run10_…`);
+the counting-certificate principle, the explicit family, the LP computations and the exact asymptotic reduction are the coordinating seat's
+and a Qwen3.8-Max run (`run12_…`); a further Pro run (`run11_…`) showed that the number of anchors must depend on the prime set.
+An independent Claude Opus referee run checked the new section line by line; its corrections are incorporated.
 No human supplied any mathematics. License: CC0.
