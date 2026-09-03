@@ -132,8 +132,10 @@ intervals (Conjecture~\ref{conj:TH}): if it holds, then $g(n)\le18n$ (Theorem~\r
 inequality in two special cases and show, with explicit certificates, that three natural strengthenings of it are
 false because intervals can contain more integers free of small primes than $[1,m]$ does. Section~\ref{sec:counting} shows that the inequality follows, by linear-programming duality, from
 the two-sided count $\lfloor m/d\rfloor\le N_I(d)\le\lfloor m/d\rfloor+1$ of multiples alone in every instance we could compute,
-gives an explicit certificate for 0/1 weights valid up to about $10^{40}$, and proves the 0/1 case for all $m$ with the
-threshold $2$ replaced by $20\ln\ln m$ (Theorem~\ref{thm:A}). Section~\ref{sec:fractional} extends this to arbitrary weights
+observes that for the full set of primes the 0/1 case already follows from the trivial bound
+$\sum_I(w-1)^+\ge\sum_{k\le m}w(k)-m$ (Corollary~\ref{cor:affine}), gives an explicit anchor certificate for prime sets without small
+primes, where that bound fails, and proves the 0/1 case for all $m$ and all prime sets with the threshold $2$ replaced by $20\ln\ln m$
+(Theorem~\ref{thm:A}). Section~\ref{sec:fractional} extends this to arbitrary weights
 with threshold $1+149e\ln(1+\ln m)$ (Theorem~\ref{thm:frac}), which through the same duality gives
 $g(n)=O(n\ln\ln n)$ (Corollary~\ref{cor:lnln}). Section~\ref{sec:constant} sharpens the threshold to $20\ln\ln m$ by a geometric
 refinement of the same sieve (Theorem~\ref{thm:twenty}), giving $g(n)\le(16+20\ln\ln(8n^3))n$ for all $n$, which is below the
@@ -695,6 +697,24 @@ Summing \eqref{eq:F} over $b\in I$ gives $\sum_{b\in I}(w_z(b)-1)^+\ge\sum_d c_d
 $\lfloor m/d\rfloor\le N_I(d)\le\lfloor m/d\rfloor+1$ for every $d$ because $I$ consists of $m$ consecutive integers.
 \end{proof}
 
+\begin{corollary}[the trivial regime]\label{cor:affine}
+For every weight $z$, every $m\ge1$ and every $x\ge0$, $\sum_{b\in I}(w_z(b)-1)^+\ge\sum_{k\le m}w_z(k)-m$. Hence the hinge inequality
+with threshold $c\ge1$ holds for $(m,z)$ and every $x$ whenever $\sum_{k\le m,\,w_z(k)<c}(c-w_z(k))\le(c-1)m$; for 0/1 weights,
+\eqref{eq:TH} holds whenever $\#\{k\le m:w_z(k)=0\}\le\#\{k\le m:w_z(k)\ge2\}$, in particular for $P$ the set of all primes up to $m$ and every $m$.
+\end{corollary}
+\begin{proof}
+This is Proposition~\ref{prop:cert} for the affine certificate $c_1=-1$, $c_{p^j}=z_p$ ($j\ge1$), which satisfies \eqref{eq:F} with
+$\sum_{d\mid n}c_d=w_z(n)-1$; directly, $\sum_I(w_z-1)^+\ge\sum_I(w_z-1)=\sum_{p,j}z_pN_I(p^j)-m\ge\sum_{k\le m}w_z(k)-m$. Since
+$\sum_{k\le m}(w_z(k)-c)^+=\sum_{k\le m}w_z(k)-cm+\sum_{w_z(k)<c}(c-w_z(k))$, the stated condition is exactly $\sum_K(w_z-c)^+\le\sum_Kw_z-m$.
+For 0/1 weights and $c=2$ the condition reads $2\#\{w_z=0\}+\#\{w_z=1\}\le m$. For the full set of primes $\#\{w_z=0\}=1$ and
+$\#\{w_z\ge2\}\ge1$ for $m\ge4$, while for $m\le3$ the left side of \eqref{eq:TH} vanishes.
+\end{proof}
+
+So the hinge inequality is nontrivial only when integers of weight below the threshold dominate $[1,m]$: for 0/1 weights, prime sets
+without small primes (for $P$ the primes in $[53,653]$ and $m=10^8$ one has $\#\{\omega_P=0\}=61{,}911{,}251$ against
+$\#\{\omega_P\ge2\}=7{,}944{,}229$, and the trivial bound is negative); for fractional weights, weights spread over primes of many sizes with
+$\sum_{k\le m}w_z(k)$ of order $m$. This is also the regime of the dense windows of Proposition~\ref{prop:false}.
+
 The best certificate is the optimum of a linear programme: the dual of minimising $\sum_t n_t(w_z(t)-1)^+$ over
 nonnegative real ``multisets'' $(n_t)$ of valuation patterns $t$ subject to $\lfloor m/d\rfloor\le\sum_{t:d\mid t}n_t\le
 \lfloor m/d\rfloor+1$ for all $d$. We solved this programme (for general weights with the exponents capped at
@@ -702,8 +722,9 @@ $\lfloor\log_pm\rfloor+1$, which is legitimate because a certificate supported o
 \eqref{eq:F} by separation) and found $V\ge W$ in every instance: for all weights $z\in\{1,0.7,0.4\}^P$ and mixed weights
 with $P$ the primes up to $17$ and $m\le200$ (e.g.\ $V=114$ against $W=64$ for $m=100$, $z\equiv1$), and for 0/1 weights
 with $P$ the set of all primes up to $m$ for $m\in\{300,500,1000\}$ ($V=223.5,\,407.4,\,907.0$ against the distinct-prime
-targets $W_\omega=59,\,124,\,321$ defined below)
-as well as for various subsets of the primes at $m=400$. The optimal certificates are small: $c_{p^j}=1$ for prime powers with $j\ge2$,
+targets $W_\omega=59,\,124,\,321$ defined below; these are the values of the programme restricted to pairs and triples, and the affine
+certificate of Corollary~\ref{cor:affine} alone gives $277,\,507,\,1125$)
+as well as for various subsets of the primes at $m=400$. The optimal certificates found (they are not unique) are small: $c_{p^j}=1$ for prime powers with $j\ge2$,
 $c_{pq}=1$ for pairs containing $2$, $3$ or $5$, and $c_{pqr}=-1$ for a few triples (no coefficient at $d=1$ or at single primes). The scripts are in the repository.
 
 \subsection*{An explicit family for 0/1 weights}
@@ -736,10 +757,10 @@ exact identities $W_\omega(m)=\mathcal A(m)-2m+2+\#\{\text{prime powers}\le m\}$
 $V_2(m)=\mathcal A(m/2)+\mathcal A(m/3)-\mathcal A(m/6)-\lfloor m/4\rfloor-\lfloor m/6\rfloor-\lfloor m/9\rfloor+\lfloor m/12\rfloor+\lfloor m/18\rfloor-\pi(m/2)+2$,
 so $V_2(m)\ge W_\omega(m)$ was checked exactly for every $m\le10^7$ (at $m=10^3,\dots,10^7$ the ratio $V_2/W_\omega$ is $2.72,\,2.00,\,1.71,\,1.55,\,1.44$). Since
 $\mathcal A(x)=x\ln\ln x+Mx+O(x/\ln x)$ \cite[Thm.~430]{HW}, $V_2(m)-W_\omega(m)=-\tfrac13m\ln\ln m+(\tfrac{29}{18}-\tfrac M3)m+o(m)$,
-so this single certificate proves the 0/1 case of \eqref{eq:TH} for every $m\le10^7$ (checked exactly for each $m$) and fails
-for all sufficiently large $m$ (the leading-order crossing is at $\ln\ln m=\tfrac{29}6-M\approx4.57$, i.e.\ $m\approx10^{42}$; in
-between the inequality is expected but has not been verified); the linear programme shows that better certificates exist ($907$ against $873$ at
-$m=1000$), and whether they exist for every $m$ is open. The number of anchors must depend on $P$: for $P$ the primes in $[53,653]$ and
+so this single certificate proves the 0/1 case of \eqref{eq:TH} for the full set of primes for every $m\le10^7$ (checked exactly for each $m$)
+and fails for all sufficiently large $m$ (the leading-order crossing is at $\ln\ln m=\tfrac{29}6-M\approx4.57$, i.e.\ $m\approx10^{42}$).
+For the full set of primes this is of course weaker than Corollary~\ref{cor:affine}, which settles that case for every $m$; the point of
+the family is that it does not need small primes in $P$, where the affine certificate fails. The number of anchors must depend on $P$: for $P$ the primes in $[53,653]$ and
 $m=10^8$ the two-anchor certificate gives $1{,}595{,}615<W_\omega=1{,}602{,}217$, while three anchors give $2{,}266{,}053$.
 
 \subsection*{The 0/1 case with a larger threshold}

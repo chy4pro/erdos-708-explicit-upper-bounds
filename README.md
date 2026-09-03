@@ -26,12 +26,17 @@ $100, whether g(n) ≤ (2+o(1))n or even 2n — [erdosproblems.com/708](https://
 * (v6) **Improved constant**: the hinge inequality holds for all weights and all m ≥ 3 with threshold 20 ln ln m (geometric levels of
   ratio 51/50 + a factorial inversion with arbitrary gain, so the ln ln L baseline is paid once); hence g(n) ≤ (16 + 20 ln ln(8n³))·n for all n,
   below the √ bound for every n and below the log bound for n ≳ 10^35. Budget verified independently (`src/r9_budget_check.py`: sup (B_L+3)/h = 17.90 < 19.24).
+* (v7) **Correction (Section 8)**: the affine certificate c₁ = −1, c_{p^j} = z_p gives Σ_I (w−1)⁺ ≥ Σ_{k≤m} w(k) − m for every weight and
+  window, so the hinge inequality is trivial unless low-weight integers dominate [1,m]; for 0/1 weights with P = all primes ≤ m it holds for
+  every m (V − W = m − 2 − Π(m) ≥ 0). The earlier sentence 'whether certificates exist for every m is open' was wrong for the full set of primes;
+  the anchor family remains needed for prime sets without small primes (P = [53,653], m = 10⁸: affine bound −52,364,805 < 0). The quoted LP
+  values 223.5/407.4/907 are values of the programme restricted to pairs and triples (`src/graph_cert.py`); see `src/affine_check.py`. No theorem is affected.
 
 To our knowledge these are the first upper bounds for g(n) depending on n alone (none is recorded in Erdős's 1992
 paper or on the problem's page; the 1959 original, in Hungarian, was not accessible to us). The conjectured 2n is
 **not** proved; the problem remains open. We also record g(4) ≥ 5 and g(5) ≥ 6 (exact computation).
 
-**Paper.** `paper/main.pdf` (source `paper/main.tex`, v6); archived at Zenodo: v6 DOI [10.5281/zenodo.22287949](https://doi.org/10.5281/zenodo.22287949) (v5: [10.5281/zenodo.22287131](https://doi.org/10.5281/zenodo.22287131); v4: [10.5281/zenodo.22286559](https://doi.org/10.5281/zenodo.22286559) (v3: [10.5281/zenodo.22284511](https://doi.org/10.5281/zenodo.22284511) (v2: [10.5281/zenodo.22270923](https://doi.org/10.5281/zenodo.22270923); v1: [10.5281/zenodo.22267396](https://doi.org/10.5281/zenodo.22267396); concept DOI [10.5281/zenodo.22267395](https://doi.org/10.5281/zenodo.22267395) always resolves to the latest version).
+**Paper.** `paper/main.pdf` (source `paper/main.tex`, v7); archived at Zenodo: v7 DOI [10.5281/zenodo.22288059](https://doi.org/10.5281/zenodo.22288059) (v6: [10.5281/zenodo.22287949](https://doi.org/10.5281/zenodo.22287949); v5: [10.5281/zenodo.22287131](https://doi.org/10.5281/zenodo.22287131); v4: [10.5281/zenodo.22286559](https://doi.org/10.5281/zenodo.22286559) (v3: [10.5281/zenodo.22284511](https://doi.org/10.5281/zenodo.22284511) (v2: [10.5281/zenodo.22270923](https://doi.org/10.5281/zenodo.22270923); v1: [10.5281/zenodo.22267396](https://doi.org/10.5281/zenodo.22267396); concept DOI [10.5281/zenodo.22267395](https://doi.org/10.5281/zenodo.22267395) always resolves to the latest version).
 
 ## Verification
 * `src/gn_dp.py` — exact minimum |B| for a concrete (A, x) by dynamic programming over capped valuation vectors; reproduces
