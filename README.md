@@ -18,12 +18,17 @@ $100, whether g(n) ≤ (2+o(1))n or even 2n — [erdosproblems.com/708](https://
   an explicit certificate family proves the 0/1 case for every m ≤ 10⁷ (and, by the asymptotics, up to about 10⁴² but not beyond);
   and **Theorem A**: for 0/1 weights the hinge inequality holds for ALL m with the threshold 2 replaced by c*(m) ≤ 20 ln ln m
   (an explicit, elementary sieve lemma). Fractional weights — the case the linear bound needs — reduce to an explicit integer statement.
+* (v5) **g(n) = O(n ln ln n)**: for arbitrary weights the hinge inequality holds for every m with threshold c_m = 1 + 149e·ln(1+ln m)
+  (a weighted sieve lemma: random thinning, a k-th order two-term Bonferroni inequality, an exact dyadic encoding of fractional valuations,
+  and the two-sided count of multiples in an interval); through the LP duality this gives **g(n) ≤ (17 + 149e·ln(1+ln(8n³)))·n**,
+  the first bound linear up to a ln ln n factor. The constant ≈ 405 is poor (the bound beats the √ bound only for astronomically large n);
+  the conjectured 2n, and the threshold-2 hinge inequality that would give 18n, remain open.
 
 To our knowledge these are the first upper bounds for g(n) depending on n alone (none is recorded in Erdős's 1992
 paper or on the problem's page; the 1959 original, in Hungarian, was not accessible to us). The conjectured 2n is
 **not** proved; the problem remains open. We also record g(4) ≥ 5 and g(5) ≥ 6 (exact computation).
 
-**Paper.** `paper/main.pdf` (source `paper/main.tex`, v4); archived at Zenodo: v4 DOI [10.5281/zenodo.22286559](https://doi.org/10.5281/zenodo.22286559) (v3: [10.5281/zenodo.22284511](https://doi.org/10.5281/zenodo.22284511) (v2: [10.5281/zenodo.22270923](https://doi.org/10.5281/zenodo.22270923); v1: [10.5281/zenodo.22267396](https://doi.org/10.5281/zenodo.22267396); concept DOI [10.5281/zenodo.22267395](https://doi.org/10.5281/zenodo.22267395) always resolves to the latest version).
+**Paper.** `paper/main.pdf` (source `paper/main.tex`, v5); archived at Zenodo: v5 DOI PENDING (v4: [10.5281/zenodo.22286559](https://doi.org/10.5281/zenodo.22286559) (v3: [10.5281/zenodo.22284511](https://doi.org/10.5281/zenodo.22284511) (v2: [10.5281/zenodo.22270923](https://doi.org/10.5281/zenodo.22270923); v1: [10.5281/zenodo.22267396](https://doi.org/10.5281/zenodo.22267396); concept DOI [10.5281/zenodo.22267395](https://doi.org/10.5281/zenodo.22267395) always resolves to the latest version).
 
 ## Verification
 * `src/gn_dp.py` — exact minimum |B| for a concrete (A, x) by dynamic programming over capped valuation vectors; reproduces
@@ -64,4 +69,7 @@ reduction targets and the Laplace candidate proposed by the engines. Transcripts
 the counting-certificate principle, the explicit family, the LP computations and the exact asymptotic reduction are the coordinating seat's
 and a Qwen3.8-Max run (`run12_…`); a further Pro run (`run11_…`) showed that the number of anchors must depend on the prime set.
 An independent Claude Opus referee run checked the new section line by line; its corrections are incorporated.
+(v5) The weighted sieve lemma and the O(n ln ln n) theorem are due to a GPT-5.6 Pro run of 31 minutes (`run14_…`), building on the
+weighted ordering identity supplied by the coordinating seat; a second independent Claude Opus referee run verified every step (with
+numerical checks up to L = 2^200000) and found no gap; a Qwen3.8-Max run (`run15_…`) proved a special case independently.
 No human supplied any mathematics. License: CC0.

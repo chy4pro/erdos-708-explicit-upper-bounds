@@ -30,7 +30,7 @@ seven million random instances, and every numerical inequality in
 the explicit parameter choices was checked by machine (scripts in the accompanying repository). No human
 supplied a definition, a lemma, a proof idea, or a correction. The problem itself remains open: the
 conjectured bound $g(n)\le 2n$ is not proved here.}}
-\date{September 4, 2026 (v4; v1: September 3, v2, v3: September 4)}
+\date{September 4, 2026 (v5; v1: September 3, v2--v4: September 4)}
 
 \begin{document}
 \maketitle
@@ -46,7 +46,8 @@ g(n)\;\le\; n\bigl(\lceil\log_2 2n\rceil+\lceil\log_2\lceil\log_2 2n\rceil\rceil
 \qquad
 g(n)\;\le\;\Bigl\lceil 48\,n\sqrt{\tfrac{81+\ln n}{\ln(81+\ln n)}}\Bigr\rceil ,
 \]
-and $g(n)\le(2+o(1))\,n\sqrt{\ln n/\ln\ln n}$. We also show that the conjectured bound holds for long
+and $g(n)\le(2+o(1))\,n\sqrt{\ln n/\ln\ln n}$, and, by a different method (linear-programming duality and an
+elementary sieve lemma for intervals), $g(n)\le\bigl(17+149e\ln(1+\ln(8n^3))\bigr)n=O(n\ln\ln n)$. We also show that the conjectured bound holds for long
 intervals: if $a_n\ge 8n^3$ then $2n$ integers always suffice, so Erd\H{o}s's question is reduced to the
 range $a_n<8n^3$; more generally, for every integer $k\ge 2$, $kn$ integers suffice whenever $a_n\le kn$ or
 $a_n^{k-1}\ge(kn)^{k+1}$; hence for every fixed $\delta>0$ a bound linear in $n$ (with a constant depending on
@@ -132,7 +133,10 @@ inequality in two special cases and show, with explicit certificates, that three
 false because intervals can contain more integers free of small primes than $[1,m]$ does. Section~\ref{sec:counting} shows that the inequality follows, by linear-programming duality, from
 the two-sided count $\lfloor m/d\rfloor\le N_I(d)\le\lfloor m/d\rfloor+1$ of multiples alone in every instance we could compute,
 gives an explicit certificate for 0/1 weights valid up to about $10^{40}$, and proves the 0/1 case for all $m$ with the
-threshold $2$ replaced by $20\ln\ln m$ (Theorem~\ref{thm:A}).
+threshold $2$ replaced by $20\ln\ln m$ (Theorem~\ref{thm:A}). Section~\ref{sec:fractional} extends this to arbitrary weights
+with threshold $1+149e\ln(1+\ln m)$ (Theorem~\ref{thm:frac}), which through the same duality gives
+$g(n)\le(17+149e\ln(1+\ln(8n^3)))n=O(n\ln\ln n)$ (Corollary~\ref{cor:lnln}), an improvement of Theorem~\ref{thm:sqrt} in the
+order of growth (though not numerically below astronomically large $n$).
 
 \section{The common construction}\label{sec:construction}
 
@@ -808,6 +812,149 @@ function $S$; for rational weights $z_p=a_p/N$ this is the integer statement $\s
 with $R(n)=\sum_p\min(a_p\vp_p(n),N)$, of which the 0/1 case ($a_p\in\{0,N\}$) is the one treated above. The linear programme
 of Proposition~\ref{prop:cert} certifies the fractional inequality in every instance we solved; an explicit certificate for all
 $m$ and all weights would complete the proof of $g(n)\le18n$.
+\end{remark}
+
+\section{The fractional case and an $O(n\ln\ln n)$ bound}\label{sec:fractional}
+
+Theorem~\ref{thm:A} used only 0/1 weights. In this section the same method, combined with a random-thinning device,
+handles arbitrary weights, at the price of a larger threshold; through Lemma~\ref{lem:dual} this gives the first bound
+for $g(n)$ that is linear up to a $\ln\ln n$ factor.
+
+\begin{theorem}\label{thm:frac}
+For every weight $z$, every $m\ge16$ and every $x\ge0$,
+\begin{equation}\label{eq:thfrac}
+\sum_{k\le m}\bigl(w_z(k)-c_m\bigr)^+\le\sum_{b\in I}\bigl(w_z(b)-1\bigr)^+,\qquad c_m:=1+149e\ln(1+\ln m),
+\end{equation}
+and $c_m<675\ln\ln m$. For $2\le m\le15$ the inequality holds with $c_m=4$.
+\end{theorem}
+
+\begin{corollary}\label{cor:lnln}
+$g(n)\le\bigl(17+149e\ln(1+\ln(8n^3))\bigr)n$ for all $n\ge1$; in particular $g(n)=O(n\ln\ln n)$.
+\end{corollary}
+\begin{proof}
+If $a_n\ge8n^3$, Theorem~\ref{thm:long} gives $2n$. Otherwise $m=a_n<8n^3$ and, by Lemma~\ref{lem:dual} with a maximiser
+$z$, $\sum_{a\in A}w_z(a)\le c_mn+\sum_{k\le m}(w_z(k)-c_m)^+\le c_mn+\sum_{b\in I}(w_z(b)-1)^+$, so $\tau^*\le c_mn$ and
+Lemmas~\ref{lem:round}, \ref{lem:fewprimes} give $|B|<(c_m+16)n$, with $c_m=4$ when $m\le15$; in all cases $c_m\le c_{8n^3}$ since $c_m$ is
+increasing for $m\ge16$ and $4<c_{16}$.
+\end{proof}
+
+Throughout this section $\lambda(t):=\ln(1+\ln t)$, $L\ge16$ is an integer, $J$ is a set of $L$ consecutive positive integers,
+$R:=\lfloor\log_2L\rfloor$, $H:=e\lambda(L)$ and $L_0:=\ln(H+2)$; note $H>3$ and $L_0>1$ for $L\ge16$.
+
+\subsection*{Two-term Bonferroni at level $k$}
+\begin{lemma}\label{lem:bonfk}
+For integers $r\ge0$ and $k\ge1$, $[r\ge k]\ge\binom rk-k\binom r{k+1}$.
+\end{lemma}
+\begin{proof}
+For $r<k$ both sides vanish; for $r\in\{k,k+1\}$ the right side is $1$; for $r\ge k+2$,
+$\binom rk-k\binom r{k+1}=\binom rk\bigl(1-\tfrac{k(r-k)}{k+1}\bigr)\le0$.
+\end{proof}
+
+\subsection*{A sieve lemma with an arbitrary gain}
+Let $D$ be a finite family of pairwise coprime integers $d\ge2$ and $\nu_D(n):=\#\{d\in D:d\mid n\}$. For $1\le k\le R-1$ put
+\begin{equation}\label{eq:rho}
+\rho(k):=\Bigl\lceil16H+\frac{16kL_0}{\sqrt{\ln(2+k/H)}}\Bigr\rceil,\qquad C(k):=2k+\rho(k).
+\end{equation}
+
+\begin{lemma}[gain-$G$ sieve]\label{lem:gain}
+For every real $1\le G\le2H$, every $1\le k\le R-1$ and every $J$,
+\[
+G\cdot\#\{n\le L:\nu_D(n)\ge C(k)\}\le\#\{n\in J:\nu_D(n)\ge k\}.
+\]
+\end{lemma}
+\begin{proof}
+Put $y:=L^{1/(k+1)}\ge2$, $D_0:=\{d\in D:d\le y\}$ and $H_0:=\sum_{d\in D_0}1/d$. Choosing a prime divisor of each $d\in D_0$
+gives distinct primes $\le y$, so $H_0\le\sum_{p\le y}1/p\le e\lambda(y)\le H$ by Lemma~\ref{lem:sumrecip}. Let $e_j$ denote
+the elementary symmetric functions of the numbers $1/d$, $d\in D_0$; then $(k+1)e_{k+1}\le H_0e_k$ and
+$e_{k+r}\le e_ke_r/\binom{k+r}k\le e_kH_0^r/r!$.
+
+\emph{Lower bound on $J$.} Retain each element of $D_0$ independently with probability $\theta:=1/(8H)$, obtaining a random
+subfamily $E$. For every $E$, Lemma~\ref{lem:bonfk} summed over $n\in J$ gives
+$\#\{n\in J:\nu_E(n)\ge k\}\ge M_k(E)-kM_{k+1}(E)$, where $M_j(E):=\sum_{F\subseteq E,|F|=j}N_J(\prod F)$; since $\nu_D\ge\nu_E$
+and $\mathbb E\,M_j(E)=\theta^jM_j(D_0)$, taking expectations yields
+$\#\{n\in J:\nu_D(n)\ge k\}\ge\theta^k\bigl(M_k(D_0)-k\theta M_{k+1}(D_0)\bigr)$. A product of $k$ elements of $D_0$ is at most
+$y^k=L/y\le L/2$, so $N_J(a)\ge L/a-1\ge L/(2a)$ and $M_k(D_0)\ge\tfrac L2e_k$; a product of $k+1$ elements is at most $y^{k+1}=L$,
+so $N_J(a)\le L/a+1\le2L/a$ and $M_{k+1}(D_0)\le2Le_{k+1}$. Hence $k\theta M_{k+1}(D_0)\le2\theta LH_0e_k\le\tfrac L4e_k$ and
+\begin{equation}\label{eq:lowerJ}
+\#\{n\in J:\nu_D(n)\ge k\}\ge\frac{Le_k}{4(8H)^k}.
+\end{equation}
+
+\emph{Upper bound on $[1,L]$.} An integer $n\le L$ is divisible by at most $k$ elements of $D\setminus D_0$, since $k+1$ of them
+would have product $>y^{k+1}=L$. Hence $\nu_D(n)\ge C(k)$ implies $\nu_{D_0}(n)\ge k+\rho(k)$, and with $r=\rho(k)$,
+\begin{equation}\label{eq:upperL}
+\#\{n\le L:\nu_D(n)\ge C(k)\}\le Le_{k+r}\le Le_k\frac{H^{r}}{r!}.
+\end{equation}
+
+\emph{The gain.} Write $s=k/H$ and $\ell=\ln(2+s)$. We claim $\ln\bigl(\tfrac{16}e(1+s/\sqrt\ell)\bigr)\ge\tfrac12\sqrt\ell$.
+With $t=\sqrt\ell$: if $t\le1$ the left side is at least $\ln(16/e)>1\ge t/2$; if $t\ge1$ then $s=e^{t^2}-2$ and
+$1+s/t\ge e^{t^2}/(2t)$ (as $e^{t^2}/2+t-2\ge0$), so the difference of the two sides is at least
+$\ln(8/e)+t^2-\ln t-t/2$, which is positive at $t=1$ and increasing. Since $r=\rho(k)\ge16H(1+s\,L_0/\sqrt\ell)\ge16H(1+s/\sqrt\ell)$,
+we get $\ln\frac r{eH}\ge\tfrac12\sqrt\ell$ and, using $r!\ge(r/e)^r$ and $r\ge16kL_0/\sqrt\ell$,
+$\ln\frac{r!}{H^r}\ge r\ln\frac r{eH}\ge8kL_0$. On the other hand $4G\le8H\le(H+2)^3$ gives
+$\ln\bigl(4G(8H)^k\bigr)\le3(k+1)L_0\le6kL_0$. Therefore $4G(8H)^kH^r/r!\le1$, and \eqref{eq:lowerJ}, \eqref{eq:upperL} give the lemma.
+\end{proof}
+
+\subsection*{Dyadic encoding of fractional valuations}
+Let $u=(u_q)$ be weights, $s_q(n):=\min(u_q\vp_q(n),1)$ and $X(n):=\sum_qs_q(n)$. For $j\ge0$ put
+$N_j(n):=\#\{q:s_q(n)\ge2^{-j}\}$ and, for $u_q>0$, $d_{q,j}:=q^{\lceil2^{-j}/u_q\rceil}$. Then $s_q(n)\ge2^{-j}$ if and only if
+$d_{q,j}\mid n$, the integers $d_{q,j}$ ($q$ varying) are pairwise coprime, so $N_j=\nu_{D_j}$ for $D_j:=\{d_{q,j}\}$; and since
+$s\le\sum_{j\ge0}2^{-j}[s\ge2^{-j}]\le2s$ for $s\in[0,1]$,
+\begin{equation}\label{eq:dyadic}
+X(n)\le\sum_{j\ge0}2^{-j}N_j(n)\le2X(n).
+\end{equation}
+
+\begin{lemma}[weighted sieve lemma]\label{lem:wsl}
+For every family of weights $u$, every $L\ge16$ and every $J$,
+\[
+\#\{n\le L:X(n)\ge149H\}\le\#\{n\in J:X(n)\ge1\}.
+\]
+\end{lemma}
+\begin{proof}
+Put $Q:=1+\lfloor\log_2(R-1)\rfloor$, so that $2^j\le R-1$ for $j<Q$ and $2^Q\ge R$. With $t=\ln L$ one has $R<2t$ and
+$Q<3+2\ln t<5\lambda(L)<2H$ for $L\ge16$. For $j<Q$ set $a_j:=C(2^j)-1$ and for $j\ge Q$ set $a_j:=R$; let
+$A:=\sum_{j\ge0}2^{-j}a_j$. Since $N_j(n)\le\omega(n)\le R$ for $n\le L$, if $X(n)\ge A+1$ for some $n\le L$ then by
+\eqref{eq:dyadic} some $j<Q$ has $N_j(n)\ge C(2^j)$. Lemma~\ref{lem:gain} with $D=D_j$, $k=2^j$ and $G=Q$ gives
+$Q\cdot\#\{n\le L:N_j(n)\ge C(2^j)\}\le\#\{n\in J:N_j(n)\ge2^j\}\le\#\{n\in J:X(n)\ge1\}$, the last step because
+$N_j(n)\ge2^j$ forces $X(n)\ge2^{-j}N_j(n)\ge1$. Summing over the $Q$ indices $j<Q$,
+$\#\{n\le L:X(n)\ge A+1\}\le\#\{n\in J:X(n)\ge1\}$.
+
+It remains to show $A+1\le149H$. From \eqref{eq:rho}, $a_j\le2\cdot2^j+16H+16\cdot2^jL_0/\sqrt{\ln(2+2^j/H)}$, so
+$\sum_{j<Q}2^{-j}a_j\le2Q+32H+16L_0S_Q$ with $S_Q:=\sum_{j<Q}\ln(2+2^j/H)^{-1/2}$. The indices with $2^j\le H$ number at most
+$1+\log_2H\le1+\tfrac32\sqrt H$ and contribute at most $\tfrac54$ each, hence at most $\tfrac{21}8\sqrt H$; if $j_0$ is the first
+index with $2^{j_0}>H$, the $j_0$-term is less than $1$ and the term $j_0+t$ ($t\ge1$) is less than $\tfrac54t^{-1/2}$, so the
+remaining terms contribute less than $1+\tfrac52\sqrt Q\le\tfrac{21}5\sqrt H$. Thus $S_Q\le7\sqrt H$, and with
+$L_0=\ln(H+2)\le\sqrt H$ we get $16L_0S_Q\le112H$. Finally $\sum_{j\ge Q}2^{-j}R=2R/2^Q\le2$, so
+$A\le4H+32H+112H+2=148H+2$ and $A+1\le149H$ because $H>3$.
+\end{proof}
+
+\subsection*{Proof of Theorem~\ref{thm:frac}}
+Write $w_z=E+S$ with $S(n)=\sum_p\min(z_p\vp_p(n),1)$ as in the remark after Theorem~\ref{thm:A}; it suffices to prove
+$\sum_{k\le m}(S(k)-c_m)^+\le\sum_{b\in I}(S(b)-1)^+$. By continuity in the (finitely many) weights we may assume $z_p=a_p/N$
+rational; put $r_p(n):=\min(a_p\vp_p(n),N)$ and $R(n):=\sum_pr_p(n)=NS(n)$. For integers $n$ and thresholds $T\ge0$ let
+$R_{<p}(n):=\sum_{q<p}r_q(n)$. Ordering the primes dividing $n$ and letting $p^*$ be the first with $R_{\le p^*}(n)\ge T$,
+one has $\sum_{p\mid n}r_p(n)[R_{<p}(n)\ge T]=R(n)-R_{\le p^*}(n)$ and $T\le R_{\le p^*}(n)<T+N$, whence
+\begin{equation}\label{eq:wordering}
+\bigl(R(n)-T-N\bigr)^+\le\sum_{p\mid n}r_p(n)\bigl[R_{<p}(n)\ge T\bigr]\le\bigl(R(n)-T\bigr)^+ .
+\end{equation}
+Applying \eqref{eq:wordering} with $T=(c_m-1)N$ on $[1,m]$ and with $T=N$ on $I$, it suffices to show, for every prime $p$,
+$\sum_{k\le m,\,p\mid k}r_p(k)[R_{<p}(k)\ge(c_m-1)N]\le\sum_{b\in I,\,p\mid b}r_p(b)[R_{<p}(b)\ge N]$. Writing
+$r_p(n)=\sum_{j\ge1}\Delta_{p,j}[p^j\mid n]$ with $\Delta_{p,j}=\min(a_pj,N)-\min(a_p(j-1),N)\ge0$ and using
+$R_{<p}(p^ji)=R_{<p}(i)$, this follows from: for every $j\ge1$, $L:=\lfloor m/p^j\rfloor$ and every run $J$ of $L$ consecutive
+integers (the quotients $i$ of the multiples $p^ji\in I$ form a run of $L$ or $L+1$ consecutive integers),
+\[
+\#\{i\le L:R_{<p}(i)\ge(c_m-1)N\}\le\#\{i\in J:R_{<p}(i)\ge N\}.
+\]
+Dividing by $N$, $R_{<p}/N$ is the function $X$ of Lemma~\ref{lem:wsl} for the weights $u_q=z_q$ ($q<p$). If $L\ge16$ the
+lemma applies because $c_m-1=149e\lambda(m)\ge149e\lambda(L)$; if $L<16$ the left side is empty since $X(i)\le\omega(i)\le2<c_m-1$
+for $i\le15$. This proves \eqref{eq:thfrac} for $m\ge16$; for $2\le m\le15$, $S(k)\le\omega(k)\le2$ gives the statement with $c_m=4$.
+Finally, for $m\ge16$ and $t=\ln m$, $\lambda(m)=\ln\ln m+\ln(1+1/t)<\tfrac32\ln\ln m$ (as $1/t<3/8<\tfrac12\ln\ln m$), and
+$1+149e\lambda(m)<150e\lambda(m)<675\ln\ln m$.\qed
+
+\begin{remark}
+The constant $149e\approx405$ is far from optimal: the thinning probability $1/(8H)$, the gain $G=Q$ and the dyadic budget
+were chosen for simplicity. The bound of Corollary~\ref{cor:lnln} is smaller than that of Theorem~\ref{thm:sqrt} only for
+astronomically large $n$; its point is the order of growth. The hinge inequality with threshold $2$ (Conjecture~\ref{conj:TH}),
+which would give $18n$, remains open.
 \end{remark}
 
 \begin{thebibliography}{9}
