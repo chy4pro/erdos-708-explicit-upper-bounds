@@ -31,12 +31,16 @@ $100, whether g(n) ≤ (2+o(1))n or even 2n — [erdosproblems.com/708](https://
   every m (V − W = m − 2 − Π(m) ≥ 0). The earlier sentence 'whether certificates exist for every m is open' was wrong for the full set of primes;
   the anchor family remains needed for prime sets without small primes (P = [53,653], m = 10⁸: affine bound −52,364,805 < 0). The quoted LP
   values 223.5/407.4/907 are values of the programme restricted to pairs and triples (`src/graph_cert.py`); see `src/affine_check.py`. No theorem is affected.
+* (v8) **0/1 case with an absolute threshold** (Section 11): for every finite prime set P, every m and every window of m consecutive
+  integers, Σ_{k≤m}(Ω_P(k)−4)⁺ ≤ Σ_{b∈I}(Ω_P(b)−1)⁺ — two explicit counting certificates (pair–triple with coefficients 11/21, −1/7 on the primes
+  ≤ m^{1/3} when their harmonic mass η ≤ 2; the affine certificate when η > 2). Replaces the 20 ln ln m of Theorem A by 4. Does not improve
+  the bound on g(n) (fractional weights needed; naive threshold averaging fails). Independent referee: `src/referee_c4_cert.py`, `src/referee_c4_scan.py`.
 
 To our knowledge these are the first upper bounds for g(n) depending on n alone (none is recorded in Erdős's 1992
 paper or on the problem's page; the 1959 original, in Hungarian, was not accessible to us). The conjectured 2n is
 **not** proved; the problem remains open. We also record g(4) ≥ 5 and g(5) ≥ 6 (exact computation).
 
-**Paper.** `paper/main.pdf` (source `paper/main.tex`, v7); archived at Zenodo: v7 DOI [10.5281/zenodo.22288059](https://doi.org/10.5281/zenodo.22288059) (v6: [10.5281/zenodo.22287949](https://doi.org/10.5281/zenodo.22287949); v5: [10.5281/zenodo.22287131](https://doi.org/10.5281/zenodo.22287131); v4: [10.5281/zenodo.22286559](https://doi.org/10.5281/zenodo.22286559) (v3: [10.5281/zenodo.22284511](https://doi.org/10.5281/zenodo.22284511) (v2: [10.5281/zenodo.22270923](https://doi.org/10.5281/zenodo.22270923); v1: [10.5281/zenodo.22267396](https://doi.org/10.5281/zenodo.22267396); concept DOI [10.5281/zenodo.22267395](https://doi.org/10.5281/zenodo.22267395) always resolves to the latest version).
+**Paper.** `paper/main.pdf` (source `paper/main.tex`, v8); archived at Zenodo: v8 DOI [10.5281/zenodo.22288514](https://doi.org/10.5281/zenodo.22288514) (v7: [10.5281/zenodo.22288059](https://doi.org/10.5281/zenodo.22288059); v6: [10.5281/zenodo.22287949](https://doi.org/10.5281/zenodo.22287949); v5: [10.5281/zenodo.22287131](https://doi.org/10.5281/zenodo.22287131); v4: [10.5281/zenodo.22286559](https://doi.org/10.5281/zenodo.22286559) (v3: [10.5281/zenodo.22284511](https://doi.org/10.5281/zenodo.22284511) (v2: [10.5281/zenodo.22270923](https://doi.org/10.5281/zenodo.22270923); v1: [10.5281/zenodo.22267396](https://doi.org/10.5281/zenodo.22267396); concept DOI [10.5281/zenodo.22267395](https://doi.org/10.5281/zenodo.22267395) always resolves to the latest version).
 
 ## Verification
 * `src/gn_dp.py` — exact minimum |B| for a concrete (A, x) by dynamic programming over capped valuation vectors; reproduces
@@ -85,3 +89,7 @@ No human supplied any mathematics. License: CC0.
 micro-lemma on the thinning probability (`run17_theta_budget_qwen*.md`) and the coordinator's exact budget computation (`src/constant_check.py`);
 the proof was checked item by item by an independent Claude Opus referee run (one transcription slip, a spurious square root in s(A), was
 corrected; every constant recomputed) and the budget by `src/r9_budget_check.py`.
+(v8) The threshold-4 theorem for 0/1 weights is due to a GPT-5.6 Pro run of 65 minutes (`run19_zero_one_threshold4_pro*.md`), answering a
+coordinator brief that asked whether counting with both interval bounds can give an absolute constant; checked step by step by an independent
+Claude Opus referee run (68,251 exhaustive instances m ≤ 43, structured/random/deep-window scans, an abstract-adversary LP), which found no
+error. The Qwen3.8-Max micro-lemma runs of the same day (`run18_*`, anchor asymptotics; single-scale certificate) are recorded but not used.

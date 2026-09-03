@@ -47,7 +47,9 @@ g(n)\;\le\; n\bigl(\lceil\log_2 2n\rceil+\lceil\log_2\lceil\log_2 2n\rceil\rceil
 g(n)\;\le\;\Bigl\lceil 48\,n\sqrt{\tfrac{81+\ln n}{\ln(81+\ln n)}}\Bigr\rceil ,
 \]
 and $g(n)\le(2+o(1))\,n\sqrt{\ln n/\ln\ln n}$, and, by a different method (linear-programming duality and an
-elementary sieve lemma for intervals), $g(n)\le\bigl(16+20\ln\ln(8n^3)\bigr)n=O(n\ln\ln n)$. We also show that the conjectured bound holds for long
+elementary sieve lemma for intervals), $g(n)\le\bigl(16+20\ln\ln(8n^3)\bigr)n=O(n\ln\ln n)$. The duality reduces a linear bound to a ``hinge inequality'' for
+weighted prime-factor counts on intervals; we prove it for 0/1 weights with the absolute threshold $4$ for every set of primes, by
+explicit counting certificates, while the fractional case, which would give $g(n)=O(n)$, remains open. We also show that the conjectured bound holds for long
 intervals: if $a_n\ge 8n^3$ then $2n$ integers always suffice, so Erd\H{o}s's question is reduced to the
 range $a_n<8n^3$; more generally, for every integer $k\ge 2$, $kn$ integers suffice whenever $a_n\le kn$ or
 $a_n^{k-1}\ge(kn)^{k+1}$; hence for every fixed $\delta>0$ a bound linear in $n$ (with a constant depending on
@@ -135,7 +137,8 @@ the two-sided count $\lfloor m/d\rfloor\le N_I(d)\le\lfloor m/d\rfloor+1$ of mul
 observes that for the full set of primes the 0/1 case already follows from the trivial bound
 $\sum_I(w-1)^+\ge\sum_{k\le m}w(k)-m$ (Corollary~\ref{cor:affine}), gives an explicit anchor certificate for prime sets without small
 primes, where that bound fails, and proves the 0/1 case for all $m$ and all prime sets with the threshold $2$ replaced by $20\ln\ln m$
-(Theorem~\ref{thm:A}). Section~\ref{sec:fractional} extends this to arbitrary weights
+(Theorem~\ref{thm:A}); Section~\ref{sec:four} replaces $20\ln\ln m$ by the absolute threshold $4$, for every prime set, with two
+explicit certificates (Theorem~\ref{thm:four}). Section~\ref{sec:fractional} extends this to arbitrary weights
 with threshold $1+149e\ln(1+\ln m)$ (Theorem~\ref{thm:frac}), which through the same duality gives
 $g(n)=O(n\ln\ln n)$ (Corollary~\ref{cor:lnln}). Section~\ref{sec:constant} sharpens the threshold to $20\ln\ln m$ by a geometric
 refinement of the same sieve (Theorem~\ref{thm:twenty}), giving $g(n)\le(16+20\ln\ln(8n^3))n$ for all $n$, which is below the
@@ -1082,6 +1085,99 @@ The remaining $\ln\ln m$ comes from the baseline $\rho\ge eH$ in Lemma~\ref{lem:
 $\nu_D$ on $[1,L]$ above its typical size with the count at level $k$ in $J$. An absolute constant would require a comparison
 at the typical level; the counting certificates of Section~\ref{sec:counting} suggest that this is possible, but we have not
 proved it.
+\end{remark}
+
+\section{The 0/1 case with an absolute threshold}\label{sec:four}
+
+The threshold $20\ln\ln m$ of Theorem~\ref{thm:A} can be replaced by the constant $4$, for every prime set, by two
+explicit counting certificates. Throughout this section $P$ is a finite set of primes, $\Omega_P(n)=\sum_{p\in P}\vp_p(n)$,
+$\omega_P(n)=\#\{p\in P:p\mid n\}$, $e_P:=\Omega_P-\omega_P=\sum_{p\in P}(\vp_p-1)^+$, and
+\[
+y:=\lfloor m^{1/3}\rfloor,\qquad S:=\{p\in P:p\le y\},\qquad L:=P\setminus S,\qquad
+H:=\sum_{p\in S}\frac1p,\qquad \eta:=\Bigl(1+\frac1y\Bigr)H .
+\]
+
+\begin{theorem}\label{thm:four}
+For every finite set of primes $P$, every $m\ge1$ and every $x\ge0$,
+\begin{equation}\label{eq:four}
+\sum_{k\le m}\bigl(\Omega_P(k)-4\bigr)^+\le\sum_{b\in I}\bigl(\Omega_P(b)-1\bigr)^+ .
+\end{equation}
+\end{theorem}
+
+The proof uses Proposition~\ref{prop:cert} with the weight $z=\mathbf 1_P$ (so $w_z=\Omega_P$), and splits according to
+whether $\eta\le2$ or $\eta>2$. We write $A:=\sum_{p\in P}\sum_{j\ge2,\,p^j\le m}\lfloor m/p^j\rfloor=\sum_{k\le m}e_P(k)$ and, for
+$j=2,3$, $E_j:=\sum_{B\subseteq S,\,|B|=j}\lfloor m/\prod B\rfloor=\sum_{k\le m}\binom{\omega_S(k)}j$.
+
+\begin{lemma}[cube-root peeling]\label{lem:peel}
+Every $k\le m$ has $\omega_L(k)\le2$, and $(\Omega_P(k)-4)^+\le e_P(k)+(\omega_S(k)-2)^+$. Hence
+$\sum_{k\le m}(\Omega_P(k)-4)^+\le A+\sum_{k\le m}(\omega_S(k)-2)^+$.
+\end{lemma}
+\begin{proof}
+Three distinct primes larger than $y$ have product at least $(y+1)^3>m$. Thus $\Omega_P(k)-4=e_P(k)+\omega_S(k)+\omega_L(k)-4\le
+e_P(k)+\omega_S(k)-2$, and $(a+b)^+\le a+b^+$ for $a\ge0$.
+\end{proof}
+
+\begin{lemma}[sparse branch]\label{lem:sparse}
+Suppose $\eta\le2$. The certificate $c_{p^j}=1$ ($p\in P$, $j\ge2$, $p^j\le m$), $c_{pq}=\tfrac{11}{21}$ ($p<q$ in $S$),
+$c_{pqr}=-\tfrac17$ ($p<q<r$ in $S$), all other $c_d=0$, satisfies \eqref{eq:F} for $w=\Omega_P$ and has
+$V(c)\ge\sum_{k\le m}(\Omega_P(k)-4)^+$.
+\end{lemma}
+\begin{proof}
+Feasibility. Let $r=\omega_S(n)$ and $t=\omega_P(n)\ge r$. The pair and triple coefficients contribute
+$\phi(r)=\tfrac{11}{21}\binom r2-\tfrac17\binom r3=r(r-1)(13-r)/42$, and $r(13-r)\le42$ for every integer $r$ (with equality at
+$r=6,7$), so $\phi(r)\le(r-1)^+\le(t-1)^+$. The prime-power coefficients contribute at most $e_P(n)$. If $t\ge1$ then
+$e_P(n)+(t-1)=\Omega_P(n)-1$; if $t=0$ the sum is $0$.
+
+Value. Here $V(c)=A+\tfrac{11}{21}E_2-\tfrac17\bigl(E_3+\binom{|S|}3\bigr)$. Every triple in $S$ has product at most $y^3\le m$, so
+$\binom{|S|}3\le E_3$. Next, $3E_3=\sum_{\{p,q\}\subseteq S}\sum_{r\in S\setminus\{p,q\}}\lfloor m/pqr\rfloor\le
+H\sum_{\{p,q\}\subseteq S}m/pq$, and for $p,q\in S$ one has $pq\le y^2$, hence $\lfloor m/pq\rfloor\ge y$ and
+$m/pq<\lfloor m/pq\rfloor+1\le(1+1/y)\lfloor m/pq\rfloor$; therefore $3E_3\le\eta E_2\le2E_2$. Consequently
+\[
+V(c)\ge A+\tfrac{11}{21}E_2-\tfrac27E_3\ge A+\Bigl(\tfrac{11}{21}-\tfrac27\cdot\tfrac23\Bigr)E_2=A+\tfrac13E_2 .
+\]
+Finally $(r-2)^+\le\tfrac13\binom r2$ for all integers $r\ge0$ (the difference is $(r-3)(r-4)/6$ for $r\ge3$), so
+$\sum_{k\le m}(\omega_S(k)-2)^+\le\tfrac13E_2$, and Lemma~\ref{lem:peel} finishes the proof.
+\end{proof}
+
+\begin{lemma}[dense branch]\label{lem:dense}
+Suppose $\eta>2$. The affine certificate $c_1=-1$, $c_{p^j}=1$ ($p\in P$, $j\ge1$, $p^j\le m$) satisfies \eqref{eq:F} for
+$w=\Omega_P$ and has $V(c)\ge\sum_{k\le m}(\Omega_P(k)-4)^+$.
+\end{lemma}
+\begin{proof}
+Feasibility is Corollary~\ref{cor:affine}. The value is $V(c)=\sum_{k\le m}\Omega_P(k)-(m+1)$, and since
+$\Omega-(\Omega-4)^+=\min(\Omega,4)$ it suffices to show $\sum_{k\le m}\min(\Omega_P(k),4)\ge m+1$.
+For $y\le4$ one has $\eta\le0,\tfrac34,\tfrac{10}9,\tfrac{25}{24}$ respectively, so $y\ge5$ and $H>2y/(y+1)\ge5/3$. Adding the
+primes of $S$ one at a time until the reciprocal sum first reaches $3/2$ gives $Q\subseteq S$ with $\tfrac32\le H_Q:=\sum_{p\in Q}1/p<2$
+(the last term is at most $1/2$) and $|Q|\le\pi(y)\le y$. For integers $r\ge0$, $\min(r,4)\ge r-\tfrac17\binom r2$ (for $r\ge5$
+the difference is $(r-7)(r-8)/14\ge0$). Hence, with $E_1(Q)=\sum_{p\in Q}\lfloor m/p\rfloor$ and $E_2(Q)=\sum_{\{p,q\}\subseteq Q}\lfloor m/pq\rfloor$,
+\[
+\sum_{k\le m}\min(\omega_Q(k),4)\ge E_1(Q)-\tfrac17E_2(Q)\ge mH_Q-|Q|-\tfrac m{14}H_Q^2\ge m\Bigl(\tfrac32-\tfrac{9}{56}\Bigr)-y=\tfrac{75}{56}m-y,
+\]
+because $h\mapsto h-h^2/14$ is increasing on $[\tfrac32,2]$. As $m\ge y^3$ and $y\ge5$, $\tfrac{19}{56}m\ge y+1$, so
+$\sum_{k\le m}\min(\Omega_P(k),4)\ge\sum_{k\le m}\min(\omega_Q(k),4)\ge m+1$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:four}]
+If $\eta\le2$ apply Proposition~\ref{prop:cert} with the certificate of Lemma~\ref{lem:sparse}; if $\eta>2$ with that of
+Lemma~\ref{lem:dense}. (For $m<8$ one has $y=1$, $S=\emptyset$, $\eta=0$, and the sparse certificate consists of the prime-power
+terms only.)
+\end{proof}
+
+\begin{remark}
+(a) The threshold is $2+2$: two from $\omega_L\le2$, which the choice $y=m^{1/3}$ forces, and two from $(r-2)^+\le\binom r2/3$.
+Taking $y=m^{1/2}$ would give $\omega_L\le1$ but destroy the bound $\binom{|S|}3\le E_3$. The coefficients $\tfrac{11}{21},-\tfrac17$
+are extremal for the pair--triple ansatz: the pointwise constraint at $r=6$ gives $3a-1\le4b$, and the value bound
+$\tfrac{11}{21}-\tfrac27\cdot\tfrac23=\tfrac13$ is an identity, so this ansatz reaches exactly $\eta=2$. Numerically the
+inequality \eqref{eq:four} holds with threshold $2$ in every instance tested (Section~\ref{sec:linear}), and fails with threshold $1$.
+
+(b) Theorem~\ref{thm:four} concerns 0/1 weights only. It does not by itself improve the bound on $g(n)$, because the duality of
+Section~\ref{sec:linear} requires the hinge inequality for all fractional weights. The obvious averaging does not transfer it:
+for $z_p\in[0,1]$ and $P_t:=\{p:z_p\ge t\}$ one has $\int_0^1(\Omega_{P_t}(n)-1)^+\,dt=w_z(n)-\max_{p\mid n}z_p$, which exceeds
+$(w_z(n)-1)^+$ (e.g.\ $n=pq$ with $z_p=z_q=\tfrac12$), so the averaged certificate violates \eqref{eq:F}.
+
+(c) The anchor certificates of Lemma~\ref{lem:family} cannot give an absolute threshold: for $Y=2^{41}$, $m=(8Y)^4$ and $P$ the
+primes in $(Y,8Y]$, no choice of anchors $R\subseteq P$ (even with all positive prime-power coefficients added) reaches threshold
+$3$, while the pair--triple certificate above handles this $P$ at threshold $2$; the computation is in the engine transcript.
 \end{remark}
 
 \begin{thebibliography}{9}
