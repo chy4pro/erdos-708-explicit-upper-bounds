@@ -47,7 +47,7 @@ g(n)\;\le\; n\bigl(\lceil\log_2 2n\rceil+\lceil\log_2\lceil\log_2 2n\rceil\rceil
 g(n)\;\le\;\Bigl\lceil 48\,n\sqrt{\tfrac{81+\ln n}{\ln(81+\ln n)}}\Bigr\rceil ,
 \]
 and $g(n)\le(2+o(1))\,n\sqrt{\ln n/\ln\ln n}$, and, by a different method (linear-programming duality and an
-elementary sieve lemma for intervals), $g(n)\le\bigl(17+149e\ln(1+\ln(8n^3))\bigr)n=O(n\ln\ln n)$. We also show that the conjectured bound holds for long
+elementary sieve lemma for intervals), $g(n)\le\bigl(16+20\ln\ln(8n^3)\bigr)n=O(n\ln\ln n)$. We also show that the conjectured bound holds for long
 intervals: if $a_n\ge 8n^3$ then $2n$ integers always suffice, so Erd\H{o}s's question is reduced to the
 range $a_n<8n^3$; more generally, for every integer $k\ge 2$, $kn$ integers suffice whenever $a_n\le kn$ or
 $a_n^{k-1}\ge(kn)^{k+1}$; hence for every fixed $\delta>0$ a bound linear in $n$ (with a constant depending on
@@ -135,8 +135,9 @@ the two-sided count $\lfloor m/d\rfloor\le N_I(d)\le\lfloor m/d\rfloor+1$ of mul
 gives an explicit certificate for 0/1 weights valid up to about $10^{40}$, and proves the 0/1 case for all $m$ with the
 threshold $2$ replaced by $20\ln\ln m$ (Theorem~\ref{thm:A}). Section~\ref{sec:fractional} extends this to arbitrary weights
 with threshold $1+149e\ln(1+\ln m)$ (Theorem~\ref{thm:frac}), which through the same duality gives
-$g(n)\le(17+149e\ln(1+\ln(8n^3)))n=O(n\ln\ln n)$ (Corollary~\ref{cor:lnln}), an improvement of Theorem~\ref{thm:sqrt} in the
-order of growth (though not numerically below astronomically large $n$).
+$g(n)=O(n\ln\ln n)$ (Corollary~\ref{cor:lnln}). Section~\ref{sec:constant} sharpens the threshold to $20\ln\ln m$ by a geometric
+refinement of the same sieve (Theorem~\ref{thm:twenty}), giving $g(n)\le(16+20\ln\ln(8n^3))n$ for all $n$, which is below the
+bound of Theorem~\ref{thm:sqrt} for every $n$.
 
 \section{The common construction}\label{sec:construction}
 
@@ -952,9 +953,114 @@ $1+149e\lambda(m)<150e\lambda(m)<675\ln\ln m$.\qed
 
 \begin{remark}
 The constant $149e\approx405$ is far from optimal: the thinning probability $1/(8H)$, the gain $G=Q$ and the dyadic budget
-were chosen for simplicity. The bound of Corollary~\ref{cor:lnln} is smaller than that of Theorem~\ref{thm:sqrt} only for
-astronomically large $n$; its point is the order of growth. The hinge inequality with threshold $2$ (Conjecture~\ref{conj:TH}),
+were chosen for simplicity, and the bound of Corollary~\ref{cor:lnln} is smaller than that of Theorem~\ref{thm:sqrt} only for
+astronomically large $n$. Section~\ref{sec:constant} optimises these choices and reaches the threshold $20\ln\ln m$; the resulting
+bound $(16+20\ln\ln(8n^3))n$ is below Theorem~\ref{thm:sqrt} for every $n$ and below Theorem~\ref{thm:log} for $n\gtrsim10^{35}$. The hinge inequality with threshold $2$ (Conjecture~\ref{conj:TH}),
 which would give $18n$, remains open.
+\end{remark}
+
+\section{An improved constant: threshold $20\ln\ln m$}\label{sec:constant}
+
+The dyadic budget of Section~\ref{sec:fractional} pays about $eH$ at every level. Replacing the dyadic levels by a
+geometric sequence with ratio close to $1$, and allowing an arbitrary gain in Lemma~\ref{lem:gain}, the levels can be
+made to share one payment of $eH$, and the constant $149e\approx405$ drops to $20$.
+
+\begin{theorem}\label{thm:twenty}
+For every weight $z$, every $m\ge3$ and every $x\ge0$,
+\begin{equation}\label{eq:th20}
+\sum_{k\le m}\bigl(w_z(k)-20\ln\ln m\bigr)^+\le\sum_{b\in I}\bigl(w_z(b)-1\bigr)^+ ,
+\end{equation}
+and for $m\le2$ the inequality holds with threshold $2$. Consequently $g(n)\le\bigl(16+20\ln\ln(8n^3)\bigr)n$ for all $n\ge1$.
+\end{theorem}
+
+The consequence follows exactly as in Corollary~\ref{cor:lnln} ($20\ln\ln m$ is increasing and exceeds $2$ for $m\ge3$).
+We keep the notation of Section~\ref{sec:fractional}: $L\ge16$, $J$ a set of $L$ consecutive positive integers,
+$R=\lfloor\log_2L\rfloor$, and now $h:=\ln(1+\ln L)$, $H:=eh$, $h_0:=eH$. For a family $D$ of pairwise coprime integers $\ge2$
+and $1\le k\le R-1$ we use $y=L^{1/(k+1)}$, $D_0=\{d\in D:d\le y\}$ and the elementary symmetric functions $e_r$ of $\{1/d:d\in D_0\}$
+as before; Lemma~\ref{lem:sumrecip} gives $\sum_{d\in D_0}1/d\le H$.
+
+\begin{lemma}[arbitrary gain]\label{lem:anyG}
+Let $G\ge1$, $A:=\ln(4G)+k\ln(8H)$, $s(A):=\min\{A,\ 2A/\ln(2+A/h_0)\}$ and $\rho:=\lceil h_0+s(A)\rceil$. Then
+\[
+G\cdot\#\{n\le L:\nu_D(n)\ge2k+\rho\}\le\#\{n\in J:\nu_D(n)\ge k\}.
+\]
+\end{lemma}
+\begin{proof}
+By \eqref{eq:lowerJ} and \eqref{eq:upperL} it suffices that $\rho!\ge4G(8H)^kH^\rho$, and by $\rho!\ge(\rho/e)^\rho$ it suffices
+that $\rho\ln\frac{\rho}{eH}\ge A$. Put $u=A/h_0$. For the first candidate $\rho=h_0(1+u)$ this reads $(1+u)\ln(1+u)\ge u$, which
+holds. For the second, $\rho=h_0(1+v)$ with $v=2u/\ln(2+u)$, we need $(1+v)\ln(1+v)\ge u$. If $\ln(2+u)\le2$ then $v\ge u$
+and we are done. Otherwise put $y=2+u\ge e^2$, so $v=2(y-2)/\ln y$; the function $2(y-2)/(\sqrt y\ln y)$ is increasing for
+$y\ge e^2$ (its logarithmic derivative is $\frac1{y-2}-\frac1{2y}-\frac1{y\ln y}>0$) and equals $1.98\ldots$ at $y=e^2$, hence
+$v\ge\sqrt y$, $\ln(1+v)\ge\tfrac12\ln y$ and $(1+v)\ln(1+v)\ge v\cdot\tfrac12\ln y=y-2=u$. Rounding up preserves the
+inequality, since $\rho\ln(\rho/h_0)$ is increasing for $\rho\ge h_0$.
+\end{proof}
+
+\subsection*{Geometric encoding}
+Fix $q:=51/50$, $\delta:=1/50$, and put $k_j:=\lceil q^j\rceil$; let $Q$ be the number of $j\ge0$ with $k_j\le R-1$ and
+$\alpha_j:=\delta q^{-j}$. For weights $u=(u_p)$, $X(n)=\sum_p\min(u_p\vp_p(n),1)$ and $D_j:=\{p^{\lceil q^{-j}/u_p\rceil}:u_p>0\}$
+(pairwise coprime), one has $\min(u_p\vp_p(n),1)\ge q^{-j}$ iff $p^{\lceil q^{-j}/u_p\rceil}\mid n$, so $N_j:=\nu_{D_j}$ counts the
+primes with $\min(u_p\vp_p(n),1)\ge q^{-j}$. For $a\in(0,1]$ and $j_0$ the least $j$ with $q^{-j}\le a$,
+$\sum_{j\ge j_0}\delta q^{-j}=q^{1-j_0}\ge a$; since $n\le L$ has at most $R$ distinct prime factors, the tail $j\ge Q$ contributes at most
+$Rq^{1-Q}$, and therefore
+\begin{equation}\label{eq:geom}
+X(n)\le\sum_{j<Q}\alpha_jN_j(n)+Rq^{1-Q}\qquad(n\le L),\qquad\text{while}\qquad N_j(n)\ge k_j\ \Rightarrow\ X(n)\ge k_jq^{-j}\ge1.
+\end{equation}
+
+\begin{lemma}\label{lem:compare20}
+Let $h\ge4$, $\rho_j:=\rho(H,Q,k_j)$ as in Lemma~\ref{lem:anyG} with $G=Q$, and $B_L:=\sum_{j<Q}\alpha_j(2k_j+\rho_j)$. Then
+$\#\{n\le L:X(n)\ge B_L+2\}\le\#\{n\in J:X(n)\ge1\}$.
+\end{lemma}
+\begin{proof}
+Since $k_Q=\lceil q^Q\rceil\ge R$ we have $q^Q>R-1$, and $h\ge4$ gives $R\ge77$, so $Rq^{1-Q}<qR/(R-1)<1.05$. If $n\le L$ has
+$N_j(n)\le2k_j+\rho_j-1$ for all $j<Q$, then by \eqref{eq:geom} $X(n)<B_L-\sum_{j<Q}\alpha_j+2<B_L+2$. Hence $X(n)\ge B_L+2$ forces
+$N_j(n)\ge2k_j+\rho_j$ for some $j<Q$; Lemma~\ref{lem:anyG} with $D=D_j$, $k=k_j$, $G=Q$ and \eqref{eq:geom} give
+$Q\cdot\#\{n\le L:N_j(n)\ge2k_j+\rho_j\}\le\#\{n\in J:N_j(n)\ge k_j\}\le\#\{n\in J:X(n)\ge1\}$, and summing over the $Q$ levels
+proves the claim.
+\end{proof}
+
+\begin{lemma}[budget]\label{lem:budget20}
+For $h\ge4$, $B_L+3<19.24\,h$.
+\end{lemma}
+\begin{proof}
+Write $\ell:=\ln(8H)=\ln(8eh)$ and $A_j:=\ln(4Q)+k_j\ell$, so $\rho_j\le h_0+s(A_j)+1$. Since $R<eh/\ln2$ and $Q\le1+\ln R/\ln q$,
+one has $Q<56h$; also $\sum_{j<Q}\alpha_j<q$ and, as $k_j\le q^j+1$, $2\sum_{j<Q}\alpha_jk_j\le2\delta Q+2q<2.24h+2.04$, while
+$\sum_{j<Q}\alpha_j(h_0+1)<q(e^2h+1)<7.538h+1.02$. The function $f(t)=\min\{t,2t/\ln(2+t/h_0)\}$ has $f(t)/t$ nonincreasing,
+hence is subadditive, so $s(A_j)\le\ln(4Q)+k_j\ell\,g(k_j)$ with $g(u):=\min\{1,2/\ln(2+\beta u)\}$, $\beta:=\ell/(e^2h)$.
+The first part contributes at most $q\ln(4Q)<1.02\ln(224h)<1.734h$. For the second, $g$ is decreasing and $k_j\le q^j+1$, so
+$\sum_{j<Q}\alpha_jk_jg(k_j)\le q+\delta+\frac{\delta}{\ln q}\int_1^Rg(u)\,\frac{du}u$ with $\delta/\ln q<1.01$; splitting the
+integral at $u=v_0/\beta$, $v_0:=e^2-2$, and using $\ln(2+v)\ge\ln v$ gives
+$\int_1^Rg(u)\,du/u\le J(h):=\ln\frac{v_0e^2h}{\ell}+2\ln\frac{h-3/2}{\ln v_0}$ (because $\ln(\beta R)<h-3/2$ for $h\ge4$).
+The one-variable inequality $\ell J(h)/h<5$ holds for $h\ge8$ analytically ($J(h)<3\ln h+1.01$, $\ell<\ln h+3.08$, and
+$(y+3.08)(3y+1.01)e^{-y}$ is decreasing in $y=\ln h$ with value $<4.68$ at $y=\ln8$) and on $[4,8]$ by an interval computation with
+$80$ bins, using that $\ell$ and $J$ are increasing (maximum upper bound $4.966$, attained on $[4.40,4.45]$; the true maximum is
+$4.910$ at $h=4.513$; script in the repository). Hence
+$\ell\sum_{j<Q}\alpha_jk_jg(k_j)<6.212h$. Adding the pieces, $B_L<(7.538+2.240+1.734+6.212)h+3.06$, and $3.06+3<1.515h$ for $h\ge4$,
+so $B_L+3<19.239h$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:twenty}]
+Lemmas~\ref{lem:compare20} and~\ref{lem:budget20} give, for every $L$ with $\ln(1+\ln L)\ge4$ and every $J$,
+\begin{equation}\label{eq:wsl20}
+\#\{n\le L:X(n)\ge19.25\,h_L-1\}\le\#\{n\in J:X(n)\ge1\},\qquad h_L:=\ln(1+\ln L).
+\end{equation}
+Now let $m$ satisfy $h_m:=\ln(1+\ln m)\ge4$, put $T:=20\ln\ln m-1$ and argue as in the proof of Theorem~\ref{thm:frac}: with
+$S=\sum_p\min(z_p\vp_p,1)$, the weighted ordering identity \eqref{eq:wordering} (in the normalised form with $r_p\in[0,1]$ and
+$N=1$) reduces \eqref{eq:th20} for $S$ to the transfer inequality $\#\{i\le L_d:R_{<p}(i)\ge T\}\le\#\{i\in J_d:R_{<p}(i)\ge1\}$ for
+every prime power $d=p^j$, $L_d=\lfloor m/d\rfloor$ and every run $J_d$ of $L_d$ consecutive integers. Since
+$\ln\ln m=h_m+\ln(1-e^{-h_m})\ge0.995\,h_m$ for $h_m\ge4$, we have $T\ge19.9h_m-1\ge19.25h_{L_d}-1$ whenever $h_{L_d}\ge4$, and
+\eqref{eq:wsl20} applies; if $h_{L_d}<4$ then $R_{<p}(i)\le\omega(i)\le\log_2L_d<(e^4-1)/\ln2<77.4<T$, so the left side is
+empty. Peeling $E=w_z-S$ as before gives \eqref{eq:th20} for $h_m\ge4$. If $m\ge4$ and $h_m<4$, then $\ln m<e^4-1$ and
+$w_z(k)\le\Omega(k)\le\log_2m\le20\ln\ln m$ (the function $t/\ln t$ on $[\ln4,e^4-1]$ is at most $13.47<20\ln2$), so the left side
+of \eqref{eq:th20} vanishes; for $m=3$, $20\ln\ln3>1\ge w_z(k)$; for $m\le2$ the left side vanishes with threshold $2$.
+\end{proof}
+
+\begin{remark}
+The constant is not sharp: with the exact $\rho_j$ one finds $\sup_{h\ge4}(B_L+3)/h=17.90$, so the same argument supports a
+threshold of about $18\ln\ln m$; the binding steps are the bounds $\ln(224h)<1.7h$ and $1.04\,\ell(4)/4<1.162$ at $h=4$.
+The remaining $\ln\ln m$ comes from the baseline $\rho\ge eH$ in Lemma~\ref{lem:anyG}, i.e.\ from comparing the tail of
+$\nu_D$ on $[1,L]$ above its typical size with the count at level $k$ in $J$. An absolute constant would require a comparison
+at the typical level; the counting certificates of Section~\ref{sec:counting} suggest that this is possible, but we have not
+proved it.
 \end{remark}
 
 \begin{thebibliography}{9}
