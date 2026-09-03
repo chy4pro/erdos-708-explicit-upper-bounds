@@ -6,7 +6,8 @@ $100, whether g(n) ≤ (2+o(1))n or even 2n — [erdosproblems.com/708](https://
 
 * g(n) ≤ n(⌈log₂ 2n⌉ + ⌈log₂⌈log₂ 2n⌉⌉ + 2) for n ≥ 2  (e.g. g(10) ≤ 100, g(100) ≤ 1300);
 * g(n) ≤ ⌈48 n √((81 + ln n)/ln(81 + ln n))⌉ for n ≥ 1, and g(n) ≤ (2 + o(1)) n √(ln n / ln ln n);
-* if a_n ≥ 8n³ then 2n integers always suffice (the conjecture holds for long intervals; Erdős's question reduces to a_n < 8n³).
+* if a_n ≥ 8n³ then 2n integers always suffice (the conjecture holds for long intervals; Erdős's question reduces to a_n < 8n³);
+* (v2) for every integer k ≥ 2, kn integers suffice whenever a_n ≤ kn or a_n^{k−1} ≥ (kn)^{k+1} — e.g. a_n ≥ 9n² ⇒ 3n, a_n ≥ n² ⇒ 12n, a_n ≥ n^{7/4} ⇒ 15n; for every fixed δ > 0 a linear bound holds when a_n ≥ n^{1+δ}.
 
 To our knowledge these are the first upper bounds for g(n) depending on n alone (none is recorded in Erdős's 1992
 paper or on the problem's page; the 1959 original, in Hungarian, was not accessible to us). The conjectured 2n is
@@ -23,16 +24,17 @@ paper or on the problem's page; the 1959 original, in Hungarian, was not accessi
   representatives), checks the budget conditions (B1), (B2) for n = 2..1999 and larger n, and verifies the output on
   2·10⁶ random instances.
 * `src/es_bound3.py` — implements the long-interval construction (a_n ≥ 8n³ ⇒ 2n elements) and verifies it on 2.4·10⁵ random instances.
+* `src/es_bound4.py` — implements the k-split construction (Theorem D) and verifies it for k = 2..6 on 4.3·10⁶ random instances; `src/linear_constants.py` computes the best linear constants per exponent.
 * `src/split_assign.py`, `src/search_S_omega3.py` — exact feasibility test for the split-assignment conjecture of the paper
   (§5); no counterexample among >10⁶ random instances.
 
 Run: `python3 src/es_bound.py`, `python3 src/es_bound2.py`, `python3 src/gn_dp.py 3`.
 
 ## Provenance (honest)
-The proofs of the two bounds were produced by OpenAI GPT-5.6 (Pro effort, web interface) in two independent runs (90 and 26 minutes), and the long-interval theorem by Qwen3.8-Max (web interface),
+The proofs of the two bounds were produced by OpenAI GPT-5.6 (Pro effort, web interface) in two independent runs (90 and 26 minutes), and the long-interval theorem and its k-parameter generalisation (v2) by Qwen3.8-Max (web interface, two runs),
 inside an autonomous pipeline coordinated by Claude Fable 5.1 (Anthropic), which selected the problem, pinned the
 statement to Erdős's text, verified the lower-bound construction by exact computation, re-derived every step of both
-proofs, commissioned independent referee runs (Claude Opus 5 agents in fresh contexts; a Qwen3.8-Max adversarial
+proofs, commissioned independent referee runs (four Claude Opus 5 agents in fresh contexts, one per theorem; a Qwen3.8-Max adversarial
 audit), wrote the verification scripts and drafted the paper. Two earlier engine attempts (Qwen3.8-Max, in a dual-response chat) produced
 invalid proofs of stronger claims (3n, 2n) — they double-counted shared interval elements or assumed a distinct-multiples
 matching that van Doorn–Li–Tang (arXiv:2603.28636) show to be false; they are kept in `engine_transcripts/` as a record.

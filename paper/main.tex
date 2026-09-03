@@ -20,17 +20,17 @@
 \textbf{Disclosure of the production pipeline.} Every mathematical statement in this note was produced by
 automated systems inside an autonomous research pipeline: the proofs of Theorems~\ref{thm:log} and \ref{thm:sqrt} were found in two independent runs
 of OpenAI GPT-5.6 at ``Pro'' effort through the web interface (26 and 90 minutes of reasoning respectively,
-on 2026-09-03) and the proof of Theorem~\ref{thm:long} by Qwen3.8-Max (Alibaba) through its web interface
-on the same day, all working from briefs written by an orchestrating agent (Claude Fable 5.1, Anthropic) that
+on 2026-09-03) and the proofs of Theorems~\ref{thm:long} and \ref{thm:ksplit} by Qwen3.8-Max (Alibaba) through its web
+interface in two runs on 2026-09-03/04, all working from briefs written by an orchestrating agent (Claude Fable 5.1, Anthropic) that
 selected the problem, pinned the statement to Erd\H{o}s's 1992 text, verified the lower-bound construction
 by exact computation, re-derived every step of both proofs, commissioned independent referee runs
 (Claude Opus 5 agents in fresh contexts, which also brute-forced the lemmas on hundreds of thousands of
-instances), and drafted this document. The three constructions were implemented and exercised on more than
-three million random instances, and every numerical inequality in
+instances), and drafted this document. The four constructions were implemented and exercised on more than
+seven million random instances, and every numerical inequality in
 the explicit parameter choices was checked by machine (scripts in the accompanying repository). No human
 supplied a definition, a lemma, a proof idea, or a correction. The problem itself remains open: the
 conjectured bound $g(n)\le 2n$ is not proved here.}}
-\date{September 3, 2026}
+\date{September 4, 2026 (v2; v1: September 3)}
 
 \begin{document}
 \maketitle
@@ -48,7 +48,9 @@ g(n)\;\le\;\Bigl\lceil 48\,n\sqrt{\tfrac{81+\ln n}{\ln(81+\ln n)}}\Bigr\rceil ,
 \]
 and $g(n)\le(2+o(1))\,n\sqrt{\ln n/\ln\ln n}$. We also show that the conjectured bound holds for long
 intervals: if $a_n\ge 8n^3$ then $2n$ integers always suffice, so Erd\H{o}s's question is reduced to the
-range $a_n<8n^3$. All proofs are elementary and constructive: prime-power atoms of the $a_i$ that are large
+range $a_n<8n^3$; more generally, for every integer $k\ge 2$, $kn$ integers suffice whenever $a_n\le kn$ or
+$a_n^{k-1}\ge(kn)^{k+1}$; hence for every fixed $\delta>0$ a bound linear in $n$ (with a constant depending on
+$\delta$) holds whenever $a_n\ge n^{1+\delta}$, e.g.\ $12n$ integers suffice whenever $a_n\ge n^2$. All proofs are elementary and constructive: prime-power atoms of the $a_i$ that are large
 relative to $a_n$ are placed one per interval element by a per-prime greedy rule, the small atoms are packed
 into bins, and a counting argument bounds the number of bins. We also record $g(4)\ge 5$ and $g(5)\ge 6$ by
 exact computation.
@@ -108,8 +110,21 @@ Conjecture~\ref{conj:S} below holds for such $A$. Consequently $g(n)\le 8n^3$ as
 well, and the question whether $g(n)\le 2n$ is equivalent to the same question restricted to $a_n<8n^3$.
 \end{theorem}
 
-The gap between $n\sqrt{\ln n/\ln\ln n}$ and $2n$ in the range $a_n<8n^3$ is discussed in
-Section~\ref{sec:remarks}.
+Theorem~\ref{thm:long} is the case $k=2$ of a one-parameter family:
+
+\begin{theorem}\label{thm:ksplit}
+Let $k\ge 2$ be an integer and suppose that $a_n\le kn$ or $a_n^{\,k-1}\ge(kn)^{k+1}$. Then for every $x\ge 0$ some (at
+most) $kn$ of the integers $x+1,\dots,x+a_n$ have product divisible by $a_1\cdots a_n$. In particular $a_n\ge 9n^2$
+gives $3n$ and $a_n\ge 1024^{1/3}n^{5/3}$ gives $4n$; for every $\delta>0$ and every integer $k$ with
+$\delta(k-1)>2$, $a_n\ge n^{1+\delta}$ gives $kn$ as soon as $n^{\delta(k-1)-2}\ge k^{k+1}$. Taking for each $n$ the
+smallest admissible $k$ (and Theorem~\ref{thm:log} where none is admissible) gives, for every $n\ge 1$: $7n$ integers
+suffice whenever $a_n\ge n^3$, $12n$ whenever $a_n\ge n^2$, and $15n$ whenever $a_n\ge n^{7/4}$.
+\end{theorem}
+
+Thus for every fixed $\delta>0$ a bound linear in $n$ holds when $a_n\ge n^{1+\delta}$, with a constant depending on
+$\delta$; for a fixed constant $C$ the range not covered by Theorem~\ref{thm:ksplit} is $Cn<a_n<(Cn)^{(C+1)/(C-1)}$,
+a full power of $n$. The Erd\H{o}s--Sur\'anyi family, with $a_n\asymp n(\ln n)^2$, lies just above the trivial range.
+The gap between $n\sqrt{\ln n/\ln\ln n}$ and $2n$ is discussed in Section~\ref{sec:remarks}.
 
 \section{The common construction}\label{sec:construction}
 
@@ -380,6 +395,60 @@ $b\in B$ divides $b$, and since the demands of each $a$ multiply to $a$, $P\mid\
 exactly an assignment as in Conjecture~\ref{conj:S}. Finally, if $a_n<8n^3$ then Lemma~\ref{lem:whole}
 gives a solution with at most $a_n<8n^3$ elements, so $g(n)\le 8n^3$.
 \end{proof}
+
+\section{The $k$-split lemma: proof of Theorem~\ref{thm:ksplit}}\label{sec:ksplit}
+
+\begin{lemma}[$k$-split]\label{lem:ksplit}
+Let $k\ge 1$ and let $H\le m$ be positive integers. Let $Q$ be a finite multiset of integers $>1$ with product $A$
+such that $A^2H^{k+1}\le m^{k+1}$. Then $Q$ can be partitioned into at most $k$ pieces (none if $Q=\emptyset$), each
+of which is either a single element of $Q$ or a \emph{bin}: a nonempty $F\subseteq Q$ whose product $f$ satisfies
+$fH\le m$.
+\end{lemma}
+\begin{proof}
+Induction on $k$; if $Q=\emptyset$ there is nothing to do, so let $Q\ne\emptyset$. For $k=1$ the hypothesis reads
+$A^2H^2\le m^2$, so $AH\le m$ and $Q$ itself is one bin. Let $k\ge 2$.
+
+\emph{Case 1: some $q\in Q$ has $q^2H>m$.} Make $q$ a singleton piece. The product $A'=A/q$ of the rest satisfies
+$A'^2H^k=A^2H^{k+1}/(q^2H)<m^{k+1}/m=m^k$, so the induction hypothesis (with $k-1$) splits the rest into at most
+$k-1$ pieces.
+
+\emph{Case 2: $q^2H\le m$ for all $q\in Q$.} Build one bin greedily: start with $f=1$ and, while $Q$ is not exhausted
+and $f^2H<m$, multiply the next element into $f$. The invariant $fH\le m$ holds at the start ($H\le m$) and is
+preserved, because before a step $f^2H<m$ and $q^2H\le m$ give $(fqH)^2<m^2$. The first element is always absorbed
+unless $H=m$, in which case the hypothesis forces $A=1$, i.e.\ $Q=\emptyset$; so the bin is nonempty. If the process
+exhausts $Q$, all of $Q$ is one bin. Otherwise it stops with $f^2H\ge m$; then the product $A'=A/f$ of the remaining
+elements satisfies $A'^2H^k=A^2H^{k+1}/(f^2H)\le m^k$, and the induction hypothesis splits them into at most $k-1$
+further pieces.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:ksplit}]
+Put $H=kn$. If $m\le H$, Lemma~\ref{lem:whole} gives $B=I$ with $|B|=m\le kn$. Otherwise $m>H$ and
+$m^{k-1}\ge H^{k+1}$; for every $a\in A$, $a^2H^{k+1}\le m^2\cdot m^{k-1}=m^{k+1}$. Apply Lemma~\ref{lem:ksplit} to
+the atoms of each $a\in A$ (pairwise coprime, product $a$, all $\le m$): each $a$ splits into at most $k$ pieces, hence
+at most $kn=H$ pieces in all. Call a singleton piece $q$ \emph{large} if $qH>m$; every other piece (a bin, or a
+singleton with $qH\le m$) is a bin $f$ with $fH\le m$ in the sense of Section~\ref{sec:construction} with threshold
+$T=m/H$. The large pieces are atoms of distinct elements of $A$ for each fixed prime (an element of $A$ has one atom
+per prime), so Lemma~\ref{lem:large} applies to them, and Lemma~\ref{lem:assembly} (with $r$ = number of large pieces,
+$s$ = number of bins, $r+s\le H$) gives $B\subseteq I$ with $|B|\le H=kn$ and $P\mid\prod_{b\in B}b$; note that the
+$p$-adic valuation of a bin comes from the single $p$-atom of the element of $A$ it was cut from.
+For the corollaries: $k=2$ is $m\ge 8n^3$; $k=3$ is $m^2\ge 81n^4$; $k=4$ is $m^3\ge 1024n^5$; for $\delta>0$ and
+$\delta(k-1)>2$, $m\ge n^{1+\delta}$ gives $m^{k-1}\ge n^{(1+\delta)(k-1)}\ge k^{k+1}n^{k+1}$ as soon as
+$n^{\delta(k-1)-2}\ge k^{k+1}$. The last sentence of the theorem is a finite computation: for each exponent $e$ and each
+$n$ take the least $k\ge 2$ with $e(k-1)\ln n\ge(k+1)\ln(kn)$, or $F(n)/n$ from Theorem~\ref{thm:log} if there is
+none; for $e=3,2,7/4$ some $k\le 10$ is admissible for all $n\ge 5$, $n\ge 38$, $n\ge 207$ respectively, and
+the maximum over $n$ is attained at $n=4,36,165$ with the values $7,12,15$; the script is in the repository.
+\end{proof}
+
+\begin{remark}
+Lemma~\ref{lem:ksplit} is the sharp form of the same atom-binning that underlies Theorem~\ref{thm:log} (which needs no
+hypothesis on $a_n$); what is new here is the exact threshold $\sqrt{m/H}$ and the explicit family of thresholds
+$a_n^{k-1}\ge(kn)^{k+1}$. The threshold is essentially sharp for the lemma: $k+1$ atoms each with $q^2H>m$ cannot share
+bins and violate the hypothesis. With $k=2$ the lemma is Lemma~\ref{lem:pack} in a different normalisation, so
+Section~\ref{sec:long} is the case $k=2$; it was kept because it also exhibits the explicit assignment required by
+Conjecture~\ref{conj:S}. Choosing $k$ as a function of $m/n$ does not improve the global bounds of
+Theorems~\ref{thm:log} and \ref{thm:sqrt}: for $m=n\,e^{\sqrt{\ln n\ln\ln n}}$ both routes give about
+$n\sqrt{\ln n/\ln\ln n}$.
+\end{remark}
 
 \section{Small values, obstructions and remarks}\label{sec:remarks}
 
