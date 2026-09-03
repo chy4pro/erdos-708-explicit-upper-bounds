@@ -30,7 +30,7 @@ seven million random instances, and every numerical inequality in
 the explicit parameter choices was checked by machine (scripts in the accompanying repository). No human
 supplied a definition, a lemma, a proof idea, or a correction. The problem itself remains open: the
 conjectured bound $g(n)\le 2n$ is not proved here.}}
-\date{September 4, 2026 (v2; v1: September 3)}
+\date{September 4, 2026 (v3; v1: September 3, v2: September 4)}
 
 \begin{document}
 \maketitle
@@ -125,6 +125,11 @@ Thus for every fixed $\delta>0$ a bound linear in $n$ holds when $a_n\ge n^{1+\d
 $\delta$; for a fixed constant $C$ the range not covered by Theorem~\ref{thm:ksplit} is $Cn<a_n<(Cn)^{(C+1)/(C-1)}$,
 a full power of $n$. The Erd\H{o}s--Sur\'anyi family, with $a_n\asymp n(\ln n)^2$, lies just above the trivial range.
 The gap between $n\sqrt{\ln n/\ln\ln n}$ and $2n$ is discussed in Section~\ref{sec:remarks}.
+
+Finally, Section~\ref{sec:linear} reduces a linear bound to a single inequality about additive functions on
+intervals (Conjecture~\ref{conj:TH}): if it holds, then $g(n)\le18n$ (Theorem~\ref{thm:cond}). We prove the
+inequality in two special cases and show, with explicit certificates, that three natural strengthenings of it are
+false because intervals can contain more integers free of small primes than $[1,m]$ does.
 
 \section{The common construction}\label{sec:construction}
 
@@ -503,6 +508,160 @@ the assignment on the Erd\H{o}s--Sur\'anyi instances with $\ell=3,4$, on the ins
 Proposition~\ref{prop:small}, and on more than $10^6$ random instances with $n\le 6$ and $a_n\le 210$;
 we found no counterexample.
 
+\section{A conditional linear bound}\label{sec:linear}
+
+Theorem~\ref{thm:long} settles the range $a_n\ge 8n^3$ with the conjectured value $2n$, so a bound $g(n)\le Cn$
+with an absolute constant $C$ is a statement about $a_n<8n^3$ only. In this section we reduce such a bound to a single
+inequality about additive functions on intervals of integers, we prove the inequality in two special cases, and we
+record three natural strengthenings of it that are \emph{false}, with explicit certificates.
+
+Throughout, a \emph{weight} is a family $z=(z_p)_p$ indexed by the primes with $0\le z_p\le 1$ and only finitely many
+$z_p\ne0$, and $w_z(k):=\sum_p z_p\vp_p(k)$ is the associated completely additive function. We write $t^+=\max(t,0)$.
+
+\begin{conjecture}[hinge inequality]\label{conj:TH}
+For every $m\ge1$, every $x\ge0$ and every weight $z$, with $I=\{x+1,\dots,x+m\}$,
+\begin{equation}\label{eq:TH}
+\sum_{k=1}^{m}\bigl(w_z(k)-2\bigr)^+\;\le\;\sum_{b\in I}\bigl(w_z(b)-1\bigr)^+ .
+\end{equation}
+\end{conjecture}
+
+\begin{theorem}\label{thm:cond}
+If Conjecture~\ref{conj:TH} holds, then $g(n)\le 18n$ for all $n\ge1$. More precisely, it suffices that
+\eqref{eq:TH} holds for $m=a_n$ and every weight supported on the primes dividing $\prod A$.
+\end{theorem}
+
+The proof is a linear-programming argument. Fix $A=\{a_1<\dots<a_n\}$ with $m=a_n<8n^3$, an interval $I$ of length
+$m$, the set $\mathcal P$ of primes dividing $P=\prod A$, and $R_p:=\sum_{a\in A}\vp_p(a)$ for $p\in\mathcal P$.
+Consider the fractional cover problem
+\begin{equation}\label{eq:LP}
+\tau^*:=\min\Bigl\{\sum_{b\in I}y_b:\ \sum_{b\in I}\vp_p(b)\,y_b\ge R_p\ (p\in\mathcal P),\ 0\le y_b\le1\Bigr\}.
+\end{equation}
+It is feasible, since $y\equiv1$ works: $\prod A$ divides $m!$, which divides the product of any $m$ consecutive
+integers, so $\sum_{b\in I}\vp_p(b)\ge R_p$.
+
+\begin{lemma}[duality]\label{lem:dual}
+$\tau^*=\max_{z\ge0}\Bigl[\sum_{a\in A}w_z(a)-\sum_{b\in I}\bigl(w_z(b)-1\bigr)^+\Bigr]$, where the maximum is over
+$z=(z_p)_{p\in\mathcal P}$ with $z_p\ge0$, and it is attained at some $z$ with all $z_p\le1$.
+\end{lemma}
+\begin{proof}
+The dual of \eqref{eq:LP} has variables $z_p\ge0$ (one per covering constraint) and $u_b\ge0$ (one per upper bound
+$y_b\le1$) and reads $\max\sum_p z_pR_p-\sum_b u_b$ subject to $\sum_p z_p\vp_p(b)-u_b\le1$ for every $b\in I$.
+For fixed $z$ the best choice is $u_b=(w_z(b)-1)^+$, and $\sum_p z_pR_p=\sum_{a\in A}w_z(a)$; strong duality holds
+because \eqref{eq:LP} is feasible and bounded. For the last claim fix all $z_q$, $q\ne p$, and let $z_p\ge1$ vary:
+every $b$ with $p\mid b$ then has $w_z(b)\ge1$, so the right derivative of the objective in $z_p$ equals
+$R_p-\sum_{b\in I}\vp_p(b)\le0$. Hence the objective does not increase on $z_p\ge1$.
+\end{proof}
+
+\begin{lemma}[rounding]\label{lem:round}
+There is a set $B\subseteq I$ with $\prod A\mid\prod B$ and $|B|\le\tau^*+|\mathcal P|$.
+\end{lemma}
+\begin{proof}
+Let $y^*$ be an optimal vertex of the polytope in \eqref{eq:LP}. A vertex of a polytope in $\mathbb R^{m}$ is
+determined by $m$ linearly independent tight constraints, at most $|\mathcal P|$ of which are covering constraints,
+so at most $|\mathcal P|$ coordinates of $y^*$ lie strictly between $0$ and $1$. Put $B=\{b:y^*_b>0\}$. Then
+$\sum_{b\in B}\vp_p(b)\ge\sum_b\vp_p(b)y^*_b\ge R_p$ for every $p$, i.e.\ $\prod A\mid\prod B$, and
+$|B|\le\#\{b:y^*_b=1\}+|\mathcal P|\le\tau^*+|\mathcal P|$.
+\end{proof}
+
+\begin{lemma}[few primes]\label{lem:fewprimes}
+If $m<8n^3$ then $|\mathcal P|<16n$.
+\end{lemma}
+\begin{proof}
+The $i$-th prime is at least $i+1$, so if $|\mathcal P|\ge16n$ then
+$\prod_{p\in\mathcal P}p\ge(16n+1)!>(16n/e)^{16n}$, while $\prod_{p\in\mathcal P}p\le\prod A\le m^n<(8n^3)^n$.
+Taking logarithms, $16\ln(16n/e)=28.3\ldots+16\ln n>\ln 8+3\ln n$ for every $n\ge1$, a contradiction.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:cond}]
+If $a_n\ge8n^3$, Theorem~\ref{thm:long} gives $2n\le18n$ elements. Otherwise let $z$ be a maximiser in
+Lemma~\ref{lem:dual} with $z_p\le1$, supported on $\mathcal P$. Since $w_z(a)\le2+(w_z(a)-2)^+$ and $A\subseteq[1,m]$,
+\[
+\sum_{a\in A}w_z(a)\le 2n+\sum_{k=1}^{m}\bigl(w_z(k)-2\bigr)^+\le 2n+\sum_{b\in I}\bigl(w_z(b)-1\bigr)^+
+\]
+by \eqref{eq:TH}, so $\tau^*\le2n$. Lemmas~\ref{lem:round} and~\ref{lem:fewprimes} give $|B|\le 2n+16n-1<18n$.
+\end{proof}
+
+\subsection*{Equivalent forms and a per-prime-power sufficient condition}
+Subtracting $\sum w_z$ over both ranges, \eqref{eq:TH} is equivalent to
+\begin{equation}\label{eq:TH2}
+\sum_{b\in I}\min\bigl(w_z(b),1\bigr)\le\sum_{k=1}^{m}\min\bigl(w_z(k),2\bigr)+\Delta,\qquad
+\Delta:=\sum_{b\in I}w_z(b)-\sum_{k=1}^{m}w_z(k)=\sum_{q}z_q\delta_q\ge0,
+\end{equation}
+where $q$ runs over prime powers, $z_{p^j}:=z_p$, and $\delta_q:=\#\{b\in I:q\mid b\}-\lfloor m/q\rfloor\in\{0,1\}$.
+Writing $\min(w,1)=w\min(1,1/w)$ and $\min(w,2)=w\min(1,2/w)$ and expanding $w_z(n)=\sum_{q\mid n}z_q$, both sides of
+\eqref{eq:TH2} become sums over prime powers, and \eqref{eq:TH} follows if for every prime power $q$ with $z_q>0$
+\begin{equation}\label{eq:PQ}
+\sum_{b\in I,\ q\mid b}\min\Bigl(1,\frac1{w_z(b)}\Bigr)\le\delta_q+\sum_{k\le m,\ q\mid k}\min\Bigl(1,\frac2{w_z(k)}\Bigr).
+\end{equation}
+Substituting $b=qi'$, $k=qi$ and $w_z(qi)=a+w_z(i)$ with $a:=w_z(q)$, the multiples of $q$ in $I$ correspond to an
+interval $J$ of $L:=\lfloor m/q\rfloor$ or $L+1$ consecutive integers, and \eqref{eq:PQ} follows from
+\begin{equation}\label{eq:PQprime}
+\sum_{i\in J}f_a\bigl(w_z(i)\bigr)\le\sum_{i=1}^{L}g_a\bigl(w_z(i)\bigr),\qquad
+f_a(u):=\min\Bigl(1,\frac1{a+u}\Bigr),\quad g_a(u):=\min\Bigl(1,\frac2{a+u}\Bigr),
+\end{equation}
+for intervals $J$ of length $L$ (the possible extra element of $J$ is paid by $\delta_q$, as $f_a\le1$).
+
+\begin{proposition}\label{prop:PQcases}
+Inequality \eqref{eq:PQprime} holds for every interval $J$ of length $L$ and every $a\ge0$ in each of the following
+cases: (i) $z$ is supported on a single prime; (ii) $a\ge2$ and $aL\ge w_z(L!)$, in particular whenever
+$a\ge\max\{2,\sum_{p\le L}z_p/(p-1)\}$.
+\end{proposition}
+\begin{proof}
+(i) Let $z$ be supported on $p$ and $\phi(j):=f_a(z_pj)$, a nonincreasing function of $j$, with increments
+$D_j:=\phi(j-1)-\phi(j)\ge0$. For any set $S$ of $L$ integers,
+$\sum_{i\in S}\phi(\vp_p(i))=L\phi(0)-\sum_{j\ge1}D_j\#\{i\in S:p^j\mid i\}$. Since an interval of length $L$
+contains at least $\lfloor L/p^j\rfloor=\#\{i\le L:p^j\mid i\}$ multiples of $p^j$, the sum over $J$ is at most the
+sum over $[1,L]$, and $f_a\le g_a$ pointwise. (ii) For $a\ge2$ the minima are inactive; the left side is at most
+$L/a$, and by the Cauchy--Schwarz inequality the right side is
+$2\sum_{i\le L}(a+w_z(i))^{-1}\ge 2L^2/(aL+w_z(L!))\ge L/a$. Finally
+$w_z(L!)=\sum_pz_p\vp_p(L!)\le L\sum_{p\le L}z_p/(p-1)$ by Legendre's formula.
+\end{proof}
+
+\subsection*{Three strengthenings that fail}
+Each of the following statements would imply \eqref{eq:TH} or \eqref{eq:PQprime} by a short argument, and each is
+false. The common mechanism is that an interval of length $L$ can contain more integers free of all primes $\le L$
+than $\pi(L)+1$: the pattern of such integers is an admissible set, and by the Chinese remainder theorem every
+admissible pattern occurs, so their maximal number is the Hensley--Richards function $\rho^*(L)$, which exceeds
+$\pi(L)$ for $L\ge3159$ and by an unbounded amount as $L\to\infty$ \cite{HR74,GR98}. Explicit windows were built
+by a centred sieve (residue class $0$ modulo every $p\le\sqrt L$, then the least populated class modulo each larger
+prime) and the Chinese remainder theorem; the starting points $x$ and verification scripts are in the repository.
+
+\begin{proposition}\label{prop:false}
+\begin{enumerate}
+\item[(a)] \emph{(weight-free transport)} There need not exist an injection $\varphi:[1,m]\to I$ such that for every
+$k$ some prime $p\mid k$ satisfies $(k/p)\mid\varphi(k)$. For $m=20000$ there is an $x$ (with $4298$ digits) for which
+$I$ contains $2270$ integers free of all primes $\le m/2$; every $k$ related to such an integer is $1$ or a prime, so
+Hall's condition fails because $2270>\pi(m)+1=2263$. (Such an injection would give \eqref{eq:TH} at once, since
+$w_z(\varphi(k))\ge w_z(k)-z_p\ge w_z(k)-1$.)
+\item[(b)] \emph{(single-threshold level sets)} The inequality $\#\{i\le L:w_z(i)\ge2\tau\}\le\#\{i\in J:w_z(i)\ge\tau\}$
+fails for $L=10^5$, $z_p=1$ for all $p\le L/2$, at $\tau=1$ (by $142$) and at $\tau=1/2$ (by $5275$), although
+\eqref{eq:PQprime} holds on the same window with room to spare. (Integrating it over $\tau$ would give
+\eqref{eq:PQprime}.)
+\item[(c)] \emph{(Laplace form)} The inequality $s\sum_{i\in J}s^{w_z(i)}\le\sum_{i\le L}s^{w_z(i)}$ for all
+$s\in(0,1]$, which would give \eqref{eq:PQprime} for all $a\ge2$ by integrating against $s^{a-1}\,ds$, fails for
+$L=10^6$, $z_p=1$ for all $p\le L$, and $s\in[0.005,0.015]$: the window (with $x$ of $433636$ digits) contains
+$80436$ integers free of all primes $\le L$, against $\pi(L)+1=78499$, and at $s=0.005$ the two sides are
+$405.03$ and $398.77$.
+\end{enumerate}
+\end{proposition}
+
+\begin{remark}[evidence and the remaining programme]
+Conjecture~\ref{conj:TH} was tested on $2.1\times10^6$ random and adversarial instances with $m\le600$ (0/1,
+fractional and $p^{-\theta}$ weights; $x=0$, random $x$, $x\equiv-1$ modulo products of weighted primes, windows centred
+at highly divisible numbers) and, with nine weight choices, on the dense windows of Proposition~\ref{prop:false} of
+lengths $2\cdot10^4$ and $10^5$, where the slack is at least $0.18m$; \eqref{eq:PQprime} was tested on $3.5\times10^5$
+instances over all prime powers. Equality in \eqref{eq:TH} occurs only for $x=0$ and single primes. For 0/1 weights
+$z=\mathbf 1_{\mathcal Q}$ the inequality is equivalent to $B_0-A_0\le\Delta+B_{\ge2}$, where $B_0$ and $A_0$ count the
+integers in $[1,m]$ and in $I$ free of the primes of $\mathcal Q$, and $B_{\ge2}$ counts the $k\le m$ with at least two
+prime factors from $\mathcal Q$ (with multiplicity); by inclusion--exclusion $B_0-A_0$ is an alternating sum of the
+surpluses $\delta_d$ over squarefree products $d$ of primes of $\mathcal Q$. In the layer-cake form of
+\eqref{eq:PQprime} the integrand is positive only where the count on $[1,L]$ is stuck at a low level, and its
+positive part is bounded by the number of integers in a window free of the weighted primes, i.e.\ by an explicit large
+sieve bound, while the negative part is a counting quantity on $[1,L]$. Making this quantitative for all weights is
+the remaining step; the failures in Proposition~\ref{prop:false} show that it cannot be replaced by a weight-free
+or single-threshold argument.
+\end{remark}
+
 \begin{thebibliography}{9}
 \bibitem{ES59} P.~Erd\H{o}s and J.~Sur\'anyi, Megjegyz\'esek egy versenyfeladathoz (Remarks on a problem of a
 mathematical competition), \emph{Mat.\ Lapok} 10 (1959), 39--48 (in Hungarian).
@@ -511,5 +670,7 @@ mathematical competition), \emph{Mat.\ Lapok} 10 (1959), 39--48 (in Hungarian).
 \bibitem{EP708} T.~F.~Bloom, Erd\H{o}s Problem \#708, \url{https://www.erdosproblems.com/708}, accessed 2026-09-03.
 \bibitem{vDLT26} W.~van Doorn, Y.~Li and Q.~Tang, Optimal bounds for an Erd\H{o}s problem on matching integers
 to distinct multiples, arXiv:2603.28636 (2026).
+\bibitem{HR74} D.~Hensley and I.~Richards, Primes in intervals, \emph{Acta Arith.} 25 (1974), 375--391.
+\bibitem{GR98} D.~M.~Gordon and G.~Rodemich, Dense admissible sets, in: \emph{Algorithmic Number Theory (ANTS-III)}, Lecture Notes in Comput. Sci. 1423, Springer, 1998, 216--225.
 \end{thebibliography}
 \end{document}

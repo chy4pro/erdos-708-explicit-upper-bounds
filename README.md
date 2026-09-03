@@ -8,12 +8,17 @@ $100, whether g(n) ≤ (2+o(1))n or even 2n — [erdosproblems.com/708](https://
 * g(n) ≤ ⌈48 n √((81 + ln n)/ln(81 + ln n))⌉ for n ≥ 1, and g(n) ≤ (2 + o(1)) n √(ln n / ln ln n);
 * if a_n ≥ 8n³ then 2n integers always suffice (the conjecture holds for long intervals; Erdős's question reduces to a_n < 8n³);
 * (v2) for every integer k ≥ 2, kn integers suffice whenever a_n ≤ kn or a_n^{k−1} ≥ (kn)^{k+1} — e.g. a_n ≥ 9n² ⇒ 3n, a_n ≥ n² ⇒ 12n, a_n ≥ n^{7/4} ⇒ 15n; for every fixed δ > 0 a linear bound holds when a_n ≥ n^{1+δ}.
+* (v3) a **conditional linear bound**: a single inequality about additive functions on intervals (the "hinge inequality",
+  Conjecture 7.1: Σ_{k≤m}(w(k)−2)⁺ ≤ Σ_{b∈I}(w(b)−1)⁺ for w = Σ_p z_p v_p, 0 ≤ z_p ≤ 1) implies g(n) ≤ 18n, by LP duality
+  and rounding. The inequality is proved for a single prime and in an explicit large-parameter regime, has no counterexample
+  among 2.1·10⁶ instances, and three natural strengthenings of it are shown to be **false** with explicit certificates
+  (windows of length up to 10⁶ containing more integers free of small primes than [1,m]; Hensley–Richards). It remains open.
 
 To our knowledge these are the first upper bounds for g(n) depending on n alone (none is recorded in Erdős's 1992
 paper or on the problem's page; the 1959 original, in Hungarian, was not accessible to us). The conjectured 2n is
 **not** proved; the problem remains open. We also record g(4) ≥ 5 and g(5) ≥ 6 (exact computation).
 
-**Paper.** `paper/main.pdf` (source `paper/main.tex`); archived at Zenodo: v2 DOI [10.5281/zenodo.22270923](https://doi.org/10.5281/zenodo.22270923) (v1: [10.5281/zenodo.22267396](https://doi.org/10.5281/zenodo.22267396); concept DOI [10.5281/zenodo.22267395](https://doi.org/10.5281/zenodo.22267395) always resolves to the latest version).
+**Paper.** `paper/main.pdf` (source `paper/main.tex`, v3); archived at Zenodo: v3 DOI PENDING (v2: [10.5281/zenodo.22270923](https://doi.org/10.5281/zenodo.22270923); v1: [10.5281/zenodo.22267396](https://doi.org/10.5281/zenodo.22267396); concept DOI [10.5281/zenodo.22267395](https://doi.org/10.5281/zenodo.22267395) always resolves to the latest version).
 
 ## Verification
 * `src/gn_dp.py` — exact minimum |B| for a concrete (A, x) by dynamic programming over capped valuation vectors; reproduces
@@ -28,6 +33,11 @@ paper or on the problem's page; the 1959 original, in Hungarian, was not accessi
 * `src/split_assign.py`, `src/search_S_omega3.py` — exact feasibility test for the split-assignment conjecture of the paper
   (§5); no counterexample among >10⁶ random instances.
 
+* (v3) `src/hinge_test2.py`, `src/pq_test.py`, `src/layer_test.py`, `src/lap_test.py` — adversarial random tests of the hinge inequality,
+  of the per-prime-power inequality (7.5) and of two candidate strengthenings; `src/hr_construct.py`, `src/hr_tail21.py`, `src/adv_window*.py`
+  build the dense windows of Proposition 7.7 by a centred sieve + CRT and verify the failures from x; `src/bigwindow_eval.py`, `src/lap_window.py`
+  evaluate all inequalities on a stored window. The windows themselves are in `certificates/` (see `certificates/README.md`).
+
 Run: `python3 src/es_bound.py`, `python3 src/es_bound2.py`, `python3 src/gn_dp.py 3`.
 
 ## Provenance (honest)
@@ -38,4 +48,8 @@ proofs, commissioned independent referee runs (four Claude Opus 5 agents in fres
 audit), wrote the verification scripts and drafted the paper. Two earlier engine attempts (Qwen3.8-Max, in a dual-response chat) produced
 invalid proofs of stronger claims (3n, 2n) — they double-counted shared interval elements or assumed a distinct-multiples
 matching that van Doorn–Li–Tang (arXiv:2603.28636) show to be false; they are kept in `engine_transcripts/` as a record.
+(v3) The LP reduction of a linear bound to the hinge inequality is due to a GPT-5.6 Pro run (4 h); the matching and forest reformulations
+and the large-parameter case to two further Pro runs (2.4 h and 3.7 h); the one-prime case to Qwen3.8-Max; the per-prime-power sufficient
+condition, the counterexample constructions and all verification code to the coordinating Claude Fable 5.1 seat, which also refuted the two
+reduction targets and the Laplace candidate proposed by the engines. Transcripts: `engine_transcripts/run5_…` to `run9_…`.
 No human supplied any mathematics. License: CC0.
