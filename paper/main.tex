@@ -1,0 +1,446 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Lam}{\Lambda}
+\DeclareMathOperator{\vp}{v}
+\DeclareMathOperator{\om}{\omega}
+
+\title{Explicit upper bounds for the Erd\H{o}s--Sur\'anyi function $g(n)$}
+\author{Haoyu Chen\thanks{%
+\textbf{Disclosure of the production pipeline.} Every mathematical statement in this note was produced by
+automated systems inside an autonomous research pipeline: the proofs of Theorems~\ref{thm:log} and \ref{thm:sqrt} were found in two independent runs
+of OpenAI GPT-5.6 at ``Pro'' effort through the web interface (26 and 90 minutes of reasoning respectively,
+on 2026-09-03) and the proof of Theorem~\ref{thm:long} by Qwen3.8-Max (Alibaba) through its web interface
+on the same day, all working from briefs written by an orchestrating agent (Claude Fable 5.1, Anthropic) that
+selected the problem, pinned the statement to Erd\H{o}s's 1992 text, verified the lower-bound construction
+by exact computation, re-derived every step of both proofs, commissioned independent referee runs
+(Claude Opus 5 agents in fresh contexts, which also brute-forced the lemmas on hundreds of thousands of
+instances), and drafted this document. The three constructions were implemented and exercised on more than
+three million random instances, and every numerical inequality in
+the explicit parameter choices was checked by machine (scripts in the accompanying repository). No human
+supplied a definition, a lemma, a proof idea, or a correction. The problem itself remains open: the
+conjectured bound $g(n)\le 2n$ is not proved here.}}
+\date{September 3, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For $n\ge 1$ let $g(n)$ be the least integer $g$ such that for every set $\{a_1<\dots<a_n\}$ of integers
+greater than $1$ and every $x\ge 0$, some $g$ of the integers $x+1,\dots,x+a_n$ have product divisible by
+$a_1\cdots a_n$. Erd\H{o}s and Sur\'anyi (1959) proved $g(3)=4$ and $g(n)\ge(2-o(1))n$, and Erd\H{o}s asked
+(offering \$100) whether $g(n)\le(2+o(1))n$, or even $g(n)\le 2n$ (Erd\H{o}s Problem \#708). To our
+knowledge no upper bound depending on $n$ alone has been published. We prove
+\[
+g(n)\;\le\; n\bigl(\lceil\log_2 2n\rceil+\lceil\log_2\lceil\log_2 2n\rceil\rceil+2\bigr)\quad(n\ge 2),
+\qquad
+g(n)\;\le\;\Bigl\lceil 48\,n\sqrt{\tfrac{81+\ln n}{\ln(81+\ln n)}}\Bigr\rceil ,
+\]
+and $g(n)\le(2+o(1))\,n\sqrt{\ln n/\ln\ln n}$. We also show that the conjectured bound holds for long
+intervals: if $a_n\ge 8n^3$ then $2n$ integers always suffice, so Erd\H{o}s's question is reduced to the
+range $a_n<8n^3$. All proofs are elementary and constructive: prime-power atoms of the $a_i$ that are large
+relative to $a_n$ are placed one per interval element by a per-prime greedy rule, the small atoms are packed
+into bins, and a counting argument bounds the number of bins. We also record $g(4)\ge 5$ and $g(5)\ge 6$ by
+exact computation.
+\end{abstract}
+
+\section{Introduction}
+
+Gallai observed that among any $a_2$ consecutive integers one can always find two whose product is a
+multiple of $a_1a_2$ (for $1<a_1<a_2$), but that there are $a_1<a_2<a_3$ and a run of $a_3$ consecutive
+integers among which no three have product divisible by $a_1a_2a_3$. Erd\H{o}s and Sur\'anyi
+\cite{ES59} studied the general situation. Following Erd\H{o}s's formulation \cite[\S1]{Er92}, let $g(n)$ be
+the smallest integer such that, whenever $1<a_1<\dots<a_n$ are integers and $x\ge 0$, there are integers
+$x<u_1<\dots<u_{g(n)}\le x+a_n$ with $u_1\cdots u_{g(n)}\equiv 0 \pmod{a_1\cdots a_n}$. (Since enlarging $B$ inside the interval preserves divisibility, ``$g(n)$ integers'' may be read as ``at most
+$g(n)$ integers''; we use the latter, which also covers the case $a_n<g(n)$.) They proved
+$g(3)=4$ and
+\begin{equation}\label{eq:ES}
+ g(n)\;\ge\;(2-\varepsilon)\,n\qquad(n>n_0(\varepsilon)),
+\end{equation}
+the lower bound coming from the set of all products $p_ip_j$ of $\ell$ primes satisfying $2p_1^2>p_\ell^2$,
+with the interval positioned so that a single integer $u$, divisible exactly once by each $p_i$, is the only
+common multiple of every $p_ip_j$ in it. Erd\H{o}s \cite{Er92} asked whether $g(n)<(2+\varepsilon)n$ for
+large $n$, ``or perhaps even $g(n)\le 2n$'', and offered \$100 for a proof or disproof; the question is
+Problem \#708 on the Erd\H{o}s problems site \cite{EP708}. Neither \cite{Er92} nor \cite{EP708} records
+an upper bound for $g(n)$, and we are not aware of one in the literature (the original paper \cite{ES59},
+in Hungarian, was not accessible to us). Note that a bound in terms of $n$ alone is not obvious: the trivial
+estimate $g\le\sum_i\om(a_i)$ (one interval element per prime factor of each $a_i$, see
+Lemma~\ref{lem:large}) depends on $a_n$, which is unbounded.
+
+Throughout, $\vp_p(k)$ is the exponent of the prime $p$ in $k$, $\om(k)$ the number of distinct prime factors
+of $k$, and $\Lam(t)=\lceil\log_2 t\rceil$ is the least $r\ge 0$ with $t\le 2^r$.
+
+\begin{theorem}\label{thm:log}
+For every $n\ge 2$,
+\[
+ g(n)\;\le\;F(n):=n\bigl(\Lam(2n)+\Lam(\Lam(2n))+2\bigr)\;=\;n\log_2 n+n\log_2\log_2 n+O(n).
+\]
+In particular $F(2)=10$, $F(3)=21$, $F(4)=28$, $F(10)=100$, $F(100)=1300$, $F(1000)=17000$.
+\end{theorem}
+
+\begin{theorem}\label{thm:sqrt}
+For every $n\ge 1$, with $L=81+\ln n$,
+\[
+ g(n)\;\le\;\Bigl\lceil 48\,n\sqrt{L/\ln L}\,\Bigr\rceil ,
+\qquad\text{and}\qquad
+ g(n)\;\le\;(2+o(1))\,n\sqrt{\frac{\ln n}{\ln\ln n}}\quad(n\to\infty).
+\]
+\end{theorem}
+
+Theorem~\ref{thm:log} gives the smaller value for every $n$ below about $10^{104}$; Theorem~\ref{thm:sqrt}
+is asymptotically stronger. Neither is close to the conjectured $2n$. For long intervals, however, the
+conjecture holds:
+
+\begin{theorem}\label{thm:long}
+If $a_n\ge 8n^3$, then for every $x\ge 0$ some $2n$ of the integers $x+1,\dots,x+a_n$ have product divisible
+by $a_1\cdots a_n$ (at most $2n$ are needed, and since $a_n\ge 2n$ the set may be padded); in fact
+Conjecture~\ref{conj:S} below holds for such $A$. Consequently $g(n)\le 8n^3$ as
+well, and the question whether $g(n)\le 2n$ is equivalent to the same question restricted to $a_n<8n^3$.
+\end{theorem}
+
+The gap between $n\sqrt{\ln n/\ln\ln n}$ and $2n$ in the range $a_n<8n^3$ is discussed in
+Section~\ref{sec:remarks}.
+
+\section{The common construction}\label{sec:construction}
+
+Fix $A=\{a_1<\dots<a_n\}\subset\{2,3,\dots\}$, put $m=a_n$, $I=\{x+1,\dots,x+m\}$ and $P=a_1\cdots a_n$.
+We must find $B\subseteq I$ with $P\mid\prod_{b\in B}b$ and bound $|B|$. Note that $B$ is a set: an interval
+element contributes its valuations once, however many $a_i$ it may be a multiple of.
+
+\begin{lemma}[counting]\label{lem:count}
+For every integer $d\le m$: $\;\#\{a\in A: d\mid a\}\;\le\;\lfloor m/d\rfloor\;\le\;\lfloor (x+m)/d\rfloor-\lfloor x/d\rfloor=\#\{b\in I: d\mid b\}$.
+\end{lemma}
+\begin{proof}
+The multiples of $d$ in $\{1,\dots,m\}$ are $d,2d,\dots,\lfloor m/d\rfloor d$, and the $a_i$ are distinct
+elements of $\{2,\dots,m\}$. Any $m$ consecutive integers contain
+$\lfloor (x+m)/d\rfloor-\lfloor x/d\rfloor\ge\lfloor m/d\rfloor$ multiples of $d$.
+\end{proof}
+
+\begin{lemma}[whole interval]\label{lem:whole}
+$P$ divides $\prod_{b\in I}b$. Hence if $m\le H$ then $B=I$ has $|B|=m\le H$.
+\end{lemma}
+\begin{proof}
+$P\mid m!$ because the $a_i$ are distinct elements of $\{2,\dots,m\}$, and
+$\prod_{b\in I}b=m!\binom{x+m}{m}$.
+\end{proof}
+
+\paragraph{Atoms, large and small.}
+Fix an integer budget $H\ge 1$ and assume $m>H$; put $T=m/H>1$. For $a\in A$ and $p\mid a$ call
+$q_p(a)=p^{\vp_p(a)}$ an \emph{atom} of $a$; the atoms of $a$ are pairwise coprime and multiply to $a$, and
+$a$ has $\om(a)$ atoms. An atom is \emph{large} if $q>T$ and \emph{small} if $q\le T$.
+
+\begin{lemma}[large atoms, one element each]\label{lem:large}
+Let $\mathcal L$ be the multiset of all large atoms of all $a\in A$ (atoms of different $a$ are distinct
+members, so $r=|\mathcal L|$ counts with multiplicity). There is a \emph{set} $U\subseteq I$ with $|U|\le r$
+such that for every prime $p$
+\[
+ \vp_p\Bigl(\prod_{u\in U}u\Bigr)\;\ge\;\sum_{q\in\mathcal L,\;q\text{ a power of }p}\vp_p(q).
+\]
+More precisely, one can assign to each $q\in\mathcal L$ an element $\beta(q)\in I$ with $q\mid\beta(q)$ such
+that atoms of the same prime receive distinct elements; then $U=\beta(\mathcal L)$.
+\end{lemma}
+\begin{proof}
+Fix a prime $p$ and list the large atoms of $p$ as $p^{e_1},\dots,p^{e_s}$ with $e_1\ge\dots\ge e_s$. Each
+$a\in A$ has at most one atom of $p$, so the first $j$ atoms come from $j$ distinct elements of $A$, all
+divisible by $p^{e_j}$; by Lemma~\ref{lem:count}, $I$ contains at least $j$ multiples of $p^{e_j}$. Assign the
+atoms in this order, giving the $j$-th one a multiple of $p^{e_j}$ in $I$ different from the $j-1$ elements
+already used for $p$. Elements used for different primes may coincide; this only decreases $|U|$. For a
+fixed $p$ the assigned elements are distinct, so their $p$-adic valuations add up to at least $\sum_j e_j$.
+\end{proof}
+
+\begin{lemma}[assembly]\label{lem:assembly}
+Suppose the small atoms of all $a\in A$ (a multiset; atoms of different $a$ are distinct members) have been
+partitioned into \emph{bins}, each bin being a set of small atoms whose product $f$ satisfies $f\le T$ (a bin may
+contain atoms of different $a$). Let $s$ be the total number of bins and
+$D=r+s$. If $D\le H$, then there is $B\subseteq I$ with $|B|\le D$ and $P\mid\prod_{b\in B}b$.
+\end{lemma}
+\begin{proof}
+Take $U$ from Lemma~\ref{lem:large}, $|U|\le r$. Order the bins $f_1,\dots,f_s$ arbitrarily. Since
+$f_j\le T=m/H$ and $H$ is an integer, Lemma~\ref{lem:count} gives at least $\lfloor m/f_j\rfloor\ge H$ multiples of
+$f_j$ in $I$.
+When bin $j$ is processed, the elements to avoid are those of $U$ and the $j-1$ elements chosen for earlier
+bins, at most $r+s-1=D-1\le H-1$ in number; so an unused multiple $v_j$ of $f_j$ exists. Put
+$B=U\cup\{v_1,\dots,v_s\}$. By construction $U\cap\{v_1,\dots,v_s\}=\emptyset$ and the $v_j$ are pairwise
+distinct, so $|B|\le r+s=D$ and (this is the only place where the valuations of different elements are added)
+\[
+ \prod_{b\in B}b=\prod_{u\in U}u\cdot\prod_{j}v_j ,
+\]
+whose $p$-adic valuation is at least (sum over large atoms of $p$) $+\;\vp_p(\prod_j f_j)$, which equals
+$\vp_p(P)$ because every atom of every $a$ is either large or lies in exactly one bin.
+\end{proof}
+
+Thus everything reduces to producing bins and a budget $H$ with $D=r+s\le H$. Theorems~\ref{thm:log} and
+\ref{thm:sqrt} do this in two different ways.
+
+\section{Proof of Theorem~\ref{thm:log}}\label{sec:log}
+
+\paragraph{Next-fit bins.} For each $a\in A$ list its small atoms in increasing order of the prime and pack
+them by multiplicative next-fit: keep a current bin, initially empty (product $1$); if multiplying the next
+atom keeps the product $\le T$, add it; otherwise close the bin and start a new one containing that atom.
+Every small atom is $\le T$, so every bin has product $\le T$.
+
+\begin{lemma}\label{lem:nextfit}
+If $d_1,\dots,d_u$ are the bin products of one $a$ in the order created, then $d_jd_{j+1}>T$ for $1\le j<u$.
+\end{lemma}
+\begin{proof}
+Bin $j$ was closed because the next atom $q$ did not fit: $d_jq>T$. That atom is the first element of bin
+$j+1$, so $d_{j+1}\ge q$.
+\end{proof}
+
+\begin{lemma}[budget]\label{lem:budget}
+Let $H,\kappa\ge 1$ be integers with
+\begin{equation}\label{eq:B}
+ \text{(B1)}\;\; H\ge n(2\kappa+1),\qquad\text{(B2)}\;\; H^{(\kappa+1)n}\le 2^{\kappa H}.
+\end{equation}
+Then the next-fit construction with threshold $T=m/H$ produces $D=r+s\le H$ demands.
+\end{lemma}
+\begin{proof}
+\emph{Case $m^\kappa\le H^{\kappa+1}$.} Binning never increases the count, so $D\le W:=\sum_{a\in A}\om(a)$.
+Since every atom is at least $2$, $2^{\om(a)}\le a$, hence $2^W\le\prod_a a\le m^n$ and
+$2^{\kappa W}\le m^{\kappa n}\le H^{(\kappa+1)n}\le 2^{\kappa H}$ by (B2). So $W\le H$.
+
+\emph{Case $m^\kappa>H^{\kappa+1}$.} Then $T^{\kappa+1}=m^{\kappa+1}/H^{\kappa+1}>m$. Fix $a\in A$ with
+$\ell$ large atoms and $u$ bins $d_1,\dots,d_u$. The large atoms and the products $d_1d_2,\,d_3d_4,\dots$ of
+consecutive bin pairs are pairwise coprime divisors of $a$, each exceeding $T$ (Lemma~\ref{lem:nextfit}).
+If $\ell+\lfloor u/2\rfloor\ge\kappa+1$, the product of $\kappa+1$ of them would exceed $T^{\kappa+1}>m\ge a$
+while dividing $a$; so $\ell+\lfloor u/2\rfloor\le\kappa$, and since $u\le 2\lfloor u/2\rfloor+1$,
+$\ell+u\le 2(\ell+\lfloor u/2\rfloor)+1\le 2\kappa+1$. Summing over $a$, $D\le n(2\kappa+1)\le H$ by (B1).
+\end{proof}
+
+\begin{lemma}\label{lem:params}
+For $n\ge 2$ let $r=\Lam(2n)$, $s=\Lam(r)$, $C=r+s+2$, $H=nC=F(n)$ and $\kappa=\lfloor(C-1)/2\rfloor$. Then
+\textup{(B1)} and \textup{(B2)} hold.
+\end{lemma}
+\begin{proof}
+(B1): $2\kappa+1\le C$. (B2), $n\ge 3$: then $2n\ge 6$, so $r\ge 3$ and $s\ge 2$; by definition $2n\le 2^r$,
+i.e.\ $n\le 2^{r-1}$, and $r\le 2^s$; also $s+2\le 2^s$ for $s\ge 2$. Hence $C=r+s+2\le 2^{s+1}$ and
+$H=nC\le 2^{r-1}2^{s+1}=2^{C-2}$. Moreover $C\le 2(\kappa+1)$, i.e.\ $(C-2)(\kappa+1)\le\kappa C$, so
+$H^{(\kappa+1)n}\le 2^{(C-2)(\kappa+1)n}\le 2^{\kappa Cn}=2^{\kappa H}$. For $n=2$: $r=2$, $s=1$, $C=5$,
+$H=10$, $\kappa=2$, and $10^6\le 2^{20}$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:log}]
+Let $H=F(n)$. If $m\le H$ use Lemma~\ref{lem:whole}. Otherwise Lemmas~\ref{lem:budget} and \ref{lem:params}
+give $D\le H$, and Lemma~\ref{lem:assembly} gives $B$ with $|B|\le D\le F(n)$.
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:sqrt}}\label{sec:sqrt}
+
+Here the bins are formed by \emph{maximal merging}: start with each small atom (of any $a$) in its own bin
+and, as long as two bins have product $\le T$, merge them. Each merge preserves the property ``product
+$\le T$'' and decreases the number of bins, so the process terminates, and at termination any two bins have
+product $>T$.
+
+\begin{lemma}\label{lem:K}
+With $W=\sum_a\om(a)$ and $D=r+s$ as before,
+\[
+ \text{(i)}\;\; D\le W,\qquad
+ \text{(ii)}\;\; D\;\le\;\frac{2n\ln m}{\ln(m/H)}+1 .
+\]
+\end{lemma}
+\begin{proof}
+(i) is clear. (ii): any two bins have product $>T$, so at most one bin has product $\le\sqrt T$, and that bin still has
+product $\ge 2>1$. Hence, if $s\ge 1$, $P=\prod_{\text{large}}q\cdot\prod_j f_j>T^{\,r}\,T^{(s-1)/2}$ strictly, and
+$P\le m^n$; thus
+$r+(s-1)/2<n\ln m/\ln T$ and $D=r+s<2n\ln m/\ln T-r+1\le 2n\ln m/\ln(m/H)+1$. If $s=0$, $P>T^{\,r}$ gives
+$D=r<n\ln m/\ln T$.
+\end{proof}
+
+\begin{lemma}\label{lem:primesum}
+For real $X>1$, $\;\sum_{p\le X}1/p\le e\ln(1+\ln X)$ (sum over primes).
+\end{lemma}
+\begin{proof}
+Put $\sigma=1+1/\ln X$. For $p\le X$, $p^{\sigma-1}\le X^{1/\ln X}=e$, so $1/p\le e\,p^{-\sigma}$. Using
+$-\ln(1-t)\ge t$ and the finite Euler product,
+$\sum_{p\le X}p^{-\sigma}\le\ln\prod_{p\le X}(1-p^{-\sigma})^{-1}\le\ln\zeta(\sigma)$, and
+$\zeta(\sigma)\le 1+\int_1^\infty t^{-\sigma}dt=1+1/(\sigma-1)=1+\ln X$.
+\end{proof}
+
+\begin{lemma}[average number of prime factors]\label{lem:omega}
+For every real $t>1$,
+\[
+ \frac1n\sum_{i=1}^n\om(a_i)\;\le\;\frac{\ln(m/n)+(t-1)\,e\ln(1+\ln m)}{\ln t}.
+\]
+\end{lemma}
+\begin{proof}
+For every positive integer $k$, $t^{\om(k)}=\prod_{p\mid k}\bigl(1+(t-1)\bigr)=\sum_{d\mid k,\ d\text{ squarefree}}(t-1)^{\om(d)}$.
+All terms are nonnegative because $t>1$. Summing over $k\le m$,
+\[
+ \sum_{k\le m}t^{\om(k)}=\sum_{\substack{d\le m\\ d\text{ sqfree}}}(t-1)^{\om(d)}\Bigl\lfloor\frac md\Bigr\rfloor
+ \le m\prod_{p\le m}\Bigl(1+\frac{t-1}p\Bigr)\le m\exp\Bigl((t-1)\sum_{p\le m}\frac1p\Bigr)
+ \le m\,e^{(t-1)e\ln(1+\ln m)}
+\]
+by Lemma~\ref{lem:primesum}. The $a_i$ are distinct integers in $[2,m]$, so
+$\sum_i t^{\om(a_i)}\le\sum_{k\le m}t^{\om(k)}$, and by the AM--GM inequality
+$t^{\frac1n\sum_i\om(a_i)}\le\frac1n\sum_i t^{\om(a_i)}$. Taking logarithms gives the claim (note $m\ge n+1$, so $\ln(m/n)>0$).
+\end{proof}
+
+\begin{lemma}[explicit parameters]\label{lem:explicit}
+Let $L=81+\ln n$, $\ell=\ln L$, $R=\sqrt{L/\ell}$ and $H=\lceil 48nR\rceil$. If $m>H$ then $D<H$.
+\end{lemma}
+\begin{proof}
+Elementary facts: $\ell>4$ (as $L\ge 81>e^4$); $\ell\le L/4$ (the function $y/4-\ln y$ is increasing and
+positive for $y\ge 81$); $\ln\ell\le\ell/2$ (as $y/2-\ln y>0$ is increasing for $y\ge 4$); hence
+$R>2$. Put $y=\ln m$, $z=\ln H$, $d=y-z>0$, $c=z-\ln n$. Since $48nR>1$, $H\le 96nR$, so
+$c\le\ln 96+\ln R<7+\ell/2$ (using $\ln R=(\ell-\ln\ell)/2\le\ell/2$) and $z<\ln n+7+\ell/2<2L$. Put
+$\Delta=4\sqrt{L\ell}=4R\ell\le 2L$ (as $4\ell\le L$).
+
+\emph{Case $d\le\Delta$.} Then $y\le 4L$. Apply Lemma~\ref{lem:omega} with $t=R$: $\ln R=(\ell-\ln\ell)/2\ge\ell/4$
+and $e\ln(1+y)\le e\ln(5L)<3(\ell+3)<6\ell$. Since $\ln(m/n)=d+c$,
+\[
+ \frac Wn\le\frac{d+c+(R-1)\cdot 6\ell}{\ell/4}<\frac{4R\ell+7+\ell/2+6R\ell}{\ell/4}=40R+\frac{28}{\ell}+2<45R,
+\]
+so by Lemma~\ref{lem:K}(i), $D\le W<45nR<H$.
+
+\emph{Case $d>\Delta$.} By Lemma~\ref{lem:K}(ii),
+$D\le 2n\,\frac{z+d}{d}+1<2n+\frac{2n\cdot 2L}{4\sqrt{L\ell}}+1=2n+nR+1<3nR<H$, using $R>2$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:sqrt}, explicit part]
+Let $H=\lceil 48nR\rceil$. If $m\le H$ use Lemma~\ref{lem:whole}; otherwise Lemma~\ref{lem:explicit} gives
+$D<H$ and Lemma~\ref{lem:assembly} gives $|B|\le D<H$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:sqrt}, asymptotic part]
+Fix $\varepsilon>0$, put $Q_n=\sqrt{\ln n/\ln\ln n}$ and $H=\lceil(2+\varepsilon)nQ_n\rceil$; we show $D<H$
+for all $m>H$ once $n$ is large, which suffices as before. With $y=\ln m$, $z=\ln H$, $d=y-z$, $c=z-\ln n$ we
+have $z=\ln n+O(\ln\ln n)$, hence $\sqrt{z/\ln z}=(1+o(1))Q_n$ and $c=O(\ln z)$. Put $\Delta=\sqrt{z\ln z}$.
+If $d>\Delta$, Lemma~\ref{lem:K}(ii) gives $D/n\le 2+2z/d+1/n\le(2+o(1))\sqrt{z/\ln z}$. If $d\le\Delta$, then
+$y=(1+o(1))z$; apply Lemma~\ref{lem:omega} with $t=\sqrt z/(\ln z)^2$, so $\ln t=(\tfrac12+o(1))\ln z$:
+the three terms of the numerator divided by $\ln t$ are at most $(2+o(1))\sqrt{z/\ln z}$, $O(1)$ and
+$O(\sqrt z/(\ln z)^2)$ respectively, so $D/n\le W/n\le(2+o(1))\sqrt{z/\ln z}$. In both cases
+$D\le(2+\varepsilon/2)nQ_n<H$ for all $n\ge n_0(\varepsilon)$, so $g(n)\le\lceil(2+\varepsilon)nQ_n\rceil$ for
+$n\ge n_0(\varepsilon)$; as $\varepsilon>0$ was arbitrary, $\limsup_n g(n)/(nQ_n)\le 2$.
+\end{proof}
+
+\begin{remark}
+No attempt was made to optimise the constant $48$; the same argument with the case threshold and the
+prime-sum estimate tightened (e.g.\ an explicit Mertens bound in place of Lemma~\ref{lem:primesum}) gives
+a single-digit constant. Theorems~\ref{thm:log} and \ref{thm:sqrt} are proved by the same construction and
+differ only in how the number of bins is counted; Theorem~\ref{thm:long} uses the same two ingredients
+(per-prime placement of large atoms, private multiples for small parts) with the budget $2n$ made possible by
+the length of the interval.
+\end{remark}
+
+\section{Long intervals: proof of Theorem~\ref{thm:long}}\label{sec:long}
+
+Assume $m=a_n\ge 8n^3$ and put $C=m/(2n)$. Then $C\ge m^{2/3}$ (equivalent to $m^{1/3}\ge 2n$),
+$C\ge 4n^2\ge 2n$, and, since $m\ge 8n^3\ge 4n^2$, also $C^2=m^2/(4n^2)\ge m$. In the language of
+Section~\ref{sec:construction} we take the integer budget $H=2n$ and threshold $T=C=m/H$ (note $m>H$).
+
+\begin{lemma}[two-bin packing]\label{lem:pack}
+Let $C\ge1$ be real and let $q_1,\dots,q_r>1$ be integers with $q_i\le C$ and $P=q_1\cdots q_r\le C^{3/2}$.
+Then some sub-product $s$ of the $q_i$ (over a subset, possibly empty or everything) satisfies
+$P/C\le s\le C$; consequently the $q_i$ can be partitioned into two classes with products $\le C$.
+\end{lemma}
+\begin{proof}
+If $P\le C$ take $s=P$. Otherwise $1<P/C\le\sqrt C$. If some $q_i>\sqrt C$, take $s=q_i$: then $s\le C$ and
+$s>\sqrt C\ge P/C$. If all $q_i\le\sqrt C$, multiply them in any order and stop at the first partial product
+$s\ge P/C$ (this happens at the latest at $s=P$); the previous partial product, possibly the empty product
+$1<P/C$, was $<P/C$, so $s<(P/C)\sqrt C=P/\sqrt C\le C$. In every case the
+complementary product is $P/s\le C$.
+\end{proof}
+
+\begin{lemma}[split]\label{lem:split}
+Every $a\in A$ has at most one atom exceeding $C$, and admits a factorisation $a=d_1d_2$ into coprime parts
+such that either $d_1,d_2\le C$, or $d_1$ is an atom $>C$ and $d_2<2n\le C$.
+\end{lemma}
+\begin{proof}
+Two atoms $>C$ are coprime, so they would give $a>C^2\ge m$, impossible. If $q=p^e>C$ is an atom, put
+$d_1=q$, $d_2=a/q<m/C=2n$. Otherwise all atoms of $a$ are $\le C$ and their product $a\le m\le C^{3/2}$, so
+Lemma~\ref{lem:pack} splits them into two coprime classes with products $\le C$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:long}]
+Split every $a\in A$ by Lemma~\ref{lem:split}; parts equal to $1$ impose no condition and may be assigned
+to any element, so we discard them. This gives at most $2n$ \emph{demands}, each either a \emph{large} atom
+$>C$ or a \emph{small} integer $\le C$. (Lemma~\ref{lem:assembly} with $H=2n$ already gives $|B|\le 2n$; we
+repeat the argument because Conjecture~\ref{conj:S} asks for the explicit assignment.) Assign the large
+demands as in Lemma~\ref{lem:large}: for each prime $p$, the large atoms of $p$ (one per $a$) receive
+distinct multiples of the required powers of $p$; different primes may share elements. Let $U$ be the set of
+elements used, $|U|\le$ number of large demands. Now assign the small demands one at a time: a small demand
+$d\le C=m/(2n)$ has at least $\lfloor m/d\rfloor\ge 2n$ multiples in $I$ by Lemma~\ref{lem:count} ($2n$ is
+an integer), while the forbidden elements ($U$ together with the elements already given to earlier small
+demands) number at most $2n-1$, because there are at most $2n$ demands in all and the current one is not yet
+placed; so $d$ receives a multiple of its own, outside $U$ and different from all other small
+representatives. Let $B$ be the set of all elements used, $|B|\le 2n$. At an element of $U$ the demands
+present are prime powers of distinct primes, each dividing the element; at every other element of $B$
+exactly one demand $d$ is present and $d$ divides the element. Hence the product of the demands at any
+$b\in B$ divides $b$, and since the demands of each $a$ multiply to $a$, $P\mid\prod_{b\in B}b$. This is
+exactly an assignment as in Conjecture~\ref{conj:S}. Finally, if $a_n<8n^3$ then Lemma~\ref{lem:whole}
+gives a solution with at most $a_n<8n^3$ elements, so $g(n)\le 8n^3$.
+\end{proof}
+
+\section{Small values, obstructions and remarks}\label{sec:remarks}
+
+\begin{proposition}\label{prop:small}
+$g(4)\ge 5$ and $g(5)\ge 6$.
+\end{proposition}
+\begin{proof}
+Let $A=\{10,12,15,20\}$ and $x=50$, so $I=\{51,\dots,70\}$ and $P=2^5\cdot3^2\cdot5^3$. No element of $I$ is
+divisible by $25$, so a solution contains at least three of the multiples $55,60,65,70$ of $5$; any set $S$ of
+multiples of $5$ in $I$ has $\vp_2(\prod S)\le 3$ and $\vp_3(\prod S)\le 1$. Hence a further element with
+$\vp_2\ge 2$ and $\vp_3\ge 1$, i.e.\ a multiple of $12$, is needed; the only multiple of $12$ in $I$ is $60$,
+and using it still leaves $\vp_2\le 3<5$. So at least five elements are needed, and $\{55,63,64,65,70\}$
+works. For $A=\{5,10,12,15,20\}$ and $x=50$ we have $P=2^5\cdot3^2\cdot5^4$, so all four multiples of $5$ are
+forced, supplying $\vp_2=3$ and $\vp_3=1$; two more elements are then needed for $2^2$ and $3$ (no element of
+$I$ other than $60$ is divisible by $12$), and $\{55,60,63,64,65,70\}$ works. Both minima were also confirmed
+by an exhaustive dynamic programme over capped valuation vectors, which further shows that no other $x$
+gives a larger minimum for these two sets.
+\end{proof}
+
+\begin{remark}[why the obvious approaches fail]
+(a) Choosing a multiple of each $a_i$ and multiplying does not work, because the chosen multiples may
+coincide and a shared element contributes its valuations once; in the Erd\H{o}s--Sur\'anyi family every
+$a_i$ has the same unique multiple $u$. (b) One cannot in general match the $a_i\le m/2$ to
+\emph{distinct} multiples inside an interval of length $m$: van Doorn, Li and Tang \cite{vDLT26} showed that an
+interval of length $2\max A$ guarantees only $\min(n,\lceil 2\sqrt n\rceil)$ disjoint pairs $(a,\text{multiple of }a)$,
+and this is optimal. (c) An induction that removes $a_n$, takes a solution $B'$ for the rest and repairs it
+with two new elements fails: for $A'=\{2,4,8,10,12\}$, $I=\{1,\dots,16\}$, $B'=\{8,12,15,16\}$ and $a_6=16$,
+the missing factor $2^4$ cannot be supplied by two elements of $I\setminus B'$. Lemma~\ref{lem:assembly}
+avoids all three pitfalls by giving every bin at least $H$ candidates and letting different primes share an
+element only through the per-prime bookkeeping of Lemma~\ref{lem:large}.
+\end{remark}
+
+\begin{remark}[the gap to $2n$]
+Both proofs pay one interval element per large atom and per bin. In the balancing region of
+Lemma~\ref{lem:K} an $a_i$ may have about $\sqrt{\ln n/\ln\ln n}$ atoms of ``medium'' size, none of which can
+be merged, and this is exactly the loss in Theorem~\ref{thm:sqrt}. A linear bound would require medium atoms
+of \emph{different} $a_i$ to share representatives. A natural sufficient statement is the following.
+\end{remark}
+
+\begin{conjecture}[split assignment]\label{conj:S}
+For every $A$ and $I$ as above one can choose for each $a\in A$ a factorisation $a=d_1(a)d_2(a)$ into
+coprime parts ($d_2=1$ allowed) and assign each of the at most $2n$ parts to an element $\beta(d)\in I$ so
+that for every $b\in I$ and every prime $p$, $\sum_{d:\beta(d)=b}\vp_p(d)\le\vp_p(b)$.
+\end{conjecture}
+
+The conjecture implies $g(n)\le 2n$ (take $B=\beta(\text{parts})$), and Theorem~\ref{thm:long} proves it
+whenever $a_n\ge 8n^3$. Since the capacity constraint couples
+two parts only if they share a prime, the assignment always exists when every $a\in A$ has at most two
+distinct prime factors (use the finest splitting and Lemma~\ref{lem:large} prime by prime); a counterexample
+would need elements with three or more prime factors competing for composite multiples. An exact search found
+the assignment on the Erd\H{o}s--Sur\'anyi instances with $\ell=3,4$, on the instances of
+Proposition~\ref{prop:small}, and on more than $10^6$ random instances with $n\le 6$ and $a_n\le 210$;
+we found no counterexample.
+
+\begin{thebibliography}{9}
+\bibitem{ES59} P.~Erd\H{o}s and J.~Sur\'anyi, Megjegyz\'esek egy versenyfeladathoz (Remarks on a problem of a
+mathematical competition), \emph{Mat.\ Lapok} 10 (1959), 39--48 (in Hungarian).
+\bibitem{Er92} P.~Erd\H{o}s, Some of my forgotten problems in number theory, \emph{Hardy--Ramanujan J.} 15
+(1992), 34--50, \S1.
+\bibitem{EP708} T.~F.~Bloom, Erd\H{o}s Problem \#708, \url{https://www.erdosproblems.com/708}, accessed 2026-09-03.
+\bibitem{vDLT26} W.~van Doorn, Y.~Li and Q.~Tang, Optimal bounds for an Erd\H{o}s problem on matching integers
+to distinct multiples, arXiv:2603.28636 (2026).
+\end{thebibliography}
+\end{document}
