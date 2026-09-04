@@ -39,12 +39,16 @@ $100, whether g(n) ≤ (2+o(1))n or even 2n — [erdosproblems.com/708](https://
   whenever the atoms of modulus ≤ m/64 have mean ≥ 17/16 (dense branch); hence g(n) ≤ 81n follows from a 'sparse core' statement (mean < 17/16),
   which is vacuous below the 65th primorial (≈ 6·10^127), has left side ≤ 6.24·10^−90·m, and remains OPEN. Projective-plane configurations show
   that the two-sided interval counts alone (without the values ⌊m/d⌋) cannot prove it. Referee scripts: `src/referee_fractional_check*.py`.
+* (v10) **g(n) ≤ 81n for all n ≤ 10^962** (Section 12, 'arithmetic shadows'): a single k ≤ m with atom mass > 64 yields 32 pairwise coprime
+  moduli D_r | k (group mass > 4/3) and the nonnegative certificate c_{D_r} = 1/3, giving Σ_I(S_0−1)⁺ ≥ (32/3)(1−6^−31) m/k^{1/32}; with the
+  factorial-moment bound this proves the sparse core for 4096 < m ≤ 10^2887 (exact range 10^2887.45), hence the hinge inequality with threshold 65
+  for all m ≤ 10^2887 and g(n) ≤ 81n for n ≤ 10^962. Beyond that only O(n ln ln n) is known. Referee scripts: `src/referee_shadow_*.py`.
 
 To our knowledge these are the first upper bounds for g(n) depending on n alone (none is recorded in Erdős's 1992
 paper or on the problem's page; the 1959 original, in Hungarian, was not accessible to us). The conjectured 2n is
 **not** proved; the problem remains open. We also record g(4) ≥ 5 and g(5) ≥ 6 (exact computation).
 
-**Paper.** `paper/main.pdf` (source `paper/main.tex`, v9); archived at Zenodo: v9 DOI [10.5281/zenodo.22293074](https://doi.org/10.5281/zenodo.22293074) (v8: [10.5281/zenodo.22288514](https://doi.org/10.5281/zenodo.22288514); v7: [10.5281/zenodo.22288059](https://doi.org/10.5281/zenodo.22288059); v6: [10.5281/zenodo.22287949](https://doi.org/10.5281/zenodo.22287949); v5: [10.5281/zenodo.22287131](https://doi.org/10.5281/zenodo.22287131); v4: [10.5281/zenodo.22286559](https://doi.org/10.5281/zenodo.22286559) (v3: [10.5281/zenodo.22284511](https://doi.org/10.5281/zenodo.22284511) (v2: [10.5281/zenodo.22270923](https://doi.org/10.5281/zenodo.22270923); v1: [10.5281/zenodo.22267396](https://doi.org/10.5281/zenodo.22267396); concept DOI [10.5281/zenodo.22267395](https://doi.org/10.5281/zenodo.22267395) always resolves to the latest version).
+**Paper.** `paper/main.pdf` (source `paper/main.tex`, v10); archived at Zenodo: v10 DOI [10.5281/zenodo.22296625](https://doi.org/10.5281/zenodo.22296625) (v9: [10.5281/zenodo.22293074](https://doi.org/10.5281/zenodo.22293074); v8: [10.5281/zenodo.22288514](https://doi.org/10.5281/zenodo.22288514); v7: [10.5281/zenodo.22288059](https://doi.org/10.5281/zenodo.22288059); v6: [10.5281/zenodo.22287949](https://doi.org/10.5281/zenodo.22287949); v5: [10.5281/zenodo.22287131](https://doi.org/10.5281/zenodo.22287131); v4: [10.5281/zenodo.22286559](https://doi.org/10.5281/zenodo.22286559) (v3: [10.5281/zenodo.22284511](https://doi.org/10.5281/zenodo.22284511) (v2: [10.5281/zenodo.22270923](https://doi.org/10.5281/zenodo.22270923); v1: [10.5281/zenodo.22267396](https://doi.org/10.5281/zenodo.22267396); concept DOI [10.5281/zenodo.22267395](https://doi.org/10.5281/zenodo.22267395) always resolves to the latest version).
 
 ## Verification
 * `src/gn_dp.py` — exact minimum |B| for a concrete (A, x) by dynamic programming over capped valuation vectors; reproduces
@@ -102,3 +106,7 @@ projective-plane obstruction and the quantitative remarks from a further run of 
 Claude Opus referee runs (scripts in `src/`), which also corrected the scope of the obstruction (it excludes arguments that ignore the
 values ⌊m/d⌋, not the certificate method itself) and rejected two intermediate claims of the engine (a 'reduction' that was a strengthening,
 and the necessity of the lcm structure). No theorem about g(n) is affected; the linear bound remains open.
+(v10) The arithmetic-shadow theorem and the range 10^2887 come from a GPT-5.6 Pro run of about 105 minutes (`run23_*`), answering a
+coordinator brief that asked for arithmetic input after the counting limit; the coordinator's own proof of the packing lemma is used in the
+paper. An independent Claude Opus referee run verified every step (exact rationals; scaled-threshold numerics; an exhaustive scan over window
+residues) and found no error; it also showed that the multiples-only charging route proposed in the brief fails, as the engine had claimed.

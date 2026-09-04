@@ -50,8 +50,8 @@ and $g(n)\le(2+o(1))\,n\sqrt{\ln n/\ln\ln n}$, and, by a different method (linea
 elementary sieve lemma for intervals), $g(n)\le\bigl(16+20\ln\ln(8n^3)\bigr)n=O(n\ln\ln n)$. The duality reduces a linear bound to a ``hinge inequality'' for
 weighted prime-factor counts on intervals; we prove it for 0/1 weights with the absolute threshold $4$ for every set of primes, by
 explicit counting certificates; for fractional weights we prove it with threshold $65$ whenever the small-modulus part of the weight has
-mean at least $\tfrac{17}{16}$, which reduces a linear bound $g(n)\le81n$ to a ``sparse core'' statement, and we show that the two-sided
-interval counts alone cannot prove that statement, which remains open. We also show that the conjectured bound holds for long
+mean at least $\tfrac{17}{16}$, which reduces a linear bound $g(n)\le81n$ to a ``sparse core'' statement; we prove that statement for all $m\le10^{2887}$, so that
+$g(n)\le81n$ for all $n\le10^{962}$, and we show that the two-sided interval counts alone cannot prove it in general, which remains open. We also show that the conjectured bound holds for long
 intervals: if $a_n\ge 8n^3$ then $2n$ integers always suffice, so Erd\H{o}s's question is reduced to the
 range $a_n<8n^3$; more generally, for every integer $k\ge 2$, $kn$ integers suffice whenever $a_n\le kn$ or
 $a_n^{k-1}\ge(kn)^{k+1}$; hence for every fixed $\delta>0$ a bound linear in $n$ (with a constant depending on
@@ -146,8 +146,9 @@ $g(n)=O(n\ln\ln n)$ (Corollary~\ref{cor:lnln}). Section~\ref{sec:constant} sharp
 refinement of the same sieve (Theorem~\ref{thm:twenty}), giving $g(n)\le(16+20\ln\ln(8n^3))n$ for all $n$, which is below the
 bound of Theorem~\ref{thm:sqrt} for every $n$. Section~\ref{sec:sparse} returns to the fractional case: the inequality with threshold $65$
 holds whenever the small-modulus atoms of the weight have mean at least $\tfrac{17}{16}$ (Theorem~\ref{thm:dense}), so a linear bound
-$g(n)\le81n$ follows from a ``sparse core'' statement (Corollary~\ref{cor:sparsecore}); we also show that the two-sided interval counts
-alone cannot prove such a statement (Proposition~\ref{prop:fano}).
+$g(n)\le81n$ follows from a ``sparse core'' statement (Corollary~\ref{cor:sparsecore}); we prove that statement for $m\le10^{2887}$ by an
+arithmetic argument (Theorem~\ref{thm:shadow}), which gives $g(n)\le81n$ for all $n\le10^{962}$ (Corollary~\ref{cor:2887}), and we show
+that the two-sided interval counts alone cannot prove it in general (Proposition~\ref{prop:fano}).
 
 \section{The common construction}\label{sec:construction}
 
@@ -1257,7 +1258,7 @@ for $R=64$ this allows $H_{\mathrm{lo}}=\tfrac{133}{128}$.
 
 (b) The sparse core \eqref{eq:SC} is the hard half of the problem, not the easy one: it is exactly the regime in which the affine
 certificate fails (Corollary~\ref{cor:affine}). Its left side vanishes unless some $k\le m$ has $S_0(k)>64$, which requires
-$\omega(k)>64$, so \eqref{eq:SC} is vacuous for $m$ below the product of the first $65$ primes ($\approx10^{130}$); it cannot be tested
+$\omega(k)>64$, so \eqref{eq:SC} is vacuous for $m$ below the product of the first $65$ primes ($6.108\cdot10^{127}$); it cannot be tested
 numerically at this threshold, and any finite check must be run at a scaled-down threshold.
 
 (c) Three natural ways of transferring Theorem~\ref{thm:four} to fractional weights fail. Positive combinations of the 0/1 inequalities
@@ -1312,7 +1313,7 @@ argument at small harmonic mass either.
 
 Two quantitative facts about the sparse core are worth recording. First, since $S_0\le\omega$, the left side of \eqref{eq:SC} vanishes
 unless some $k\le m$ has more than $64$ distinct prime factors, so \eqref{eq:SC} is vacuous for $m$ below the product of the first
-$65$ primes, about $6.1\cdot10^{127}$; in particular the numerical evidence of Section~\ref{sec:linear} says nothing about it.
+$65$ primes, $6.108\cdot10^{127}$; in particular the numerical evidence of Section~\ref{sec:linear} says nothing about it.
 Second, the left side is always tiny: with $a_p(k)=\sum_{p^j\le m/64}\alpha_{p,j}[p^j\mid k]\in[0,1]$ and
 $h_p=\sum_{p^j\le m/64}\alpha_{p,j}/p^j$ one has $\sum_{k\le m}e_\ell\bigl((a_p(k))_p\bigr)\le m\,e_\ell\bigl((h_p)_p\bigr)\le mH_{64}^\ell/\ell!$
 for the elementary symmetric functions $e_\ell$ (distinct primes have coprime moduli), and $(t-C)^+\le e_{C+1}$ of the summands of $t$
@@ -1324,6 +1325,69 @@ while a single $k\le m$ with $S_0(k)>64$ forces $\sum_I(S_0-1)^+>63$, because th
 $S_0(b)\ge S_0(k)$. A counterexample to \eqref{eq:SC} would therefore be a window of length $m\ge6.1\cdot10^{127}$ that is deficient,
 simultaneously for astronomically many moduli, within the $\pm1$ freedom of the counts; we have not been able to rule this out, and the
 question is left open here.
+
+\subsection*{The sparse core up to $10^{2887}$}
+
+The arithmetic input that the two-sided counts lack is supplied, in a range of $m$ that is finite but enormous, by the
+multiples of a single integer with many small prime factors.
+
+\begin{lemma}[packing]\label{lem:pack32}
+Let $x_1,\dots,x_N\in(0,1]$ with $\sum_ix_i>64$. Then there are pairwise disjoint index sets $G_1,\dots,G_{32}$ with
+$\tfrac43<\sum_{i\in G_r}x_i\le2$ for every $r$.
+\end{lemma}
+\begin{proof}
+Call $x_i$ large if $x_i>\tfrac23$. Pair the large items two by two; each pair has mass in $(\tfrac43,2]$. Then form further
+groups greedily from the remaining items (at most one large one, and items of mass at most $\tfrac23$): add items until the mass
+exceeds $\tfrac43$; each such group has mass at most $\tfrac43+\tfrac23=2$, and at most $1+\tfrac23$ if it starts with the odd large item.
+Every completed group has mass in $(\tfrac43,2]$, the leftover has mass at most $\tfrac43$, so the completed groups have total mass
+more than $64-\tfrac43>31\cdot2$, and there are at least $32$ of them.
+\end{proof}
+
+\begin{theorem}[arithmetic shadows]\label{thm:shadow}
+Let $m>4096$ and let $S_0$ be as above. If $S_0(k)>64$ for some $k\le m$, then for every window $I$ of $m$ consecutive integers
+\[
+\sum_{b\in I}\bigl(S_0(b)-1\bigr)^+\ \ge\ \tfrac{32}{3}\bigl(1-6^{-31}\bigr)\,\frac{m}{k^{1/32}}\ \ge\ \tfrac{32}{3}\bigl(1-6^{-31}\bigr)\,m^{31/32}.
+\]
+\end{theorem}
+\begin{proof}
+Write $a_p(k)=\sum_{p^j\le m/64,\;p^j\mid k}\alpha_{p,j}\in[0,1]$, so $S_0(k)=\sum_pa_p(k)$. Apply Lemma~\ref{lem:pack32} to the
+numbers $a_p(k)>0$: this gives disjoint sets of primes $G_1,\dots,G_{32}$ with $\sum_{p\in G_r}a_p(k)>\tfrac43$. For each prime $p$
+let $q_p$ be the largest power $p^j\le m/64$ with $\alpha_{p,j}>0$ and $p^j\mid k$, and put $D_r:=\prod_{p\in G_r}q_p$. The $D_r$ are
+pairwise coprime, $\prod_rD_r\mid k$, and each $D_r\ge6$ (a group contains at least two primes, since one prime carries mass at most $1$).
+If $D_r\mid n$ then every atom of a prime of $G_r$ that is active at $k$ is active at $n$, so $a_p(n)\ge a_p(k)$ for $p\in G_r$; hence if
+exactly $t\ge1$ of the $D_r$ divide $n$ then $S_0(n)>\tfrac{4t}3$ and $(S_0(n)-1)^+>\tfrac{4t}3-1\ge\tfrac t3$. Thus the nonnegative
+certificate $c_{D_r}=\tfrac13$ satisfies \eqref{eq:F} for $S_0$, and by Proposition~\ref{prop:cert}
+\[
+\sum_{b\in I}(S_0(b)-1)^+\ \ge\ \tfrac13\sum_{r=1}^{32}\Bigl\lfloor\frac m{D_r}\Bigr\rfloor\ \ge\ \tfrac13\bigl(1-6^{-31}\bigr)\sum_{r=1}^{32}\frac m{D_r},
+\]
+because $m/D_r\ge\prod_{s\ne r}D_s\ge6^{31}$. Finally $\sum_r1/D_r\ge32\bigl(\prod_rD_r\bigr)^{-1/32}\ge32\,k^{-1/32}$ by the
+arithmetic--geometric mean inequality.
+\end{proof}
+
+\begin{corollary}\label{cor:2887}
+The sparse-core inequality \eqref{eq:SC} holds for every atom system and every window whenever $4096<m\le10^{2887}$. Consequently
+the hinge inequality with threshold $65$ holds for all weights and all $m\le10^{2887}$, and
+\[
+g(n)\le81\,n\qquad\text{for all }n\le10^{962}.
+\]
+\end{corollary}
+\begin{proof}
+If the left side of \eqref{eq:SC} is positive, some $k\le m$ has $S_0(k)>64$, and Theorem~\ref{thm:shadow} together with the
+moment bound above gives $R\ge\tfrac{32}3(1-6^{-31})m^{31/32}$ and $L<6.24\cdot10^{-90}m$; so $L\le R$ as soon as
+$m^{1/32}\le\tfrac{32}{3}(1-6^{-31})/(6.24\cdot10^{-90})$, which holds for $m\le10^{2887}$. The hinge inequality follows from
+Theorem~\ref{thm:dense} and Lemma~\ref{lem:largeatoms}, and the bound on $g(n)$ from the proof of Theorem~\ref{thm:cond} with
+threshold $65$, since $a_n<8n^3\le10^{2887}$ for $n\le10^{962}$ (and $2n$ integers suffice when $a_n\ge8n^3$).
+\end{proof}
+
+\begin{remark}
+The bound $g(n)\le81n$ is therefore linear for every $n$ that can be written down, and $g(n)\le(16+20\ln\ln(8n^3))n$ beyond.
+What is missing for all $n$ is a version of Theorem~\ref{thm:shadow} that charges every integer $k\le m$ with $S_0(k)>64$ rather
+than one: the shadows of different $k$ may coincide, and the natural way of charging each $k$ to its own multiples in the window
+fails by an unbounded factor on suitable windows defined by congruence conditions (engine transcript, round 12). The threshold could
+be raised instead: with $C$ in place of $64$ the same argument gives $R\ge c\,m^{1-2/C}$ against $L\le mH^{C+1}/(C+1)!$, so the
+hinge inequality holds with a threshold of order $\sqrt{\ln m/\ln\ln m}$ for all $m$, which is weaker than Theorem~\ref{thm:twenty}
+for large $m$.
+\end{remark}
 
 \begin{thebibliography}{9}
 \bibitem{ES59} P.~Erd\H{o}s and J.~Sur\'anyi, Megjegyz\'esek egy versenyfeladathoz (Remarks on a problem of a
