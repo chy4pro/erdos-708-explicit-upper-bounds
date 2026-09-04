@@ -48,7 +48,7 @@ To our knowledge these are the first upper bounds for g(n) depending on n alone 
 paper or on the problem's page; the 1959 original, in Hungarian, was not accessible to us). The conjectured 2n is
 **not** proved; the problem remains open. We also record g(4) ≥ 5 and g(5) ≥ 6 (exact computation).
 
-**Paper.** `paper/main.pdf` (source `paper/main.tex`, v10); archived at Zenodo: v10 DOI [10.5281/zenodo.22296625](https://doi.org/10.5281/zenodo.22296625) (v9: [10.5281/zenodo.22293074](https://doi.org/10.5281/zenodo.22293074); v8: [10.5281/zenodo.22288514](https://doi.org/10.5281/zenodo.22288514); v7: [10.5281/zenodo.22288059](https://doi.org/10.5281/zenodo.22288059); v6: [10.5281/zenodo.22287949](https://doi.org/10.5281/zenodo.22287949); v5: [10.5281/zenodo.22287131](https://doi.org/10.5281/zenodo.22287131); v4: [10.5281/zenodo.22286559](https://doi.org/10.5281/zenodo.22286559) (v3: [10.5281/zenodo.22284511](https://doi.org/10.5281/zenodo.22284511) (v2: [10.5281/zenodo.22270923](https://doi.org/10.5281/zenodo.22270923); v1: [10.5281/zenodo.22267396](https://doi.org/10.5281/zenodo.22267396); concept DOI [10.5281/zenodo.22267395](https://doi.org/10.5281/zenodo.22267395) always resolves to the latest version).
+**Paper.** `paper/main.pdf` (source `paper/main.tex`) — always the current version. Archived on Zenodo as ONE record under the concept DOI [10.5281/zenodo.22267395](https://doi.org/10.5281/zenodo.22267395), which resolves to the latest version; the version history (v1–v10) is the record's changelog, and earlier versions are marked as superseded.
 
 ## Verification
 * `src/gn_dp.py` — exact minimum |B| for a concrete (A, x) by dynamic programming over capped valuation vectors; reproduces
