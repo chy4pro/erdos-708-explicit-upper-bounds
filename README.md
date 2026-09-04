@@ -49,6 +49,13 @@ $100, whether g(n) ≤ (2+o(1))n or even 2n — [erdosproblems.com/708](https://
   claim that window-independent certificates refute the multi-point route only concerns certificates feasible at every integer; the
   certificate principle needs feasibility on the window only, and window-adapted certificates beat the transcript's barrier family
   (referee scripts `src/referee_r13_*.py`). These will enter the paper with its next (final) version.
+* (repo-only, 2026-09-05; not yet a Zenodo version) Round 14 (`run26_*`, refereed): a barrier for window-adapted divisor certificates.
+  On the reflected windows I = (m! − m, m!] with P a set of n primes (weights α_{p,1} = 1) every certificate c_D ≥ 0 feasible on the whole
+  window has value at most (n − 1)⌊m/(p₁p₂)⌋, while L_64 ≥ C(n, 65); an explicit infinite family (n_t = 2^{2^t}, t ≥ 11) has W/L → 0, and an
+  exact finite witness for threshold 2 uses the 425 primes in [3299, 6899] with m = 326,275,048,607 (12,703,040 < 12,704,100). The
+  sparse-core inequality itself holds on these windows (R ≥ L + 63 by reflection). The referee further showed that the certificate cone
+  survives if the (few) hot points are excluded from feasibility (value 64·L on the same family) — the open question is now that
+  hot-set-excluded LP. Check script: `src/referee_r14_check.py`.
 
 To our knowledge these are the first upper bounds for g(n) depending on n alone (none is recorded in Erdős's 1992
 paper or on the problem's page; the 1959 original, in Hungarian, was not accessible to us). The conjectured 2n is
