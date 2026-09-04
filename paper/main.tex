@@ -49,7 +49,9 @@ g(n)\;\le\;\Bigl\lceil 48\,n\sqrt{\tfrac{81+\ln n}{\ln(81+\ln n)}}\Bigr\rceil ,
 and $g(n)\le(2+o(1))\,n\sqrt{\ln n/\ln\ln n}$, and, by a different method (linear-programming duality and an
 elementary sieve lemma for intervals), $g(n)\le\bigl(16+20\ln\ln(8n^3)\bigr)n=O(n\ln\ln n)$. The duality reduces a linear bound to a ``hinge inequality'' for
 weighted prime-factor counts on intervals; we prove it for 0/1 weights with the absolute threshold $4$ for every set of primes, by
-explicit counting certificates, while the fractional case, which would give $g(n)=O(n)$, remains open. We also show that the conjectured bound holds for long
+explicit counting certificates; for fractional weights we prove it with threshold $65$ whenever the small-modulus part of the weight has
+mean at least $\tfrac{17}{16}$, which reduces a linear bound $g(n)\le81n$ to a ``sparse core'' statement, and we show that the two-sided
+interval counts alone cannot prove that statement, which remains open. We also show that the conjectured bound holds for long
 intervals: if $a_n\ge 8n^3$ then $2n$ integers always suffice, so Erd\H{o}s's question is reduced to the
 range $a_n<8n^3$; more generally, for every integer $k\ge 2$, $kn$ integers suffice whenever $a_n\le kn$ or
 $a_n^{k-1}\ge(kn)^{k+1}$; hence for every fixed $\delta>0$ a bound linear in $n$ (with a constant depending on
@@ -142,7 +144,10 @@ explicit certificates (Theorem~\ref{thm:four}). Section~\ref{sec:fractional} ext
 with threshold $1+149e\ln(1+\ln m)$ (Theorem~\ref{thm:frac}), which through the same duality gives
 $g(n)=O(n\ln\ln n)$ (Corollary~\ref{cor:lnln}). Section~\ref{sec:constant} sharpens the threshold to $20\ln\ln m$ by a geometric
 refinement of the same sieve (Theorem~\ref{thm:twenty}), giving $g(n)\le(16+20\ln\ln(8n^3))n$ for all $n$, which is below the
-bound of Theorem~\ref{thm:sqrt} for every $n$.
+bound of Theorem~\ref{thm:sqrt} for every $n$. Section~\ref{sec:sparse} returns to the fractional case: the inequality with threshold $65$
+holds whenever the small-modulus atoms of the weight have mean at least $\tfrac{17}{16}$ (Theorem~\ref{thm:dense}), so a linear bound
+$g(n)\le81n$ follows from a ``sparse core'' statement (Corollary~\ref{cor:sparsecore}); we also show that the two-sided interval counts
+alone cannot prove such a statement (Proposition~\ref{prop:fano}).
 
 \section{The common construction}\label{sec:construction}
 
@@ -1179,6 +1184,146 @@ $(w_z(n)-1)^+$ (e.g.\ $n=pq$ with $z_p=z_q=\tfrac12$), so the averaged certifica
 primes in $(Y,8Y]$, no choice of anchors $R\subseteq P$ (even with all positive prime-power coefficients added) reaches threshold
 $3$, while the pair--triple certificate above handles this $P$ at threshold $2$; the computation is in the engine transcript.
 \end{remark}
+
+\section{The fractional case: reduction to a sparse core}\label{sec:sparse}
+
+We now return to arbitrary weights $z_p\in[0,1]$ and to the function $S(n)=\sum_p\min(z_p\vp_p(n),1)$ of Section~\ref{sec:fractional};
+recall that the hinge inequality for $S$ with threshold $c$ implies it for $w_z$ (the peel $w_z=E+S$). Write
+\[
+\alpha_{p,j}:=\min(jz_p,1)-\min((j-1)z_p,1)\ \ (j\ge1),\qquad\text{so that}\qquad \alpha_{p,j}\ge0,\quad \sum_{j}\alpha_{p,j}\le1,\quad
+S(n)=\sum_{p}\sum_{j\ge1}\alpha_{p,j}[p^j\mid n].
+\]
+We call the $\alpha_{p,j}$ the \emph{atoms} of $z$; the results of this section use only $\alpha_{p,j}\ge0$ and $\sum_j\alpha_{p,j}\le1$.
+Fix $m$ and split $S=S_0+S_1$, where $S_0$ collects the atoms with $p^j\le m/64$ and $S_1$ the rest, and put
+\[
+H_{64}(m,z):=\sum_{p^j\le m/64}\frac{\alpha_{p,j}}{p^j}\qquad(\text{the mean of $S_0$ over the integers}).
+\]
+
+\begin{lemma}[large atoms]\label{lem:largeatoms}
+If $m\ge4096$ then $S_1(k)\le1$ for every $k\le m$. Consequently $(S(k)-65)^+\le(S_0(k)-64)^+$ for $k\le m$, while
+$(S_0(b)-1)^+\le(S(b)-1)^+$ for every $b$.
+\end{lemma}
+\begin{proof}
+If $p^j,q^\ell>m/64$ with $p\ne q$ both divide $k\le m$, then $p^jq^\ell\mid k$ and $m\ge p^jq^\ell>m^2/4096\ge m$, a contradiction.
+So the atoms of $S_1$ active at $k$ belong to one prime, and their sum is at most $1$.
+\end{proof}
+
+\begin{theorem}[dense branch]\label{thm:dense}
+If $H_{64}(m,z)\ge\tfrac{17}{16}$ then, for every $x\ge0$,
+\begin{equation}\label{eq:th65}
+\sum_{k\le m}\bigl(S(k)-65\bigr)^+\le\sum_{b\in I}\bigl(S(b)-1\bigr)^+ ,
+\end{equation}
+and hence the same holds for $w_z$ in place of $S$.
+\end{theorem}
+\begin{proof}
+For $m\le4096$ the left side vanishes ($S(k)\le\omega(k)\le12<65$), so let $m>4096$. By Lemma~\ref{lem:largeatoms} and the affine
+certificate $c_1=-1$, $c_{p^j}=\alpha_{p,j}$ ($p^j\le m/64$), which satisfies \eqref{eq:F} for $S_0$ and a fortiori for $S$,
+\[
+\sum_{b\in I}(S(b)-1)^+\ \ge\ \sum_{b\in I}(S_0(b)-1)^+\ \ge\ \sum_{k\le m}S_0(k)-m ,
+\]
+so it suffices to show $\sum_{k\le m}\min(S_0(k),64)\ge m$, because $S_0-(S_0-64)^+=\min(S_0,64)$ and $(S-65)^+\le(S_0-64)^+$.
+Put $h_p:=\sum_{p^j\le m/64}\alpha_{p,j}/p^j\le1/p\le\tfrac12$. Adding primes one at a time until the sum first reaches $\tfrac{17}{16}$
+gives a set $Q$ with $\tfrac{17}{16}\le H_Q:=\sum_{p\in Q}h_p\le\tfrac{25}{16}$. Let $T_Q(k)\le S_0(k)$ be the part of $S_0(k)$ coming from
+the primes of $Q$, and $U_p(k)\in[0,1]$ the contribution of a single $p\in Q$. Since $p^j\le m/64$ gives $\lfloor m/p^j\rfloor\ge\tfrac{63}{64}m/p^j$,
+\[
+\sum_{k\le m}T_Q(k)=\sum_{p\in Q}\sum_{p^j\le m/64}\alpha_{p,j}\Bigl\lfloor\frac m{p^j}\Bigr\rfloor\ge\tfrac{63}{64}H_Qm\ge\tfrac{1071}{1024}m .
+\]
+For the second moment, $\sum_{k\le m}U_p(k)^2\le\sum_{k\le m}U_p(k)\le mh_p$ and, for $p\ne q$,
+$\sum_{k\le m}U_p(k)U_q(k)=\sum_{j,\ell}\alpha_{p,j}\alpha_{q,\ell}\lfloor m/p^jq^\ell\rfloor\le mh_ph_q$; hence
+$\sum_{k\le m}T_Q(k)^2\le m(H_Q+H_Q^2)\le\tfrac{1025}{256}m$. Finally $\min(t,64)\ge t-t^2/256$ for all $t\ge0$ (the right side is at most
+$t$, and at most $64$ with maximum at $t=128$), so
+\[
+\sum_{k\le m}\min(S_0(k),64)\ \ge\ \sum_{k\le m}\min(T_Q(k),64)\ \ge\ \Bigl(\tfrac{1071}{1024}-\tfrac{1025}{65536}\Bigr)m=\tfrac{67519}{65536}\,m\ \ge\ m . \qedhere
+\]
+\end{proof}
+
+\begin{corollary}[reduction to a sparse core]\label{cor:sparsecore}
+Suppose that for every $m>4096$ and every system of atoms $\alpha_{p,j}\ge0$ with $\sum_j\alpha_{p,j}\le1$, supported on $p^j\le m/64$ and
+with $\sum\alpha_{p,j}/p^j<\tfrac{17}{16}$, the function $S_0=\sum\alpha_{p,j}[p^j\mid\cdot]$ satisfies
+\begin{equation}\label{eq:SC}
+\sum_{k\le m}\bigl(S_0(k)-64\bigr)^+\le\sum_{b\in I}\bigl(S_0(b)-1\bigr)^+\qquad\text{for every }x\ge0 .
+\end{equation}
+Then \eqref{eq:th65} holds for all weights, all $m$ and all $x$, and consequently $g(n)\le81\,n$ for all $n$.
+\end{corollary}
+\begin{proof}
+For $m\le4096$ the left side of \eqref{eq:th65} is $0$; for $m>4096$ and $H_{64}\ge\tfrac{17}{16}$ apply Theorem~\ref{thm:dense}; otherwise
+\eqref{eq:SC} and Lemma~\ref{lem:largeatoms} give \eqref{eq:th65}. The bound on $g(n)$ follows as in Corollary~\ref{cor:lnln}: the proof of Theorem~\ref{thm:cond} with threshold $65$ in place of $2$ gives $g(n)\le(65+16)n$.
+\end{proof}
+
+\begin{remark}
+(a) The constants are one point on a curve: peeling at $m/R$ costs one unit of threshold and needs $m\ge R^2$, and the same computation
+closes the dense branch for $H_R\ge H_{\mathrm{lo}}$ whenever $\tfrac{R-1}{R}H_{\mathrm{lo}}-\bigl(H_{\mathrm{lo}}+\tfrac12+(H_{\mathrm{lo}}+\tfrac12)^2\bigr)/(4R)>1$;
+for $R=64$ this allows $H_{\mathrm{lo}}=\tfrac{133}{128}$.
+
+(b) The sparse core \eqref{eq:SC} is the hard half of the problem, not the easy one: it is exactly the regime in which the affine
+certificate fails (Corollary~\ref{cor:affine}). Its left side vanishes unless some $k\le m$ has $S_0(k)>64$, which requires
+$\omega(k)>64$, so \eqref{eq:SC} is vacuous for $m$ below the product of the first $65$ primes ($\approx10^{130}$); it cannot be tested
+numerically at this threshold, and any finite check must be run at a scaled-down threshold.
+
+(c) Three natural ways of transferring Theorem~\ref{thm:four} to fractional weights fail. Positive combinations of the 0/1 inequalities
+for the level sets $\{p:z_p\ge t\}$ do not control the right side of \eqref{eq:th65}, because the level-set hinges $\sum_t(\Omega_{P_t}-1)^+$
+can be positive where $(S-1)^+=0$. The abstract principle ``an inequality between positive combinations of hinges that holds at all
+0/1 vertices holds on $[0,1]^P$'' is false: with nine coordinates, seven copies of the full set on the left and the $36$ pairs on the
+right, $7(t-4)^+\le\binom t2$ holds for every support size $t$, but $z\equiv\tfrac12$ gives $\tfrac72>0$. And no certificate supported on
+sets of a bounded number of atoms can dominate $(S-C)^+$ pointwise for all weights: in the equal-weight regime such a certificate is a
+polynomial of bounded degree in the number of active atoms, which cannot vanish on an initial segment and grow linearly afterwards.
+These are obstructions to particular arguments, not evidence against \eqref{eq:SC}, which holds in every instance we could compute at
+scaled thresholds.
+
+(d) One nonnegative certificate is available in general: order the atoms, lay their weights end to end on $[0,Z)$, and let $c_A$ be the
+measure of the set of $t$ for which the unit window $[t,t+1]$ meets exactly the atoms of $A$; then $c\ge0$, $c$ satisfies \eqref{eq:F}
+for $S$ (the divisor sum at $n$ equals $\sum_i(\ell_i-1)^+$ over the maximal runs $\ell_i$ of active atoms, which is at most $(S(n)-1)^+$),
+and its value is $\sum_{k\le m}\sum_i(\ell_i(k)-1)^+$ with no penalty terms. Whether some ordering makes this value exceed
+$\sum_{k\le m}(S_0(k)-64)^+$ on the sparse core is the question left open here.
+\end{remark}
+
+\subsection*{What the two-sided counts alone cannot do}
+
+The certificate principle of Proposition~\ref{prop:cert} uses the window $I$ only through $|I|=m$ and the two-sided counts
+$\lfloor m/d\rfloor\le N_I(d)\le\lfloor m/d\rfloor+1$. The following example shows that these constraints, taken by themselves and
+without the arithmetic values of the base counts $\lfloor m/d\rfloor$, cannot yield an absolute threshold, even for 0/1 weights.
+
+\begin{proposition}[abstract two-sided counting is insufficient]\label{prop:fano}
+Let $q$ be a prime power, let $\Pi$ be a projective plane of order $q$ with point set $X$, $|X|=v=q^2+q+1$, and put $m=qv+1$.
+Let $\mu$ be the multiset of $m$ subsets of $X$ consisting of the $v$ lines and $(q-1)v+1$ empty sets, and $\nu$ the multiset of
+$m$ subsets consisting of each singleton $q$ times and the full set $X$ once. For every nonempty $A\subseteq X$ write
+$N_\mu(A)$, $N_\nu(A)$ for the number of members containing $A$. Then $0\le N_\nu(A)-N_\mu(A)\le1$ for every nonempty $A$, while
+\[
+\sum_{B\in\mu}\bigl(|B|-C\bigr)^+-\sum_{B\in\nu}\bigl(|B|-1\bigr)^+=v(q-C)+1>0\qquad\text{for every }C\le q ,
+\]
+and the mean $\sum_{B\in\mu}|B|/m=v(q+1)/(qv+1)$ is below $1+1/q$.
+\end{proposition}
+\begin{proof}
+A singleton lies on $q+1$ lines and is counted $q+1$ times in $\nu$; two points lie on exactly one line and are contained only
+in $X$; a set of at least three points lies on at most one line and is contained only in $X$. Every line has $q+1$ points, so
+$\sum_\mu(|B|-C)^+=v(q+1-C)$, and $\sum_\nu(|B|-1)^+=v-1$.
+\end{proof}
+
+Here $\mu$ plays the role of $\{1,\dots,m\}$ (with $N_\mu(A)$ in place of $\lfloor m/d_A\rfloor$, $d_A$ the least common multiple of the
+moduli in $A$) and $\nu$ that of the window. Consequently no proof of the hinge inequality with an absolute threshold can rely solely on
+$|I|=m$, the two-sided window counts for all divisors, and the feasibility of a certificate: the arithmetic values of the base table
+$N_K(d)=\lfloor m/d\rfloor$ must enter. They do enter already at first order: at most $\lfloor m/(q+1)\rfloor-\lfloor m/(q+2)\rfloor=q-1$
+moduli $d$ have $\lfloor m/d\rfloor=q+1$, whereas the configuration above needs $q^2+q+1$ atoms with that count, so it is not realised
+by any prime powers. (For $q=5$ the abstract configuration beats the threshold $4$ of Theorem~\ref{thm:four}, whose proof is a
+counting certificate; the theorem holds because its certificate is evaluated on the true table.) Also, the hinge sum is not monotone
+under $N_I(d)\ge N_K(d)$: for $m=11021$, $P=\{101,103,107\}$ and $I$ centred at $101\cdot103\cdot107$ one has $\sum_K(\omega_P-1)^+=3$
+but $\sum_I(\omega_P-1)^+=2$, although every $N_I(d)\ge\lfloor m/d\rfloor$. So the sparse core cannot be handled by a monotonicity
+argument at small harmonic mass either.
+
+Two quantitative facts about the sparse core are worth recording. First, since $S_0\le\omega$, the left side of \eqref{eq:SC} vanishes
+unless some $k\le m$ has more than $64$ distinct prime factors, so \eqref{eq:SC} is vacuous for $m$ below the product of the first
+$65$ primes, about $6.1\cdot10^{127}$; in particular the numerical evidence of Section~\ref{sec:linear} says nothing about it.
+Second, the left side is always tiny: with $a_p(k)=\sum_{p^j\le m/64}\alpha_{p,j}[p^j\mid k]\in[0,1]$ and
+$h_p=\sum_{p^j\le m/64}\alpha_{p,j}/p^j$ one has $\sum_{k\le m}e_\ell\bigl((a_p(k))_p\bigr)\le m\,e_\ell\bigl((h_p)_p\bigr)\le mH_{64}^\ell/\ell!$
+for the elementary symmetric functions $e_\ell$ (distinct primes have coprime moduli), and $(t-C)^+\le e_{C+1}$ of the summands of $t$
+when they lie in $[0,1]$, so
+\[
+\sum_{k\le m}\bigl(S_0(k)-64\bigr)^+\le\frac{mH_{64}^{65}}{65!}<6.24\cdot10^{-90}\,m\qquad\text{when }H_{64}<\tfrac{17}{16},
+\]
+while a single $k\le m$ with $S_0(k)>64$ forces $\sum_I(S_0-1)^+>63$, because the window contains a multiple $b$ of $k$ and
+$S_0(b)\ge S_0(k)$. A counterexample to \eqref{eq:SC} would therefore be a window of length $m\ge6.1\cdot10^{127}$ that is deficient,
+simultaneously for astronomically many moduli, within the $\pm1$ freedom of the counts; we have not been able to rule this out, and the
+question is left open here.
 
 \begin{thebibliography}{9}
 \bibitem{ES59} P.~Erd\H{o}s and J.~Sur\'anyi, Megjegyz\'esek egy versenyfeladathoz (Remarks on a problem of a

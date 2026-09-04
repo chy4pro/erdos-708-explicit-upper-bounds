@@ -1,0 +1,4014 @@
+Summary of what is proved below
+I give a fully rigorous, standalone set of certificates and target inequalities. The strongest completely unconditional statements I can prove in one shot are:
+Arbitrary weights, bounded rank: an explicit absolute threshold 
+C
+=
+3
+C=3 for a single scale under the explicit extra condition 
+y
+3
+≤
+m
+<
+y
+4
+y 
+3
+ ≤m<y 
+4
+ . This uses the zero certificate and is completely ordering-independent.
+0/1 weights, nontrivial certificate: an explicit pair–triple alternating certificate proving 
+T
+H
+2
+TH 
+2
+​
+  for a single scale under the explicit condition
+y
+≥
+10
+7
+,
+y
+3
+≤
+m
+<
+y
+4
+,
+y≥10 
+7
+ ,y 
+3
+ ≤m<y 
+4
+ ,
+with all constants and finite checks displayed.
+Two scales: a general addition principle: if one-scale certificates prove thresholds 
+C
+1
+,
+C
+2
+C 
+1
+​
+ ,C 
+2
+​
+ , then the two-scale certificate proves threshold 
+C
+1
++
+C
+2
+C 
+1
+​
+ +C 
+2
+​
+ . Thus the cost/threshold adds, not multiplies.
+Sliding-window lower bound: I prove a rigorous weak lower bound (threshold at least 
+1
+1) for the sliding-window family, and I state the requested 
+c
+≥
+2
+c≥2 lower bound as a conjectural target with an explicit candidate instance; I do not claim a proof of that stronger lower bound.
+All lemmas are tagged PROVED, CONDITIONAL, or CONJECTURED.
+1. Notation and the certificate bound
+For a finite atom set 
+A
+A, write
+S
+(
+n
+)
+=
+∑
+d
+∈
+A
+α
+d
+ 
+1
+d
+∣
+n
+.
+S(n)= 
+d∈A
+∑
+​
+ α 
+d
+​
+ 1 
+d∣n
+​
+ .
+For 
+K
+=
+{
+1
+,
+…
+,
+m
+}
+K={1,…,m}, 
+I
+=
+{
+x
++
+1
+,
+…
+,
+x
++
+m
+}
+I={x+1,…,x+m}, and a finitely supported family 
+(
+c
+D
+)
+(c 
+D
+​
+ ), the proved certificate theorem says:
+If for every 
+n
+≥
+1
+n≥1,
+∑
+D
+∣
+n
+c
+D
+≤
+(
+S
+(
+n
+)
+−
+1
+)
++
+,
+D∣n
+∑
+​
+ c 
+D
+​
+ ≤(S(n)−1) 
++
+ ,
+then
+∑
+b
+∈
+I
+(
+S
+(
+b
+)
+−
+1
+)
++
+≥
+V
+(
+c
+)
+:
+=
+∑
+c
+D
+>
+0
+c
+D
+⌊
+m
+D
+⌋
+−
+∑
+c
+D
+<
+0
+∣
+c
+D
+∣
+(
+⌊
+m
+D
+⌋
++
+1
+)
+.
+b∈I
+∑
+​
+ (S(b)−1) 
++
+ ≥V(c):= 
+c 
+D
+​
+ >0
+∑
+​
+ c 
+D
+​
+ ⌊ 
+D
+m
+​
+ ⌋− 
+c 
+D
+​
+ <0
+∑
+​
+ ∣c 
+D
+​
+ ∣(⌊ 
+D
+m
+​
+ ⌋+1).
+I will repeatedly use
+⌊
+m
+D
+⌋
+≥
+m
+D
+−
+1
+⌊ 
+D
+m
+​
+ ⌋≥ 
+D
+m
+​
+ −1
+for positive coefficients, and for negative coefficients
+−
+(
+⌊
+m
+D
+⌋
++
+1
+)
+≥
+−
+m
+D
+−
+1.
+−(⌊ 
+D
+m
+​
+ ⌋+1)≥− 
+D
+m
+​
+ −1.
+2. T1, arbitrary weights: bounded-rank theorem
+Lemma 2.1 — Rank cap implies trivial 
+T
+H
+C
+TH 
+C
+​
+ 
+Status: PROVED.
+Let all atoms be primes 
+p
+∈
+(
+y
+,
+2
+y
+]
+p∈(y,2y], with arbitrary weights 
+α
+p
+∈
+[
+0
+,
+1
+]
+α 
+p
+​
+ ∈[0,1]. Let 
+C
+≥
+0
+C≥0 be an integer. Suppose
+m
+<
+y
+C
++
+1
+.
+m<y 
+C+1
+ .
+Then for every 
+k
+≤
+m
+k≤m,
+S
+(
+k
+)
+≤
+C
+.
+S(k)≤C.
+Consequently
+∑
+k
+∈
+K
+(
+S
+(
+k
+)
+−
+C
+)
++
+=
+0.
+k∈K
+∑
+​
+ (S(k)−C) 
++
+ =0.
+Taking the zero certificate 
+c
+D
+≡
+0
+c 
+D
+​
+ ≡0, which satisfies the certificate condition, gives
+∑
+b
+∈
+I
+(
+S
+(
+b
+)
+−
+1
+)
++
+≥
+0
+=
+∑
+k
+∈
+K
+(
+S
+(
+k
+)
+−
+C
+)
++
+.
+b∈I
+∑
+​
+ (S(b)−1) 
++
+ ≥0= 
+k∈K
+∑
+​
+ (S(k)−C) 
++
+ .
+Thus 
+T
+H
+C
+TH 
+C
+​
+  holds.
+Proof
+If 
+k
+≤
+m
+k≤m is divisible by 
+r
+r distinct primes from 
+(
+y
+,
+2
+y
+]
+(y,2y], then
+k
+≥
+∏
+i
+=
+1
+r
+p
+i
+>
+y
+r
+.
+k≥ 
+i=1
+∏
+r
+​
+ p 
+i
+​
+ >y 
+r
+ .
+If 
+r
+≥
+C
++
+1
+r≥C+1, then 
+k
+>
+y
+C
++
+1
+>
+m
+k>y 
+C+1
+ >m, impossible. Hence at most 
+C
+C atoms from the scale divide 
+k
+k. Since each weight is at most 
+1
+1,
+S
+(
+k
+)
+≤
+C
+.
+S(k)≤C.
+Therefore 
+(
+S
+(
+k
+)
+−
+C
+)
++
+=
+0
+(S(k)−C) 
++
+ =0 for every 
+k
+≤
+m
+k≤m. The zero certificate is valid and has value 
+0
+0. ∎
+Corollary 2.2 — Explicit 
+C
+=
+3
+C=3 at the lower scale
+Status: PROVED.
+For arbitrary weights 
+α
+p
+∈
+[
+0
+,
+1
+]
+α 
+p
+​
+ ∈[0,1] on primes 
+p
+∈
+(
+y
+,
+2
+y
+]
+p∈(y,2y], if
+y
+3
+≤
+m
+<
+y
+4
+,
+y 
+3
+ ≤m<y 
+4
+ ,
+then 
+T
+H
+3
+TH 
+3
+​
+  holds:
+∑
+k
+=
+1
+m
+(
+S
+(
+k
+)
+−
+3
+)
++
+≤
+∑
+b
+=
+x
++
+1
+x
++
+m
+(
+S
+(
+b
+)
+−
+1
+)
++
+.
+k=1
+∑
+m
+​
+ (S(k)−3) 
++
+ ≤ 
+b=x+1
+∑
+x+m
+​
+ (S(b)−1) 
++
+ .
+Proof
+Apply Lemma 2.1 with 
+C
+=
+3
+C=3. The condition 
+m
+<
+y
+4
+m<y 
+4
+  guarantees that no 
+k
+≤
+m
+k≤m can be divisible by four distinct primes 
+>
+y
+>y. Hence 
+S
+(
+k
+)
+≤
+3
+S(k)≤3. ∎
+Exact inequality proved
+With 
+c
+D
+≡
+0
+c 
+D
+​
+ ≡0,
+∑
+k
+=
+1
+m
+(
+S
+(
+k
+)
+−
+3
+)
++
+=
+0
+≤
+V
+(
+c
+)
+=
+0
+≤
+∑
+b
+∈
+I
+(
+S
+(
+b
+)
+−
+1
+)
++
+.
+k=1
+∑
+m
+​
+ (S(k)−3) 
++
+ =0≤V(c)=0≤ 
+b∈I
+∑
+​
+ (S(b)−1) 
++
+ .
+Condition
+y
+>
+0
+,
+y
+3
+≤
+m
+<
+y
+4
+,
+α
+p
+∈
+[
+0
+,
+1
+]
+.
+y>0,y 
+3
+ ≤m<y 
+4
+ ,α 
+p
+​
+ ∈[0,1].
+No condition on the ordering is needed; the certificate is identically zero.
+3. T1, 0/1 weights: explicit pair–triple alternating certificate
+This is a nontrivial certificate for threshold 
+2
+2, but in the 0/1 case.
+Assume now that
+α
+p
+∈
+{
+0
+,
+1
+}
+.
+α 
+p
+​
+ ∈{0,1}.
+Let
+A
+⊆
+{
+p
+ prime
+:
+y
+<
+p
+≤
+2
+y
+}
+,
+A⊆{p prime:y<p≤2y},
+and write 
+N
+=
+∣
+A
+∣
+N=∣A∣. For 
+p
+,
+q
+,
+r
+∈
+A
+p,q,r∈A with 
+p
+<
+q
+<
+r
+p<q<r, define
+c
+p
+q
+=
++
+1
+,
+c
+p
+q
+r
+=
+−
+1
+,
+c 
+pq
+​
+ =+1,c 
+pqr
+​
+ =−1,
+and all other 
+c
+D
+=
+0
+c 
+D
+​
+ =0.
+Thus
+c
+D
+=
+{
++
+1
+,
+D
+=
+p
+q
+,
+ 
+p
+<
+q
+,
+ 
+p
+,
+q
+∈
+A
+,
+−
+1
+,
+D
+=
+p
+q
+r
+,
+ 
+p
+<
+q
+<
+r
+,
+ 
+p
+,
+q
+,
+r
+∈
+A
+,
+0
+,
+otherwise.
+c 
+D
+​
+ = 
+⎩
+⎨
+⎧
+​
+  
++1,
+−1,
+0,
+​
+  
+D=pq, p<q, p,q∈A,
+D=pqr, p<q<r, p,q,r∈A,
+otherwise.
+​
+ 
+Lemma 3.1 — Certificate condition
+Status: PROVED.
+For every 
+n
+≥
+1
+n≥1, let
+[
+s=s(n):=#{p\in A:p\mid n}=S(n).
+]
+Then
+[
+\sum_{D\mid n}c_D
+\binom{s}{2}-\binom{s}{3}
+\le (s-1)^+.
+]
+Proof
+Only pairs and triples from 
+A
+A dividing 
+n
+n contribute. There are 
+(
+s
+2
+)
+( 
+2
+s
+​
+ ) pairs and 
+(
+s
+3
+)
+( 
+3
+s
+​
+ ) triples. Hence the certificate sum is
+F
+(
+s
+)
+:
+=
+(
+s
+2
+)
+−
+(
+s
+3
+)
+.
+F(s):=( 
+2
+s
+​
+ )−( 
+3
+s
+​
+ ).
+Check by cases:
+s
+=
+0
+,
+1
+s=0,1: 
+F
+(
+s
+)
+=
+0
+=
+(
+s
+−
+1
+)
++
+F(s)=0=(s−1) 
++
+ .
+s
+=
+2
+s=2: 
+F
+(
+2
+)
+=
+1
+=
+(
+2
+−
+1
+)
++
+F(2)=1=(2−1) 
++
+ .
+s
+=
+3
+s=3: 
+F
+(
+3
+)
+=
+3
+−
+1
+=
+2
+=
+(
+3
+−
+1
+)
++
+F(3)=3−1=2=(3−1) 
++
+ .
+s
+=
+4
+s=4: 
+F
+(
+4
+)
+=
+6
+−
+4
+=
+2
+≤
+3
+=
+(
+4
+−
+1
+)
++
+F(4)=6−4=2≤3=(4−1) 
++
+ .
+s
+=
+5
+s=5: 
+F
+(
+5
+)
+=
+10
+−
+10
+=
+0
+≤
+4
+F(5)=10−10=0≤4.
+s
+≥
+6
+s≥6: 
+(
+s
+3
+)
+>
+(
+s
+2
+)
+( 
+3
+s
+​
+ )>( 
+2
+s
+​
+ ), so 
+F
+(
+s
+)
+<
+0
+≤
+(
+s
+−
+1
+)
++
+F(s)<0≤(s−1) 
++
+ .
+Thus the certificate condition holds for all 
+n
+n. ∎
+Lemma 3.2 — Certificate value
+Status: PROVED.
+Let
+P
+2
+:
+=
+#
+{
+{
+p
+,
+q
+}
+⊆
+A
+:
+p
+<
+q
+}
+=
+(
+N
+2
+)
+,
+P 
+2
+​
+ :=#{{p,q}⊆A:p<q}=( 
+2
+N
+​
+ ),
+P
+3
+:
+=
+#
+{
+{
+p
+,
+q
+,
+r
+}
+⊆
+A
+:
+p
+<
+q
+<
+r
+}
+=
+(
+N
+3
+)
+.
+P 
+3
+​
+ :=#{{p,q,r}⊆A:p<q<r}=( 
+3
+N
+​
+ ).
+Let
+B
+2
+:
+=
+∑
+{
+p
+,
+q
+}
+⊆
+A
+1
+p
+q
+,
+B
+3
+:
+=
+∑
+{
+p
+,
+q
+,
+r
+}
+⊆
+A
+1
+p
+q
+r
+.
+B 
+2
+​
+ := 
+{p,q}⊆A
+∑
+​
+  
+pq
+1
+​
+ ,B 
+3
+​
+ := 
+{p,q,r}⊆A
+∑
+​
+  
+pqr
+1
+​
+ .
+Then
+V
+(
+c
+)
+≥
+m
+(
+B
+2
+−
+B
+3
+)
+−
+P
+2
+−
+P
+3
+.
+V(c)≥m(B 
+2
+​
+ −B 
+3
+​
+ )−P 
+2
+​
+ −P 
+3
+​
+ .
+Proof
+By definition,
+V
+(
+c
+)
+=
+∑
+{
+p
+,
+q
+}
+⊆
+A
+⌊
+m
+p
+q
+⌋
+−
+∑
+{
+p
+,
+q
+,
+r
+}
+⊆
+A
+(
+⌊
+m
+p
+q
+r
+⌋
++
+1
+)
+.
+V(c)= 
+{p,q}⊆A
+∑
+​
+ ⌊ 
+pq
+m
+​
+ ⌋− 
+{p,q,r}⊆A
+∑
+​
+ (⌊ 
+pqr
+m
+​
+ ⌋+1).
+For positive pair terms,
+⌊
+m
+p
+q
+⌋
+≥
+m
+p
+q
+−
+1.
+⌊ 
+pq
+m
+​
+ ⌋≥ 
+pq
+m
+​
+ −1.
+For negative triple terms,
+−
+(
+⌊
+m
+p
+q
+r
+⌋
++
+1
+)
+≥
+−
+m
+p
+q
+r
+−
+1.
+−(⌊ 
+pqr
+m
+​
+ ⌋+1)≥− 
+pqr
+m
+​
+ −1.
+Summing gives
+V
+(
+c
+)
+≥
+m
+∑
+{
+p
+,
+q
+}
+1
+p
+q
+−
+P
+2
+−
+m
+∑
+{
+p
+,
+q
+,
+r
+}
+1
+p
+q
+r
+−
+P
+3
+.
+V(c)≥m 
+{p,q}
+∑
+​
+  
+pq
+1
+​
+ −P 
+2
+​
+ −m 
+{p,q,r}
+∑
+​
+  
+pqr
+1
+​
+ −P 
+3
+​
+ .
+This is exactly
+V
+(
+c
+)
+≥
+m
+(
+B
+2
+−
+B
+3
+)
+−
+P
+2
+−
+P
+3
+.
+V(c)≥m(B 
+2
+​
+ −B 
+3
+​
+ )−P 
+2
+​
+ −P 
+3
+​
+ .
+∎
+Lemma 3.3 — The 
+0
+/
+1
+0/1 left-hand side when 
+m
+<
+y
+4
+m<y 
+4
+ 
+Status: PROVED.
+If
+[
+m<y^4,
+]
+then for every 
+k
+≤
+m
+k≤m, at most three primes from 
+A
+A divide 
+k
+k. Hence
+[
+\sum_{k=1}^m (S(k)-2)^+
+\sum_{{p,q,r}\subseteq A}
+\Big\lfloor\frac m{pqr}\Big\rfloor.
+]
+Proof
+If 
+k
+≤
+m
+k≤m were divisible by four distinct primes 
+>
+y
+>y, then 
+k
+>
+y
+4
+>
+m
+k>y 
+4
+ >m, impossible. Therefore 
+S
+(
+k
+)
+∈
+{
+0
+,
+1
+,
+2
+,
+3
+}
+S(k)∈{0,1,2,3}. The quantity 
+(
+S
+(
+k
+)
+−
+2
+)
++
+(S(k)−2) 
++
+  is zero unless 
+S
+(
+k
+)
+=
+3
+S(k)=3, in which case it equals 
+1
+1. Thus the left-hand side counts integers 
+k
+≤
+m
+k≤m divisible by a triple of primes from 
+A
+A, counted once per triple. Since no integer 
+≤
+m
+≤m can contain two distinct triples from 
+A
+A without having at least four prime factors from 
+A
+A, there is no overcounting. Therefore the sum is exactly the displayed triple floor sum. ∎
+Theorem 3.4 — Explicit sufficient condition for 
+V
+(
+c
+)
+≥
+∑
+K
+(
+S
+−
+2
+)
++
+V(c)≥∑ 
+K
+​
+ (S−2) 
++
+ 
+Status: PROVED.
+Assume
+y
+3
+≤
+m
+<
+y
+4
+.
+y 
+3
+ ≤m<y 
+4
+ .
+Define 
+M
+:
+=
+m
+/
+y
+3
+M:=m/y 
+3
+ , so 
+1
+≤
+M
+<
+y
+1≤M<y. If
+P
+2
+(
+m
+y
+4
+y
+3
+−
+1
+)
+≥
+P
+3
+(
+2
+m
+y
+3
++
+1
+)
+,
+P 
+2
+​
+ ( 
+4y 
+3
+ 
+my
+​
+ −1)≥P 
+3
+​
+ (2 
+y 
+3
+ 
+m
+​
+ +1),
+or equivalently
+P
+2
+(
+M
+y
+4
+−
+1
+)
+≥
+P
+3
+(
+2
+M
++
+1
+)
+,
+P 
+2
+​
+ ( 
+4
+My
+​
+ −1)≥P 
+3
+​
+ (2M+1),
+then
+V
+(
+c
+)
+≥
+∑
+k
+=
+1
+m
+(
+S
+(
+k
+)
+−
+2
+)
++
+.
+V(c)≥ 
+k=1
+∑
+m
+​
+ (S(k)−2) 
++
+ .
+Consequently 
+T
+H
+2
+TH 
+2
+​
+  holds for this 
+0
+/
+1
+0/1 instance.
+Proof
+Since 
+p
+,
+q
+≤
+2
+y
+p,q≤2y,
+1
+p
+q
+≥
+1
+4
+y
+2
+.
+pq
+1
+​
+ ≥ 
+4y 
+2
+ 
+1
+​
+ .
+Hence
+[
+B_2\ge \frac{P_2}{4y^2}.
+]
+Since 
+p
+,
+q
+,
+r
+>
+y
+p,q,r>y,
+[
+\frac1{pqr}>\frac1{y^3},
+]
+and therefore
+[
+B_3\le \frac{P_3}{y^3}.
+]
+By Lemma 3.2,
+[
+V(c)
+\ge
+m\Big(\frac{P_2}{4y^2}\Big)-P_2
+-m\Big(\frac{P_3}{y^3}\Big)-P_3.
+]
+Thus
+[
+V(c)
+\ge
+P_2\Big(\frac m{4y^2}-1\Big)
+-P_3\Big(\frac m{y^3}+1\Big).
+]
+By Lemma 3.3,
+[
+\sum_{k=1}^m(S(k)-2)^+
+\sum_{{p,q,r}}
+\Big\lfloor\frac m{pqr}\Big\rfloor
+\le
+mB_3
+\le
+\frac m{y^3}P_3
+=
+MP_3.
+]
+Therefore it is enough that
+P
+2
+(
+m
+4
+y
+2
+−
+1
+)
+−
+P
+3
+(
+m
+y
+3
++
+1
+)
+≥
+M
+P
+3
+.
+P 
+2
+​
+ ( 
+4y 
+2
+ 
+m
+​
+ −1)−P 
+3
+​
+ ( 
+y 
+3
+ 
+m
+​
+ +1)≥MP 
+3
+​
+ .
+Since 
+m
+=
+M
+y
+3
+m=My 
+3
+ , this becomes
+P
+2
+(
+M
+y
+4
+−
+1
+)
+≥
+P
+3
+(
+2
+M
++
+1
+)
+,
+P 
+2
+​
+ ( 
+4
+My
+​
+ −1)≥P 
+3
+​
+ (2M+1),
+which is the stated condition. ∎
+Corollary 3.5 — A completely explicit large-
+y
+y sufficient condition
+Status: PROVED.
+If
+y
+≥
+10
+7
+,
+y
+3
+≤
+m
+<
+y
+4
+,
+y≥10 
+7
+ ,y 
+3
+ ≤m<y 
+4
+ ,
+and the weights are 
+0
+/
+1
+0/1, then the pair–triple certificate proves 
+T
+H
+2
+TH 
+2
+​
+ .
+Proof
+We prove that the condition of Theorem 3.4 holds.
+Since 
+A
+A is a subset of the primes in 
+(
+y
+,
+2
+y
+]
+(y,2y],
+N
+≤
+π
+(
+2
+y
+)
+.
+N≤π(2y).
+Use the explicit classical bound, valid for 
+t
+>
+1
+t>1,
+π
+(
+t
+)
+≤
+1.25506
+ 
+t
+log
+⁡
+t
+.
+π(t)≤1.25506 
+logt
+t
+​
+ .
+For 
+y
+≥
+10
+7
+y≥10 
+7
+ ,
+log
+⁡
+(
+2
+y
+)
+≥
+log
+⁡
+(
+2
+⋅
+10
+7
+)
+>
+16.8
+,
+log(2y)≥log(2⋅10 
+7
+ )>16.8,
+so
+N
+≤
+1.25506
+⋅
+2
+y
+log
+⁡
+(
+2
+y
+)
+≤
+0.1493
+ 
+y
+<
+y
+6
+.
+N≤1.25506⋅ 
+log(2y)
+2y
+​
+ ≤0.1493y< 
+6
+y
+​
+ .
+Thus
+N
+≤
+y
+6
+.
+N≤ 
+6
+y
+​
+ .
+Now
+P
+2
+=
+(
+N
+2
+)
+,
+P
+3
+=
+(
+N
+3
+)
+,
+P 
+2
+​
+ =( 
+2
+N
+​
+ ),P 
+3
+​
+ =( 
+3
+N
+​
+ ),
+and for 
+N
+≥
+3
+N≥3,
+P
+3
+P
+2
+=
+N
+−
+2
+3
+≤
+N
+3
+≤
+y
+18
+.
+P 
+2
+​
+ 
+P 
+3
+​
+ 
+​
+ = 
+3
+N−2
+​
+ ≤ 
+3
+N
+​
+ ≤ 
+18
+y
+​
+ .
+The condition of Theorem 3.4 is implied by
+M
+y
+4
+−
+1
+≥
+P
+3
+P
+2
+(
+2
+M
++
+1
+)
+≤
+y
+18
+(
+2
+M
++
+1
+)
+.
+4
+My
+​
+ −1≥ 
+P 
+2
+​
+ 
+P 
+3
+​
+ 
+​
+ (2M+1)≤ 
+18
+y
+​
+ (2M+1).
+It is therefore enough that
+M
+y
+4
+−
+1
+≥
+y
+18
+(
+2
+M
++
+1
+)
+.
+4
+My
+​
+ −1≥ 
+18
+y
+​
+ (2M+1).
+Rearrange:
+M
+y
+(
+1
+4
+−
+2
+9
+)
+≥
+y
+18
++
+1.
+My( 
+4
+1
+​
+ − 
+9
+2
+​
+ )≥ 
+18
+y
+​
+ +1.
+Since
+1
+4
+−
+2
+9
+=
+9
+−
+8
+36
+=
+1
+36
+,
+4
+1
+​
+ − 
+9
+2
+​
+ = 
+36
+9−8
+​
+ = 
+36
+1
+​
+ ,
+this becomes
+M
+y
+36
+≥
+y
+18
++
+1.
+36
+My
+​
+ ≥ 
+18
+y
+​
+ +1.
+Because 
+M
+≥
+1
+M≥1, it is enough that
+y
+36
+≥
+y
+18
++
+1
+,
+36
+y
+​
+ ≥ 
+18
+y
+​
+ +1,
+which as written is false; the sharper calculation uses the exact coefficient from the previous display. Let us redo the arithmetic carefully.
+We need
+M
+y
+4
+−
+1
+≥
+y
+18
+(
+2
+M
++
+1
+)
+.
+4
+My
+​
+ −1≥ 
+18
+y
+​
+ (2M+1).
+The right-hand side is
+M
+y
+9
++
+y
+18
+.
+9
+My
+​
+ + 
+18
+y
+​
+ .
+So it is enough that
+M
+y
+(
+1
+4
+−
+1
+9
+)
+≥
+y
+18
++
+1.
+My( 
+4
+1
+​
+ − 
+9
+1
+​
+ )≥ 
+18
+y
+​
+ +1.
+Now
+1
+4
+−
+1
+9
+=
+9
+−
+4
+36
+=
+5
+36
+.
+4
+1
+​
+ − 
+9
+1
+​
+ = 
+36
+9−4
+​
+ = 
+36
+5
+​
+ .
+Thus we need
+5
+M
+y
+36
+≥
+y
+18
++
+1.
+36
+5My
+​
+ ≥ 
+18
+y
+​
+ +1.
+Since 
+M
+≥
+1
+M≥1,
+5
+y
+36
+≥
+y
+18
++
+1
+  
+⟺
+  
+5
+y
+36
+−
+2
+y
+36
+≥
+1
+  
+⟺
+  
+3
+y
+36
+≥
+1
+  
+⟺
+  
+y
+≥
+12.
+36
+5y
+​
+ ≥ 
+18
+y
+​
+ +1⟺ 
+36
+5y
+​
+ − 
+36
+2y
+​
+ ≥1⟺ 
+36
+3y
+​
+ ≥1⟺y≥12.
+This holds for 
+y
+≥
+10
+7
+y≥10 
+7
+ . Therefore the sufficient condition of Theorem 3.4 holds.
+For 
+N
+<
+3
+N<3, the left-hand side 
+∑
+K
+(
+S
+−
+2
+)
++
+∑ 
+K
+​
+ (S−2) 
++
+  is zero and the conclusion is trivial. Hence the corollary follows. ∎
+Exact inequality proved
+For the certificate
+[
+c_{pq}=1,\qquad c_{pqr}=-1,
+]
+one has
+[
+V(c)
+\sum_{{p,q}\subseteq A}\Big\lfloor\frac m{pq}\Big\rfloor
+\sum_{{p,q,r}\subseteq A}
+\Big(\Big\lfloor\frac m{pqr}\Big\rfloor+1\Big),
+]
+and under the explicit condition 
+y
+≥
+10
+7
+y≥10 
+7
+ , 
+y
+3
+≤
+m
+<
+y
+4
+y 
+3
+ ≤m<y 
+4
+ ,
+V
+(
+c
+)
+≥
+∑
+k
+=
+1
+m
+(
+S
+(
+k
+)
+−
+2
+)
++
+.
+V(c)≥ 
+k=1
+∑
+m
+​
+ (S(k)−2) 
++
+ .
+By the certificate theorem,
+∑
+b
+∈
+I
+(
+S
+(
+b
+)
+−
+1
+)
++
+≥
+V
+(
+c
+)
+≥
+∑
+k
+=
+1
+m
+(
+S
+(
+k
+)
+−
+2
+)
++
+.
+b∈I
+∑
+​
+ (S(b)−1) 
++
+ ≥V(c)≥ 
+k=1
+∑
+m
+​
+ (S(k)−2) 
++
+ .
+Condition
+α
+p
+∈
+{
+0
+,
+1
+}
+,
+y
+≥
+10
+7
+,
+y
+3
+≤
+m
+<
+y
+4
+.
+α 
+p
+​
+ ∈{0,1},y≥10 
+7
+ ,y 
+3
+ ≤m<y 
+4
+ .
+4. T2: two scales — addition, not multiplication
+Let
+S
+(
+n
+)
+=
+S
+1
+(
+n
+)
++
+S
+2
+(
+n
+)
+,
+S(n)=S 
+1
+​
+ (n)+S 
+2
+​
+ (n),
+where 
+S
+i
+S 
+i
+​
+  is supported on atoms in the scale 
+(
+y
+i
+,
+2
+y
+i
+]
+(y 
+i
+​
+ ,2y 
+i
+​
+ ]. Assume 
+y
+2
+≥
+y
+1
+2
+y 
+2
+​
+ ≥y 
+1
+2
+​
+ , although the addition principle below does not require this separation.
+Lemma 4.1 — Superadditivity of the right-hand side excess
+Status: PROVED.
+For all 
+a
+,
+b
+≥
+0
+a,b≥0,
+(
+a
+−
+1
+)
++
++
+(
+b
+−
+1
+)
++
+≤
+(
+a
++
+b
+−
+1
+)
++
+.
+(a−1) 
++
+ +(b−1) 
++
+ ≤(a+b−1) 
++
+ .
+Proof
+If both 
+a
+,
+b
+≤
+1
+a,b≤1, both sides are zero. If exactly one exceeds 
+1
+1, say 
+a
+>
+1
+a>1, 
+b
+≤
+1
+b≤1, then the left side is 
+a
+−
+1
+a−1, while
+(
+a
++
+b
+−
+1
+)
++
+≥
+a
+−
+1.
+(a+b−1) 
++
+ ≥a−1.
+If both exceed 
+1
+1, then
+(
+a
+−
+1
+)
++
++
+(
+b
+−
+1
+)
++
+=
+a
++
+b
+−
+2
+≤
+a
++
+b
+−
+1
+=
+(
+a
++
+b
+−
+1
+)
++
+.
+(a−1) 
++
+ +(b−1) 
++
+ =a+b−2≤a+b−1=(a+b−1) 
++
+ .
+∎
+Lemma 4.2 — Subadditivity of the left-hand side excess with additive thresholds
+Status: PROVED.
+For all 
+u
+,
+v
+∈
+R
+u,v∈R,
+(
+u
++
+v
+)
++
+≤
+u
++
++
+v
++
+.
+(u+v) 
++
+ ≤u 
++
+ +v 
++
+ .
+Consequently, for 
+C
+1
+,
+C
+2
+≥
+0
+C 
+1
+​
+ ,C 
+2
+​
+ ≥0,
+(
+S
+1
++
+S
+2
+−
+(
+C
+1
++
+C
+2
+)
+)
++
+≤
+(
+S
+1
+−
+C
+1
+)
++
++
+(
+S
+2
+−
+C
+2
+)
++
+.
+(S 
+1
+​
+ +S 
+2
+​
+ −(C 
+1
+​
+ +C 
+2
+​
+ )) 
++
+ ≤(S 
+1
+​
+ −C 
+1
+​
+ ) 
++
+ +(S 
+2
+​
+ −C 
+2
+​
+ ) 
++
+ .
+Proof
+Immediate from the elementary inequality 
+(
+u
++
+v
+)
++
+≤
+u
++
++
+v
++
+(u+v) 
++
+ ≤u 
++
+ +v 
++
+  with 
+u
+=
+S
+1
+−
+C
+1
+u=S 
+1
+​
+ −C 
+1
+​
+ , 
+v
+=
+S
+2
+−
+C
+2
+v=S 
+2
+​
+ −C 
+2
+​
+ . ∎
+Theorem 4.3 — Addition of thresholds and certificates
+Status: PROVED.
+Suppose scale 
+i
+i has a certificate 
+c
+(
+i
+)
+c 
+(i)
+  proving
+∑
+k
+=
+1
+m
+(
+S
+i
+(
+k
+)
+−
+C
+i
+)
++
+≤
+∑
+b
+∈
+I
+(
+S
+i
+(
+b
+)
+−
+1
+)
++
+.
+k=1
+∑
+m
+​
+ (S 
+i
+​
+ (k)−C 
+i
+​
+ ) 
++
+ ≤ 
+b∈I
+∑
+​
+ (S 
+i
+​
+ (b)−1) 
++
+ .
+Then the combined certificate
+c
+D
+:
+=
+c
+D
+(
+1
+)
++
+c
+D
+(
+2
+)
+c 
+D
+​
+ :=c 
+D
+(1)
+​
+ +c 
+D
+(2)
+​
+ 
+proves
+∑
+k
+=
+1
+m
+(
+S
+(
+k
+)
+−
+(
+C
+1
++
+C
+2
+)
+)
++
+≤
+∑
+b
+∈
+I
+(
+S
+(
+b
+)
+−
+1
+)
++
+.
+k=1
+∑
+m
+​
+ (S(k)−(C 
+1
+​
+ +C 
+2
+​
+ )) 
++
+ ≤ 
+b∈I
+∑
+​
+ (S(b)−1) 
++
+ .
+In particular, the threshold constants add:
+C
+t
+w
+o
+ 
+s
+c
+a
+l
+e
+=
+C
+1
++
+C
+2
+.
+C 
+two scale
+​
+ =C 
+1
+​
+ +C 
+2
+​
+ .
+Proof
+First, the combined certificate satisfies the pointwise certificate condition. For any 
+n
+n,
+∑
+D
+∣
+n
+c
+D
+=
+∑
+D
+∣
+n
+c
+D
+(
+1
+)
++
+∑
+D
+∣
+n
+c
+D
+(
+2
+)
+≤
+(
+S
+1
+(
+n
+)
+−
+1
+)
++
++
+(
+S
+2
+(
+n
+)
+−
+1
+)
++
+.
+D∣n
+∑
+​
+ c 
+D
+​
+ = 
+D∣n
+∑
+​
+ c 
+D
+(1)
+​
+ + 
+D∣n
+∑
+​
+ c 
+D
+(2)
+​
+ ≤(S 
+1
+​
+ (n)−1) 
++
+ +(S 
+2
+​
+ (n)−1) 
++
+ .
+By Lemma 4.1,
+(
+S
+1
+(
+n
+)
+−
+1
+)
++
++
+(
+S
+2
+(
+n
+)
+−
+1
+)
++
+≤
+(
+S
+1
+(
+n
+)
++
+S
+2
+(
+n
+)
+−
+1
+)
++
+=
+(
+S
+(
+n
+)
+−
+1
+)
++
+.
+(S 
+1
+​
+ (n)−1) 
++
+ +(S 
+2
+​
+ (n)−1) 
++
+ ≤(S 
+1
+​
+ (n)+S 
+2
+​
+ (n)−1) 
++
+ =(S(n)−1) 
++
+ .
+Thus 
+c
+c is a valid certificate.
+For the target inequality, use Lemma 4.2:
+∑
+k
+=
+1
+m
+(
+S
+(
+k
+)
+−
+(
+C
+1
++
+C
+2
+)
+)
++
+≤
+∑
+k
+=
+1
+m
+(
+S
+1
+(
+k
+)
+−
+C
+1
+)
++
++
+∑
+k
+=
+1
+m
+(
+S
+2
+(
+k
+)
+−
+C
+2
+)
++
+.
+k=1
+∑
+m
+​
+ (S(k)−(C 
+1
+​
+ +C 
+2
+​
+ )) 
++
+ ≤ 
+k=1
+∑
+m
+​
+ (S 
+1
+​
+ (k)−C 
+1
+​
+ ) 
++
+ + 
+k=1
+∑
+m
+​
+ (S 
+2
+​
+ (k)−C 
+2
+​
+ ) 
++
+ .
+By the one-scale assumptions,
+≤
+∑
+b
+∈
+I
+(
+S
+1
+(
+b
+)
+−
+1
+)
++
++
+∑
+b
+∈
+I
+(
+S
+2
+(
+b
+)
+−
+1
+)
++
+.
+≤ 
+b∈I
+∑
+​
+ (S 
+1
+​
+ (b)−1) 
++
+ + 
+b∈I
+∑
+​
+ (S 
+2
+​
+ (b)−1) 
++
+ .
+By Lemma 4.1 pointwise on each 
+b
+b,
+≤
+∑
+b
+∈
+I
+(
+S
+(
+b
+)
+−
+1
+)
++
+.
+≤ 
+b∈I
+∑
+​
+ (S(b)−1) 
++
+ .
+This proves 
+T
+H
+C
+1
++
+C
+2
+TH 
+C 
+1
+​
+ +C 
+2
+​
+ 
+​
+ . ∎
+Explicit constants from the proved one-scale results
+From the arbitrary-weight bounded-rank result 
+C
+=
+3
+C=3 on each scale, one obtains a two-scale threshold
+C
+=
+3
++
+3
+=
+6
+C=3+3=6
+under the rank-cap conditions
+m
+<
+min
+⁡
+(
+y
+1
+4
+,
+y
+2
+4
+)
+.
+m<min(y 
+1
+4
+​
+ ,y 
+2
+4
+​
+ ).
+From the 
+0
+/
+1
+0/1 pair–triple result 
+C
+=
+2
+C=2 on each scale, one obtains a two-scale threshold
+C
+=
+2
++
+2
+=
+4
+C=2+2=4
+whenever the one-scale 
+0
+/
+1
+0/1 conditions are satisfied for both scales.
+The separation 
+y
+2
+≥
+y
+1
+2
+y 
+2
+​
+ ≥y 
+1
+2
+​
+  is not needed for the algebraic addition principle; it is relevant in broader applications to keep the scales separated.
+5. T3: lower bound for sliding-window certificates
+Lemma 5.1 — Sliding-window certificates cannot beat threshold 
+1
+1 in general
+Status: PROVED.
+Take a single atom 
+p
+∈
+(
+y
+,
+2
+y
+]
+p∈(y,2y] with weight 
+α
+p
+=
+1
+α 
+p
+​
+ =1. For any order, the sliding-window construction has certificate value 
+0
+0. For any 
+C
+<
+1
+C<1,
+∑
+k
+=
+1
+m
+(
+S
+(
+k
+)
+−
+C
+)
++
+≥
+(
+1
+−
+C
+)
+⌊
+m
+p
+⌋
+>
+0
+k=1
+∑
+m
+​
+ (S(k)−C) 
++
+ ≥(1−C)⌊ 
+p
+m
+​
+ ⌋>0
+whenever 
+m
+≥
+p
+m≥p. Therefore no sliding-window certificate can prove 
+T
+H
+C
+TH 
+C
+​
+  for all such instances with 
+C
+<
+1
+C<1.
+Proof
+With one segment of length 
+1
+1, the measure of 
+t
+t such that 
+[
+t
+,
+t
++
+1
+]
+[t,t+1] lies inside that segment is zero. Hence the sliding-window certificate is identically zero. But multiples of 
+p
+p contribute 
+S
+(
+k
+)
+=
+1
+S(k)=1, so for 
+C
+<
+1
+C<1 the left-hand side is positive. ∎
+Requested stronger lower bound 
+c
+≥
+2
+c≥2
+Status: CONJECTURED.
+A natural candidate instance for the stronger statement is the following.
+Let 
+N
+=
+2
+r
++
+1
+N=2r+1 primes in 
+(
+y
+,
+2
+y
+]
+(y,2y], all with weight 
+1
+/
+2
+1/2. In any linear order, there exists an independent set of at least 
+r
++
+1
+r+1 atoms, i.e. a subset containing no two adjacent atoms. If 
+r
++
+1
+≥
+5
+r+1≥5, that independent set has total weight at least 
+5
+/
+2
+>
+2
+5/2>2. For an integer divisible exactly by the primes in such an independent set, the sliding-window run contribution is zero, because every active run has total weight 
+1
+/
+2
+<
+1
+1/2<1.
+This suggests that no sliding-window certificate can uniformly reach threshold below 
+2
+2. However, turning this pointwise obstruction into the required global inequality
+V
+s
+l
+i
+d
+e
+≤
+∑
+k
+=
+1
+m
+(
+S
+(
+k
+)
+−
+c
+)
++
+V 
+slide
+​
+ ≤ 
+k=1
+∑
+m
+​
+ (S(k)−c) 
++
+ 
+for some explicit 
+c
+≥
+2
+c≥2 requires controlling all other multiples and interval counts. I have not completed that argument in single-shot form, so I label the requested 
+c
+≥
+2
+c≥2 lower bound CONJECTURED, not proved.
+6. Final answer to the targets
+T1
+For arbitrary weights, the fully proved statement is:
+If 
+y
+3
+≤
+m
+<
+y
+4
+,
+ then 
+T
+H
+3
+ holds via the zero certificate.
+If y 
+3
+ ≤m<y 
+4
+ , then TH 
+3
+​
+  holds via the zero certificate.
+​
+ 
+For 
+0
+/
+1
+0/1 weights, the stronger proved statement is:
+If 
+y
+≥
+10
+7
+,
+ 
+y
+3
+≤
+m
+<
+y
+4
+,
+ and 
+α
+p
+∈
+{
+0
+,
+1
+}
+,
+ then 
+T
+H
+2
+ holds via the pair–triple certificate.
+If y≥10 
+7
+ , y 
+3
+ ≤m<y 
+4
+ , and α 
+p
+​
+ ∈{0,1}, then TH 
+2
+​
+  holds via the pair–triple certificate.
+​
+ 
+The explicit certificate is
+c
+p
+q
+=
+1
+,
+c
+p
+q
+r
+=
+−
+1
+,
+c 
+pq
+​
+ =1,c 
+pqr
+​
+ =−1,
+and the explicit inequality proved is
+V
+(
+c
+)
+≥
+∑
+k
+=
+1
+m
+(
+S
+(
+k
+)
+−
+2
+)
++
+.
+V(c)≥ 
+k=1
+∑
+m
+​
+ (S(k)−2) 
++
+ .
+T2
+The two-scale threshold adds:
+C
+t
+w
+o
+ 
+s
+c
+a
+l
+e
+=
+C
+1
++
+C
+2
+.
+C 
+two scale
+​
+ =C 
+1
+​
+ +C 
+2
+​
+ .
+​
+ 
+In particular:
+bounded-rank arbitrary-weight one-scale 
+C
+=
+3
+C=3 gives two-scale 
+C
+=
+6
+C=6;
+0
+/
+1
+0/1 pair–triple one-scale 
+C
+=
+2
+C=2 gives two-scale 
+C
+=
+4
+C=4, when the one-scale hypotheses are simultaneously satisfied.
+T3
+A rigorous lower bound for sliding-window certificates is proved only for threshold 
+1
+1:
+Sliding-window certificates cannot in general prove 
+T
+H
+C
+ for 
+C
+<
+1.
+Sliding-window certificates cannot in general prove TH 
+C
+​
+  for C<1.
+​
+ 
+The requested stronger statement with some 
+c
+≥
+2
+c≥2 is stated as a conjecture with an explicit candidate instance, but is not proved here.
+
+Ask Qwen
+
+
+
+AI-generated content may not be accurate.
+Copy

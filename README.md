@@ -35,12 +35,16 @@ $100, whether g(n) ≤ (2+o(1))n or even 2n — [erdosproblems.com/708](https://
   integers, Σ_{k≤m}(Ω_P(k)−4)⁺ ≤ Σ_{b∈I}(Ω_P(b)−1)⁺ — two explicit counting certificates (pair–triple with coefficients 11/21, −1/7 on the primes
   ≤ m^{1/3} when their harmonic mass η ≤ 2; the affine certificate when η > 2). Replaces the 20 ln ln m of Theorem A by 4. Does not improve
   the bound on g(n) (fractional weights needed; naive threshold averaging fails). Independent referee: `src/referee_c4_cert.py`, `src/referee_c4_scan.py`.
+* (v9) **Fractional case: reduction to a sparse core** (Section 12): with prime-power atoms, the hinge inequality holds with threshold 65
+  whenever the atoms of modulus ≤ m/64 have mean ≥ 17/16 (dense branch); hence g(n) ≤ 81n follows from a 'sparse core' statement (mean < 17/16),
+  which is vacuous below the 65th primorial (≈ 6·10^127), has left side ≤ 6.24·10^−90·m, and remains OPEN. Projective-plane configurations show
+  that the two-sided interval counts alone (without the values ⌊m/d⌋) cannot prove it. Referee scripts: `src/referee_fractional_check*.py`.
 
 To our knowledge these are the first upper bounds for g(n) depending on n alone (none is recorded in Erdős's 1992
 paper or on the problem's page; the 1959 original, in Hungarian, was not accessible to us). The conjectured 2n is
 **not** proved; the problem remains open. We also record g(4) ≥ 5 and g(5) ≥ 6 (exact computation).
 
-**Paper.** `paper/main.pdf` (source `paper/main.tex`, v8); archived at Zenodo: v8 DOI [10.5281/zenodo.22288514](https://doi.org/10.5281/zenodo.22288514) (v7: [10.5281/zenodo.22288059](https://doi.org/10.5281/zenodo.22288059); v6: [10.5281/zenodo.22287949](https://doi.org/10.5281/zenodo.22287949); v5: [10.5281/zenodo.22287131](https://doi.org/10.5281/zenodo.22287131); v4: [10.5281/zenodo.22286559](https://doi.org/10.5281/zenodo.22286559) (v3: [10.5281/zenodo.22284511](https://doi.org/10.5281/zenodo.22284511) (v2: [10.5281/zenodo.22270923](https://doi.org/10.5281/zenodo.22270923); v1: [10.5281/zenodo.22267396](https://doi.org/10.5281/zenodo.22267396); concept DOI [10.5281/zenodo.22267395](https://doi.org/10.5281/zenodo.22267395) always resolves to the latest version).
+**Paper.** `paper/main.pdf` (source `paper/main.tex`, v9); archived at Zenodo: v9 DOI [10.5281/zenodo.22293074](https://doi.org/10.5281/zenodo.22293074) (v8: [10.5281/zenodo.22288514](https://doi.org/10.5281/zenodo.22288514); v7: [10.5281/zenodo.22288059](https://doi.org/10.5281/zenodo.22288059); v6: [10.5281/zenodo.22287949](https://doi.org/10.5281/zenodo.22287949); v5: [10.5281/zenodo.22287131](https://doi.org/10.5281/zenodo.22287131); v4: [10.5281/zenodo.22286559](https://doi.org/10.5281/zenodo.22286559) (v3: [10.5281/zenodo.22284511](https://doi.org/10.5281/zenodo.22284511) (v2: [10.5281/zenodo.22270923](https://doi.org/10.5281/zenodo.22270923); v1: [10.5281/zenodo.22267396](https://doi.org/10.5281/zenodo.22267396); concept DOI [10.5281/zenodo.22267395](https://doi.org/10.5281/zenodo.22267395) always resolves to the latest version).
 
 ## Verification
 * `src/gn_dp.py` — exact minimum |B| for a concrete (A, x) by dynamic programming over capped valuation vectors; reproduces
@@ -93,3 +97,8 @@ corrected; every constant recomputed) and the budget by `src/r9_budget_check.py`
 coordinator brief that asked whether counting with both interval bounds can give an absolute constant; checked step by step by an independent
 Claude Opus referee run (68,251 exhaustive instances m ≤ 43, structured/random/deep-window scans, an abstract-adversary LP), which found no
 error. The Qwen3.8-Max micro-lemma runs of the same day (`run18_*`, anchor asymptotics; single-scale certificate) are recorded but not used.
+(v9) The dense fractional branch and the reduction to the sparse core come from a GPT-5.6 Pro run of 168 minutes (`run20_*`), the
+projective-plane obstruction and the quantitative remarks from a further run of 141 minutes (`run21_*`); both were checked by independent
+Claude Opus referee runs (scripts in `src/`), which also corrected the scope of the obstruction (it excludes arguments that ignore the
+values ⌊m/d⌋, not the certificate method itself) and rejected two intermediate claims of the engine (a 'reduction' that was a strengthening,
+and the necessity of the lcm structure). No theorem about g(n) is affected; the linear bound remains open.
