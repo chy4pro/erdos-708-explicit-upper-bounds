@@ -43,6 +43,12 @@ $100, whether g(n) ≤ (2+o(1))n or even 2n — [erdosproblems.com/708](https://
   moduli D_r | k (group mass > 4/3) and the nonnegative certificate c_{D_r} = 1/3, giving Σ_I(S_0−1)⁺ ≥ (32/3)(1−6^−31) m/k^{1/32}; with the
   factorial-moment bound this proves the sparse core for 4096 < m ≤ 10^2887 (exact range 10^2887.45), hence the hinge inequality with threshold 65
   for all m ≤ 10^2887 and g(n) ≤ 81n for n ≤ 10^962. Beyond that only O(n ln ln n) is known. Referee scripts: `src/referee_shadow_*.py`.
+* (repo-only, 2026-09-05; not yet a Zenodo version) Two items verified by an independent referee run on the round-13 transcript (`run24_*`):
+  (a) the sparse-core range extends to 4096 < m ≤ 10^2942 (a mean bifurcation on top of the shadow theorem), hence g(n) ≤ 81n for n ≤ 10^980;
+  (b) a wording gap in the packing lemma (the odd large item must be placed first in its group) — fixed in `paper/main.tex`. The transcript's
+  claim that window-independent certificates refute the multi-point route only concerns certificates feasible at every integer; the
+  certificate principle needs feasibility on the window only, and window-adapted certificates beat the transcript's barrier family
+  (referee scripts `src/referee_r13_*.py`). These will enter the paper with its next (final) version.
 
 To our knowledge these are the first upper bounds for g(n) depending on n alone (none is recorded in Erdős's 1992
 paper or on the problem's page; the 1959 original, in Hungarian, was not accessible to us). The conjectured 2n is

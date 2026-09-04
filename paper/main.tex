@@ -1337,8 +1337,9 @@ $\tfrac43<\sum_{i\in G_r}x_i\le2$ for every $r$.
 \end{lemma}
 \begin{proof}
 Call $x_i$ large if $x_i>\tfrac23$. Pair the large items two by two; each pair has mass in $(\tfrac43,2]$. Then form further
-groups greedily from the remaining items (at most one large one, and items of mass at most $\tfrac23$): add items until the mass
-exceeds $\tfrac43$; each such group has mass at most $\tfrac43+\tfrac23=2$, and at most $1+\tfrac23$ if it starts with the odd large item.
+groups greedily from the remaining items (at most one large one, and items of mass at most $\tfrac23$), placing the odd large item, if
+any, first: add items until the mass exceeds $\tfrac43$; each such group has mass at most $\tfrac43+\tfrac23=2$ (the group containing
+the large item has mass at most $1+\tfrac23$, since the large item is added while the mass is $0$).
 Every completed group has mass in $(\tfrac43,2]$, the leftover has mass at most $\tfrac43$, so the completed groups have total mass
 more than $64-\tfrac43>31\cdot2$, and there are at least $32$ of them.
 \end{proof}
