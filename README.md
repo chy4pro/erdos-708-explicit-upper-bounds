@@ -56,6 +56,12 @@ $100, whether g(n) ≤ (2+o(1))n or even 2n — [erdosproblems.com/708](https://
   sparse-core inequality itself holds on these windows (R ≥ L + 63 by reflection). The referee further showed that the certificate cone
   survives if the (few) hot points are excluded from feasibility (value 64·L on the same family) — the open question is now that
   hot-set-excluded LP. Check script: `src/referee_r14_check.py`.
+* (repo-only, 2026-09-05; not yet a Zenodo version) Round 15 (`run27_*`, Claude Fable, refereed): (a) the sparse-core inequality (SC_64) holds for
+  EVERY m when all atom weights are 0 or 1 (a companion of the paper's threshold-4 theorem; hence any counterexample must use fractional
+  weights); (b) an exact identity reduces the hot-set-excluded certificate question to one inequality (NC) about crowded window points;
+  (c) if every window point has S₀ ≤ S*(m) ≈ 1.4·10^20 (m ≤ 10^3000; S₀ ≤ 262 for single-atom-per-prime systems, for all m) then R ≥ 2L —
+  the first positive (SC_64) statement with no cap on m and no 0/1 restriction. Referee amendments to §6 are recorded in the referee file.
+  These will enter the paper with its next (final) version. Scripts: `src/run27/`.
 
 To our knowledge these are the first upper bounds for g(n) depending on n alone (none is recorded in Erdős's 1992
 paper or on the problem's page; the 1959 original, in Hungarian, was not accessible to us). The conjectured 2n is
