@@ -1,0 +1,10 @@
+ell 1 24*eps*R_ell <= 0.5019636472434594 cap 0.51
+ell 2 24*eps*R_ell <= 0.23913217582949012 cap 0.24
+ell 4 24*eps*R_ell <= 0.02887642251980248 cap 0.03
+ell 8 24*eps*R_ell <= 0.0038936588211071297 cap 0.004
+ell 16 24*eps*R_ell <= 0.000496720857411992 cap 0.0005
+ell 32 24*eps*R_ell <= 6.113043171342187e-05 cap 6.25e-05
+ell 64 24*eps*R_ell <= 7.11398322684689e-06 cap 1e-05
+tail < 0.009403714917883539 | finite+tail sum = 0.7945725 < 0.8
+window factor 24(1-2γH*/K) = 62248/30583 ≈ 2.035379132197626
+ALL ASSERTIONS PASSED

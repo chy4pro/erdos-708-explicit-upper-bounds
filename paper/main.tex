@@ -29,12 +29,14 @@ instances), and drafted this document. The proof of Theorem~\ref{thm:signed} (Se
 through the Codex command-line interface in a single 33-minute run on 2026-09-07, from a brief by the orchestrating agent; it was
 self-checked by exact arithmetic, re-derived line by line by the orchestrator, and refereed by a Claude Opus 5 agent in a fresh context
 (hinge, counting and value lemmas brute-forced on hundreds of instances). The Lean formalisation described at the end of
-Section~\ref{sec:signed} was likewise written by GPT-6 Astra from the paper's statements and checked by the orchestrator. The four constructions were implemented and exercised on more than
+Section~\ref{sec:signed} was likewise written by GPT-6 Astra from the paper's statements and checked by the orchestrator. The threshold-$17$ proof of
+Section~\ref{sec:h17} was found by GPT-6 through the ChatGPT web interface at ``Pro'' effort (34 minutes), refereed by a Claude Opus 5
+agent, and formalised by GPT-6 Astra. The four constructions were implemented and exercised on more than
 seven million random instances, and every numerical inequality in
 the explicit parameter choices was checked by machine (scripts in the accompanying repository). No human
 supplied a definition, a lemma, a proof idea, or a correction. The problem itself remains open: the
 conjectured bound $g(n)\le 2n$ is not proved here.}}
-\date{September 7, 2026 (v12; v1: September 3, v2--v10: September 4--5, v11: September 7)}
+\date{September 7, 2026 (v13; v1: September 3, v2--v10: September 4--5, v11--v12: September 7)}
 
 \begin{document}
 \maketitle
@@ -56,9 +58,9 @@ weighted prime-factor counts on intervals; we prove it for 0/1 weights with the 
 explicit counting certificates; for fractional weights we prove it with threshold $65$ whenever the small-modulus part of the weight has
 mean at least $\tfrac{17}{16}$, which reduces a linear bound $g(n)\le81n$ to a ``sparse core'' statement; we prove that statement for all $m$ by a signed divisor
 certificate (dyadic rounding of the weights, prefix carriers of mass between $2$ and $4$, and a capped-mass count of the carriers through a
-point), so that $g(n)\le81n$ for all $n$; the two-sided interval counts alone cannot prove it, and the certificate's value bound uses one
-further arithmetic input, a factorial-moment bound. The proof of the linear bound (Sections~5, 7, 13 and 14) has been formalised in
-Lean~4 and checked by the kernel: the final theorem depends only on the three standard axioms. We also show that the conjectured bound holds for long
+point), so that $g(n)\le81n$ for all $n$, and, with tightened constants, the threshold $17$, so that $g(n)\le33n$ for all $n$; the two-sided interval counts alone cannot prove it, and the certificate's value bound uses one
+further arithmetic input, a factorial-moment bound. The proofs of both linear bounds (Sections~5, 7, 13, 14 and 15) have been formalised in
+Lean~4 and checked by the kernel: the final theorems depend only on the three standard axioms. We also show that the conjectured bound holds for long
 intervals: if $a_n\ge 8n^3$ then $2n$ integers always suffice, so Erd\H{o}s's question is reduced to the
 range $a_n<8n^3$; more generally, for every integer $k\ge 2$, $kn$ integers suffice whenever $a_n\le kn$ or
 $a_n^{k-1}\ge(kn)^{k+1}$; hence for every fixed $\delta>0$ a bound linear in $n$ (with a constant depending on
@@ -156,7 +158,8 @@ holds whenever the small-modulus atoms of the weight have mean at least $\tfrac{
 $g(n)\le81n$ follows from a ``sparse core'' statement (Corollary~\ref{cor:sparsecore}); we show that the two-sided interval counts alone
 cannot prove it (Proposition~\ref{prop:fano}), prove it for $m\le10^{2887}$ by a nonnegative certificate (Theorem~\ref{thm:shadow},
 Corollary~\ref{cor:2887}), and finally, in Section~\ref{sec:signed}, prove it for all $m$ by a certificate with coefficients of both signs
-(Theorem~\ref{thm:signed}), which gives $g(n)\le81n$ for all $n$ (Theorem~\ref{thm:81}).
+(Theorem~\ref{thm:signed}), which gives $g(n)\le81n$ for all $n$ (Theorem~\ref{thm:81}); Section~\ref{sec:h17} tightens the
+constants to the threshold $17$, giving $g(n)\le33n$ (Theorem~\ref{thm:h17}).
 
 \section{The common construction}\label{sec:construction}
 
@@ -1394,6 +1397,8 @@ removes the restriction on $m$ with a certificate whose coefficients have both s
 \end{remark}
 
 \input{sec_signed}
+
+\input{sec_h17}
 
 \begin{thebibliography}{9}
 \bibitem{ES59} P.~Erd\H{o}s and J.~Sur\'anyi, Megjegyz\'esek egy versenyfeladathoz (Remarks on a problem of a

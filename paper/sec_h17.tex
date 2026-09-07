@@ -1,0 +1,156 @@
+\section{A smaller threshold: $g(n)\le33n$}\label{sec:h17}
+
+The constants of Section~\ref{sec:signed} were chosen for simplicity. Tightening them along the same route gives the
+hinge inequality with the absolute threshold $17$, and hence, through Theorem~\ref{thm:cond} with threshold $17$ in place of
+$2$ (the rounding cost of Lemma~\ref{lem:round} adds $16n$), the bound $g(n)\le33n$. Throughout, an \emph{atom system} is a
+finitely supported family $\alpha_{p,j}\ge0$ ($p$ prime, $j\ge1$) with $\sum_j\alpha_{p,j}\le1$ for every $p$, and
+$S(n)=\sum_{p,j}\alpha_{p,j}[p^j\mid n]$; this includes $S(n)=\sum_p\min(z_p\vp_p(n),1)$ for every weight $z$.
+
+\begin{theorem}[threshold $17$]\label{thm:h17}
+For every atom system, every $m\ge1$ and every window $I$ of $m$ consecutive positive integers,
+\[
+\sum_{k\le m}\bigl(S(k)-17\bigr)^+\ \le\ \sum_{b\in I}\bigl(S(b)-1\bigr)^+ .
+\]
+Consequently $g(n)\le33\,n$ for every $n\ge1$.
+\end{theorem}
+
+Fix the constants
+\[
+Q=2^{16},\qquad H^*=\tfrac{1025}{1024},\qquad \gamma=\tfrac{65536}{65535},\qquad K=\tfrac{35}{16},
+\]
+and for a system $f=\sum_pf_p$ with nonnegative prime-power increments write $H(f)=\sum_{p,j}\bigl(f_p(p^j)-f_p(p^{j-1})\bigr)/p^j$.
+
+\begin{lemma}[hinges and moments]\label{lem:h17-1}
+For $0\le u_i\le1$ and an integer $r\ge1$, $(\sum_iu_i-(r-1))^+\le e_r(u)$ and $(\sum_iu_i-\tfrac72)^+\le\tfrac12e_4(u)$.
+If $f_p$ has nonnegative prime-power increments and $H=H(f)$, then $\sum_{n\le N}e_r\bigl((f_p(n))_p\bigr)\le NH^r/r!$.
+If $f_p(p^v)\le g_p(p^v)$ for all $p,v$ then $H(f)\le H(g)$.
+\end{lemma}
+\begin{proof}
+The polynomials $e_r(u)-\sum u_i+r-1$ and $e_4(u)-2\sum u_i+7$ are multi-affine, hence on $[0,1]^N$ convex combinations of
+their vertex values; at a vertex with $j$ ones these are $\binom jr-j+r-1\ge0$ and $\binom j4-2j+7\ge0$ (check $j\le4$; increasing
+afterwards). Together with $e_r\ge0$ this gives both hinges. The moment bound is Lemma~\ref{lem:moment} (expand $e_r$ into one
+level per prime; distinct primes give coprime moduli). For the last claim,
+$\sum_j\bigl(f_p(p^j)-f_p(p^{j-1})\bigr)/p^j=(1-\tfrac1p)\sum_{v\ge1}f_p(p^v)/p^v$; compare termwise.
+\end{proof}
+
+\begin{lemma}[large atoms]\label{lem:h17-2}
+Let $S_0$ keep only the atoms with $p^j\le m/Q$. For every $c\ge7$ and $k\le m$, $(S(k)-c)^+=(S_0(k)-c)^+$. Moreover the left
+side of Theorem~\ref{thm:h17} vanishes when $m<2^{48}$.
+\end{lemma}
+\begin{proof}
+If a removed atom $p^j>m/Q$ divides $k\le m$, write $k=p^{\vp_p(k)}u$; then $u<Q$, and since $2\cdot3\cdot5\cdot7\cdot11\cdot13\cdot17>Q$,
+$u$ has at most six prime factors, so $S(k)\le\omega(k)\le7$ and both sides vanish. Otherwise $S(k)=S_0(k)$. The product of the
+first thirteen primes exceeds $2^{48}$, so $S(k)\le\omega(k)\le12$ when $m<2^{48}$.
+\end{proof}
+
+Henceforth $m\ge2^{48}$ and $H:=H(S_0)$.
+
+\begin{lemma}[dense branch]\label{lem:h17-3}
+If $H\ge H^*$ then Theorem~\ref{thm:h17} holds.
+\end{lemma}
+\begin{proof}
+Let $V=(H^*/H)S_0$, so $H(V)=H^*$ and $V\le S_0$. For $d\le m/Q$, $\lfloor m/d\rfloor\ge(1-\tfrac1Q)m/d$, whence
+$\sum_{k\le m}V(k)\ge(1-\tfrac1Q)mH^*$; Lemma~\ref{lem:h17-1} gives $\sum_{k\le m}(V(k)-7)^+\le mH^{*8}/8!$, and
+$(1-\tfrac1Q)H^*-H^{*8}/8!>1$ (indeed $(1-\tfrac1Q)H^*-1=64511/2^{26}>2^{-11}$ and $H^{*8}/8!<1/20160$). Hence
+$\sum_{k\le m}\min(V(k),7)\ge m$ and, as $\min(S_0,17)\ge\min(V,7)$, $\sum_{k\le m}\min(S_0(k),17)\ge m$. The affine
+certificate $F(n)=S_0(n)-1$ is pointwise at most $(S_0(n)-1)^+$ and sums over $I$ to at least $\sum_{k\le m}S_0(k)-m\ge
+\sum_{k\le m}(S_0(k)-17)^+$; conclude with Lemma~\ref{lem:h17-2} and $S_0\le S$.
+\end{proof}
+
+\begin{lemma}[rounding with loss $6$]\label{lem:h17-4}
+Assume $H<H^*$. For dyadic $t=2^{-h}$ let $q_p(t)$ be the least prime power $p^j$ at which the $p$-component of $S_0$ is at
+least $t$, and retain $(q_p(t),t)$ exactly when $q_p(t)^{3/t}\le m$. Let $b_p(n)$ be the largest retained $t$ with $q_p(t)\mid n$
+($0$ if none) and $B=\sum_pb_p$. Then $B\le S_0$, $H(B)\le H$, $S_0(k)\le2B(k)+6$ for $k\le m$, and with
+$L_B:=\sum_{k\le m}(B(k)-\tfrac{11}2)^+$,
+\[
+\sum_{k\le m}\bigl(S_0(k)-17\bigr)^+\le2L_B .
+\]
+All atoms of $b_p$, and of $\min(b_p,\theta)$, have moduli at most $m^{1/3}$.
+\end{lemma}
+\begin{proof}
+As in Lemma~\ref{lem:rounding}: a $p$-component of $S_0$ at $k$ with rounded value $t$ is less than $2t$; if the level is
+retained it is at most $2b_p(k)$; otherwise $q_p(t)\mid k$ and $t<3\log q_p(t)/\log m\le3\vp_p(k)\log p/\log m$, and these
+contributions sum to at most $6\log k/\log m\le6$. Retained moduli satisfy $q\le m^{t/3}\le m^{1/3}$.
+\end{proof}
+
+\begin{lemma}[carriers of mass $1+\theta$]\label{lem:h17-5}
+For every hot $k\le m$ (i.e.\ $B(k)>\tfrac{11}2$) order its nonzero effective levels by decreasing value, ties by increasing
+prime, and let the carrier $C$ of $k$ be the shortest prefix of mass exceeding $1$; write $P_C$ for the product of its moduli
+and $\theta_C$ for its last value. Then $\mu(C)=1+\theta_C$ and $P_C\le m^{(1+\theta_C)/3}\le m^{2/3}$. Let $M_C$ be the sum of
+$B(k)-\tfrac{11}2$ over the $k$ with carrier $C$, $\nu_C=\lfloor m/P_C\rfloor$ and $c_C=M_C/\nu_C$; then $\sum_CM_C=L_B$. With
+$\varepsilon_1=\gamma H^{*4}/(2\cdot4!)$ and, for dyadic $\ell\ge2$, $r_\ell=9\ell/2$ and
+$\varepsilon_\ell=\gamma\ell^{r_\ell-1}H^{*r_\ell}/r_\ell!$, one has $c_C\le\varepsilon_\ell$ whenever $\theta_C=1/\ell$.
+\end{lemma}
+\begin{proof}
+Every selected value is an integer multiple of $\theta_C$, the mass before the last level is at most $1$ and the total exceeds
+$1$, so the total is exactly $1+\theta_C$; the bound on $P_C$ follows from the retention rule. For $k=P_Cu$ with carrier $C$,
+every unselected prime has $b_p(k)=b_p(u)\le\theta_C$. If $\theta_C=1$ the residual excess is
+$(\sum_{p\nmid P_C}b_p(u)-\tfrac72)^+\le\tfrac12e_4$; if $\theta_C=1/\ell\le\tfrac12$ it is $\theta_C(\sum u_p-(r_\ell-1))^+$
+with $u_p=b_p(u)/\theta_C\in[0,1]$, since $(\tfrac{11}2-1-\tfrac1\ell)\ell=r_\ell-1$; apply Lemma~\ref{lem:h17-1}, sum over
+$u\le\nu_C$ (the map $k\mapsto u$ is injective) and use the moment bound with $H(B)\le H<H^*$.
+\end{proof}
+
+\begin{lemma}[the certificate and the counting reduction]\label{lem:h17-6}
+Let $\delta^{(\theta)}_{p,j}=\min(b_p(p^j),\theta)-\min(b_p(p^{j-1}),\theta)$, $U_C(n)=\sum_{p\nmid P_C}\min(b_p(n),\theta_C)$ and
+\[
+F(n)=24\sum_Cc_C\,[P_C\mid n]\Bigl(1-\frac{U_C(n)}K\Bigr)
+=\sum_{d\mid n}\lambda_d,\qquad
+\lambda_d=24\!\!\sum_{C:\,P_C=d}\!\!c_C-\frac{24}K\!\!\sum_{\substack{C,\ p\nmid P_C,\ j\\ P_Cp^j=d}}\!\!c_C\,\delta^{(\theta_C)}_{p,j}.
+\]
+Every negative modulus is at most $m$. For dyadic $\ell$ put $C_\ell(N)=[X^{\ell+1}](1+X+X^2+X^4+\dots+X^\ell)^N$ and
+\[
+R_\ell=\max_{0\le N\le\lfloor(K+1)\ell+1\rfloor}\ \frac{C_\ell(N)\bigl(1-\max(0,\tfrac{N-\ell-1}\ell)/K\bigr)^+}{\max(\tfrac1\ell,\tfrac{N-\ell}\ell)} .
+\]
+Then $F(n)\le\bigl(24\sum_{\ell=1,2,4,\dots}\varepsilon_\ell R_\ell\bigr)(B(n)-1)^+$ for every positive integer $n$.
+\end{lemma}
+\begin{proof}
+Negative moduli are $P_Cp^j\le m^{2/3}m^{1/3}$. If $B(n)\le1$ no carrier divides $n$. Fix $\theta=1/\ell$ and let $N$ be the
+number of primes with $b_p(n)\ge\theta$: a carrier of last value $\theta$ dividing $n$ selects at each such prime no level or one
+level of scaled value in $\{1,2,4,\dots,\ell\}$ with total $\ell+1$, and a set of choices determines at most one carrier, so
+there are at most $C_\ell(N)$ of them. For $P_C\mid n$, $U_C(n)=T_\theta(n)-\theta\,\omega(P_C)\ge\max(0,N\theta-1-\theta)$ with
+$T_\theta(n)=\sum_p\min(b_p(n),\theta)$, and $B(n)-1\ge\max(\theta,N\theta-1)$. Drop the negative summands, use
+$c_C\le\varepsilon_\ell$ and sum over the scales.
+\end{proof}
+
+\begin{lemma}[the numerical constant]\label{lem:h17-7}
+$24\sum_{\ell=1,2,4,\dots}\varepsilon_\ell R_\ell<\tfrac45$. Consequently $F(n)\le\tfrac45(B(n)-1)^+$ for every $n$.
+\end{lemma}
+\begin{proof}
+For $\ell\le64$ the quantities $24\varepsilon_\ell R_\ell$ are bounded exactly (all $417$ relevant values of $N$, the
+coefficients $C_\ell(N)$ from the recurrence $sg_s=\sum_{j\in\{1,2,4,\dots,\ell\},\,j\le s}((N+1)j-s)g_{s-j}$ for $g=f^N$) by
+$\tfrac{51}{100},\tfrac6{25},\tfrac3{100},\tfrac1{250},\tfrac1{2000},\tfrac1{16000},\tfrac1{100000}$ at
+$\ell=1,2,4,8,16,32,64$. For the tail put $f=\tfrac{2633}{2000}$, $E=\tfrac{87}{32}>e$ and $\zeta=(2EH^*/9)^{9/2}$: then
+$C_\ell(N)\le4^{\ell+1}f^N$, $\varepsilon_\ell\le(\gamma/\ell)\zeta^\ell$ for $\ell\ge2$, and the exact rational inequalities
+$4^{16}f^{51}(2EH^*/9)^{72}<1$, $16f^4(2EH^*/9)^9<\tfrac9{16}$ give $24\varepsilon_\ell R_\ell(N)\le96\gamma(\tfrac34)^\ell$
+for $N<2\ell$ and $\le192\gamma f/(K\ell^2)$ for $N\ge2\ell$ (using $qf^{-q}\le2$ for the integer $q=(K+1)\ell+1-N$ when
+$\ell\ge128$). Summing over $\ell=128\cdot2^j$ gives less than $\tfrac1{100}$, and $\tfrac{317829}{400000}<\tfrac45$.
+\end{proof}
+
+\begin{lemma}[value on the window]\label{lem:h17-8}
+For every window $I$ of $m$ consecutive positive integers, $\sum_{b\in I}F(b)\ge\tfrac{62248}{30583}L_B$.
+\end{lemma}
+\begin{proof}
+$N_I(P_C)\ge\nu_C$; every negative modulus is at most $m$, so $N_I(P_Cq)\le2m/(P_Cq)$; $m/P_C\ge m^{1/3}\ge2^{16}$ gives
+$m/(P_C\nu_C)\le\gamma$; and the mean of the increments of $U_C$ is at most $H^*$. Hence
+$\sum_IF\ge24(1-2\gamma H^*/K)\sum_CM_C=\tfrac{62248}{30583}L_B$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:h17}]
+For $m<2^{48}$ the left side vanishes (Lemma~\ref{lem:h17-2}); for $H\ge H^*$ apply Lemma~\ref{lem:h17-3}. Otherwise, by
+Lemmas~\ref{lem:h17-2}, \ref{lem:h17-4}, \ref{lem:h17-7} and \ref{lem:h17-8},
+\[
+\sum_{k\le m}(S(k)-17)^+\le2L_B\le\tfrac{30583}{31124}\sum_IF\le\tfrac{30583}{38905}\sum_{b\in I}(B(b)-1)^+\le\sum_{b\in I}(S(b)-1)^+ .
+\]
+The bound $g(n)\le33n$ follows from Theorem~\ref{thm:cond} with threshold $17$: the fractional cover value is at most $17n$
+and rounding adds fewer than $16n$ (Lemmas~\ref{lem:round} and \ref{lem:fewprimes}; $2n$ suffice when $a_n\ge8n^3$ by
+Theorem~\ref{thm:long}).
+\end{proof}
+
+\subsection*{Formalisation}
+Theorem~\ref{thm:h17}, its nine lemmas and the threshold-$17$ variant of the reduction chain are formalised in the repository
+(directory \texttt{lean/Erdos708/H17}); the final theorem \texttt{Erdos708H17.g\_le\_33n} depends only on \texttt{propext},
+\texttt{Classical.choice} and \texttt{Quot.sound}. The proof of this section was found by GPT-6 (web interface, effort ``Pro'')
+in a $34$-minute run from the statements of Section~\ref{sec:signed}, its constants were re-verified in exact arithmetic,
+it was refereed by a Claude Opus 5 agent, and the Lean text was written by GPT-6 Astra in a $116$-minute session and recompiled
+independently by the orchestrator. The tightest numerical steps are $4^{16}f^{51}(2EH^*/9)^{72}<1$ ($0.6\%$ margin) and the total
+$\tfrac{317829}{400000}<\tfrac45$.

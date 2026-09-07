@@ -1,0 +1,9 @@
+lemma1: For finite unit-cube inputs both the integer hinge and the half-fourth-moment hinge are bounded by elementary symmetric functions; atom moments satisfy the factorial mean bound; prime-power component domination implies mean domination.
+lemma2: Deleting atoms with 65536 times their modulus greater than m preserves hinges at every threshold at least seven on 1..m; below 2^48 the threshold-17 initial hinge is zero; deletion decreases S everywhere.
+lemma3: If the mean of the small-atom system is at least 1025/1024 and m is positive, its sum truncated at 17 is at least m and the threshold-17 hinge inequality holds on every window.
+lemma4: With m at least 2^48, the rounded function is bounded by the small-atom function, its mean decreases, its pointwise rounding loss is six after multiplication by two, its beta=11/2 hinge controls the threshold-17 hinge with factor two, and retained moduli have cubes at most m.
+lemma5: Every carrier has positive modulus, mass exactly one plus its last dyadic level, last level in (0,1], the stated real-power and cubed size bounds, positive floor count, partitioned hot mass summing to LB, and a nonnegative coefficient bounded by epsilon at its dyadic scale.
+lemma6: The explicit certificate equals its signed divisor expansion, negative coefficients have modulus at most m, and summability of the exact numeric series implies its pointwise counting bound against the rounded hinge.
+lemma7: The exact dyadic numeric series is summable and its total is strictly below four fifths.
+lemma8: Every length-m positive window has certificate sum at least 62248/30583 times LB, including LB=0.
+lemma9: The left, domination, feasibility and window estimates imply the sparse factor 30583/38905 bound and the required comparison with the original right hinge.

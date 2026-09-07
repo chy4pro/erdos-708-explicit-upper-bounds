@@ -18,6 +18,7 @@ Toolchain: `leanprover/lean4:v4.34.0-rc1`, Mathlib commit `de5ce8a9a66a4aa68a9bd
 | `Erdos708/Signed/Cards.lean` | **self-contained** (`import Mathlib` only): all nine lemmas and `Erdos708SparseCore.sparse_core` | Thm 14.1 |
 | `Erdos708/Chain/*.lean` | the reduction chain: large atoms, dense branch, LP duality, rounding, few primes, long intervals, the threshold-65 conditional theorem; `Erdos708Chain.linear_bound` from the hypothesis `sparse_core_hyp` | §5, §7, §13 |
 | `Erdos708/Final.lean` | bridge: `sparse_core` ⇒ `sparse_core_hyp`, hence the unconditional `Erdos708Final.g_le_81n` | Thm 14.11 |
+| `Erdos708/H17/` | the threshold-17 development (Section 15): `Defs.lean`, `Cards.lean` (nine lemma cards + `hinge17`), `Proofs/*.lean` (incl. the exact numerical tables and the analytic tail), `ChainParts/` (copy of the reduction chain in its own namespace) and `Chain.lean` with the parametrised `(c+16)n` reduction and `Erdos708H17.g_le_33n` | §15, Thm 15.1 |
 
 The final statement (`Erdos708Final.g_le_81n`): for every `n ≥ 1`, every set `A` of `n` integers `≥ 2` and every `x`,
 there is `B ⊆ {x+1, …, x + max A}` with `|B| ≤ 81 n` and `∏ A ∣ ∏ B`.

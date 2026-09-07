@@ -79,11 +79,20 @@ $100, whether g(n) ≤ (2+o(1))n or even 2n — [erdosproblems.com/708](https://
   minutes) from statement-first cards, independently recompiled by the orchestrator, definitions checked against the paper; the sparse-core theorem
   and its three milestone lemmas were also verified server-side on Prove2Me. See `lean/README.md` and `engine_transcripts/run29_astra_lean/`.
 
+* (v13, 2026-09-07) **g(n) ≤ 33n for all n, kernel-verified** (Section 15, 'A smaller threshold'): the hinge inequality with the absolute
+  threshold 17 for every atom system — the Section-14 route with tightened constants (split at p^j ≤ m/2^16, cutoff q^{3/t} ≤ m with loss 6,
+  carriers of mass exactly 1+θ, exact carrier count C_ℓ(N) = [X^{ℓ+1}](1+X+X²+X⁴+…+X^ℓ)^N, certificate 24·Σ c_C[P_C|n](1 − U_C/K) with K = 35/16,
+  pointwise F ≤ (4/5)(B−1)⁺, window value ≥ (62248/30583)·L_B) — hence, with the rounding cost 16n, g(n) ≤ 33n. Found by GPT-6 (ChatGPT web,
+  'Pro' effort, 34 minutes; `engine_transcripts/run30_pro_r17/`), constants re-verified in exact arithmetic (`verify_constants.py`), refereed by a
+  Claude Opus 5 agent (PASS; one editorial slip in a displayed intermediate repaired), and formalised by GPT-6 Astra (`lean/Erdos708/H17/`, 116
+  minutes, ≈7,900 lines): `Erdos708H17.g_le_33n` depends only on propext, Classical.choice, Quot.sound; recompiled independently by the orchestrator.
+  Constant improvement only; Erdős's 2n remains open.
+
 To our knowledge these are the first upper bounds for g(n) depending on n alone (none is recorded in Erdős's 1992
 paper or on the problem's page; the 1959 original, in Hungarian, was not accessible to us). The conjectured 2n is
 **not** proved; the problem remains open. We also record g(4) ≥ 5 and g(5) ≥ 6 (exact computation).
 
-**Paper.** `paper/main.pdf` (source `paper/main.tex`) — always the current version. Archived on Zenodo as ONE record under the concept DOI [10.5281/zenodo.22267395](https://doi.org/10.5281/zenodo.22267395), which resolves to the latest version; the version history (v1–v12) is the record's changelog, and earlier versions are marked as superseded.
+**Paper.** `paper/main.pdf` (source `paper/main.tex`) — always the current version. Archived on Zenodo as ONE record under the concept DOI [10.5281/zenodo.22267395](https://doi.org/10.5281/zenodo.22267395), which resolves to the latest version; the version history (v1–v13) is the record's changelog, and earlier versions are marked as superseded.
 
 ## Verification
 * `src/gn_dp.py` — exact minimum |B| for a concrete (A, x) by dynamic programming over capped valuation vectors; reproduces
