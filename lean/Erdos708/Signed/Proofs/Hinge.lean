@@ -1,0 +1,250 @@
+import Mathlib
+
+open Finset BigOperators
+open scoped NNReal
+
+namespace Erdos708SparseCore
+
+structure AtomSystem where
+  atoms : Finset (ℕ × ℕ)
+  weight : ℕ × ℕ → ℝ
+  prime_of_mem : ∀ a ∈ atoms, Nat.Prime a.1 ∧ 1 ≤ a.2
+  weight_nonneg : ∀ a ∈ atoms, 0 ≤ weight a
+  perPrime_le_one : ∀ p : ℕ, ∑ a ∈ atoms.filter (fun a => a.1 = p), weight a ≤ 1
+
+/-- `S₀(n) = Σ_{(p,j) ∈ atoms, p^j ∣ n} α(p,j)`. -/
+noncomputable def S0 (A : AtomSystem) (n : ℕ) : ℝ :=
+  ∑ a ∈ A.atoms.filter (fun a => a.1 ^ a.2 ∣ n), A.weight a
+
+/-- The mean `H = Σ α(p,j) / p^j` of `S₀` over the integers. -/
+noncomputable def mean (A : AtomSystem) : ℝ :=
+  ∑ a ∈ A.atoms, A.weight a / ((a.1 : ℝ) ^ a.2)
+
+/-- Left hinge sum `L = Σ_{k=1}^{m} (S₀(k) − 64)⁺`. -/
+noncomputable def L (A : AtomSystem) (m : ℕ) : ℝ :=
+  ∑ k ∈ Icc 1 m, max (S0 A k - 64) 0
+
+/-- Right hinge sum `R = Σ_{b=x+1}^{x+m} (S₀(b) − 1)⁺` over the window of `m` consecutive
+integers starting after `x`. -/
+noncomputable def R (A : AtomSystem) (x m : ℕ) : ℝ :=
+  ∑ b ∈ Icc (x + 1) (x + m), max (S0 A b - 1) 0
+
+/-! Concrete finite constructions from Section 14. The base atom system and
+`S0`, `mean`, `L`, `R` above are copied verbatim from the original statement card. -/
+
+noncomputable section
+
+/-- The finitely many primes occurring in the original atom support. -/
+def primes (A : AtomSystem) : Finset ℕ := A.atoms.image Prod.fst
+
+/-- Cumulative original weight through exponent `j` at prime `p`. -/
+def cumulative (A : AtomSystem) (p j : ℕ) : ℝ :=
+  ∑ a ∈ A.atoms.filter (fun a => a.1 = p ∧ a.2 ≤ j), A.weight a
+
+/-- Least `h` with `2⁻ʰ ≤ u`. The default matters only when no such `h` exists;
+first rounded levels below are restricted to positive cumulative weight. -/
+def dyadicHeight (u : ℝ) : ℕ := by
+  classical
+  exact if h : ∃ h : ℕ, (2 : ℝ)⁻¹ ^ h ≤ u then Nat.find h else 0
+
+def levelHeight (A : AtomSystem) (a : ℕ × ℕ) : ℕ :=
+  dyadicHeight (cumulative A a.1 a.2)
+
+/-- Nonnegative-real dyadic value, enabling finite suprema with bottom zero. -/
+def levelValue (A : AtomSystem) (a : ℕ × ℕ) : ℝ≥0 :=
+  (2 : ℝ≥0)⁻¹ ^ levelHeight A a
+
+def modulus (a : ℕ × ℕ) : ℕ := a.1 ^ a.2
+
+/-- First exponent in the original support at which a positive rounded value occurs. -/
+def roundedLevels (A : AtomSystem) : Finset (ℕ × ℕ) := by
+  classical
+  exact A.atoms.filter (fun a => 0 < cumulative A a.1 a.2 ∧
+    ∀ b ∈ A.atoms, b.1 = a.1 → 0 < cumulative A b.1 b.2 →
+      levelHeight A b = levelHeight A a → a.2 ≤ b.2)
+
+/-- The modulus-cost cutoff, with the exact integer exponent `16 / t`. -/
+def retained (A : AtomSystem) (m : ℕ) : Finset (ℕ × ℕ) :=
+  (roundedLevels A).filter (fun a => modulus a ^ (16 * 2 ^ levelHeight A a) ≤ m)
+
+/-- Largest retained cumulative value at one prime that divides `n`. -/
+def bpNN (A : AtomSystem) (m p n : ℕ) : ℝ≥0 :=
+  ((retained A m).filter (fun a => a.1 = p ∧ modulus a ∣ n)).sup (levelValue A)
+
+def bp (A : AtomSystem) (m p n : ℕ) : ℝ := bpNN A m p n
+
+def B (A : AtomSystem) (m n : ℕ) : ℝ := ∑ p ∈ primes A, bp A m p n
+
+/-- Previous retained value at the same prime (zero if there is no previous level). -/
+def previousValue (A : AtomSystem) (m : ℕ) (a : ℕ × ℕ) : ℝ≥0 :=
+  ((retained A m).filter (fun b => b.1 = a.1 ∧ b.2 < a.2)).sup (levelValue A)
+
+def increment (A : AtomSystem) (m : ℕ) (a : ℕ × ℕ) : ℝ :=
+  (levelValue A a : ℝ) - previousValue A m a
+
+def HB (A : AtomSystem) (m : ℕ) : ℝ :=
+  ∑ a ∈ retained A m, increment A m a / (modulus a : ℝ)
+
+def LB (A : AtomSystem) (m : ℕ) : ℝ :=
+  ∑ k ∈ Icc 1 m, max (B A m k - 16) 0
+
+def RB (A : AtomSystem) (m x : ℕ) : ℝ :=
+  ∑ n ∈ Icc (x + 1) (x + m), max (B A m n - 1) 0
+
+/-- Increasing height is decreasing dyadic value; ties are broken by `(p,j)`. -/
+def orderKey (A : AtomSystem) (a : ℕ × ℕ) : Lex (ℕ × Lex (ℕ × ℕ)) :=
+  toLex (levelHeight A a, toLex a)
+
+def orderedLevels (A : AtomSystem) (s : Finset (ℕ × ℕ)) : List (ℕ × ℕ) :=
+  ((s.image (orderKey A)).sort).map (fun k => ofLex (ofLex k).2)
+
+/-- At each prime, the largest retained exponent whose modulus divides `n`. -/
+def effective (A : AtomSystem) (m n : ℕ) : Finset (ℕ × ℕ) :=
+  (retained A m).filter (fun a => modulus a ∣ n ∧
+    ∀ b ∈ retained A m, b.1 = a.1 → modulus b ∣ n → b.2 ≤ a.2)
+
+def effectiveList (A : AtomSystem) (m n : ℕ) : List (ℕ × ℕ) :=
+  orderedLevels A (effective A m n)
+
+def hot (A : AtomSystem) (m : ℕ) : Finset ℕ := by
+  classical
+  exact (Icc 1 m).filter (fun k => 16 < B A m k)
+
+def prefixLevels (A : AtomSystem) (m k i : ℕ) : List (ℕ × ℕ) :=
+  (effectiveList A m k).take i
+
+def prefixProd (A : AtomSystem) (m k i : ℕ) : ℕ :=
+  ((prefixLevels A m k i).map modulus).prod
+
+def partialMass (A : AtomSystem) (m k i : ℕ) : ℝ :=
+  ((prefixLevels A m k i).map (fun a => (levelValue A a : ℝ))).sum
+
+/-- Length of `[s_{i-1},s_i) ∩ (2,3]`; endpoint conventions do not change length. -/
+def prefixWeight (A : AtomSystem) (m k i : ℕ) : ℝ :=
+  max (min (partialMass A m k i) 3 - max (partialMass A m k (i - 1)) 2) 0
+
+/-- Exactly the hot prefix occurrences with strictly positive weight. -/
+def occurrences (A : AtomSystem) (m : ℕ) : Finset (ℕ × ℕ) := by
+  classical
+  exact (hot A m).biUnion (fun k =>
+    ((Icc 1 (effectiveList A m k).length).filter
+      (fun i => 0 < prefixWeight A m k i)).image (fun i => (k, i)))
+
+def carriers (A : AtomSystem) (m : ℕ) : Finset ℕ :=
+  (occurrences A m).image (fun ki => prefixProd A m ki.1 ki.2)
+
+/-- Carrier levels can be recovered from the modulus itself. -/
+def lastLevel (A : AtomSystem) (m P : ℕ) : ℕ × ℕ :=
+  (effectiveList A m P).getLast?.getD (0, 0)
+
+def mu (A : AtomSystem) (m P : ℕ) : ℝ := B A m P
+
+def theta (A : AtomSystem) (m P : ℕ) : ℝ := levelValue A (lastLevel A m P)
+
+def M (A : AtomSystem) (m P : ℕ) : ℝ :=
+  ∑ ki ∈ (occurrences A m).filter (fun ki => prefixProd A m ki.1 ki.2 = P),
+    (B A m ki.1 - 16) * prefixWeight A m ki.1 ki.2
+
+def K (m P : ℕ) : ℕ := m / P
+
+def coefficient (A : AtomSystem) (m P : ℕ) : ℝ := M A m P / (K m P : ℝ)
+
+/-- For `θ=2⁻ʰ`, the integer moment order is `12/θ+1`. -/
+def momentOrder (h : ℕ) : ℕ := 12 * 2 ^ h + 1
+
+def epsilon (H : ℝ) (h : ℕ) : ℝ :=
+  ((2 : ℝ)⁻¹ ^ h) ^ (2 - (momentOrder h : ℤ)) *
+    H ^ momentOrder h / (Nat.factorial (momentOrder h) : ℝ)
+
+def G (H : ℝ) (h : ℕ) : ℝ :=
+  epsilon H h / ((2 : ℝ)⁻¹ ^ h) * 2 ^ (23 * 2 ^ h)
+
+def Ttheta (A : AtomSystem) (m n : ℕ) (θ : ℝ) : ℝ :=
+  ∑ p ∈ primes A, min (bp A m p n) θ
+
+def Ntheta (A : AtomSystem) (m n : ℕ) (θ : ℝ) : ℕ := by
+  classical
+  exact #((primes A).filter (fun p => θ ≤ bp A m p n))
+
+def U (A : AtomSystem) (m P n : ℕ) : ℝ :=
+  ∑ p ∈ (primes A).filter (fun p => ¬ p ∣ P), min (bp A m p n) (theta A m P)
+
+def F (A : AtomSystem) (m n : ℕ) : ℝ :=
+  3 * ∑ P ∈ carriers A m, if P ∣ n then coefficient A m P * (1 - U A m P n / 16) else 0
+
+/-- Clipped increments used to expand the negative part of the certificate. -/
+def beta (A : AtomSystem) (m : ℕ) (θ : ℝ) (a : ℕ × ℕ) : ℝ :=
+  min (levelValue A a : ℝ) θ - min (previousValue A m a : ℝ) θ
+
+def certificateSupport (A : AtomSystem) (m : ℕ) : Finset ℕ :=
+  carriers A m ∪ (carriers A m).biUnion (fun P =>
+    ((retained A m).filter (fun a => ¬ a.1 ∣ P)).image (fun a => P * modulus a))
+
+/-- Combined coefficients; the definition has no window parameter. -/
+def signedCoefficient (A : AtomSystem) (m D : ℕ) : ℝ :=
+  (∑ P ∈ carriers A m, if P = D then 3 * coefficient A m P else 0) -
+    (3 / 16 : ℝ) * ∑ P ∈ carriers A m, coefficient A m P *
+      ∑ a ∈ (retained A m).filter (fun a => ¬ a.1 ∣ P),
+        if P * modulus a = D then beta A m (theta A m P) a else 0
+
+private lemma esymm_insert {ι : Type*} [DecidableEq ι] (s : Finset ι)
+    (x : ι → ℝ) (a : ι) (ha : a ∉ s) (k : ℕ) :
+    (∑ t ∈ (insert a s).powersetCard (k + 1), ∏ i ∈ t, x i) =
+      (∑ t ∈ s.powersetCard (k + 1), ∏ i ∈ t, x i) +
+      x a * ∑ t ∈ s.powersetCard k, ∏ i ∈ t, x i := by
+  rw [powersetCard_succ_insert ha, sum_union]
+  · congr 1
+    rw [sum_image, mul_sum]
+    · apply sum_congr rfl
+      intro t ht
+      exact prod_insert (fun hat => ha ((mem_powersetCard.mp ht).1 hat))
+    · intro t ht u hu heq
+      have hat : a ∉ t := fun h => ha ((mem_powersetCard.mp ht).1 h)
+      have hau : a ∉ u := fun h => ha ((mem_powersetCard.mp hu).1 h)
+      simpa [hat, hau] using congrArg (erase · a) heq
+  · apply disjoint_left.mpr
+    intro t ht ht'
+    obtain ⟨u, hu, rfl⟩ := mem_image.mp ht'
+    exact ha ((mem_powersetCard.mp ht).1 (mem_insert_self _ _))
+
+ theorem hinge_le_esymm {ι : Type*} (s : Finset ι) (x : ι → ℝ) (hx : ∀ i ∈ s, 0 ≤ x i ∧ x i ≤ 1)
+    (C : ℕ) :
+    max (∑ i ∈ s, x i - C) 0 ≤ ∑ t ∈ s.powersetCard (C + 1), ∏ i ∈ t, x i := by
+  classical
+  induction s using Finset.induction_on generalizing C with
+  | empty =>
+    have hempty : (∅ : Finset ι).powersetCard (C + 1) = ∅ :=
+      powersetCard_eq_empty.mpr (by simp)
+    simp [hempty]
+  | @insert a s ha ih =>
+    have hxa := hx a (mem_insert_self _ _)
+    have hxs : ∀ i ∈ s, 0 ≤ x i ∧ x i ≤ 1 := fun i hi => hx i (mem_insert_of_mem hi)
+    have hnonneg (k : ℕ) : 0 ≤ ∑ t ∈ s.powersetCard k, ∏ i ∈ t, x i := by
+      apply sum_nonneg
+      intro t ht
+      exact prod_nonneg (fun i hi => (hxs i ((mem_powersetCard.mp ht).1 hi)).1)
+    cases C with
+    | zero =>
+      simp only [Nat.cast_zero, sub_zero, Nat.zero_add, powersetCard_one, sum_map,
+        Function.Embedding.coeFn_mk, prod_singleton]
+      exact max_le (le_refl _) (sum_nonneg fun i hi => (hx i hi).1)
+    | succ C =>
+      rw [sum_insert ha, esymm_insert s x a ha (C + 1)]
+      apply max_le
+      · have h₁ := (le_max_left _ _).trans (ih hxs (C + 1))
+        have h₂ := (le_max_left _ _).trans (ih hxs C)
+        calc
+          x a + ∑ i ∈ s, x i - (C + 1 : ℕ) =
+              (1 - x a) * ((∑ i ∈ s, x i) - (C + 1 : ℕ)) +
+              x a * ((∑ i ∈ s, x i) - (C : ℝ)) := by push_cast; ring
+          _ ≤ (1 - x a) * (∑ t ∈ s.powersetCard (C + 1 + 1), ∏ i ∈ t, x i) +
+              x a * (∑ t ∈ s.powersetCard (C + 1), ∏ i ∈ t, x i) :=
+            add_le_add (mul_le_mul_of_nonneg_left h₁ (sub_nonneg.mpr hxa.2))
+              (mul_le_mul_of_nonneg_left h₂ hxa.1)
+          _ ≤ _ := by nlinarith [mul_nonneg hxa.1 (hnonneg (C + 1 + 1))]
+      · exact add_nonneg (hnonneg _) (mul_nonneg hxa.1 (hnonneg _))
+
+#print axioms hinge_le_esymm
+
+end
+end Erdos708SparseCore

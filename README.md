@@ -73,6 +73,12 @@ $100, whether g(n) ≤ (2+o(1))n or even 2n — [erdosproblems.com/708](https://
   Claude Opus 5 agent (`engine_transcripts/run28_astra_r16/referee_opus.md`, brute-forced lemmas) and re-derived by the orchestrator. Exact checks:
   `engine_transcripts/run28_astra_r16/exact_checks.py`. The conjectured 2n (and the threshold-2 hinge inequality, which would give 18n) remain open.
 
+* (repo, 2026-09-07 05:00) **Kernel-verified: `Erdos708Final.g_le_81n`** — the whole chain from the signed certificate (Section 14) through the
+  reduction (Sections 5, 7, 13) to `g(n) ≤ 81n` is formalised in Lean 4 (Mathlib de5ce8a9), ≈12,000 lines in `lean/`, every theorem depending only
+  on `propext`, `Classical.choice`, `Quot.sound`; no `sorry`/`native_decide`/custom axioms. Written by GPT-6 Astra in three campaigns (10 + 97 + 56
+  minutes) from statement-first cards, independently recompiled by the orchestrator, definitions checked against the paper; the sparse-core theorem
+  and its three milestone lemmas were also verified server-side on Prove2Me. See `lean/README.md` and `engine_transcripts/run29_astra_lean/`.
+
 To our knowledge these are the first upper bounds for g(n) depending on n alone (none is recorded in Erdős's 1992
 paper or on the problem's page; the 1959 original, in Hungarian, was not accessible to us). The conjectured 2n is
 **not** proved; the problem remains open. We also record g(4) ≥ 5 and g(5) ≥ 6 (exact computation).
