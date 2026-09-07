@@ -28,12 +28,13 @@ by exact computation, re-derived every step of both proofs, commissioned indepen
 instances), and drafted this document. The proof of Theorem~\ref{thm:signed} (Section~\ref{sec:signed}) was found by OpenAI GPT-6 Astra
 through the Codex command-line interface in a single 33-minute run on 2026-09-07, from a brief by the orchestrating agent; it was
 self-checked by exact arithmetic, re-derived line by line by the orchestrator, and refereed by a Claude Opus 5 agent in a fresh context
-(hinge, counting and value lemmas brute-forced on hundreds of instances). The four constructions were implemented and exercised on more than
+(hinge, counting and value lemmas brute-forced on hundreds of instances). The Lean formalisation described at the end of
+Section~\ref{sec:signed} was likewise written by GPT-6 Astra from the paper's statements and checked by the orchestrator. The four constructions were implemented and exercised on more than
 seven million random instances, and every numerical inequality in
 the explicit parameter choices was checked by machine (scripts in the accompanying repository). No human
 supplied a definition, a lemma, a proof idea, or a correction. The problem itself remains open: the
 conjectured bound $g(n)\le 2n$ is not proved here.}}
-\date{September 7, 2026 (v11; v1: September 3, v2--v10: September 4--5)}
+\date{September 7, 2026 (v12; v1: September 3, v2--v10: September 4--5, v11: September 7)}
 
 \begin{document}
 \maketitle
@@ -56,7 +57,8 @@ explicit counting certificates; for fractional weights we prove it with threshol
 mean at least $\tfrac{17}{16}$, which reduces a linear bound $g(n)\le81n$ to a ``sparse core'' statement; we prove that statement for all $m$ by a signed divisor
 certificate (dyadic rounding of the weights, prefix carriers of mass between $2$ and $4$, and a capped-mass count of the carriers through a
 point), so that $g(n)\le81n$ for all $n$; the two-sided interval counts alone cannot prove it, and the certificate's value bound uses one
-further arithmetic input, a factorial-moment bound. We also show that the conjectured bound holds for long
+further arithmetic input, a factorial-moment bound. The proof of the linear bound (Sections~5, 7, 13 and 14) has been formalised in
+Lean~4 and checked by the kernel: the final theorem depends only on the three standard axioms. We also show that the conjectured bound holds for long
 intervals: if $a_n\ge 8n^3$ then $2n$ integers always suffice, so Erd\H{o}s's question is reduced to the
 range $a_n<8n^3$; more generally, for every integer $k\ge 2$, $kn$ integers suffice whenever $a_n\le kn$ or
 $a_n^{k-1}\ge(kn)^{k+1}$; hence for every fixed $\delta>0$ a bound linear in $n$ (with a constant depending on

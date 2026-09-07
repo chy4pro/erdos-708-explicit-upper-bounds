@@ -73,7 +73,7 @@ $100, whether g(n) ≤ (2+o(1))n or even 2n — [erdosproblems.com/708](https://
   Claude Opus 5 agent (`engine_transcripts/run28_astra_r16/referee_opus.md`, brute-forced lemmas) and re-derived by the orchestrator. Exact checks:
   `engine_transcripts/run28_astra_r16/exact_checks.py`. The conjectured 2n (and the threshold-2 hinge inequality, which would give 18n) remain open.
 
-* (repo, 2026-09-07 05:00) **Kernel-verified: `Erdos708Final.g_le_81n`** — the whole chain from the signed certificate (Section 14) through the
+* (v12, 2026-09-07) **Kernel-verified: `Erdos708Final.g_le_81n`** — paper v12 adds a closing 'Formalisation' subsection to Section 14 and an abstract sentence; no mathematical change. — the whole chain from the signed certificate (Section 14) through the
   reduction (Sections 5, 7, 13) to `g(n) ≤ 81n` is formalised in Lean 4 (Mathlib de5ce8a9), ≈12,000 lines in `lean/`, every theorem depending only
   on `propext`, `Classical.choice`, `Quot.sound`; no `sorry`/`native_decide`/custom axioms. Written by GPT-6 Astra in three campaigns (10 + 97 + 56
   minutes) from statement-first cards, independently recompiled by the orchestrator, definitions checked against the paper; the sparse-core theorem
@@ -83,7 +83,7 @@ To our knowledge these are the first upper bounds for g(n) depending on n alone 
 paper or on the problem's page; the 1959 original, in Hungarian, was not accessible to us). The conjectured 2n is
 **not** proved; the problem remains open. We also record g(4) ≥ 5 and g(5) ≥ 6 (exact computation).
 
-**Paper.** `paper/main.pdf` (source `paper/main.tex`) — always the current version. Archived on Zenodo as ONE record under the concept DOI [10.5281/zenodo.22267395](https://doi.org/10.5281/zenodo.22267395), which resolves to the latest version; the version history (v1–v11) is the record's changelog, and earlier versions are marked as superseded.
+**Paper.** `paper/main.pdf` (source `paper/main.tex`) — always the current version. Archived on Zenodo as ONE record under the concept DOI [10.5281/zenodo.22267395](https://doi.org/10.5281/zenodo.22267395), which resolves to the latest version; the version history (v1–v12) is the record's changelog, and earlier versions are marked as superseded.
 
 ## Verification
 * `src/gn_dp.py` — exact minimum |B| for a concrete (A, x) by dynamic programming over capped valuation vectors; reproduces

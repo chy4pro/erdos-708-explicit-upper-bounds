@@ -240,3 +240,23 @@ certificate in the range $m\le10^{2887}$.
 (e) The threshold $65$ and the constant $81$ are not optimised; Conjecture~\ref{conj:TH} (threshold $2$, which would give $18n$) and
 Erd\H{o}s's $2n$ remain open.
 \end{remark}
+
+\subsection*{Formalisation}
+
+The proof of Theorem~\ref{thm:81} has been formalised in Lean~4 (toolchain \texttt{v4.34.0-rc1}, Mathlib commit
+\texttt{de5ce8a9}) and is distributed with the repository (directory \texttt{lean/}). The development is statement-first:
+the definitions of this section (dyadic rounding, retained levels, carriers, the certificate $F$) and the objects of
+Sections~\ref{sec:long}, \ref{sec:linear} and \ref{sec:sparse} are Lean definitions; each lemma of this section and each
+of Lemmas~\ref{lem:largeatoms}, \ref{lem:dual}, \ref{lem:round}, \ref{lem:fewprimes}, Theorems~\ref{thm:long},
+\ref{thm:dense} and the threshold-$65$ variant of Theorem~\ref{thm:cond} is a separate theorem with its own proof file;
+and the final statement
+\begin{center}
+\texttt{Erdos708Final.g\_le\_81n} : for every $n\ge1$, every set $A$ of $n$ integers $\ge2$ and every $x$, some
+$B\subseteq\{x+1,\dots,x+\max A\}$ with $|B|\le81n$ has $\prod A\mid\prod B$
+\end{center}
+is derived from them. The kernel's axiom audit (\texttt{\#print axioms}) reports only \texttt{propext},
+\texttt{Classical.choice} and \texttt{Quot.sound}; no \texttt{sorry}, \texttt{native\_decide} or custom axiom occurs.
+The Lean text was written by GPT-6 Astra in three sessions (about 160 minutes in total) from the statements of this paper and
+recompiled independently by the orchestrating agent; the sparse-core theorem and three of its lemmas were also verified by the
+Prove2Me platform under a different Mathlib version. The formalisation does not use the support condition $p^j\le m/64$ in
+Theorem~\ref{thm:signed}, in accordance with Remark~(a) above.
