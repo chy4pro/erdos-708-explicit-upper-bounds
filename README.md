@@ -63,11 +63,21 @@ $100, whether g(n) ≤ (2+o(1))n or even 2n — [erdosproblems.com/708](https://
   the first positive (SC_64) statement with no cap on m and no 0/1 restriction. Referee amendments to §6 are recorded in the referee file.
   These will enter the paper with its next (final) version. Scripts: `src/run27/`.
 
+* (v11, 2026-09-07) **g(n) ≤ 81n for ALL n** (Section 14, 'a signed clipped-prefix certificate'): the sparse-core inequality (SC_64) holds for every
+  m > 4096, every atom system with mean < 17/16 and every window, in the stronger form R ≥ (141/128)·L. The certificate has coefficients of
+  both signs (positive on 'carrier' moduli P < m^{1/4} of dyadic-rounded mass in (2,4); negative on products Pq < m^{5/16} clipping the primes
+  outside P); pointwise feasibility F(n) ≤ (B(n)−1)⁺ holds at every integer via a capped-mass carrier count 2^{(3+T_θ)/θ} and the exact constant
+  2^23·(187/768)^12 < 1/2; the value bound uses the two-sided counts plus the factorial-moment bound. With the reduction of v9 this gives the
+  threshold-65 hinge inequality for all weights and **g(n) ≤ 81n for every n**. The nonnegativity restriction is exactly what the rounds-13/14
+  barriers used, so they do not apply. Proof found by GPT-6 Astra (codex CLI, 33 minutes, 2026-09-07) from the orchestrator's brief; refereed by a
+  Claude Opus 5 agent (`engine_transcripts/run28_astra_r16/referee_opus.md`, brute-forced lemmas) and re-derived by the orchestrator. Exact checks:
+  `engine_transcripts/run28_astra_r16/exact_checks.py`. The conjectured 2n (and the threshold-2 hinge inequality, which would give 18n) remain open.
+
 To our knowledge these are the first upper bounds for g(n) depending on n alone (none is recorded in Erdős's 1992
 paper or on the problem's page; the 1959 original, in Hungarian, was not accessible to us). The conjectured 2n is
 **not** proved; the problem remains open. We also record g(4) ≥ 5 and g(5) ≥ 6 (exact computation).
 
-**Paper.** `paper/main.pdf` (source `paper/main.tex`) — always the current version. Archived on Zenodo as ONE record under the concept DOI [10.5281/zenodo.22267395](https://doi.org/10.5281/zenodo.22267395), which resolves to the latest version; the version history (v1–v10) is the record's changelog, and earlier versions are marked as superseded.
+**Paper.** `paper/main.pdf` (source `paper/main.tex`) — always the current version. Archived on Zenodo as ONE record under the concept DOI [10.5281/zenodo.22267395](https://doi.org/10.5281/zenodo.22267395), which resolves to the latest version; the version history (v1–v11) is the record's changelog, and earlier versions are marked as superseded.
 
 ## Verification
 * `src/gn_dp.py` — exact minimum |B| for a concrete (A, x) by dynamic programming over capped valuation vectors; reproduces

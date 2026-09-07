@@ -1,0 +1,242 @@
+\section{The sparse core for all $m$: a signed clipped-prefix certificate}\label{sec:signed}
+
+Throughout this section fix an integer $m>4096$, a window $I$ of $m$ consecutive positive integers, and a finitely
+supported atom system $\alpha_{p,j}\ge0$ with $\sum_j\alpha_{p,j}\le1$ for every prime $p$; write
+\[
+S_0(n)=\sum_pa_p(n),\qquad a_p(n)=\sum_{j:\,p^j\mid n}\alpha_{p,j}=A_{p,\vp_p(n)},\qquad A_{p,j}:=\sum_{i\le j}\alpha_{p,i}\ (A_{p,0}=0),
+\]
+\[
+H:=\sum_{p,j}\frac{\alpha_{p,j}}{p^j}<\tfrac{17}{16},\qquad L:=\sum_{k\le m}\bigl(S_0(k)-64\bigr)^+,\qquad R:=\sum_{b\in I}\bigl(S_0(b)-1\bigr)^+ .
+\]
+The support condition $p^j\le m/64$ of Section~\ref{sec:sparse} is not needed here.
+
+\begin{theorem}[signed certificate]\label{thm:signed}
+$R\ge\tfrac{141}{128}L$. In particular the sparse-core inequality \eqref{eq:SC} holds for every $m>4096$, every atom system with
+$H_{64}(m,z)<\tfrac{17}{16}$ and every window $I$.
+\end{theorem}
+
+The certificates of Sections~\ref{sec:counting}--\ref{sec:sparse} have nonnegative coefficients, and the obstructions recorded there
+(Proposition~\ref{prop:fano}, and the reflected-window barrier in the repository) concern such certificates. The certificate below has
+coefficients of both signs: a positive coefficient on each ``carrier'' modulus $P$, and negative coefficients on products $Pq$ which clip
+the contribution of the primes outside $P$. It is feasible at every positive integer, and its value on the window is bounded below by the
+two-sided counts of multiples together with one arithmetic input, a factorial-moment bound (Lemma~\ref{lem:moment}).
+
+\subsection*{Dyadic rounding and removal by modulus cost}
+
+For each prime $p$ and each $j$ with $A_{p,j}>0$ let $t_{p,j}$ be the largest number $2^{-h}$, $h\ge0$, with $2^{-h}\le A_{p,j}$, so
+that $t_{p,j}\le A_{p,j}<2t_{p,j}$. Keep, for each distinct rounded value, only the first exponent at which it occurs; this yields
+finitely many pairs $(q,t)$ with $q=p^j$, in which $q$ and $t$ both increase strictly along $j$. Call $(q,t)$ \emph{retained} if
+\begin{equation}\label{eq:cutoff}
+q^{16/t}\le m\qquad(\text{note that }16/t\in\N).
+\end{equation}
+Let $b_p(n)$ be the largest retained value $t$ at $p$ whose modulus divides $n$ ($b_p(n)=0$ if there is none), and $B(n):=\sum_pb_p(n)$.
+The differences of consecutive retained values at $p$ form a new atom system with dyadic cumulative values and per-prime total at
+most $1$, and $b_p(n)\le a_p(n)$ (a retained $q=p^j\mid n$ has $t\le A_{p,j}\le a_p(n)$). Put
+\[
+H_B:=\sum_{\text{retained }q}\frac{\mathrm{inc}_q}{q},\qquad R_B:=\sum_{b\in I}\bigl(B(b)-1\bigr)^+,\qquad L_B:=\sum_{k\le m}\bigl(B(k)-16\bigr)^+,
+\]
+where $\mathrm{inc}_q\ge0$ is the increment of the retained value at $q$ over the previous retained value at the same prime. Every
+retained $(q,t)$ satisfies $\log q\le\tfrac t{16}\log m$ by \eqref{eq:cutoff}, and this remains true after other levels have been
+removed, because the retained increments telescope to $t$.
+
+\begin{lemma}[rounding]\label{lem:rounding}
+$H_B\le H$, $R_B\le R$ and $L\le2L_B$.
+\end{lemma}
+\begin{proof}
+$R_B\le R$ since $B\le S_0$. For the means take a common multiple $Q$ of all original moduli: $S_0$ and $B$ are periodic modulo $Q$,
+the average of $[q\mid\cdot]$ over $1,\dots,Q$ is $1/q$, so the averages are $H$ and $H_B$, and $B\le S_0$ gives $H_B\le H$.
+Fix $k\le m$. For each prime with $a_p(k)>0$ let $t_p$ be the rounded value of $A_{p,\vp_p(k)}$, so $a_p(k)<2t_p$, and let $q_p$ be
+the first modulus at which the rounded value $t_p$ occurs; then $q_p\mid k$. If $(q_p,t_p)$ is retained then $b_p(k)\ge t_p$ and
+$a_p(k)<2b_p(k)$. Otherwise $q_p^{16/t_p}>m$, i.e.\ $t_p<16\log q_p/\log m$ and $a_p(k)<32\log q_p/\log m$; the $q_p$ of these primes
+are powers of distinct primes whose product divides $k\le m$, so $\sum\log q_p\le\log m$ and these primes contribute less than $32$
+in total. Hence $S_0(k)<2B(k)+32$ and $(S_0(k)-64)^+\le2(B(k)-16)^+$; sum over $k\le m$.
+\end{proof}
+
+\subsection*{Prefixes at threshold $16$}
+
+Order all retained levels by decreasing value $t$, breaking ties by $(p,j)$. Call $k\le m$ \emph{hot} if $B(k)>16$. For hot $k$ list
+its effective levels---at each prime with $b_p(k)>0$, the largest retained level dividing $k$---in this order, with values
+$a_1\ge\dots\ge a_s$ and partial sums $s_i$; let $P_i(k)$ be the product of the first $i$ moduli and
+\[
+w_{k,i}:=\bigl|[s_{i-1},s_i)\cap(2,3]\bigr|,\qquad\text{so that}\qquad\sum_iw_{k,i}=1 .
+\]
+A \emph{carrier} is a $P=P_i(k)$ with $w_{k,i}>0$ for some hot $k$. Its levels are the $p$-parts of $P$, listed in the fixed order,
+so its \emph{mass} $\mu(P):=B(P)=s_i$, its \emph{last value} $\theta_P:=a_i$ (a dyadic number) and $s_{i-1}$ depend only on $P$;
+positivity of $w_{k,i}$ gives $s_i>2$ and $s_{i-1}<3$, hence $\mu(P)\in(2,4)$ and $w_{k,i}\le\theta_P$. With $d_k:=B(k)-16$ put
+\[
+M(P):=\sum_{k\text{ hot},\,i:\,P_i(k)=P}d_kw_{k,i},\qquad\text{so}\qquad\sum_PM(P)=L_B,\qquad K_P:=\lfloor m/P\rfloor,\qquad c_P:=\frac{M(P)}{K_P}.
+\]
+
+\begin{lemma}[hinge]\label{lem:hinge}
+For $x_1,\dots,x_N\in[0,1]$ and an integer $C\ge0$, $\bigl(\sum_ix_i-C\bigr)^+\le e_{C+1}(x_1,\dots,x_N)$.
+\end{lemma}
+\begin{proof}
+With the other coordinates fixed, $e_{C+1}$ has the form $A+(u+v)D+uvE$ in two coordinates $u,v$, where $E\ge0$ is $e_{C-1}$ of the
+remaining coordinates ($E=0$ if $C=0$). Moving $u,v$ at fixed sum until one of them reaches $0$ or $1$ decreases $uv$, so it does not
+increase $e_{C+1}$, and it leaves the left side unchanged. Each move reduces the number of coordinates in $(0,1)$, so finitely many
+moves lead to a vector with $q=\lfloor\sum_ix_i\rfloor$ ones, one coordinate $\tau\in[0,1)$ and zeros, at which
+$e_{C+1}=\binom q{C+1}+\tau\binom qC$. This is $\ge0$ if $q<C$, equals $\tau$ if $q=C$, and is $\ge q-C+\tau$ if $q>C$ (fix $C$ of
+the $q$ ones and adjoin each of the other $q-C$), which is the hinge in each case.
+\end{proof}
+
+\begin{lemma}[moment bound]\label{lem:moment}
+For all integers $N,r\ge1$, $\sum_{j\le N}e_r\bigl((b_p(j))_p\bigr)\le N\,H_B^r/r!$.
+\end{lemma}
+\begin{proof}
+$b_p(j)=\sum_{\text{retained }q\mid j}\mathrm{inc}_q$, the increments telescoping. Expanding $e_r$ chooses $r$ distinct primes and one
+retained level at each; the moduli are coprime, so $\sum_{j\le N}[\prod q\mid j]=\lfloor N/\prod q\rfloor\le N/\prod q$. Hence the sum is
+at most $N\,e_r(h)$ for $h=(\mathrm{inc}_q/q)_q$, and $r!\,e_r(h)\le(\sum h)^r=H_B^r$.
+\end{proof}
+
+\begin{lemma}[carried mass]\label{lem:carried}
+Every carrier satisfies $P<m^{1/4}$, so $K_P\ge1$. If $\theta=\theta_P$ and $r:=12/\theta+1$, then
+\begin{equation}\label{eq:carried}
+M(P)\le\varepsilon(\theta)\,\frac mP\qquad\text{and}\qquad c_P\le2\varepsilon(\theta),\qquad\text{where}\quad
+\varepsilon(\theta):=\theta^{2-r}\,\frac{H_B^r}{r!}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Summing $\log q\le\tfrac t{16}\log m$ over the levels of $P$ gives $\log P\le\tfrac{\mu(P)}{16}\log m<\tfrac14\log m$. Let $k=Pj$ be
+hot with $P_i(k)=P$. At the primes of $P$ the effective level of $k$ is the level in $P$; at a prime $p\nmid P$ we have
+$b_p(j)=b_p(k)\le\theta$, because these levels come after position $i$ in the decreasing order. Hence
+$B(k)=\mu(P)+\sum_{p\nmid P}b_p(j)$ and, as $\mu(P)<4$,
+\[
+d_k\le\Bigl(\sum_{p\nmid P}b_p(j)-12\Bigr)^+\le\theta^{1-r}e_r\bigl((b_p(j))_{p\nmid P}\bigr)\le\theta^{1-r}e_r\bigl((b_p(j))_p\bigr),
+\]
+by Lemma~\ref{lem:hinge} applied to $x_p=b_p(j)/\theta\in[0,1]$ and $C=12/\theta$ (an integer, $\theta$ being dyadic). Multiply by
+$w_{k,i}\le\theta$ and sum over the hot $k$ with $P_i(k)=P$: the map $k\mapsto j$ is injective and $j\le K_P$, so Lemma~\ref{lem:moment} gives
+\[
+M(P)\le\theta^{2-r}\sum_{j\le K_P}e_r\bigl((b_p(j))_p\bigr)\le\theta^{2-r}K_P\frac{H_B^r}{r!}\le\varepsilon(\theta)\frac mP ,
+\]
+and $c_P=M(P)/K_P\le2\varepsilon(\theta)$ because $\lfloor u\rfloor\ge u/2$ for $u\ge1$.
+\end{proof}
+
+\subsection*{Carriers through a point}
+
+For a positive integer $n$ and a dyadic $\theta$ put
+\[
+T_\theta(n):=\sum_p\min\bigl(b_p(n),\theta\bigr),\qquad N_\theta(n):=\#\{p:\,b_p(n)\ge\theta\},\qquad\text{so that}\quad\theta N_\theta(n)\le T_\theta(n).
+\]
+
+\begin{lemma}[carriers with a given last level]\label{lem:carriercount}
+Let $q$ be a retained level of value $\theta$ with $q\mid n$. The number of carriers $P\mid n$ with last level $q$ is at most
+$2^{(3+T_\theta(n))/\theta}$.
+\end{lemma}
+\begin{proof}
+Such a $P$ is $q$ times a set of retained levels at distinct other primes, each dividing $n$, each of value at least $\theta$ (they
+precede $q$ in the order), of total value less than $3$; by unique factorisation $P$ determines this set. Values $\ge\theta$ are of the
+form $\theta2^i$, $i\ge0$, and at one prime they are distinct, so the sum of $2^{-\mathrm{value}/\theta}$ over the levels available at one
+prime is at most $\sum_{i\ge0}2^{-2^i}\le\sum_{i\ge0}2^{-i-1}=1$. The generating sum of $2^{-\mathrm{total}/\theta}$ over all choices of at
+most one available level at each prime is therefore at most $2^{N_\theta(n)}$, and every admissible choice contributes at least
+$2^{-3/\theta}$; so there are at most $2^{3/\theta+N_\theta(n)}\le2^{(3+T_\theta(n))/\theta}$ of them (dropping the order restriction only
+enlarges the count).
+\end{proof}
+
+\begin{lemma}[values at a point]\label{lem:valuesum}
+For every $n$, $\sum_{\text{retained }q\mid n}t_q\le2B(n)$.
+\end{lemma}
+\begin{proof}
+At one prime the retained levels dividing $n$ have distinct dyadic values at most $b_p(n)$, so their sum is at most
+$b_p(n)(1+\tfrac12+\tfrac14+\cdots)=2b_p(n)$; sum over $p$.
+\end{proof}
+
+\begin{lemma}[a uniform numerical bound]\label{lem:G}
+For $\theta=2^{-h}$, $h\ge0$, and $H_B\le\tfrac{17}{16}$,
+\begin{equation}\label{eq:G}
+G(\theta):=\frac{\varepsilon(\theta)}{\theta}\,2^{23/\theta}\le\frac{17}{416}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+With $t=1/\theta\in\N$ and $r=12t+1$ we have $G(\theta)=t^{12t}H_B^{12t+1}2^{23t}/(12t+1)!$, and $(12t)!\ge(12t/e)^{12t}$ (from
+$e^n\ge n^n/n!$) gives
+\[
+G(\theta)\le\frac{H_B}{12t+1}\Bigl(2^{23}\bigl(\tfrac{eH_B}{12}\bigr)^{12}\Bigr)^t .
+\]
+Since $e<\tfrac{11}4$ (sum the exponential series through $1/4!$ and bound the tail by $\tfrac1{120}\cdot\tfrac65$, giving
+$e<\tfrac{65}{24}+\tfrac1{100}<\tfrac{11}4$) and $H_B\le\tfrac{17}{16}$, we get $eH_B/12<\tfrac{187}{768}<\tfrac14$ and so
+$2^{23}(eH_B/12)^{12}<2^{23}\cdot2^{-24}=\tfrac12$ (exactly,
+$2^{23}(187/768)^{12}=1828518162230556187140793681/5019318332045454244023631872<\tfrac12$). Hence
+$G(\theta)\le17/\bigl(16(12t+1)2^t\bigr)\le\tfrac{17}{416}$, the right side decreasing in $t$.
+\end{proof}
+
+\subsection*{The certificate}
+
+For a carrier $P$ with last value $\theta_P$ and a positive integer $n$ put
+\begin{equation}\label{eq:cert}
+U_P(n):=\sum_{p\nmid P}\min\bigl(b_p(n),\theta_P\bigr),\qquad
+F(n):=3\sum_Pc_P\,[P\mid n]\Bigl(1-\frac{U_P(n)}{16}\Bigr).
+\end{equation}
+
+\begin{lemma}[pointwise feasibility]\label{lem:feasible}
+$F(n)\le\bigl(B(n)-1\bigr)^+$ for every positive integer $n$.
+\end{lemma}
+\begin{proof}
+If $P\mid n$ then $b_p(n)\ge b_p(P)\ge\theta_P$ for every $p\mid P$, so $B(n)\ge\mu(P)>2$; thus $F(n)=0$ when $B(n)\le2$. Let $B(n)>2$.
+For $P\mid n$ each prime of $P$ contributes exactly $\theta_P$ to $T_{\theta_P}(n)$, so $U_P(n)=T_{\theta_P}(n)-\theta_P\om(P)$ with
+$\theta_P\om(P)\le\mu(P)<4$. If the bracket in \eqref{eq:cert} is positive then $U_P(n)<16$, hence $T_{\theta_P}(n)<20$; and the bracket is
+at most $1$. Discard the nonpositive terms and group the remaining carriers by their last level $q$, a retained level dividing $n$ of
+value $\theta_q$. By \eqref{eq:carried}, Lemma~\ref{lem:carriercount} with $T_{\theta_q}(n)<20$, \eqref{eq:G} and Lemma~\ref{lem:valuesum},
+\[
+F(n)\le3\sum_{q\mid n}2\varepsilon(\theta_q)\,2^{23/\theta_q}=6\sum_{q\mid n}\theta_qG(\theta_q)\le\frac{102}{416}\sum_{q\mid n}t_q
+\le\frac{51}{104}B(n)\le\frac{B(n)}2\le B(n)-1 . \qedhere
+\]
+\end{proof}
+
+A prime of $P$ may have $b_p(n)>b_p(P)$ at a multiple $n$ of $P$; the cap at $\theta_P$ in $U_P$ makes this irrelevant, and this is why
+the primes of $P$ are excluded from $U_P$.
+
+\begin{lemma}[value on the window]\label{lem:value}
+$F$ is a finite signed divisor sum $\sum_Dc'_D[D\mid\cdot]$ whose positive moduli are carriers $P<m^{1/4}$ and whose negative moduli
+have the form $Pq<m^{5/16}$; its coefficients depend only on the atom system and $m$; and
+\[
+\sum_{n\in I}F(n)\ge\tfrac{141}{64}L_B .
+\]
+\end{lemma}
+\begin{proof}
+For a dyadic $\theta$ the function $\min(b_p(n),\theta)$ telescopes over the retained levels at $p$:
+$\min(b_p(n),\theta)=\sum_{q\mid n}\beta^\theta_q$ with $\beta^\theta_q:=\min(t_q,\theta)-\min(t_{q^-},\theta)\ge0$, where $q^-$ is the
+previous retained level at $p$ (value $0$ if there is none); moreover $\beta^\theta_q\le\mathrm{inc}_q$, so
+$H_\theta:=\sum_q\beta^\theta_q/q\le H_B$. Since the primes in $U_P$ lie outside $P$,
+$[P\mid n]\,U_P(n)=\sum_{p\nmid P}\sum_{q}\beta^{\theta_P}_q[Pq\mid n]$ with $\gcd(P,q)=1$, and every retained $q$ has
+$q\le m^{t_q/16}\le m^{1/16}$, so $Pq<m^{5/16}\le m$. For $d\le m$ every window of $m$ consecutive integers satisfies
+$\lfloor m/d\rfloor\le N_I(d)\le m/d+1\le2m/d$. The positive part of the term of $P$ sums to $3c_PN_I(P)\ge3c_PK_P=3M(P)$; its negative
+part is at most
+\[
+\frac3{16}\,c_P\sum_q\beta^{\theta_P}_qN_I(Pq)\le\frac3{16}\cdot\frac{M(P)}{K_P}\cdot\frac{2m}P\sum_q\frac{\beta^{\theta_P}_q}q
+\le\frac3{16}\cdot4M(P)H_{\theta_P}\le\frac34H_BM(P),
+\]
+using $K_P\ge m/(2P)$. Summing over the carriers,
+$\sum_IF\ge3(1-H_B/4)\sum_PM(P)\ge3(1-\tfrac{17}{64})L_B=\tfrac{141}{64}L_B$. Bounding the terms before combining equal moduli is
+legitimate, $\sum_IF$ being linear in the terms.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:signed}]
+By Lemmas~\ref{lem:rounding}, \ref{lem:feasible} and \ref{lem:value},
+$R\ge R_B\ge\sum_{n\in I}F(n)\ge\tfrac{141}{64}L_B\ge\tfrac{141}{128}L$.
+\end{proof}
+
+\begin{theorem}[linear bound]\label{thm:81}
+For every weight $z$, every $m\ge1$ and every $x\ge0$ the hinge inequality \eqref{eq:th65} with threshold $65$ holds, and
+\[
+g(n)\le81\,n\qquad\text{for every }n\ge1 .
+\]
+\end{theorem}
+\begin{proof}
+Theorem~\ref{thm:signed} supplies the hypothesis of Corollary~\ref{cor:sparsecore}.
+\end{proof}
+
+\begin{remark}
+(a) Theorem~\ref{thm:signed} does not use the support condition $p^j\le m/64$, so it holds for every finitely supported atom system
+with $H<\tfrac{17}{16}$. Its binding numerical step is $eH_B/12<\tfrac14$, i.e.\ $H_B<3/e\approx1.1036$, so the argument tolerates a mean
+slightly above $\tfrac{17}{16}$.
+(b) The certificate uses the window only through $|I|=m$ and the two-sided counts of multiples, but its value bound rests on
+Lemma~\ref{lem:moment}, which uses $\lfloor N/d\rfloor\le N/d$ for coprime moduli; this is the arithmetic input that
+Proposition~\ref{prop:fano} shows to be necessary, and it fails in the projective-plane configuration there.
+(c) The nonnegativity of the coefficients is essential in the barriers for window-adapted certificates (repository, rounds 13--14):
+those arguments force coefficients to vanish through inequalities of the form $\sum_{E\mid D}c_E\le0$, which do not constrain signed
+coefficients.
+(d) Theorem~\ref{thm:shadow} and Corollary~\ref{cor:2887} remain of interest as a proof of the sparse core by a nonnegative
+certificate in the range $m\le10^{2887}$.
+(e) The threshold $65$ and the constant $81$ are not optimised; Conjecture~\ref{conj:TH} (threshold $2$, which would give $18n$) and
+Erd\H{o}s's $2n$ remain open.
+\end{remark}
