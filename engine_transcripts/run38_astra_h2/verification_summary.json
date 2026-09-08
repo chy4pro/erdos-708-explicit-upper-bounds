@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "threshold": "280923567/32000000",
+  "total_upper": "499998420228283/500000000000000",
+  "margin": "1579771717/500000000000000",
+  "finite_scales": 65,
+  "full": true,
+  "kernel_checked": false
+}

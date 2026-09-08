@@ -263,17 +263,29 @@ $Q=2$ gives $\tfrac{71}{60}>1$.
 The elimination proof of Theorem~\ref{thm:fiveprimes} needs the antichain bound only for the four
 moduli actually present. For an arbitrary multilevel system on four primes $P$ the corresponding
 statement is: for every integer $Q\ge2$, the coordinatewise-minimal exponent vectors $e$ with
-$D(e)/\max_ip_i^{e_i}\ge Q$, where $D(e)=\prod p_i^{e_i}$, satisfy $Q\sum_e D(e)^{-1}\le1$. This
-would give $(H_2)$ for five unrestricted primes. It is open. It holds in every case computed --- all
-four-element subsets of the primes below $60$ with $2\le Q\le400$, and $P=\{2,3,5,7\}$ with
-$2\le Q\le4000$ --- with maximum $\tfrac{101}{105}$, a margin of under $4\%$. Two structural remarks
-make it delicate: the quantity is not monotone in the primes
-($K_{\{2,5,7,11\}}(3)=\tfrac{111}{220}<\tfrac{236}{385}=K_{\{3,5,7,11\}}(3)$), and the maximising $Q$
-is not always $2$ (for $\{2,5,7,11\}$ it is $Q=4$, with value $\tfrac{37}{55}>\tfrac{213}{385}$), so
-the statement does not collapse to Lemma~\ref{lem:antichain}. Even granted, it would not iterate: the
-five-prime analogue is false, since
+$D(e)/\max_ip_i^{e_i}\ge Q$, where $D(e)=\prod p_i^{e_i}$, satisfy
+$K_P(Q):=Q\sum_eD(e)^{-1}\le1$. It is now proved for $P=\{2,3,5,7\}$ at every $Q\ge2$, by an exact
+sweep of the $1\,763\,328$ exponent states of the ladder below
+$Q_0=4\,900\,014\,488\,437\,221\,682$ (which fall into $35\,109$ minimality intervals) together with
+the uniform tail $K_P(Q)\le Q^{-1/5}\prod_{p\in P}(1-p^{-1/10})^{-1}\le1$ for $Q\ge Q_0$, valid for
+every quadruple; the maximum over all $Q\ge2$ is exactly $\tfrac{101}{105}$, attained only at $Q=2$
+(the runner-up is $Q=4$ with $\tfrac{299}{315}$, so the maximiser is not simply the least $Q$).
+Because $Q_0$ does not depend on $P$ and no ladder is larger than that of $\{2,3,5,7\}$, the same
+finite computation decides any named quadruple in seconds --- it does so for all $70$ four-element
+subsets of the first eight primes --- and no computation is needed when every prime of $P$ exceeds
+$10^{15}$, since then $A_P^5\le(31/30)^{20}<2$. Consequently Theorem~\ref{thm:fiveprimes} upgrades:
+$(H_2)$ holds for arbitrary multilevel systems supported on $\{2,3,5,7,p\}$, and on the analogous
+supports for those $70$ quadruples, for every fifth prime $p$.
+What remains open is the \emph{uniform} statement over the infinitely many quadruples containing a
+small prime, and, as before, the passage from five primes to six. Even granted in full, it would not
+iterate: the five-prime analogue is false, since
 $2\,e_2(\tfrac12,\tfrac13,\tfrac15,\tfrac17,\tfrac1{11})=\tfrac{194}{165}>1$.
 \end{remark}
+
+\begin{corollary}\label{cor:smallestsupport}
+If $(H_2)$ fails for a system with at most five active primes, then $\{2,3,5,7\}$ is not among its
+primes; in particular the smallest admissible support $\{2,3,5,7,11\}$ cannot carry a failure.
+\end{corollary}
 
 \subsection*{The incidence graph}
 
@@ -348,6 +360,12 @@ structural: on the family of all $\binom\ell3$ triple products of $\ell$ primes 
 $|\mathcal P(A)|=\ell\asymp n^{1/3}$ and $\beta/n\to2$, so the bound gives only $3n$ there. What is
 missing is an arithmetic saving on primitive connected instances whose cycle rank exceeds $n$.
 
+One further negative datum bears on Section~\ref{sec:h883}: the signed carrier architecture of that
+section cannot simply be re-run at threshold $2$. The atom system with the single point
+$2^{340}3^{214}5^{77}7^{49}$ defeats both the published retention table and a retuned one, the
+supremum of the relevant quantity being $\tfrac5{256}$ and $\tfrac{117}{256}$ respectively, in each
+case far below what a threshold-$2$ closure would need.
+
 \subsection*{Provenance}
 Lemma~\ref{lem:primorial}, Propositions~\ref{prop:fourprimes}--\ref{prop:remains} and Remark~\ref{rem:notight} were
 found by GPT-6 (web interface, ``Pro'') in a $41$-minute run on 2026-09-08, whose declared targets --- a proof of the
@@ -375,3 +393,11 @@ agent, which re-derived the proof step by step and recomputed every optimum by a
 programme. The orchestrating agent then re-verified the sharpness family at $t=2,3$ and found that the
 primes first proposed for it admit no admissible window at $t=2$, which is why the placement is stated
 as a hypothesis above and exhibited case by case.
+The proof of $K_{\{2,3,5,7\}}$ and the resulting upgrade of Theorem~\ref{thm:fiveprimes} were found by
+GPT-6 Astra (OpenAI, through the codex CLI) in a $41$-minute single-agent run on 2026-09-08 whose
+declared targets, a proof or refutation of $(H_2)$, were again not reached. A Claude Opus 5 agent
+refereed them, recomputing the frontier sweep independently in three implementations, extending it to
+$Q\le10^{60}$ without change to the maximum, verifying that the finite range and the analytic tail
+join with more than five orders of slack, and proving the statement for all $70$ four-subsets of the
+first eight primes and for all quadruples of primes above $10^{15}$; it also verified the certificate
+of the upgraded theorem over full periods on $46$ multilevel systems. None of this is formalised.
