@@ -11,7 +11,8 @@ Referee: Claude Opus 5 agent, 2026-09-08. Target: the four claims (A)–(D) plus
 the open Lemma 8. All checks below are **my own**, written from the *statements* in `proof.md`
 and not from `exact_verifier.py`; they live in `referee_checks.py` in this directory and run in
 exact integer/`Fraction` arithmetic (NumPy is used only for exact `int64` window sweeps).
-`75 passed, 0 failed` after one of *my* conjectures (not the author's) was corrected — see §E.
+`python3 referee_checks.py` reports **76 passed, 0 failed** (the one initial failure was a
+conjecture of *mine*, not a claim of the author's — see §E).
 I read `verifier_output.txt` / `verifier_full_output.txt` but relied on nothing in them; where my
 independent rebuild and theirs agree I say so explicitly, because that agreement is evidence and
 not an assumption.

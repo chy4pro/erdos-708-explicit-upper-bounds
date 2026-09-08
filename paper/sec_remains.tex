@@ -242,6 +242,23 @@ summation, and the exhaustive searches reported below found no violation of $(H_
 does say is that past five primes any certificate must be signed, or must give up pointwise left
 domination, as Theorem~\ref{thm:fiveprimes} does.
 
+\begin{corollary}[the surviving five-prime case]\label{cor:fivesurviving}
+If $(H_2)$ fails for a system with at most five active primes, then at least two of those primes carry
+more than one nonzero atom, and at least one carries total weight greater than $\tfrac12$.
+\end{corollary}
+\begin{proof}
+Theorem~\ref{thm:fiveprimes} excludes systems with at most one multilevel prime, and
+Theorem~\ref{thm:cap} with $N=5$, where $\lambda=\tfrac12$, excludes systems all of whose primes have
+total weight at most $\tfrac12$.
+\end{proof}
+
+Two remarks delimit these results. The weight cap of Theorem~\ref{thm:cap} is load-bearing and not an
+artefact: at $N=6$ with six weights equal to $\tfrac12>\tfrac25=\lambda$ the cyclic certificate falls
+below the lower hinge. And the obstruction of Proposition~\ref{prop:sixobstruction} genuinely begins
+at six primes: a pointwise nonnegative certificate does exist on $\{0,\tfrac12,1\}^5$. Pairwise
+coprimality in Lemma~\ref{lem:antichain} is likewise essential, since $(a,b,c,d)=(2,3,4,5)$ with
+$Q=2$ gives $\tfrac{71}{60}>1$.
+
 \begin{remark}[the bridge to unrestricted five primes]\label{rem:K4}
 The elimination proof of Theorem~\ref{thm:fiveprimes} needs the antichain bound only for the four
 moduli actually present. For an arbitrary multilevel system on four primes $P$ the corresponding
