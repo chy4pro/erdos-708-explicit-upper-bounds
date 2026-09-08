@@ -1,0 +1,278 @@
+\section{What remains: the threshold interval $[2,\tfrac{56501}{6400}]$}\label{sec:remains}
+
+By Theorem~\ref{thm:h883} and Proposition~\ref{prop:barrier}, the set of admissible thresholds is a closed half-line
+$[c^*,\infty)$ with
+\[
+2\ \le\ c^*\ \le\ \tfrac{56501}{6400}=8.828\ldots
+\]
+(the set is upward closed, and closed because for each instance both sides depend continuously on $c$). This section
+records what is known about the interior of that interval: an exact truncation available at \emph{every} threshold, the
+inequality with threshold $2$ for systems with few primes and for systems of large mean, and the precise statement of
+what is left. Nothing here narrows the interval.
+
+\begin{remark}[the barrier family is not tight at $2$]\label{rem:notight}
+On the family of Proposition~\ref{prop:barrier} the two sides are $\binom r2(2-c)$ and $r-1$, so equality holds at
+$c=2-\tfrac2r$ and at $c=2$ the left side vanishes while the right side is $r-1$. The family therefore forces
+$c^*\ge2$ only in the limit $r\to\infty$, and provides no evidence whatever that $c^*=2$; the true threshold may lie
+anywhere in $[2,\tfrac{56501}{6400}]$.
+\end{remark}
+
+\begin{lemma}[primorial truncation]\label{lem:primorial}
+Let $d\ge0$ be an integer and let $Q_d=p_1\cdots p_d$ be the $d$-th primorial ($Q_0=1$, $Q_1=2$, $Q_2=6$, $Q_3=30$,
+$Q_4=210$, $Q_5=2310$, $Q_6=30030$, $Q_7=510510$). Given an atom system $S$ and $m\ge1$, let $S_0$ consist of the atoms
+$p^j$ with $p^jQ_d\le m$. Then for every $k\le m$ and every real $c\ge d$,
+\[
+\bigl(S(k)-c\bigr)^+=\bigl(S_0(k)-c\bigr)^+ ,
+\]
+so $\sum_{k\le m}(S(k)-c)^+=\sum_{k\le m}(S_0(k)-c)^+$; and $S_0\le S$ gives
+$\sum_{b\in I}(S_0(b)-1)^+\le\sum_{b\in I}(S(b)-1)^+$ for every window. In particular a counterexample to $(H_c)$
+yields one supported on $p^j\le m/Q_d$. The primorial is optimal: for every $Q'>Q_d$ there are $S$ and $m$ for which
+the identity fails at $c=d$.
+\end{lemma}
+\begin{proof}
+Suppose an omitted atom $q=p^j$ (that is, $qQ_d>m$) divides $k\le m$, and write $k=qt$. Then $t\le m/q<Q_d$, so
+$\omega(t)\le d-1$: an integer with $d$ distinct prime factors is at least the product of the $d$ smallest primes,
+namely $Q_d$. Since $q$ is a prime \emph{power}, $\omega(k)\le\omega(t)+1\le d$. The per-prime capacity now gives
+\[
+S(k)=\sum_{p\mid k}\ \sum_j\alpha_{p,j}[p^j\mid k]\ \le\ \sum_{p\mid k}1=\omega(k)\le d\le c ,
+\]
+and $S_0\le S$, so both hinges vanish at $k$. At every other $k\le m$ no omitted atom of positive weight divides $k$,
+so $S(k)=S_0(k)$. For optimality take $q$ the least prime exceeding $Q_d$, $m=Q_dq$, and unit weights on
+$p_1,\dots,p_d$ and $q$: then $S(m)=d+1$ and the hinge at $k=m$ equals $1$, while any cutoff $m/Q'$ with $Q'>Q_d$
+omits $q$ and the hinge collapses to $0$.
+\end{proof}
+
+The truncation of Lemma~\ref{lem:h97-2} is the case $d=7$ with $2^{16}$ in place of $Q_7=510510$, and is weaker
+($2^{16}<Q_7$); we keep it in Section~\ref{sec:h97} because that is the form which has been formalised.
+The point of Lemma~\ref{lem:primorial} is that it is available at \emph{every} threshold: at $c=2$ one may truncate at
+$p^j\le m/6$, whereas no argument of the $2^{16}$ type truncates at all below $c=7$. It is a prerequisite for the two
+propositions below and for any attack on $c<7$. Its price is that the floor
+$\lfloor m/q\rfloor\ge\tfrac{Q_d}{Q_d+1}\,\tfrac mq$ degrades from $1-2^{-16}$ to $\tfrac67$ at $d=2$, and that the
+truncated system may still carry every prime power up to $m/6$.
+
+\begin{proposition}[threshold $2$ for at most four primes]\label{prop:fourprimes}
+Let $S$ be an atom system in which at most four primes carry positive weight. Then
+$\sum_{k\le m}(S(k)-2)^+\le\sum_{b\in I}(S(b)-1)^+$ for every $m\ge1$ and every window $I$ of $m$ consecutive positive
+integers.
+\end{proposition}
+\begin{proof}
+Padding with zero functions, write $S=f_1+f_2+f_3+f_4$ with $f_i(n)=\sum_j\alpha_{p_i,j}[p_i^j\mid n]\in[0,1]$, put
+$g_{ij}=(f_i+f_j-1)^+$ and $G=\tfrac13\sum_{i<j}g_{ij}$. Each $f_i$ occurs in exactly three of the six pairs, so
+$\sum_{i<j}g_{ij}\ge\sum_{i<j}(f_i+f_j-1)=3S-6$; the sum is also nonnegative, whence $G\ge(S-2)^+$. For the other
+half, the six pairs split into the three perfect matchings $\{12,34\}$, $\{13,24\}$, $\{14,23\}$, and
+$(a-1)^++(b-1)^+\le(a+b-1)^+$ for $a,b\ge0$; applying this to each matching and averaging gives $G\le(S-1)^+$.
+
+Fix a pair $p,q$ and let $A_a=\sum_{j\le a}\alpha_{p,j}$, $B_b=\sum_{j\le b}\alpha_{q,j}$ be the cumulative weights, so
+that $f_p(n)=A_{\min(v_p(n),J_p)}$ where $J_p$ is the largest exponent occurring at $p$. With $\varphi(u)=(u-1)^+$ put
+\[
+\beta_{a,b}=\varphi(A_a+B_b)-\varphi(A_{a-1}+B_b)-\varphi(A_a+B_{b-1})+\varphi(A_{a-1}+B_{b-1}).
+\]
+Then $\beta_{a,b}\ge0$: with $\delta=A_a-A_{a-1}\ge0$ the function $u\mapsto\varphi(u+\delta)-\varphi(u)$ is
+nondecreasing because $\varphi$ is convex, and $B_b\ge B_{b-1}$. Since $A_a\le1$ and $B_b\le1$, the terms with index
+$0$ vanish, and telescoping in both variables gives the finite expansion
+$g_{pq}(n)=\sum_{a,b\ge1}\beta_{a,b}[p^aq^b\mid n]$. Every modulus $d$ satisfies
+$\#\{b\in I:d\mid b\}\ge\lfloor m/d\rfloor$, so $\sum_{k\le m}g_{pq}(k)\le\sum_{b\in I}g_{pq}(b)$. Summing the six
+pairs,
+\[
+\sum_{k\le m}(S(k)-2)^+\le\sum_{k\le m}G(k)\le\sum_{b\in I}G(b)\le\sum_{b\in I}(S(b)-1)^+ . \qedhere
+\]
+\end{proof}
+
+The certificate $G$ depends only on the atom system, not on $m$ or on the window. It does not survive a fifth prime:
+for five weights equal to $\tfrac12$ one has $(S-2)^+=\tfrac12$ while every pair term vanishes.
+
+\begin{proposition}[threshold $2$ for systems of large mean]\label{prop:densetwo}
+Let $S$ be an atom system, $m\ge1$, and let $S_0$ be its truncation at $p^jQ_d\le m$ as in
+Lemma~\ref{lem:primorial}. Write $H(f)=\sum_{p,j}\beta_{p,j}/p^j$ for the mean of a system with nonnegative
+prime-power increments $\beta_{p,j}$. If, for an integer $c\ge2$ and a real $h>0$,
+\[
+H(S_0)\ge h\qquad\text{and}\qquad \frac{Q_c}{Q_c+1}\,h-\frac{h^c}{(c+1)!}\ \ge\ 1 ,
+\]
+then $(H_c)$ holds for $S$, $m$ and every window. In particular, taking $c=2$, $Q_2=6$ and
+$h=h_0:=\tfrac{18-\sqrt{30}}7=1.78896\ldots$, every system whose $m/6$-truncation has mean at least $h_0$ satisfies
+the hinge inequality with threshold $2$; the rational value $\tfrac{179}{100}$ suffices, since
+$\tfrac67\cdot\tfrac{179}{100}-\tfrac16\bigl(\tfrac{179}{100}\bigr)^2-1=\tfrac{113}{420000}>0$.
+\end{proposition}
+\begin{proof}
+Put $V=(h/H(S_0))\,S_0$, so that $V\le S_0\le S$, the per-prime capacities are still at most $1$, and $H(V)=h$
+exactly; note that the hypothesis is used only through this rescaling, so no upper bound on $H(S_0)$ is needed. For
+$q\le m/Q_c$ we have $\ell=\lfloor m/q\rfloor\ge Q_c$ and $m/q<\ell+1$, hence
+$\lfloor m/q\rfloor\ge\tfrac{Q_c}{Q_c+1}\tfrac mq$ and $\sum_{k\le m}V(k)\ge\tfrac{Q_c}{Q_c+1}mh$. For $u_i\in[0,1]$
+and an integer $c\ge2$ one has $(\sum_iu_i-c)^+\le e_c(u)/(c+1)$ (the difference is minimised at a vertex of the cube
+after the usual compression, where it reduces to $\binom kc\ge(c+1)(k-c)^+$), so Lemma~\ref{lem:h97-1} gives
+$\sum_{k\le m}(V(k)-c)^+\le mh^c/(c+1)!$. Subtracting, $\sum_{k\le m}\min(V(k),c)\ge m$, and $V\le S$ gives
+$\sum_{k\le m}\min(S(k),c)\ge m$. Now the affine certificate $F=S-1$ is pointwise at most $(S-1)^+$, and
+\[
+\sum_{b\in I}F(b)=\sum_{p,j}\alpha_{p,j}\#\{b\in I:p^j\mid b\}-m\ \ge\ \sum_{k\le m}S(k)-m
+\ \ge\ \sum_{k\le m}S(k)-\sum_{k\le m}\min(S(k),c)=\sum_{k\le m}(S(k)-c)^+ ,
+\]
+while $\sum_{b\in I}F(b)\le\sum_{b\in I}(S(b)-1)^+$.
+\end{proof}
+
+The same argument with $V=\tau S$ ($0\le\tau\le1$, no truncation) shows that
+$\mu-\tfrac16H(S)^2\ge1$ implies $(H_2)$, where $\mu=\tfrac1m\sum_{k\le m}S(k)$; and under the hypotheses below the
+choice $\tau=1$ is optimal.
+
+\begin{proposition}[the remaining case]\label{prop:remains}
+The hinge inequality with threshold $2$ holds for all atom systems, all $m$ and all windows if and only if it holds
+for every $S$, $m$, $x$ subject to: all atoms satisfy $p^j\le m/6$; at least five primes carry positive weight;
+$m\ge66$; $\sum_{k\le m}(S(k)-2)^+>0$; $H(S)<h_0=\tfrac{18-\sqrt{30}}7$; and $\mu-\tfrac16H(S)^2<1$ with
+$\mu=\tfrac1m\sum_{k\le m}S(k)$.
+\end{proposition}
+\begin{proof}
+One direction is trivial. Conversely, let $(S,m,x)$ violate $(H_2)$ and replace $S$ by its $m/6$ truncation, which by
+Lemma~\ref{lem:primorial} leaves the left side unchanged and does not increase the right side. At most four active
+primes is excluded by Proposition~\ref{prop:fourprimes}. A positive left side forces some $k\le m$ with $S(k)>2$,
+hence $\omega(k)\ge3$; with five active primes all of whose atoms are at most $m/6$, the fifth smallest active prime
+is at least $11$, so $m\ge66$. Mean at least $h_0$ is excluded by Proposition~\ref{prop:densetwo} applied with
+$h=h_0$, and $\mu-\tfrac16H^2\ge1$ by the remark following it.
+\end{proof}
+
+The region described by Proposition~\ref{prop:remains} is not empty --- for instance $m=210$ with the atoms
+$2,4,3,13,19,23,29$ of weights $\tfrac23,\tfrac13,1,1,1,\tfrac23,1$ satisfies every hypothesis --- so the
+proposition is a genuine reduction and not a disguised proof. Since truncation gives $\mu\ge\tfrac67H$, the last two
+hypotheses together already force $H<h_0$ or $H>h_1=\tfrac{18+\sqrt{30}}7$, the second being excluded only by the
+rescaling in the proof of Proposition~\ref{prop:densetwo}. Analogous reductions hold at every integer threshold
+$c\ge3$, with $Q_c$ in place of $6$ and $m\ge Q_{c+1}$, but without the five-prime clause: no analogue of
+Proposition~\ref{prop:fourprimes} is known for $c\ge3$.
+
+\subsection*{Beyond four primes}
+
+Proposition~\ref{prop:fourprimes} is the base case of an induction: an atom system is finitely
+supported, so $(H_2)$ holds in general as soon as it holds for every bounded number of active
+primes. The pair certificate itself does not survive a fifth prime, but two different mechanisms do,
+and a third is provably unavailable.
+
+\begin{lemma}[Boolean antichain bound]\label{lem:antichain}
+Let $2\le a<b<c<d$ be pairwise coprime integers and $Q\ge2$ an integer. Let $\mathcal M_Q$ be the
+family of inclusion-minimal nonempty $A\subseteq\{a,b,c,d\}$ with $\prod A/\max A\ge Q$. Then
+$Q\sum_{A\in\mathcal M_Q}\bigl(\prod A\bigr)^{-1}\le1$, with maximum $\tfrac{101}{105}$ attained at
+$(\{2,3,5,7\},Q=2)$.
+\end{lemma}
+\begin{proof}
+A pair is feasible exactly when its smaller member is $\ge Q$; a triple exactly when the product of
+its two smaller members is $\ge Q$, and is minimal exactly when it contains no feasible pair; the
+quadruple is feasible exactly when $abc\ge Q$ and minimal exactly when $bc<Q$. This gives nine
+cases according to the position of $Q$ relative to $a,b,c,ab,ac,bc,abc$, and in each the displayed
+bound is $\le1$: all rows but the first are bounded by $\tfrac1c+\tfrac3d\le\tfrac4c\le\tfrac45$
+(pairwise coprimality forces $c\ge5$), and the first row is $a\,e_2(\tfrac1a,\tfrac1b,\tfrac1c,\tfrac1d)$,
+which is at most $\tfrac{101}{105}$, $\tfrac{131}{140}$, $\tfrac{179}{210}$, $\tfrac6b\le1$ according
+as $b=3$, $b=4$, $b=5$, $b\ge6$.
+\end{proof}
+
+\begin{theorem}[five primes, one multilevel]\label{thm:fiveprimes}
+Let $S=T+f$ where $T(n)=\sum_{i=1}^4w_i[q_i\mid n]$ with $w_i\in[0,1]$ and $q_1,\dots,q_4$ powers of
+four distinct primes, and $f(n)=\sum_j\alpha_j[p^j\mid n]$ with $\alpha_j\ge0$, $\sum_j\alpha_j\le1$,
+for a fifth prime $p$. Then $(H_2)$ holds for $S$, every $m$ and every window. In particular it holds
+for five arbitrary primes carrying one arbitrary prime power each.
+\end{theorem}
+\begin{proof}
+For $a\ge0$ and $f\in[0,1]$ the layer identity
+$(T+f-a)^+-(T-a)^+=\int_0^1[f>t]\,[T>a-t]\,dt$
+holds (both sides equal $(\min(f,1)-(a-T)^+)^+$; the hypothesis $f\le1$ is the per-prime capacity and
+is the only one needed). Because $f(n)=A_{v_p(n)}$ with $A_j=\sum_{h\le j}\alpha_h$ nondecreasing and
+$A_0=0$, for each $t>0$ the indicator $[f(n)>t]$ is either identically zero or equals $[p^{j(t)}\mid n]$
+with $j(t)=\min\{j:A_j>t\}\ge1$; write $d=p^{j(t)}\ge2$. Put $c=1-t$ and let
+$Q(t)=\min\{\prod_{i\in B}q_i:\sum_{i\in B}w_i>c\}$ when such a $B$ exists. If $T(n)>c+1$ then
+deleting any single $w_i$ leaves a value $>c$, so the set of indices dividing $n$ is feasible for
+Lemma~\ref{lem:antichain} and contains a minimal member; hence
+$[T>c+1]\le\sum_{A\in\mathcal M_{Q(t)}}[q_A\mid n]$ and, by Lemma~\ref{lem:antichain},
+$\#\{k\le M:T(k)>c+1\}\le M\sum_A q_A^{-1}\le M/Q(t)$, an integer bound, so $\le\lfloor M/Q(t)\rfloor$.
+Since $d$ is coprime to every $q_i$ we have $T(dk)=T(k)$, so taking $M=\lfloor m/d\rfloor$,
+\[
+\sum_{k\le m}[d\mid k]\,[T(k)>2-t]\ \le\ \Bigl\lfloor\tfrac m{dQ(t)}\Bigr\rfloor ,
+\]
+while $[dQ(t)\mid n]\le[d\mid n][T(n)>1-t]$ shows the window contains at least that many points
+contributing to the right side. Integrating over $t$ (the integrand is a step function with finitely
+many cells) gives
+$\sum_{k\le m}\Delta_2(T,f)(k)\le\sum_{b\in I}\Delta_1(T,f)(b)$, and adding
+Proposition~\ref{prop:fourprimes} for $T$ gives $(H_2)$ for $S$.
+\end{proof}
+
+\begin{remark}[domination after summation, not pointwise]\label{rem:aftersum}
+The certificate assembled in the proof --- a finite nonnegative combination of divisor indicators,
+namely $\tfrac13\sum_{i<j}(w_i+w_j-1)^+[q_iq_j\mid n]$ plus one term $(v_\ell-u_\ell)[d_\ell Q_\ell\mid n]$
+per cell --- dominates $(S-1)^+$ \emph{pointwise} but dominates $(S-2)^+$ only \emph{after summation
+over $[1,m]$}. The pointwise statement is false for it: with atoms
+$\tfrac{257}{720},\tfrac{421}{720},\tfrac{563}{720},\tfrac{611}{720}$ at $2,3,5,7$ and
+$\tfrac{293}{720},\tfrac{427}{720}$ at $11,11^2$, the certificate takes the value $\tfrac{1948}{2160}$
+at $n=12705$ while $(S(n)-2)^+=\tfrac{2625}{2160}$. This is not a defect but the mechanism, and it is
+what reconciles Theorem~\ref{thm:fiveprimes} with Proposition~\ref{prop:sixobstruction} below.
+\end{remark}
+
+\begin{theorem}[any number of primes under a weight cap]\label{thm:cap}
+Let $N\ge2$ and $\lambda=\tfrac2{N-1}$. If at most $N$ primes are active and each has total weight at
+most $\lambda$, then $(H_2)$ holds.
+\end{theorem}
+\begin{proof}
+Pad to $f_0,\dots,f_{N-1}\in[0,\lambda]$ and set
+$G(f)=\sum_{r=0}^{N-1}\max\bigl(0,\min\bigl(\tfrac\lambda N,\min_i(f_i-\lambda a_{ri})\bigr)\bigr)$ with
+$a_{ri}=((r+i)\bmod N)/N$. Then $G(f)=\lambda\,\mathbb P(Z_i\le f_i\ \forall i)$ where
+$Z_i=\lambda\{U+i/N\}$ and $U$ is uniform on $[0,1)$; the union bound gives
+$G\ge\lambda(1-\sum_i(1-f_i/\lambda))=\sum_if_i-2$, and $G\ge0$, so $G\ge(\sum_if_i-2)^+$. On branch
+$r$, writing $U=r/N+t$, all the threshold inequalities force $\sum_if_i\ge1+N\lambda t$ because
+$\sum_ia_{ri}=\tfrac{N-1}2$, so the admissible $t$-length is at most $(\sum_if_i-1)^+/(N\lambda)$;
+multiplying by $\lambda$ and summing the $N$ branches gives $G\le(\sum_if_i-1)^+$. Partitioning each
+branch at the finitely many cumulative levels turns $G$ into a nonnegative combination of divisor
+indicators, and the interval counts finish as before.
+\end{proof}
+
+At five equal half-weights this certificate has value $\tfrac12$, exactly the lower hinge, where the
+pair certificate of Proposition~\ref{prop:fourprimes} collapses to $0$.
+
+\begin{proposition}[no pointwise nonnegative certificate at six primes]\label{prop:sixobstruction}
+There is no $G(f)=\sum_tc_t\prod_{i:t_i>0}[f_i\ge t_i]$ with all $c_t\ge0$ on $\{0,\tfrac12,1\}^6$
+satisfying $(\sum_if_i-2)^+\le G\le(\sum_if_i-1)^+$ everywhere. Equivalently, for the six-prime
+system with atoms $\tfrac12$ at $p_i$ and $\tfrac12$ at $p_i^2$, no nonnegative divisor certificate
+$C(n)=\sum_d\gamma_d[d\mid n]$ satisfies $(S-2)^+\le C\le(S-1)^+$ pointwise.
+\end{proposition}
+\begin{proof}
+The upper bound at the states of total weight at most $1$ forces the constant, singleton and
+$(\tfrac12,\tfrac12)$-pair coefficients to vanish. Let $P,T,H$ be the total coefficient mass of
+support $2$, $3$ and $\ge4$. The all-ones state gives $P+T+H\le5$. Each of the twenty states with
+exactly three coordinates equal to $1$ has lower hinge $1$, and a threshold vector of support $s$ is
+dominated by exactly $\binom{6-s}{3-s}$ of them, so summing gives $4P+T\ge20$. But
+$4P+T=4(P+T+H)-3T-4H\le20$, forcing $T=H=0$. Every surviving support-$2$ coefficient has a threshold
+equal to $1$ in some coordinate, so $G$ vanishes at the all-half state, where the lower hinge is $1$.
+\end{proof}
+
+Proposition~\ref{prop:sixobstruction} is an obstruction to a \emph{method}, not evidence against
+$(H_2)$: by Remark~\ref{rem:aftersum} a certificate need only dominate the left side after
+summation, and the exhaustive searches reported below found no violation of $(H_2)$ itself. What it
+does say is that past five primes any certificate must be signed, or must give up pointwise left
+domination, as Theorem~\ref{thm:fiveprimes} does.
+
+\begin{remark}[the bridge to unrestricted five primes]\label{rem:K4}
+The elimination proof of Theorem~\ref{thm:fiveprimes} needs the antichain bound only for the four
+moduli actually present. For an arbitrary multilevel system on four primes $P$ the corresponding
+statement is: for every integer $Q\ge2$, the coordinatewise-minimal exponent vectors $e$ with
+$D(e)/\max_ip_i^{e_i}\ge Q$, where $D(e)=\prod p_i^{e_i}$, satisfy $Q\sum_e D(e)^{-1}\le1$. This
+would give $(H_2)$ for five unrestricted primes. It is open. It holds in every case computed --- all
+four-element subsets of the primes below $60$ with $2\le Q\le400$, and $P=\{2,3,5,7\}$ with
+$2\le Q\le4000$ --- with maximum $\tfrac{101}{105}$, a margin of under $4\%$. Two structural remarks
+make it delicate: the quantity is not monotone in the primes
+($K_{\{2,5,7,11\}}(3)=\tfrac{111}{220}<\tfrac{236}{385}=K_{\{3,5,7,11\}}(3)$), and the maximising $Q$
+is not always $2$ (for $\{2,5,7,11\}$ it is $Q=4$, with value $\tfrac{37}{55}>\tfrac{213}{385}$), so
+the statement does not collapse to Lemma~\ref{lem:antichain}. Even granted, it would not iterate: the
+five-prime analogue is false, since
+$2\,e_2(\tfrac12,\tfrac13,\tfrac15,\tfrac17,\tfrac1{11})=\tfrac{194}{165}>1$.
+\end{remark}
+
+\subsection*{Provenance}
+Lemma~\ref{lem:primorial}, Propositions~\ref{prop:fourprimes}--\ref{prop:remains} and Remark~\ref{rem:notight} were
+found by GPT-6 (web interface, ``Pro'') in a $41$-minute run on 2026-09-08, whose declared targets --- a proof of the
+hinge inequality with threshold $2$, or a refutation at some $c\ge2$ --- were \emph{not} reached.
+Lemma~\ref{lem:antichain}, Theorems~\ref{thm:fiveprimes} and~\ref{thm:cap}, Remarks~\ref{rem:aftersum} and~\ref{rem:K4}
+and Proposition~\ref{prop:sixobstruction} come from a second $50$-minute run of the same system on the same day, which
+likewise did not reach its target: the largest number of primes for which $(H_2)$ is proved without further hypotheses
+remains four, and no counterexample was found. That run was refereed by a Claude Opus 5 agent which re-derived the layer
+identity, swept the antichain bound over $6.1$ million (quadruple, $Q$) instances, re-verified the cyclic certificate on
+$56\,877$ grid points, rebuilt the explicit five-prime certificate over its full period $25\,410$ (reproducing its
+pointwise deficit at $n=12705$), and gave an independent exact rational Farkas certificate for
+Proposition~\ref{prop:sixobstruction}; it also supplied the two structural obstructions in Remark~\ref{rem:K4}. The
+system's own exhaustive audits cover $190\,246\,980$ window instances on five to eight primes without a violation. They were refereed
+blind by a Claude Opus 5 agent, which recomputed every constant in exact arithmetic, verified the four-prime
+certificate exhaustively over all weight vectors in $\{0,\tfrac16,\dots,1\}^4$ on the primes $2,3,5,7$ for all
+$m\le210$ and all windows ($105\,884\,100$ instances), established the optimality of the primorial cutoff and the
+sharper bound $m\ge66$, and confirmed that the region of Proposition~\ref{prop:remains} is non-empty. None of the
+results of this section is formalised.
