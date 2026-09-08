@@ -95,6 +95,23 @@ paper or on the problem's page; the 1959 original, in Hungarian, was not accessi
 **Paper.** `paper/main.pdf` (source `paper/main.tex`) — always the current version. Archived on Zenodo as ONE record under the concept DOI [10.5281/zenodo.22267395](https://doi.org/10.5281/zenodo.22267395), which resolves to the latest version; the version history (v1–v13) is the record's changelog, and earlier versions are marked as superseded.
 
 ## Verification
+* (v14, 2026-09-08) **g(n) ≤ 19n for all n, kernel-verified; g(n) ≤ 12n for all n** (Sections 16–17). Section 16 ('The rounding cost
+  revisited'): the primes dividing ∏A number at most n + π(√a_n), the k-split with k = 3 disposes of a_n ≥ 9n², the vertex rounding is strict
+  and π(3n) ≤ n+1, so a hinge threshold c gives g(n) ≤ ⌈cn⌉ + 2n; hence 19n from the threshold 17 and 18n + π((18n)^{19/34}) − 1 = 18n + o(n)
+  with k = 18; the LP's integrality gap is linear (CRT instances with τ* = n/K, g(A,x) = n). Found by GPT-6 Astra (`engine_transcripts/run31_astra_rounding/`,
+  15 minutes), refereed by a Claude Opus 5 agent (no mathematical error), formalised by GPT-6 Astra (`lean/Erdos708/H17/Chain19/`, 14 minutes,
+  `engine_transcripts/run32_astra_lean19/`): `Erdos708H17Chain.Chain19.g_le_19n` and the conditional `g_le_12n_of_hinge` depend only on propext,
+  Classical.choice, Quot.sound; recompiled independently by the orchestrator. Section 17 ('Threshold 97/10'): four-mantissa dyadic levels (ratio 5/4,
+  loss 47/16), moment order chosen per carrier mass, cofactor ≥ 210 (no large-m proviso), 29 finite scales < 187/1000 + tail < 3/1000, window value
+  718539/573440 > 5/4. Found by GPT-6 (ChatGPT web, 'Pro', 45 minutes; `engine_transcripts/run33_pro_r18/` with `proof.md`, the author's
+  `exact_verifier.py`, the referee's `referee_checks.py`), refereed blind by a Claude Opus 5 agent that recomputed every constant exactly (PASS,
+  slack 3.9%). Section 17 formalised by GPT-6 Astra (`lean/Erdos708/H97/`, single agent, 3 h 42 min, 108 modules, `engine_transcripts/run34_astra_lean_h97/`): `Erdos708H97.hinge97` and `Erdos708H97.g_le_12n` depend only on propext, Classical.choice, Quot.sound (29 numeric scales as exact certificates checked by `decide`, no native evaluation); recompiled independently by the orchestrator — **g(n) ≤ 12n is kernel-verified end to end**. Section 18 ('Threshold 56501/6400 and the
+  barrier at 2'; **refereed, not formalised**): eight mantissas, a level-by-level retention rule with exact knapsack budgets, prime-density
+  bounds in the window value, a cardinality-aware carrier count, 57 scales < 990415/10⁶ + tail < 1/1000 ⇒ threshold 8.828… ⇒ **g(n) ≤ 11n**;
+  and the barrier: (H_c) fails for every c < 2 (explicit: 21 primes 503–641, m = 404471, threshold 19/10 gives 21 > 20), so the route cannot
+  go below 4n. Found by GPT-6 (ChatGPT web, 'Pro', 50 minutes; `engine_transcripts/run35_pro_r19/` with `proof.md`, the author's
+  `exact_verifier.py`, the referee's `referee_checks.py`), refereed blind by a Claude Opus 5 agent (PASS-WITH-REPAIRS for the threshold —
+  two incomplete derivations repaired in the paper — and PASS for the barrier).
 * `src/gn_dp.py` — exact minimum |B| for a concrete (A, x) by dynamic programming over capped valuation vectors; reproduces
   the Erdős–Surányi lower-bound instances (l=3 → 4, l=4 → 6) and the g(4) ≥ 5, g(5) ≥ 6 instances.
 * `src/es_bound.py` — checks every numerical inequality of the explicit √-bound over a grid of (n, N), and implements

@@ -1,0 +1,12 @@
+# Harvest P33 — Erdős 708, hinge threshold below 97/10 (web ChatGPT GPT-6 Pro, 49m40s, 2026-09-07 17:47–18:37)
+
+Chat: https://chatgpt.com/c/6a9f3eaf-3c20-83ea-804f-50bc54b9963f (model "6 Pro" verified; brief engine/briefs/erdos708_r19_pro.md).
+Status: CLAIMED — proof.md (25.6 KB) and exact_verifier.py captured verbatim; verifier runs clean (verifier_output.txt); Opus blind referee running (referee_opus.md).
+
+CLAIMS:
+(A) (H_c) for c = 56501/6400 = 8.82828125 for every atom system, m ≥ 1, window ⇒ with the kernel-checked (c+2)n chain, g(n) ≤ ⌈cn⌉ + 2n ≤ 11n (my check: holds for n ≤ 200; in general ⌈cn⌉ ≤ 9n).
+    Architecture: eight mantissas 𝒟 = {1} ∪ {8..15}/2^h (ratio ρ = 9/8), a REPAIRED retention rule (η(t) = 16t/27 for t ≤ 1/8, an explicit table η(v/64) = E_v/720 for t > 1/8; exponent budget proved 2/3 by an exact knapsack over 24 minima — the naive rule η(1/2) = 1/4 is refuted by an explicit m = 2^132 example with a negative modulus > m), rounding loss D0 = 3601/1280 by an exact reward/cost knapsack (max at cost 696/720, pattern 1,1,7/16,1/4), T = 401/75, prime-density bounds π(ν)/ν ≤ 9/40, 3/20, 1/8 for ν ≥ 210, 2310, 30030 (from ϑ(x) ≤ x log 4 + sieve checks) feeding level-dependent K_θ and λ_θ = ρK_θ/(K_θ − H* − δ(θ)θ), a cardinality-aware count E_{k,d}, 57 finite scales (L ≤ 1024) < 990415/10^6, tail (L ≥ 2048, K = 41/40, λ < 50, a0 = 120347/2500000) < 1/1000, pointwise factor 198283/200000 < 1.
+(B) NEW NEGATIVE RESULT: (H_{19/10}) is FALSE — explicit: the 21 primes 503..641 (weight 1 each), m = 631·641 = 404471, window centred at ∏p (x = ∏p − 202236): LHS = 210·(2 − 19/10) = 21, RHS = 20 (only ∏p itself has two chosen prime factors in the window). I recomputed exactly (sieve): LHS 21, RHS 20 ✓. Generalisation: r primes in [M, √2 M), window centred at their product ⇒ L = C(r,2)(2 − c), R = r − 1 ⇒ (H_c) fails whenever c < 2 − 2/r; such clusters exist for all r (Σ 1/p diverges) ⇒ EVERY absolute threshold c < 2 fails. Consequence: the hinge/LP route cannot go below threshold 2, i.e. below (2+2)n = 4n via the (c+2)n chain — Erdős's 2n cannot be reached by this route as formulated; (H_2) itself is not refuted (consistent with the conditional 18n / now 4n).
+(C) Not claimed: (H_7), (H_6), counterexamples to (H_2), (H_3). Exhaustive finite search: 81 half-weight systems on {2,3,5,7}, m ≤ 420, all windows: no (H_2)/(H_3) counterexample.
+
+My exact rechecks: D0 + ρT = 56501/6400 ✓; 990415/10^6 + 1/1000 = 198283/200000 < 1 ✓; Lemma 10 instance ✓ (see above).

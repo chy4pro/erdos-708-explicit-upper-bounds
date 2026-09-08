@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "attempted_jobs": 93,
+  "distinct_instances": 85,
+  "maximum_normalized_raw_gap": "99/100",
+  "all_distinct_optima_settled": true,
+  "rational_LP_certificates_checked": 80,
+  "R3_exact_checks": 13,
+  "spike_or_repair_optimality_rechecked": 29,
+  "other_DP_records_with_verified_covers": 46,
+  "source_sha256": {
+    "engine/briefs/erdos708_rounding_astra.md": "03fcb173e10c6c57d3b86f5a7bf3aa2556754c85b42a6eac2aae3396f3356ac4",
+    "papers/erdos708/main.tex": "23e05dd3e74a9084dddb0bf2d8e8ed63e26562556a20f6967643e40ad87565f5",
+    "papers/erdos708/sec_h17.tex": "e9aef00ea9d36015d4a51ad67b5ea2bdde2c61fcd4e75154b68e907eab798e37",
+    "problems/erdos708/repo/src/gn_dp.py": "3b50c533211bd949255dbbea8f86f1065b856fe8cf02a1e5af05a9f22066153a",
+    "engine/harvest/astra_708_2n.md": "9dfba64f8ed2c75923ef57f4f8f4bbde1a747b1920d91d4aa79d874e84c672ee",
+    "engine/out/astra_708_2n/refutation_search.py": "50b99e008d1b9541c6c67db7df2ef779301d666fb815ac33c441a7256db4f9ee"
+  }
+}

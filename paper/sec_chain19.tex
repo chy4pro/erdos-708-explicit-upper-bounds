@@ -1,0 +1,124 @@
+\section{The rounding cost revisited: $g(n)\le19n$}\label{sec:chain19}
+
+The reductions of Sections~\ref{sec:linear}, \ref{sec:signed} and~\ref{sec:h17} pay $16n$ for the passage from the
+fractional cover to an integral one (Lemmas~\ref{lem:round} and~\ref{lem:fewprimes}); with the threshold $17$ this
+rounding cost exceeds the threshold term itself. The bound $|\mathcal P|<16n$ of Lemma~\ref{lem:fewprimes} is crude:
+an input $a\le m$ has at most one prime factor exceeding $\sqrt m$, so all but $\pi(\sqrt m)$ of the primes of
+$\mathcal P$ are ``large'' and there are at most $n$ of those. Combined with the $k$-split theorem for $k=3$, which
+disposes of $m\ge9n^2$ outright, this replaces the cost $16n$ by $2n$. We state the reduction for an arbitrary
+real threshold.
+
+\begin{theorem}[the $(c+2)n$ reduction]\label{thm:chain19}
+Let $c\ge1$ be real and suppose that for every atom system, every $m\ge1$ and every window $I$ of $m$ consecutive
+positive integers
+\begin{equation}\label{eq:Hc}
+\sum_{k\le m}\bigl(S(k)-c\bigr)^+\ \le\ \sum_{b\in I}\bigl(S(b)-1\bigr)^+ .
+\end{equation}
+Then $g(A,x)\le\lceil cn\rceil+2n$ for every $A$ with $|A|=n$ and every $x\ge0$; in particular $g(n)\le(c+2)n+1$,
+and $g(n)\le(c+2)n$ whenever $cn$ is an integer.
+\end{theorem}
+
+\begin{corollary}\label{cor:19n}
+$g(n)\le19n$ for every $n\ge1$.
+\end{corollary}
+\begin{proof}
+Theorem~\ref{thm:h17} is \eqref{eq:Hc} with $c=17$.
+\end{proof}
+
+The proof of Theorem~\ref{thm:chain19} uses three elementary lemmas. As before, $m=a_n$, $I=\{x+1,\dots,x+m\}$,
+$\mathcal P$ is the set of primes dividing $\prod A$, and $\tau^*=\tau^*(A,x)$ is the value of the linear
+programme~\eqref{eq:LP}.
+
+\begin{lemma}[counting the primes]\label{lem:primecount}
+$|\mathcal P|\le n+\pi(\sqrt m)$.
+\end{lemma}
+\begin{proof}
+If $p\in\mathcal P$ and $p>\sqrt m$, choose $a\in A$ with $p\mid a$. Two distinct primes exceeding $\sqrt m$ cannot
+both divide $a\le m$, since their product exceeds $m$; so $a$ determines $p$, and the primes of $\mathcal P$ exceeding
+$\sqrt m$ number at most $|A|=n$. The remaining primes of $\mathcal P$ are at most $\sqrt m$.
+\end{proof}
+
+\begin{lemma}[strict rounding]\label{lem:strictround}
+There is a set $B\subseteq I$ with $\prod A\mid\prod B$ and $|B|<\tau^*+|\mathcal P|$.
+\end{lemma}
+\begin{proof}
+Let $y^*$ be an optimal vertex of~\eqref{eq:LP} and $B=\{b:y^*_b>0\}$ as in Lemma~\ref{lem:round}; then
+$\prod A\mid\prod B$. Let $F=\{b:0<y^*_b<1\}$, so that $|F|\le|\mathcal P|$ by the vertex argument of
+Lemma~\ref{lem:round}. Then
+\[
+|B|-\tau^*=\#\{b:y^*_b=1\}+|F|-\Bigl(\#\{b:y^*_b=1\}+\sum_{b\in F}y^*_b\Bigr)=\sum_{b\in F}(1-y^*_b),
+\]
+which is $<|F|\le|\mathcal P|$ if $F\ne\emptyset$ and equals $0<|\mathcal P|$ if $F=\emptyset$ (note
+$|\mathcal P|\ge1$ because every $a\in A$ exceeds $1$).
+\end{proof}
+
+\begin{lemma}[primes up to $3n$]\label{lem:pi3n}
+$\pi(3n)\le n+1$ for every $n\ge1$.
+\end{lemma}
+\begin{proof}
+Exactly $n$ of the integers in $[1,3n]$ are coprime to $6$: each block of six consecutive integers contains two of them, and
+for odd $n$ the final half-block $\{3n-2,3n-1,3n\}$ contains exactly one, namely $3n-2$. Every prime other than $2$
+and $3$ is among these $n$ integers, and so is $1$, which is not prime. Hence $\pi(3n)\le(n-1)+2$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:chain19}]
+If $m\ge9n^2$, Theorem~\ref{thm:ksplit} with $k=3$ gives a cover of size at most $3n\le\lceil cn\rceil+2n$.
+Otherwise $\sqrt m<3n$, so $|\mathcal P|\le n+\pi(3n)\le2n+1$ by Lemmas~\ref{lem:primecount} and~\ref{lem:pi3n}.
+As in the proof of Theorem~\ref{thm:cond} (with $c$ in place of $2$), \eqref{eq:Hc} applied to the maximiser $z$ of
+Lemma~\ref{lem:dual} gives $\tau^*\le cn$: indeed $\sum_{a\in A}w_z(a)\le cn+\sum_{k\le m}(w_z(k)-c)^+\le
+cn+\sum_{b\in I}(w_z(b)-1)^+$, and the left side minus the last sum is the dual objective, which equals $\tau^*$.
+Lemma~\ref{lem:strictround} now gives an integer $|B|<cn+2n+1$, i.e.\ $|B|\le\lceil cn\rceil+2n$.
+\end{proof}
+
+\begin{theorem}[asymptotic refinement]\label{thm:18n}
+$g(n)\le18n+\pi\bigl((18n)^{19/34}\bigr)-1=18n+O\bigl(n^{19/34}/\ln n\bigr)$ for every $n\ge1$.
+\end{theorem}
+\begin{proof}
+Theorem~\ref{thm:ksplit} with $k=18$: if $m^{17}\ge(18n)^{19}$ then $18n$ elements suffice, and $18n$ is at most the
+displayed bound since $\pi(t)\ge1$ for $t\ge2$. Otherwise $\sqrt m<(18n)^{19/34}$, and Lemmas~\ref{lem:primecount}
+and~\ref{lem:strictround} with $\tau^*\le17n$ give $|B|<17n+n+\pi\bigl((18n)^{19/34}\bigr)$. The error term is
+$O(t/\ln t)$ with $t=(18n)^{19/34}$ by Chebyshev's bound.
+\end{proof}
+
+The coincidence with the conditional bound $18n$ of Theorem~\ref{thm:cond} is not an error: that theorem spends
+$2n$ on the threshold and $16n$ on rounding, whereas Theorem~\ref{thm:18n} spends $17n$ and $n+o(n)$.
+
+The rounding step cannot be improved to a sublinear loss for the linear programme~\eqref{eq:LP} as it stands:
+
+\begin{proposition}[the integrality gap is linear]\label{prop:gap}
+For every $n\ge1$ and every integer $K\ge2$ there is an instance $(A,x)$ with $|A|=n$, $\tau^*(A,x)=n/K$ and
+$g(A,x)=n$.
+\end{proposition}
+\begin{proof}
+Choose $n$ primes $p_1<\dots<p_n$ in an interval $[Q,\tfrac43Q)$ with $Q\ge6n$ (such an interval exists because
+$\sum1/p$ diverges while $\sum_j(n-1)(3/4)^j$ converges), and let $A=\{p_1,\dots,p_n\}$, $m=p_n$,
+$t_i=\lfloor m/2\rfloor+i$ for $i=1,\dots,n$. Then $m-p_1<t_i\le p_1$ for all $i$, because $p_1>\tfrac34m$ and
+$t_i\le m/2+n\le\tfrac56Q<p_1$. Let $x\equiv p_i^K-t_i\pmod{p_i^{K+1}}$ for all $i$ (Chinese remainder theorem).
+Then $v_{p_i}(x+t_i)=K$ exactly, and $x+t_i$ is the only multiple of $p_i$ in $I$ since $t_i-p_i\le0$ and
+$t_i+p_i>m$. Every cover must contain the $n$ elements $x+t_i$, so $g(A,x)=n$. The fractional cover $y_{x+t_i}=1/K$
+is feasible with value $n/K$, and the dual weights $z_{p_i}=1/K$ have $w_z(x+t_i)=1$ and $w_z=0$ elsewhere on $I$,
+so Lemma~\ref{lem:dual} gives $\tau^*\ge n/K$.
+\end{proof}
+
+Thus a uniform bound $g(A,x)\le\tau^*+o(n)$, or $g(A,x)\le\alpha\tau^*+C$ with fixed $\alpha,C$, is false; whether
+$g(A,x)\le\tau^*+n$ holds for every instance is open, and with Theorem~\ref{thm:h17} it would give $g(n)\le18n$.
+The instances of Proposition~\ref{prop:gap} have $g(A,x)=n\le2n$, so they do not bear on Erd\H{o}s's conjecture.
+
+\subsection*{Provenance and formalisation}
+Lemmas~\ref{lem:primecount}--\ref{lem:pi3n}, Theorems~\ref{thm:chain19} and~\ref{thm:18n} and
+Proposition~\ref{prop:gap} were found by GPT-6 Astra (OpenAI, through the codex CLI) in a fifteen-minute run on
+2026-09-07, refereed by a Claude Opus 5 subagent (verdict: no mathematical error; presentational repairs) and checked by the authors' exact-arithmetic scripts
+(the instance of Proposition~\ref{prop:gap} with $n=2$, $K=3$, $A=\{13,17\}$, $x=2274114691$ has
+$g(A,x)=2$ and $\tau^*=2/3$ by the dynamic programme and the exact dual).
+The reduction is formalised in Lean~4 (v4.34.0-rc1, Mathlib de5ce8a9) in the modules
+\texttt{Erdos708/H17/Chain19/} (\texttt{Primes}, \texttt{Rounding}, \texttt{Packing}, \texttt{Ksplit}, \texttt{Bound},
+\texttt{Results}; written by GPT-6 Astra in fourteen minutes, recompiled from scratch by the authors): the theorems
+\texttt{primes\_card\_le}, \texttt{pi\_le}, \texttt{strict\_rounding}, \texttt{ksplit3} ($k=3$ in Theorem~\ref{thm:ksplit}),
+\texttt{bound\_of\_hinge} (Theorem~\ref{thm:chain19} for real $c\ge1$) and \texttt{g\_le\_19n}, whose statement is
+literally that of \texttt{Erdos708H17.g\_le\_33n} of Section~\ref{sec:h17} with $19n$ in place of $33n$,
+depend only on the axioms \texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}:
+for every $n\ge1$, every $A\subseteq\mathbb N$ with $|A|=n$ and $\min A\ge2$, and every $x$, there is
+$B\subseteq[x+1,x+\max A]$ with $|B|\le19n$ and $\prod A\mid\prod B$. So does the conditional
+\texttt{g\_le\_12n\_of\_hinge}, which derives $g(n)\le12n$ from the hinge inequality with threshold $\tfrac{97}{10}$
+(a candidate proof of that inequality is under review at the time of writing). Theorem~\ref{thm:18n} and
+Proposition~\ref{prop:gap} are not formalised.

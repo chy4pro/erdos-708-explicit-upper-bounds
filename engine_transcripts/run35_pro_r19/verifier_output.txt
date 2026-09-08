@@ -1,0 +1,21 @@
+retention prefix maxima [v,720*budget]: [[9, 480], [10, 480], [11, 480], [12, 480], [13, 480], [14, 480], [15, 480], [16, 480], [18, 480], [20, 480], [22, 480], [24, 480], [26, 480], [28, 480], [30, 480], [32, 480], [36, 480], [40, 480], [44, 480], [48, 480], [52, 480], [56, 480], [60, 480], [64, 480]]
+rounding maximum: 3601/1280 at cost 696 /720
+prime-density finite ranges: PASS
+finite scale 8 < 48879/1000000
+finite scale 16 < 137403/250000
+finite scale 32 < 271163/1000000
+finite scale 64 < 24771/250000
+finite scale 128 < 20073/1000000
+finite scale 256 < 1577/1000000
+finite scale 512 < 13/500000
+finite scale 1024 < 1/1000000
+infinite tail < 1/1000
+discarded eta(1/2)=1/4 rule: negative-modulus assertion REFUTED
+{"P": 36561584400629760000000000000, "Pq": 173578370842962258025701703680000000000000, "m": 5444517870735015415413993718908291383296, "q": 4747561509943, "source": 1291971160146798461960847360000000000000}
+H_(19/10) REFUTED: {"L": "21", "R": "20", "m": 404471, "primes": [503, 509, 521, 523, 541, 547, 557, 563, 569, 571, 577, 587, 593, 599, 601, 607, 613, 617, 619, 631, 641], "x": 8741863184546118987302153833068330864675030899050452812141}
+EXHAUSTIVE half-weight four-prime grid: 7144200 windows; max critical threshold 5/4 record ((0, 2, 2, 2), 35, 84, 6)
+HR-type audit: [2268, 2268] pi(m)=2262 object SHA256=5c9905c4ee137dbf7ca6b789bba7f226cf84fd3aec06777c68947cd816280ab4
+reflected / centered CRT / HR carrier-window audits: PASS
+FINAL: H_56501/6400; g(n) <= ceil(56501/6400*n)+2*n <= 11*n
+Universal proof dependencies: the mathematical lemmas in the text;
+all numerical assertions above have passed exact arithmetic.

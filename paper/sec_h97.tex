@@ -1,0 +1,225 @@
+\section{Threshold $\tfrac{97}{10}$: $g(n)\le12n$}\label{sec:h97}
+
+The proof of Section~\ref{sec:h17} loses a factor $2$ and an additive $6$ in the dyadic rounding, and its
+residual hinge has the fixed order $\tfrac72$. Rounding to four mantissas per dyadic band (ratio $\tfrac54$), choosing
+the moment order separately for each carrier mass, and replacing the large-$m$ proviso by an arithmetic property of the
+hot points (a carrier's cofactor has at least four prime factors, hence is at least $210$) bring the threshold down to
+$\tfrac{97}{10}$. Through Theorem~\ref{thm:chain19} this gives $g(n)\le12n$.
+
+\begin{theorem}[threshold $\tfrac{97}{10}$]\label{thm:h97}
+For every atom system, every $m\ge1$ and every window $I$ of $m$ consecutive positive integers,
+\[
+\sum_{k\le m}\bigl(S(k)-\tfrac{97}{10}\bigr)^+\ \le\ \sum_{b\in I}\bigl(S(b)-1\bigr)^+ .
+\]
+\end{theorem}
+
+\begin{corollary}\label{cor:12n}
+$g(n)\le12n$ for every $n\ge1$.
+\end{corollary}
+\begin{proof}
+Theorem~\ref{thm:chain19} with $c=\tfrac{97}{10}$ gives $g(n)\le\lceil\tfrac{97}{10}n\rceil+2n\le10n+2n$.
+\end{proof}
+
+Fix the constants
+\[
+Q=2^{16},\quad H^*=\tfrac{1025}{1024},\quad \Gamma=\tfrac{211}{210},\quad K=\tfrac83,\quad
+\lambda=\tfrac{51}{10},\quad \rho=\tfrac54,\quad D_0=\tfrac{47}{16},\quad T=\tfrac{541}{100},
+\]
+so that $D_0+\rho T=\tfrac{97}{10}=:c$. As in Section~\ref{sec:h17}, $H(f)=\sum_{p,j}\beta_{p,j}/p^j$ for a system
+$f=\sum_pf_p$ with nonnegative prime-power increments $\beta_{p,j}$, and $e_r$ is the $r$-th elementary symmetric
+polynomial.
+
+\begin{lemma}[moments and optimised hinges]\label{lem:h97-1}
+(i) If each $f_p\le1$ then $\sum_{n\le N}e_r\bigl((f_p(n))_p\bigr)\le NH(f)^r/r!$, and pointwise domination of finite
+atom systems implies domination of $H$. (ii) Let $r\ge2$ and $a\ge r-1$ be real, $v=\lfloor ra/(r-1)\rfloor$ and
+$A_r(a)=(v-a)/\binom vr$. Then $(\sum_iu_i-a)^+\le A_r(a)\,e_r(u)$ for all finite vectors $u_i\in[0,1]$. In particular
+$(\sum_iu_i-7)^+\le e_8(u)$.
+\end{lemma}
+\begin{proof}
+(i) is Lemma~\ref{lem:h17-1}. (ii) The function $A_r(a)e_r(u)-(\sum u_i-a)^+$ is affine minus convex, hence concave,
+in each coordinate separately, so its minimum over the cube is attained at a vertex. At a vertex with $h$ ones the
+claim reads $(h-a)^+\le A_r(a)\binom hr$; for $h<r$ the left side vanishes because $h\le r-1\le a$. For $h\ge r$ put
+$g(h)=(h-a)^+/\binom hr$; where both numerators are positive, $g(h+1)\le g(h)$ if and only if $h\ge ra/(r-1)-1$, so
+$g$ is maximised at $h=v$ (a tie between adjacent integers does not affect the maximum), and $g(v)=A_r(a)$. For
+$r=8$, $a=7$ one gets $v=8$ and $A_8(7)=1$.
+\end{proof}
+
+\begin{lemma}[large atoms and the dense branch]\label{lem:h97-2}
+Let $S_0$ consist of the atoms $p^j\le m/Q$ of $S$ and $H=H(S_0)$. Then $(S(k)-c')^+=(S_0(k)-c')^+$ for all $k\le m$
+and all $c'\ge7$. If $H\ge H^*$ then Theorem~\ref{thm:h97} holds.
+\end{lemma}
+\begin{proof}
+If an omitted atom $q=p^j>m/Q$ divides $k\le m$, the cofactor $k/q<Q=65536<510510=2\cdot3\cdots17$ has at most six
+distinct prime factors, so $\omega(k)\le7$ and $S(k)\le7\le c'$, while $S_0(k)\le S(k)$; both sides are $0$. For the
+dense branch put $V=(H^*/H)S_0\le S_0$. Every retained modulus is at most $m/Q$, so
+$\sum_{k\le m}V(k)\ge(1-Q^{-1})mH^*$, and by Lemma~\ref{lem:h97-1}
+$\sum_{k\le m}\min(V(k),7)\ge m\bigl((1-Q^{-1})H^*-H^{*8}/8!\bigr)>m$ (the constant is $1.00093\ldots$). Since
+$c>7$, $\sum_{k\le m}\min(S_0(k),c)\ge m$, hence
+$\sum_{k\le m}(S_0(k)-c)^+\le\sum_{k\le m}S_0(k)-m\le\sum_{b\in I}S_0(b)-m\le\sum_{b\in I}(S(b)-1)^+$,
+using that every modulus has at least $\lfloor m/d\rfloor$ multiples in $I$.
+\end{proof}
+
+From now on $H<H^*$ and $m\ge2$ (for $m=1$ the left side of the theorem is $0$).
+
+\begin{lemma}[four-mantissa rounding, loss $\tfrac{47}{16}$]\label{lem:h97-3}
+Let $\mathcal D=\{1\}\cup\bigcup_{h\ge3}\{\tfrac4{2^h},\tfrac5{2^h},\tfrac6{2^h},\tfrac7{2^h}\}$ (adjacent levels
+have ratio at most $\tfrac54$). For $t\in\mathcal D$ let $q_p(t)$ be the least power of $p$ at which the cumulative
+$p$-part of $S_0$ reaches $t$, and retain $(p,t)$ exactly when $q_p(t)\le m^{\eta(t)}$, where $\eta(t)=\tfrac13$ for
+$t>\tfrac12$ and $\eta(t)=\tfrac{4t}9$ for $t\le\tfrac12$. Put $b_p(n)=\max(\{t:(p,t)\text{ retained},\
+q_p(t)\mid n\}\cup\{0\})$ and $B=\sum_pb_p$. Then $B\le S_0$, $H(B)\le H<H^*$, every atom of $B$ has modulus at most
+$m^{1/3}$, and for $k\le m$
+\[
+S_0(k)\le\rho B(k)+D_0,\qquad\text{hence}\qquad
+\sum_{k\le m}(S_0(k)-c)^+\le\rho L_B,\quad L_B:=\sum_{k\le m}(B(k)-T)^+ .
+\]
+\end{lemma}
+\begin{proof}
+Only finitely many levels are retained ($t\le\tfrac12$ and $q_p(t)\ge2$ force $t\ge9\ln2/(4\ln m)$), $b_p$ is
+nondecreasing in the valuation, and $b_p\le S_{0,p}$ by construction. Fix $k\le m$ and $f_p=S_{0,p}(k)>0$; round $f_p$
+down to the largest level $t_p\le f_p$, so $f_p\le\tfrac54t_p$. Since the cumulative $p$-part reaches $t_p$ at
+$p^{\vp_p(k)}$, $q_p(t_p)\le p^{\vp_p(k)}$, so $q_p(t_p)\mid k$. If $(p,t_p)$ is retained then $b_p(k)\ge t_p$ and
+$f_p-\rho b_p(k)\le0$. Otherwise $p^{\vp_p(k)}\ge q_p(t_p)>m^{\eta(t_p)}$, so $a_p:=\vp_p(k)\ln p/\ln m>\eta(t_p)$,
+where $\sum_pa_p\le1$. If $t_p>\tfrac12$ then $a_p>\tfrac13$ and $f_p\le1$; there are at most two such primes, say
+$h\in\{0,1,2\}$. For every other unretained level $t_p<\tfrac94a_p$ and $f_p<\tfrac{45}{16}a_p$. Hence
+$S_0(k)-\rho B(k)\le h+\tfrac{45}{16}(1-\tfrac h3)\le\tfrac{47}{16}$. Finally $c-D_0=\rho T$, so
+$(S_0(k)-c)^+\le\rho(B(k)-T)^+$.
+\end{proof}
+
+\begin{lemma}[carriers; no small-$m$ exception]\label{lem:h97-4}
+Call $k\le m$ hot if $B(k)>T$. Order its positive levels $b_p(k)$ nonincreasingly (ties by the prime) and let the
+carrier $C$ be the shortest prefix of mass $>1$, recording primes, levels $t_p$ and moduli $q_p(t_p)$; put
+$s_C=\sum_{p\in C}t_p$, $\theta_C=\min_{p\in C}t_p$, $P_C=\prod_{p\in C}q_p(t_p)$. Then $1<s_C\le1+\theta_C\le2$,
+every level of $k$ outside $C$ is at most $\theta_C$, $P_C\le m^{2/3}$, and $P_Cq\le m$ for every atom $q$ of $B$.
+With $M_C=\sum_{k\le m,\ \mathrm{carrier}(k)=C}(B(k)-T)$, $\nu_C=\lfloor m/P_C\rfloor$ and $c_C=M_C/\nu_C$ (carriers
+with $M_C>0$ only): $\sum_CM_C=L_B$, $\nu_C\ge210$ and $m/(P_C\nu_C)<1+1/\nu_C\le\Gamma$.
+\end{lemma}
+\begin{proof}
+The mass bounds are those of Lemma~\ref{lem:h17-5}. Exponent budget: if $\theta_C>\tfrac12$ the carrier has exactly
+two primes with budget $\tfrac13$ each. If no level exceeds $\tfrac12$, the budget is
+$\tfrac49s_C\le\tfrac49(1+\theta_C)\le\tfrac23$. Otherwise there is exactly one level $a\ge\tfrac58$; if
+$\theta_C\le\tfrac38$ the remaining mass is at most $1+\tfrac38-\tfrac58=\tfrac34$ and the budget at most
+$\tfrac13+\tfrac49\cdot\tfrac34=\tfrac23$; if $\tfrac38<\theta_C\le\tfrac12$ every other level is at least
+$\tfrac7{16}$, and $\tfrac58+\tfrac7{16}>1$ leaves room for exactly one, with budget at most
+$\tfrac13+\tfrac29<\tfrac23$. Thus $P_C\le m^{2/3}$, and $q\le m^{1/3}$ gives $P_Cq\le m$. At a source point $k$ of
+$C$ the mass outside $C$ exceeds $T-s_C\ge T-2=\tfrac{341}{100}>3$, and each prime contributes $b_p\le1$, so at least
+four distinct primes outside $C$ divide $k/P_C$; hence $k/P_C\ge2\cdot3\cdot5\cdot7=210$, and
+$\nu_C\ge k/P_C\ge210$ because $P_C\mid k\le m$.
+\end{proof}
+
+\begin{lemma}[mass-dependent coefficients]\label{lem:h97-5}
+With $\theta=\theta_C$, $s=s_C$ and $a=(T-s)/\theta$,
+\[
+c_C\le\epsilon_{\theta,s}:=\min_{2\le r\le\lfloor a\rfloor+1}\ \theta A_r(a)\frac{(H^*/\theta)^r}{r!} .
+\]
+\end{lemma}
+\begin{proof}
+Write a source point as $k=P_Cu$ with $u\le\nu_C$. Outside $C$ the valuations of $k$ and $u$ agree and the levels
+are at most $\theta$, so $M_C\le\sum_{u\le\nu_C}\bigl(\sum_{p\notin C}\min(b_p(u),\theta)-(T-s)\bigr)^+$. Divide the
+capped functions by $\theta$ (each $p$-part is then at most $1$, and the mean is at most $H^*/\theta$) and apply
+Lemma~\ref{lem:h97-1}(ii) then (i); divide by $\nu_C$. No floor loss occurs here: the sum runs over the actual integers
+$u\le\nu_C$.
+\end{proof}
+
+\begin{lemma}[the certificate and the counting reduction]\label{lem:h97-6}
+Put $U_C(n)=\sum_{p\notin C}\min(b_p(n),\theta_C)$ and
+\[
+F(n)=\lambda\sum_Cc_C\,[P_C\mid n]\Bigl(1-\frac{U_C(n)}K\Bigr),
+\]
+a finite signed atom family whose negative moduli $P_Cq$ are all at most $m$. Write a level $\theta\ne1$ uniquely as
+$j/L$ with $j\in\{4,5,6,7\}$, $L\in\{8,16,\dots\}$, and $1$ as $(j,L)=(4,4)$; let
+$G_{j,L}(X)=1+\sum_{t\in\mathcal D,\,t\ge j/L}X^{Lt}$ and $D_{j,L,d}(N)=[X^{L+d}]\bigl(G_{j,L}(X)^N-(G_{j,L}(X)-X^j)^N\bigr)$,
+and
+\[
+A_{j,L}=\max_{0\le N\le\lfloor(K+1)L/j+1\rfloor}\ \sum_{d=1}^{j}D_{j,L,d}(N)\,\epsilon_{j/L,\,1+d/L}\,
+\frac{\bigl(1-\max(0,N\theta-1-d/L)/K\bigr)^+}{\max(d/L,\ N\theta-1)} .
+\]
+Then $F(n)\le\lambda\bigl(A_{4,4}+\sum_{L\ge8}\sum_{j=4}^7A_{j,L}\bigr)(B(n)-1)^+$ for every positive integer $n$.
+\end{lemma}
+\begin{proof}
+Every level $\ge\theta=j/L$ is a multiple of $1/L$ (a level $j'/2^{h'}$ with $2^{h'}>L$ is at most
+$7/(2L)<4/L\le\theta$), so $s=1+d/L$ with $1\le d\le j$. Fix $n$ and let $N=\#\{p:b_p(n)\ge\theta\}$. A carrier
+dividing $n$ with last level $\theta$ and mass $1+d/L$ is determined by its level assignment (the modulus $q_p(t)$
+depends only on $(p,t)$), which gives each of the $N$ primes either nothing or a level $\ge\theta$, uses $\theta$ at
+least once, and has total degree $L+d$; such assignments are counted by $D_{j,L,d}(N)$, and ignoring unavailable
+levels only enlarges the count. For such a carrier $U_C(n)\ge\theta(N-|C|)\ge N\theta-s$ and
+$B(n)-1\ge\max(s-1,N\theta-1)$. For $N>\lfloor(K+1)L/j+1\rfloor$ one has $N\theta-1-d/L>K$ and the numerator vanishes.
+Discard the negative terms of $F$, bound each $c_C$ by Lemma~\ref{lem:h97-5} and sum; if $B(n)\le1$ no carrier
+divides $n$.
+\end{proof}
+
+\begin{lemma}[the finite scales]\label{lem:h97-7}
+$A_{4,4}<\tfrac{24680}{10^6}$ and $\sum_{j=4}^7A_{j,L}<\tfrac{128711}{10^6},\tfrac{25773}{10^6},\tfrac{5665}{10^6},
+\tfrac{1025}{10^6},\tfrac{150}{10^6},\tfrac{21}{10^6},\tfrac3{10^6}$ for $L=8,16,\dots,512$; the exact sum of these
+$29$ scales lies in $[186024001631,186024001632]\cdot10^{-12}<\tfrac{187}{1000}$.
+\end{lemma}
+\begin{proof}
+Exact integer coefficient extraction in $G_{j,L}^N-(G_{j,L}-X^j)^N$ through degree $L+j$, over all admissible $N$ and
+all moment orders $r$ in Lemma~\ref{lem:h97-5}, in rational arithmetic (script \texttt{exact\_verifier.py}; the
+maximising $N$ and the chosen $r$ for every mass are recorded in \texttt{constants.json}).
+\end{proof}
+
+\begin{lemma}[the tail $L\ge1024$]\label{lem:h97-8}
+For $z>1$ and $u_i\in[0,1]$, $z^{\sum u_i}\le\prod_i(1+(z-1)u_i)$, whence, with $y^+\le z^y/(e\ln z)$ and the proof of
+Lemma~\ref{lem:h97-5}, $c_C\le\frac{\theta z}{e\ln z}\bigl(e^{(z-1)H^*}z^{1-T}\bigr)^{1/\theta}$. With $z=\tfrac92$,
+$a_0=\tfrac{4377}{100000}$ and the exact comparisons $e<\tfrac{87}{32}$, $(\tfrac{87}{32})^3<(\tfrac92)^2$,
+$e>\tfrac83$ (so $e\ln\tfrac92>4$), $e^{7H^*/2}<\tfrac{133}4$ and $(\tfrac{133}4)^{100}<a_0^{100}(\tfrac92)^{441}$,
+this gives the uniform bound $c_C\le\tfrac{9\theta}8a_0^{1/\theta}$, which may replace $\epsilon_{\theta,s}$ in
+$A_{j,L}$. Let $\mathcal G_j(x)=1+\sum_{a=j}^7x^a+\sum_{r\ge1}\sum_{a=4}^7x^{a2^r}$ and take
+$(x_4,F_4)=(\tfrac{583}{1000},\tfrac{632591}{500000})$, $(x_5,F_5)=(\tfrac{321}{500},\tfrac{159089}{125000})$,
+$(x_6,F_6)=(\tfrac{69}{100},\tfrac{1278827}{1000000})$, $(x_7,F_7)=(\tfrac{73}{100},\tfrac{639137}{500000})$; then
+$\mathcal G_j(x_j)\le F_j$, $F_j\ge\tfrac54$ and $a_0^3x_j^{-3j}F_j^{11}<1$. With $D_j=\sum_{d=1}^jx_j^{-d}$,
+$\theta=j/L$ and $h=\tfrac43$: every coefficient in $D_{j,L,d}(N)$ is at most $x_j^{-(L+d)}F_j^N$ (the exponents
+$Lt$, $t\in\mathcal D$, $t\ge j/L$, are among those of $\mathcal G_j$); for $N\theta-1\le h$ the contribution to
+$A_{j,L}$ is at most $\tfrac{9j}8D_j(\tfrac34)^{L/j}$ (using $(\tfrac45)^4<(\tfrac34)^3$), and for $N\theta-1>h$ it
+is at most $\tfrac{2187}{4096}\theta^2F_jD_j$ (maximise $wF_j^{-w/\theta}$, use $e>\tfrac83$ and
+$\ln F_j\ge\ln\tfrac54>\tfrac29$). Summing over $L=1024\cdot2^r$, $r\ge0$, with $t=(\tfrac34)^{146}$,
+\[
+\sum_{L\ge1024}\sum_{j=4}^7A_{j,L}\ \le\ \frac98\Bigl(\sum_{j=4}^7jD_j\Bigr)\frac t{1-t}
++\frac{2187}{4096}\cdot\frac4{3\cdot1024^2}\sum_{j=4}^7j^2F_jD_j\ <\ \frac3{1000}.
+\]
+Consequently $F(n)\le\tfrac{51}{10}\cdot\tfrac{19}{100}(B(n)-1)^+=\tfrac{969}{1000}(B(n)-1)^+\le(S(n)-1)^+$.
+\end{lemma}
+\begin{proof}
+All displayed comparisons are exact rational inequalities checked by the verifier; the exact tail bound is in
+$[2846921822,2846921823]\cdot10^{-12}$. The last inequality uses $B\le S_0\le S$.
+\end{proof}
+
+\begin{lemma}[value on the window]\label{lem:h97-9}
+$\sum_{b\in I}F(b)\ge\lambda(1-2\Gamma H^*/K)L_B=\tfrac{718539}{573440}L_B>\tfrac54L_B$.
+\end{lemma}
+\begin{proof}
+$N_I(P_C)\ge\nu_C$; each negative modulus $P_Cq\le m$ has $N_I(P_Cq)\le m/(P_Cq)+1\le2m/(P_Cq)$; the increments of
+$U_C$ have mean at most $H(B)<H^*$. Hence
+$\sum_IF\ge\lambda\sum_Cc_C\bigl(\nu_C-2mH^*/(KP_C)\bigr)\ge\lambda(1-2\Gamma H^*/K)\sum_CM_C$ by
+Lemma~\ref{lem:h97-4}; the excess over $\tfrac54$ is $\tfrac{1739}{573440}$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:h97}]
+By Lemmas~\ref{lem:h97-2}, \ref{lem:h97-3}, \ref{lem:h97-9} and~\ref{lem:h97-8},
+\[
+\sum_{k\le m}(S(k)-c)^+=\sum_{k\le m}(S_0(k)-c)^+\le\tfrac54L_B\le\sum_{b\in I}F(b)
+\le\tfrac{969}{1000}\sum_{b\in I}(B(b)-1)^+\le\sum_{b\in I}(S(b)-1)^+ .
+\]
+If there are no hot points, $L_B=0$ and Lemma~\ref{lem:h97-3} suffices; the dense case is Lemma~\ref{lem:h97-2}.
+\end{proof}
+
+\subsection*{Provenance, verification and formalisation}
+The proof of this section was found by GPT-6 (web interface, effort ``Pro'') in a $45$-minute run from the
+statements of Section~\ref{sec:h17} and the four structural levers listed in the brief; it was refereed blind by a
+Claude Opus 5 agent, which recomputed all $29$ finite scales and the tail from the definitions in exact rational
+arithmetic (agreeing with the author's \texttt{constants.json} exactly), validated $D_{j,L,d}$ against brute-force
+enumeration, enumerated the $14176$ admissible carrier level multisets (maximal exponent budget exactly $\tfrac23$),
+and stress-tested Lemmas~\ref{lem:h97-3}--\ref{lem:h97-4} on synthetic atom systems at $m\approx10^{18}$--$10^{20}$
+without finding a violation. The overall slack is $3.9\%$; the tightest steps are $(\tfrac{133}4)/(\tfrac92)^{4.41}<a_0$
+($0.012\%$), $a_0^3x_6^{-18}F_6^{11}<1$ ($0.19\%$) and the window excess ($0.24\%$); none of them may be re-derived
+in floating point. The reduction from Theorem~\ref{thm:h97} to $g(n)\le12n$ is kernel-checked
+(\texttt{Erdos708H17Chain.Chain19.g\_le\_12n\_of\_hinge}, Section~\ref{sec:chain19}). Theorem~\ref{thm:h97} itself is formalised in Lean~4 (v4.34.0-rc1, Mathlib de5ce8a9) in the $108$ modules of
+\texttt{lean/Erdos708/H97}, written by GPT-6 Astra in a single-agent session of $3$~h~$42$~min: the nine lemmas as statement
+cards with separate proof modules, the $29$ finite scales of Lemma~\ref{lem:h97-7} as exact coefficient certificates
+(the large scales encoded as natural-number digits with a proved carry bound and checked by \texttt{decide} only; no
+native evaluation), the tail of Lemma~\ref{lem:h97-8} with all its rational and logarithmic constants, and the six
+referee clarifications. The theorems \texttt{Erdos708H97.hinge97} (Theorem~\ref{thm:h97}) and
+\texttt{Erdos708H97.g\_le\_12n} (Corollary~\ref{cor:12n}, obtained by feeding \texttt{hinge97} into the
+kernel-checked chain of Section~\ref{sec:chain19}) depend only on \texttt{propext}, \texttt{Classical.choice} and
+\texttt{Quot.sound}; the whole development was recompiled from scratch by the orchestrating agent. Thus $g(n)\le12n$
+is verified end to end.

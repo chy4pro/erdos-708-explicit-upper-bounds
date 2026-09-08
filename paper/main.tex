@@ -21,7 +21,7 @@
 automated systems inside an autonomous research pipeline: the proofs of Theorems~\ref{thm:log} and \ref{thm:sqrt} were found in two independent runs
 of OpenAI GPT-5.6 at ``Pro'' effort through the web interface (26 and 90 minutes of reasoning respectively,
 on 2026-09-03) and the proofs of Theorems~\ref{thm:long} and \ref{thm:ksplit} by Qwen3.8-Max (Alibaba) through its web
-interface in two runs on 2026-09-03/04, all working from briefs written by an orchestrating agent (Claude Fable 5.1, Anthropic) that
+interface in two runs on 2026-09-03/04, all working from briefs written by an orchestrating agent (Claude Fable 5.1 through 2026-09-07 and Claude Opus 5 from 2026-09-08, both Anthropic) that
 selected the problem, pinned the statement to Erd\H{o}s's 1992 text, verified the lower-bound construction
 by exact computation, re-derived every step of both proofs, commissioned independent referee runs
 (Claude Opus 5 agents in fresh contexts, which also brute-forced the lemmas on hundreds of thousands of
@@ -31,12 +31,16 @@ self-checked by exact arithmetic, re-derived line by line by the orchestrator, a
 (hinge, counting and value lemmas brute-forced on hundreds of instances). The Lean formalisation described at the end of
 Section~\ref{sec:signed} was likewise written by GPT-6 Astra from the paper's statements and checked by the orchestrator. The threshold-$17$ proof of
 Section~\ref{sec:h17} was found by GPT-6 through the ChatGPT web interface at ``Pro'' effort (34 minutes), refereed by a Claude Opus 5
-agent, and formalised by GPT-6 Astra. The four constructions were implemented and exercised on more than
+agent, and formalised by GPT-6 Astra. The rounding-cost reduction of Section~\ref{sec:chain19} was found by GPT-6 Astra (15 minutes) and
+formalised by it (14 minutes); the threshold-$\tfrac{97}{10}$ proof of Section~\ref{sec:h97} was found by GPT-6 (web interface, ``Pro'',
+45 minutes) and refereed by a Claude Opus 5 agent with an independent exact recomputation of every constant; it was formalised by GPT-6 Astra ($108$ modules). The threshold-$\tfrac{56501}{6400}$ proof and the barrier of
+Section~\ref{sec:h883} were found by GPT-6 (web interface, ``Pro'', 50 minutes) and refereed by a Claude Opus 5 agent; they are not
+formalised. The four constructions were implemented and exercised on more than
 seven million random instances, and every numerical inequality in
 the explicit parameter choices was checked by machine (scripts in the accompanying repository). No human
 supplied a definition, a lemma, a proof idea, or a correction. The problem itself remains open: the
 conjectured bound $g(n)\le 2n$ is not proved here.}}
-\date{September 7, 2026 (v13; v1: September 3, v2--v10: September 4--5, v11--v12: September 7)}
+\date{September 8, 2026 (v14; v1: September 3, v2--v10: September 4--5, v11--v13: September 7)}
 
 \begin{document}
 \maketitle
@@ -58,7 +62,7 @@ weighted prime-factor counts on intervals; we prove it for 0/1 weights with the 
 explicit counting certificates; for fractional weights we prove it with threshold $65$ whenever the small-modulus part of the weight has
 mean at least $\tfrac{17}{16}$, which reduces a linear bound $g(n)\le81n$ to a ``sparse core'' statement; we prove that statement for all $m$ by a signed divisor
 certificate (dyadic rounding of the weights, prefix carriers of mass between $2$ and $4$, and a capped-mass count of the carriers through a
-point), so that $g(n)\le81n$ for all $n$, and, with tightened constants, the threshold $17$, so that $g(n)\le33n$ for all $n$; the two-sided interval counts alone cannot prove it, and the certificate's value bound uses one
+point), so that $g(n)\le81n$ for all $n$, and, with tightened constants, the threshold $17$; a sharper count of the primes in the rounding step then gives $g(n)\le19n$ for all $n$ (and $18n+o(n)$), and a four-mantissa rounding with mass-dependent moment orders brings the threshold to $\tfrac{97}{10}$, so that $g(n)\le12n$ for all $n$ (all of this verified in Lean~4); a further refinement, refereed but not formalised, gives the threshold $\tfrac{56501}{6400}$ and $g(n)\le11n$, while an explicit family shows that no threshold below $2$ holds, so this route cannot give less than $4n$; the two-sided interval counts alone cannot prove it, and the certificate's value bound uses one
 further arithmetic input, a factorial-moment bound. The proofs of both linear bounds (Sections~5, 7, 13, 14 and 15) have been formalised in
 Lean~4 and checked by the kernel: the final theorems depend only on the three standard axioms. We also show that the conjectured bound holds for long
 intervals: if $a_n\ge 8n^3$ then $2n$ integers always suffice, so Erd\H{o}s's question is reduced to the
@@ -159,7 +163,11 @@ $g(n)\le81n$ follows from a ``sparse core'' statement (Corollary~\ref{cor:sparse
 cannot prove it (Proposition~\ref{prop:fano}), prove it for $m\le10^{2887}$ by a nonnegative certificate (Theorem~\ref{thm:shadow},
 Corollary~\ref{cor:2887}), and finally, in Section~\ref{sec:signed}, prove it for all $m$ by a certificate with coefficients of both signs
 (Theorem~\ref{thm:signed}), which gives $g(n)\le81n$ for all $n$ (Theorem~\ref{thm:81}); Section~\ref{sec:h17} tightens the
-constants to the threshold $17$, giving $g(n)\le33n$ (Theorem~\ref{thm:h17}).
+constants to the threshold $17$, giving $g(n)\le33n$ (Theorem~\ref{thm:h17}); Section~\ref{sec:chain19} replaces the rounding cost $16n$ by
+$2n$ (the primes dividing $\prod A$ number at most $n+\pi(\sqrt{a_n})$, and the $k$-split with $k=3$ removes $a_n\ge9n^2$), giving
+$g(n)\le19n$ and $18n+o(n)$ (Corollary~\ref{cor:19n}, Theorem~\ref{thm:18n}); Section~\ref{sec:h97} proves the threshold $\tfrac{97}{10}$,
+giving $g(n)\le12n$ (Corollary~\ref{cor:12n}); Section~\ref{sec:h883} (refereed, not formalised) reaches $\tfrac{56501}{6400}$ and
+$g(n)\le11n$ (Corollary~\ref{cor:11n}), and shows that no threshold below $2$ holds (Proposition~\ref{prop:barrier}).
 
 \section{The common construction}\label{sec:construction}
 
@@ -1399,6 +1407,12 @@ removes the restriction on $m$ with a certificate whose coefficients have both s
 \input{sec_signed}
 
 \input{sec_h17}
+
+\input{sec_chain19}
+
+\input{sec_h97}
+
+\input{sec_h883}
 
 \begin{thebibliography}{9}
 \bibitem{ES59} P.~Erd\H{o}s and J.~Sur\'anyi, Megjegyz\'esek egy versenyfeladathoz (Remarks on a problem of a

@@ -1,0 +1,2 @@
+Replaying 27247 H97 kernel declarations; 1 compiler execution helpers excluded by Lean.Replay
+PASS: 27247 H97 declarations kernel-replayed, including hinge97 and g_le_12n

@@ -1,0 +1,7 @@
+Cards.lean: exit 0, 15.17 seconds
+Primes.lean: exit 0, 2.39 seconds
+Rounding.lean: exit 0, 2.93 seconds
+Packing.lean: exit 0, 3.65 seconds
+Ksplit.lean: exit 0, 3.20 seconds
+Bound.lean: exit 0, 2.94 seconds
+Results.lean: exit 0, 4.38 seconds

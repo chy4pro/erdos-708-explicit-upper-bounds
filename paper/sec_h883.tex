@@ -1,0 +1,198 @@
+\section{Threshold $\tfrac{56501}{6400}$ and the barrier at $2$}\label{sec:h883}
+
+Eight mantissas per dyadic band instead of four, a retention rule tuned level by level, prime-density estimates in
+the window value, and a count of carriers that keeps track of their cardinality bring the threshold of
+Section~\ref{sec:h97} down to $\tfrac{56501}{6400}=8.828\ldots$, hence $g(n)\le11n$. The same run also produced an
+explicit window on which the hinge inequality with threshold $\tfrac{19}{10}$ fails, and a family showing that
+\emph{no} absolute threshold below $2$ can hold; so the route of Sections~\ref{sec:linear}--\ref{sec:h97} cannot,
+as it stands, give a bound below $4n$. Unlike Sections~\ref{sec:chain19} and~\ref{sec:h97}, the results of this
+section have been refereed and verified in exact arithmetic but \emph{not} formalised (see the end of the section).
+
+\begin{theorem}[threshold $\tfrac{56501}{6400}$]\label{thm:h883}
+For every atom system, every $m\ge1$ and every window $I$ of $m$ consecutive positive integers,
+$\sum_{k\le m}\bigl(S(k)-\tfrac{56501}{6400}\bigr)^+\le\sum_{b\in I}\bigl(S(b)-1\bigr)^+$.
+\end{theorem}
+
+\begin{corollary}\label{cor:11n}
+$g(n)\le11n$ for every $n\ge1$.
+\end{corollary}
+\begin{proof}
+Theorem~\ref{thm:chain19} with $c=\tfrac{56501}{6400}<9$ gives $g(n)\le\lceil cn\rceil+2n\le9n+2n$.
+\end{proof}
+
+Throughout, $Q=2^{16}$, $H^*=\tfrac{1025}{1024}$, $\rho=\tfrac98$, $T=\tfrac{401}{75}$, $D_0=\tfrac{3601}{1280}$,
+so that $c:=D_0+\rho T=\tfrac{56501}{6400}$. Lemma~\ref{lem:h97-1} is used as before, together with the exponential
+moment bound: for $z>1$ and $f_p\le1$, $\frac1N\sum_{n\le N}z^{\sum_pf_p(n)}\le\exp\bigl((z-1)H(f)\bigr)$ (from
+$z^u\le1+(z-1)u$ on $[0,1]$ and the multiple count). Lemma~\ref{lem:h97-2} (large atoms, $c\ge7$; dense branch) is
+unchanged, so we assume $H(S_0)<H^*$ and $m\ge2$.
+
+\begin{lemma}[eight-mantissa retention]\label{lem:h883-3}
+Let $\mathcal D=\{1\}\cup\{j/2^h:8\le j\le15,\ h\ge4\}$ (adjacent ratio at most $\tfrac98$). Put
+$\eta(t)=\tfrac{16t}{27}$ for $t\le\tfrac18$ and, for $t=v/64>\tfrac18$, $\eta(t)=E_v/720$ with
+\[
+E_{9,10}=60,\ E_{11}=71,\ E_{12}=72,\ E_{13}=76,\ E_{14}=80,\ E_{15}=88,\ E_{16}=96,\
+E_{18,20,\dots,28}=120,\ E_{30,32}=160,\ E_{36,40,\dots,64}=240 .
+\]
+Retain $(p,t)$ iff $q_p(t)\le m^{\eta(t)}$, and define $b_p$, $B$ as in Lemma~\ref{lem:h97-3}. Then $B\le S_0$,
+$H(B)\le H(S_0)$, every atom of $B$ has modulus at most $m^{1/3}$, and every shortest nonincreasing prefix of levels of
+mass $>1$ has $P_C\le m^{2/3}$; hence every negative modulus $P_Cq$ below is at most $m$.
+\end{lemma}
+\begin{proof}
+$\eta\le\tfrac13$ and $\eta(t)\le\tfrac{16t}{27}$ at every level. If the last (smallest) level $\theta$ of the prefix is
+at most $\tfrac18$, the budget is at most $\tfrac{16}{27}s\le\tfrac{16}{27}\cdot\tfrac98=\tfrac23$. Otherwise all
+levels are multiples of $\tfrac1{64}$; removing the last level $v/64$ leaves a mass $w/64$ with $65-v\le w\le64$, and
+the exact knapsack $D_v(w)=\max_{u\ge v,\,u\le w}\bigl(D_v(w-u)+E_u\bigr)$ over multisets of levels $\ge v$ gives
+$\max_{65-v\le w\le64}\bigl(D_v(w)+E_v\bigr)=480$ for each of the $24$ possible $v$; $480/720=\tfrac23$.
+\end{proof}
+
+\begin{lemma}[rounding loss $\tfrac{3601}{1280}$]\label{lem:h883-4}
+$S_0(k)\le\rho B(k)+D_0$ for $k\le m$; hence $\sum_{k\le m}(S_0(k)-c)^+\le\rho L_B$ with
+$L_B=\sum_{k\le m}(B(k)-T)^+$.
+\end{lemma}
+\begin{proof}
+As in Lemma~\ref{lem:h97-3}, a prime with positive error has its rounded level $t_p$ unretained, so
+$a_p=\vp_p(k)\ln p/\ln m>\eta(t_p)$ with $\sum_pa_p\le1$, and the error is at most the successor level of $t_p$
+(at most $1$ at the top). For $t_p\le\tfrac18$ the error is at most $\rho t_p=\tfrac{243}{128}\eta(t_p)$. For the
+larger levels the cost $720\eta(t_p)=E_v$ is an integer and the reward (successor level in units of $\tfrac1{64}$) is
+$r_v$; the strict inequality forces total large-level cost at most $719$. The exact knapsack
+$R(w)=\max_{E_v\le w}\bigl(R(w-E_v)+r_v\bigr)$ gives $\max_{w\le719}\bigl(1440R(w)+243(720-w)\bigr)=259272$,
+attained at $w=696$, $R=176$ (levels $1,1,\tfrac7{16},\tfrac14$), and $259272/92160=\tfrac{3601}{1280}$.
+\end{proof}
+
+\begin{lemma}[carriers and coefficients]\label{lem:h883-5}
+Define carriers, $\theta_C$, $s_C$, $P_C$, $\nu_C$, $M_C$, $c_C$ and $U_C$ as in Lemmas~\ref{lem:h97-4}--\ref{lem:h97-6}
+(carriers with $M_C>0$ only; $\sum_CM_C=L_B$; at a source point every level outside $C$ is at most $\theta_C$). With
+$a=(T-s_C)/\theta_C$, $c_C\le\epsilon_{\theta_C,s_C}:=\min_{2\le r\le\lfloor a\rfloor+1}\theta A_r(a)(H^*/\theta)^r/r!$.
+\end{lemma}
+\begin{proof}
+Lemma~\ref{lem:h97-5}.
+\end{proof}
+
+\begin{lemma}[prime density and the value on the window]\label{lem:h883-6}
+$\pi(\nu)/\nu\le\tfrac9{40},\tfrac3{20},\tfrac18$ for $\nu\ge210,2310,30030$ respectively. Let
+$\delta(\theta)=\tfrac9{40}$ for $\theta\ge\tfrac78$, $\tfrac3{20}$ for $\tfrac34\le\theta<\tfrac78$, $\tfrac18$ for
+$\theta<\tfrac34$; then $\pi(\nu_C)/\nu_C\le\delta(\theta_C)$ for every carrier. For $K_\theta>H^*+\delta(\theta)\theta$
+put $\lambda_\theta=\rho K_\theta/(K_\theta-H^*-\delta(\theta)\theta)$ and
+$F(n)=\sum_C\lambda_{\theta_C}c_C[P_C\mid n]\bigl(1-U_C(n)/K_{\theta_C}\bigr)$. Then
+$\sum_{b\in I}F(b)\ge\rho L_B$.
+\end{lemma}
+\begin{proof}
+$\vartheta(x)\le x\ln4$ (central binomial coefficients) and partial summation from $\pi(64)=18$ give
+$\pi(x)\ln x/x<\tfrac{17}{10}$ for $x\ge32768$; below that, sieve checks on $[210,32768)$, $[2310,2^{17})$,
+$[30030,2^{21})$ give the three bounds (the ratio decreases between primes). At a source point $k$ of $C$ the mass
+outside $C$ exceeds $T-s_C\ge T-1-\theta_C$, and every outside level lies in $\mathcal D$ and is at most $\theta_C$
+(Lemma~\ref{lem:h883-5}). If $\theta_C\ge\tfrac78$ the outside mass exceeds $\tfrac{401}{75}-2>3$ with each prime
+contributing at most $1$: at least four outside primes. If $\tfrac34\le\theta_C<\tfrac78$, the outside levels are at
+most $\tfrac{13}{16}$ (the largest level of $\mathcal D$ below $\tfrac78$) and the mass exceeds
+$\tfrac{401}{75}-1-\tfrac{13}{16}>3.53>4\cdot\tfrac{13}{16}$: at least five. If $\theta_C<\tfrac34$, the levels are at
+most $\tfrac{11}{16}$ and the mass exceeds $\tfrac{401}{75}-1-\tfrac{11}{16}>3.66>5\cdot\tfrac{11}{16}$: at least six.
+Hence $k/P_C\ge210,2310,30030$ and $\nu_C\ge k/P_C$. For the value: $N_I(P_C)\ge\nu_C$; every atom $q$ of $U_C$ has
+$P_Cq\le m$, so $N_I(P_Cq)\le\lfloor\nu_C/q\rfloor+1$; the primes of these atoms are at most $\nu_C$ and each carries
+total weight at most $\theta_C$, so $\sum_{b\in I}[P_C\mid b]\,U_C(b)\le\nu_CH^*+\theta_C\pi(\nu_C)$. Therefore
+$\sum_I\lambda_{\theta_C}c_C[P_C\mid b](1-U_C(b)/K_{\theta_C})\ge\lambda_{\theta_C}c_C\nu_C
+(1-(H^*+\delta\theta_C)/K_{\theta_C})=\rho M_C$; sum over $C$.
+\end{proof}
+
+\begin{lemma}[pointwise feasibility]\label{lem:h883-7}
+Write a level as $\theta=j/L$ ($8\le j\le15$, $L\ge16$ a power of two; level $1$ as $(8,8)$), and for $n$ let
+$N=\#\{p:b_p(n)\ge\theta\}$. A carrier of cardinality $k$, mass $1+d/L$ and minimum level $\theta$ dividing $n$
+satisfies $U_C(n)\ge(N-k)\theta$ and $B(n)-1\ge d/L+(N-k)\theta$. With
+$P_{j,L}(X)=\sum_{t\in\mathcal D,\,t\ge j/L}X^{Lt}$ and
+$E_{k,d}=[X^{L+d}]\bigl(P_{j,L}^k-(P_{j,L}-X^j)^k\bigr)$, the number of such carriers is at most $\binom NkE_{k,d}$, and
+\[
+A_\theta=\max_{N\le\lfloor K_\theta/\theta\rfloor+\lfloor1/\theta\rfloor+2}\ \sum_{k,d}\binom Nk E_{k,d}\,
+\epsilon_{\theta,1+d/L}\,\frac{\bigl(1-(N-k)\theta/K_\theta\bigr)^+}{d/L+(N-k)\theta}
+\]
+satisfies $F(n)\le\bigl(\sum_\theta\lambda_\theta A_\theta\bigr)(B(n)-1)^+$. For $\theta\ge\tfrac12$ (carriers of
+two primes, plus the triples of level $\tfrac12$ when $\theta=\tfrac12$) the smaller bound
+$A_\theta=\max_{N,v}\bigl[N(N-1)(e_\theta/2+E_\theta(v))p_2+\binom N3h_\theta p_3\bigr]/(Nv-1)$ may be used, where
+$e_\theta=\epsilon_{\theta,2\theta}$ ($\theta>\tfrac12$), $h_{1/2}=\epsilon_{1/2,3/2}$,
+$E_\theta(v)=\sum_{t\in\mathcal D,\,\theta<t\le v}\epsilon_{\theta,\theta+t}$, $p_k=(1-(N-k)\theta/K_\theta)^+$.
+\end{lemma}
+\begin{proof}
+As in Lemma~\ref{lem:h97-6}, a carrier is determined by its $k$ primes (among the $N$ eligible ones) and their levels,
+with the minimum level $\theta$ used at least once and total degree $L+d$. For $\theta\ge\tfrac12$ the numerator is,
+for fixed $N$, an affine sum of functions of the individual caps $v_i$ of the eligible primes while the denominator is
+$\sum_i(v_i-1/N)$, so the ratio is bounded by its value when all caps are equal.
+\end{proof}
+
+\begin{lemma}[the $57$ finite scales and the tail]\label{lem:h883-8}
+With $40K_\theta$ given by the table ($j=8,\dots,15$; only $j=8$ at $L=8$)
+\[
+\begin{array}{c|l|r}
+L&40K_\theta&10^6\sum_j\lambda_\theta A_\theta<\\\hline
+8&200&48879\\
+16&125,113,125,138,150,162,175,187&549612\\
+32&61,72,78,73,79,87,97,91&271163\\
+64&50,54,57,58,60,58,57,66&99084\\
+128&45,46,47,48,47,50,48,49&20073\\
+256&43,43,43,43,44,44,44,45&1577\\
+512&41,41,42,42,42,42,42,42&26\\
+1024&41,41,41,41,41,41,41,41&1
+\end{array}
+\]
+the finite scales contribute less than $\tfrac{990415}{10^6}$. For $L\ge2048$ take $K_\theta=\tfrac{41}{40}$
+(so $\lambda_\theta<50$); with $a_0=\tfrac{120347}{2500000}$ the exponential moment at $z=\tfrac92$ gives
+$c_C\le\rho\theta a_0^{1/\theta}$ (from $e\ln\tfrac92>4$, $e^{7H^*/2}<\tfrac{133}4$,
+$(\tfrac{133}4)^{75}<a_0^{75}(\tfrac92)^{326}$), and with
+$\mathcal P_j(X)=\sum_{a=j}^{15}X^a+\sum_{h\ge1}\sum_{a=8}^{15}X^{a2^h}$, the pairs
+$(x_j,\bar P_j,\sigma_j)$: $(\tfrac{473}{625},\tfrac{421847}{10^6},\tfrac{157}{200})$,
+$(\tfrac{3883}{5000},\tfrac{42539}{10^5},\tfrac{827}{1000})$, $(\tfrac{7939}{10^4},\tfrac{42847}{10^5},\tfrac{859}{1000})$,
+$(\tfrac{4047}{5000},\tfrac{107879}{250000},\tfrac{22}{25})$, $(\tfrac{8233}{10^4},\tfrac{216251}{500000},\tfrac{111}{125})$,
+$(\tfrac{4181}{5000},\tfrac{86661}{200000},\tfrac{441}{500})$, $(\tfrac{8481}{10^4},\tfrac{215799}{500000},\tfrac{863}{1000})$,
+$(\tfrac{8593}{10^4},\tfrac{213963}{500000},\tfrac{83}{100})$ satisfy $\mathcal P_j(x_j)\le\bar P_j<1$ and
+$(a_0x_j^{-j})^{40}\le\sigma_j^{40}(1-\bar P_j)^{41}$; the contribution of the scales $L\ge2048$ is then less than
+$\tfrac1{1000}$. Consequently $F(n)\le\tfrac{198283}{200000}(B(n)-1)^+\le(S(n)-1)^+$.
+\end{lemma}
+\begin{proof}
+The finite scales are exact integer coefficient extractions and rational maximisations (moment bounds rounded upward
+to a common power-of-two denominator). For the tail, write $n=N-k$; positive terms need $n\theta<K_\theta$, i.e.\
+$n\le M:=\lceil K_\theta/\theta\rceil-1\le\tfrac{41}{40}\cdot\tfrac Lj$; the identity
+$\sum_{k\ge0}\binom{n+k}kP^k=(1-P)^{-n-1}$ and $\sum_{n\le M}(1-\bar P)^{-n-1}\le\bar P^{-1}(1-\bar P)^{-M-1}$ bound
+the contribution of $(L,j)$ by $50\rho j\bigl(\sum_{d\le j}x_j^{-d}\bigr)\sigma_j^{L/j}/(\bar P_j(1-\bar P_j))$; summing
+over $L=2048\cdot2^h$ with $2^h\ge h+1$ gives the stated bound.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:h883}]
+By Lemmas~\ref{lem:h97-2}, \ref{lem:h883-4}, \ref{lem:h883-6} and~\ref{lem:h883-8},
+$\sum_{k\le m}(S(k)-c)^+=\sum_{k\le m}(S_0(k)-c)^+\le\rho L_B\le\sum_IF\le\tfrac{198283}{200000}\sum_I(B-1)^+
+\le\sum_I(S-1)^+$; the dense branch and $m=1$ are covered by Lemma~\ref{lem:h97-2}.
+\end{proof}
+
+\begin{proposition}[no threshold below $2$]\label{prop:barrier}
+Let $r\ge2$, let $p_1<\dots<p_r$ be primes in an interval $[M,\sqrt2M)$ with $M>2$, let $m=p_{r-1}p_r$ and let $I$ be
+the window of length $m$ centred at $P=p_1\cdots p_r$ (all weights $1$). Then
+$\sum_{k\le m}(S(k)-c)^+=\binom r2(2-c)$ and $\sum_{b\in I}(S(b)-1)^+=r-1$ for $1\le c\le2$, so the hinge inequality with
+threshold $c$ fails whenever $c<2-\tfrac2r$. Such clusters exist for every $r$; hence no absolute threshold $c<2$ holds.
+Explicitly, $p_1,\dots,p_{21}=503,\dots,641$, $m=404471$, $x=P-202236$ give $21>20$ for $c=\tfrac{19}{10}$.
+\end{proposition}
+\begin{proof}
+$m<2p_1p_2$ and $m<p_1p_2p_3$ (because $p_1p_2\ge M^2>m/2$ and $p_3>M>2$), so in $[1,m]$ each of the $\binom r2$
+pair products occurs exactly once and no integer has three of the primes; the left side is $\binom r2(2-c)$. Every
+pair product divides $P$ and exceeds the window radius, so $P$ is the only element of $I$ with two of the primes, where
+$S(P)=r$; the right side is $r-1$. If only boundedly many primes lay in every interval $[2^{h/2},2^{(h+1)/2})$, then
+$\sum_p1/p$ would converge, contradicting Euler; so intervals $[M,\sqrt2M)$ with at least $r$ primes exist for every
+$r$, and $M>2$ can be assumed. The instance was verified by direct enumeration.
+\end{proof}
+
+\begin{remark}
+Through Theorem~\ref{thm:chain19}, threshold $c$ gives $\lceil cn\rceil+2n$; Proposition~\ref{prop:barrier} shows
+that the hinge inequality itself cannot go below $c=2$, so the present route cannot give a bound below $4n$ (and
+$(2+2)n=4n$ would need the still-open threshold $2$, cf.\ Conjecture~\ref{conj:TH}). Erd\H{o}s's $2n$ requires
+either a rounding step with loss $o(n)$ for a different relaxation (Proposition~\ref{prop:gap} rules it out for
+\eqref{eq:LP} itself) or a different reduction.
+\end{remark}
+
+\subsection*{Provenance and verification}
+The proof of Theorem~\ref{thm:h883} and Proposition~\ref{prop:barrier} was found by GPT-6 (web interface, ``Pro'')
+in a $50$-minute run from the statements of Section~\ref{sec:h97}. It was refereed blind by a Claude Opus 5 agent,
+which recomputed the $57$ scales and the tail from the definitions in exact arithmetic
+($990409.9\cdot10^{-6}$ and $801.7\cdot10^{-6}$ against the claimed $990415\cdot10^{-6}$ and $10^{-3}$; overall
+headroom $0.88\%$), both knapsacks, the prime-density ranges, both sides of the explicit instance by direct
+enumeration, and $1.7\cdot10^6$ carriers over $6081$ pointwise profiles; it found no error but two derivations that
+were incomplete as written (the outside-prime counts of Lemma~\ref{lem:h883-6}, which need $b_p\le\theta_C$ and the
+discreteness of $\mathcal D$ and are load-bearing; and the summation range of the tail), repaired above. The tightest
+steps are $(\tfrac{133}4)^{75}<a_0^{75}(\tfrac92)^{326}$ (ratio $0.99988$) and the $\tfrac3{20}$ density bound.
+\textbf{The results of this section are not formalised}: the Lean development of the repository ends with
+Section~\ref{sec:h97}, and $g(n)\le12n$ is the strongest bound verified by the kernel; $g(n)\le11n$ rests on the
+refereed proof above.

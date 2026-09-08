@@ -1,0 +1,1740 @@
+[
+  {
+    "module": "Erdos708.H97.Audit",
+    "path": "lean/proofenv/Erdos708/H97/Audit.lean",
+    "sha256": "17f3f8c37b5cb5afc595af49d0ed0be832bc05c2379fa365a77ad04cdb142ade",
+    "lines": 95,
+    "bytes": 4881,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Chain",
+      "Erdos708.H97.Proofs.Lemma1",
+      "Erdos708.H97.Proofs.Lemma4",
+      "Erdos708.H97.Proofs.LevelModel"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Cards",
+    "path": "lean/proofenv/Erdos708/H97/Cards.lean",
+    "sha256": "44629186f42ce9c75adf3753a46178066e7e3311d6ccbd06a1f24e0c24907b76",
+    "lines": 90,
+    "bytes": 4116,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Defs"
+    ],
+    "sorry_lines": [
+      15,
+      26,
+      35,
+      46,
+      52,
+      62,
+      71,
+      78,
+      83,
+      88
+    ],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Chain",
+    "path": "lean/proofenv/Erdos708/H97/Chain.lean",
+    "sha256": "83e00b9589e0b12615a88772ba6e2c839e84630b9a984bd35a092cc77ad38b7c",
+    "lines": 29,
+    "bytes": 1218,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Hinge",
+      "Erdos708.H97.Proofs.WeightTransfer",
+      "Erdos708.H17.Chain19.Results"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Defs",
+    "path": "lean/proofenv/Erdos708/H97/Defs.lean",
+    "sha256": "184b5337d85ff2249400d30929666b22d14aa08d1abc671fbe4e54162f59827c",
+    "lines": 192,
+    "bytes": 9740,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H17.Defs"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Aggregation",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Aggregation.lean",
+    "sha256": "8f1467c19f446a33fbf81b0e348d933e90dbce8ca8476f718b7422bd8adf2059",
+    "lines": 112,
+    "bytes": 4824,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.ScaleEstimates",
+      "Erdos708.H97.Proofs.Certificate"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Capped",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Capped.lean",
+    "sha256": "3ca8abf35aea3f860bdc957db59a6232b461dcc53b799a4f5f9304199e22d52b",
+    "lines": 139,
+    "bytes": 6489,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.RoundedBasics",
+      "Erdos708.H97.Proofs.MomentBasics"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.CarrierBudget",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/CarrierBudget.lean",
+    "sha256": "df90a295274f528ee0987e94ba28a21bfe855c67a6a72a6ee055e02c1ffdc5b0",
+    "lines": 154,
+    "bytes": 7273,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.CarrierCore"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.CarrierCore",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/CarrierCore.lean",
+    "sha256": "ef5d87ec4ae9627e88342fb0c0ab80d20d9fba32f1cb3dde7873ea68c1a47519",
+    "lines": 147,
+    "bytes": 7612,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Geometry"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.CarrierCount",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/CarrierCount.lean",
+    "sha256": "43c30c2f9f58c523673ae8c4613c6e8fdb97cc6c4283a043f2c4c3fa31fc1366",
+    "lines": 99,
+    "bytes": 5057,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.ExactCount"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.CarrierResidual",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/CarrierResidual.lean",
+    "sha256": "4eb16b786cb739b869d2e0e8059039d4f5dafa35faf260a4a31f8beb3a92753e",
+    "lines": 127,
+    "bytes": 6447,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.CarrierCore"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Certificate",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Certificate.lean",
+    "sha256": "15b5449146d4861aac2ab4cbf90b960b8398b11eb273364b00df97e8330165f0",
+    "lines": 269,
+    "bytes": 10934,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.CarrierBudget",
+      "Erdos708.H97.Proofs.Cofactor",
+      "Erdos708.H97.Proofs.Capped"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Chernoff",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Chernoff.lean",
+    "sha256": "7021bd7104723fb48b2cb99c29366a96698d33ecd3a986c9aa3288281c611ff5",
+    "lines": 121,
+    "bytes": 5367,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.ExponentialMoment",
+      "Erdos708.H97.Proofs.Lemma5",
+      "Erdos708.H97.Proofs.ScalarConstants"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Closing",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Closing.lean",
+    "sha256": "0b71c3e766daa568cb6e10d7f16d3526d1aa6a2cf76baf5a8a9bd522b3675ebd",
+    "lines": 60,
+    "bytes": 2380,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Lemma2",
+      "Erdos708.H97.Proofs.Lemma3",
+      "Erdos708.H97.Proofs.Lemma9",
+      "Erdos708.H97.Proofs.Aggregation",
+      "Erdos708.H97.Proofs.Chernoff"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.CoefficientRecurrence",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/CoefficientRecurrence.lean",
+    "sha256": "0f91b5ed3e9c5d668ee0c761141bc5db208a1eb57ab11acb8d9b55f1dd93e740",
+    "lines": 77,
+    "bytes": 3464,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Defs",
+      "Mathlib.Algebra.Polynomial.BigOperators"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Cofactor",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Cofactor.lean",
+    "sha256": "0a027481af7300f9ec0d685df6e417b3c54013a6d80622f08228646be0497d7b",
+    "lines": 103,
+    "bytes": 4458,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.CarrierResidual"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.CountBounds",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/CountBounds.lean",
+    "sha256": "7db64989b5fa2de0472e0bc4072a49b40050e37e4381bbb63654ebca14598dca",
+    "lines": 94,
+    "bytes": 4385,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Lemma5"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.CubeReduction",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/CubeReduction.lean",
+    "sha256": "49a446c5ac9dad7c275b5130e5886312b715627e5ddaee527af40f0252d8c867",
+    "lines": 129,
+    "bytes": 6192,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.MomentBasics"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.ExactCount",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/ExactCount.lean",
+    "sha256": "4d2d3e7b110317a43828e0706cfc5b5748891e25b1b1a3f3a14da19b25edc9a5",
+    "lines": 78,
+    "bytes": 3208,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.ScaleGeometry",
+      "Erdos708.H17.Proofs.ExactCount"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.ExponentialMoment",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/ExponentialMoment.lean",
+    "sha256": "680d399c0ba57ae81733156ba7d1e0235ab31dd64953dccebb7fb8738a5fba55",
+    "lines": 80,
+    "bytes": 3593,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Capped",
+      "Mathlib.Analysis.Convex.SpecificFunctions.Basic",
+      "Mathlib.Analysis.SpecialFunctions.Exponential",
+      "Mathlib.Algebra.BigOperators.Group.Finset.Powerset"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.FastRecurrence",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/FastRecurrence.lean",
+    "sha256": "3a48eab071f9921b0cf60c831fc4971d840f7fab54c30cd5108b3e549c083e5f",
+    "lines": 58,
+    "bytes": 2781,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.CoefficientRecurrence"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.GeneratingSeries",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/GeneratingSeries.lean",
+    "sha256": "d571eb5feaac16be5396d3205aa69087f5352cc1a03e52f44bebfa453a19a48f",
+    "lines": 128,
+    "bytes": 5760,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.ScalarConstants",
+      "Mathlib.Analysis.SpecificLimits.Normed",
+      "Mathlib.Topology.Algebra.InfiniteSum.Real"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Geometry",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Geometry.lean",
+    "sha256": "208b9334835f4dc1a3d93fed484f39dc1f530cd76e390a353e7e4e55a4e6cf69",
+    "lines": 316,
+    "bytes": 14234,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Retention"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Hinge",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Hinge.lean",
+    "sha256": "cb9ce29f97a6e1d8267a2fc3478d402dc3b3f315ccb4891064bd1a9b3252d0fd",
+    "lines": 11,
+    "bytes": 438,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Closing",
+      "Erdos708.H97.Proofs.Lemma7",
+      "Erdos708.H97.Proofs.Lemma8"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Lemma1",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Lemma1.lean",
+    "sha256": "fd339cbec1b225cf6d7bf91d987bbf2e5dbedb2ae887c7b3f6ecfbf510f63719",
+    "lines": 17,
+    "bytes": 770,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.ScalarHinge"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Lemma2",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Lemma2.lean",
+    "sha256": "629032d89a8ca56271b21e7fe6bbe84d1b85efbdf21b8b9ae59ec635c8de4eeb",
+    "lines": 98,
+    "bytes": 3830,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Defs",
+      "Erdos708.H17.Proofs.Lemma3"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Lemma3",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Lemma3.lean",
+    "sha256": "1dfdbb3b3207313df693ef185ca562fc4b1c91a2439222eeb2770364665dd570",
+    "lines": 21,
+    "bytes": 960,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Rounding"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Lemma4",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Lemma4.lean",
+    "sha256": "73dfc2550d862bb04fb248f06be708fe8183c1d6a70bca5efc6c128f8e6aa5c8",
+    "lines": 22,
+    "bytes": 958,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Certificate"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Lemma5",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Lemma5.lean",
+    "sha256": "1e9d53cb3c44264ac686374990e55c520cbd62c5380db35d3875ad3f86701ebc",
+    "lines": 125,
+    "bytes": 5643,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Cofactor",
+      "Erdos708.H97.Proofs.Capped",
+      "Erdos708.H97.Proofs.ScalarHinge"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Lemma7",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Lemma7.lean",
+    "sha256": "e17e519c1fc994498aaf0fdca43e5294096815b2a4ab1049c299afcbc719a34e",
+    "lines": 106,
+    "bytes": 4090,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric4_4",
+      "Erdos708.H97.Proofs.Numeric4_8",
+      "Erdos708.H97.Proofs.Numeric5_8",
+      "Erdos708.H97.Proofs.Numeric6_8",
+      "Erdos708.H97.Proofs.Numeric7_8",
+      "Erdos708.H97.Proofs.Numeric4_16",
+      "Erdos708.H97.Proofs.Numeric5_16",
+      "Erdos708.H97.Proofs.Numeric6_16",
+      "Erdos708.H97.Proofs.Numeric7_16",
+      "Erdos708.H97.Proofs.Numeric4_32",
+      "Erdos708.H97.Proofs.Numeric5_32",
+      "Erdos708.H97.Proofs.Numeric6_32",
+      "Erdos708.H97.Proofs.Numeric7_32",
+      "Erdos708.H97.Proofs.Numeric4_64",
+      "Erdos708.H97.Proofs.Numeric5_64",
+      "Erdos708.H97.Proofs.Numeric6_64",
+      "Erdos708.H97.Proofs.Numeric7_64",
+      "Erdos708.H97.Proofs.Numeric4_128",
+      "Erdos708.H97.Proofs.Numeric5_128",
+      "Erdos708.H97.Proofs.Numeric6_128",
+      "Erdos708.H97.Proofs.Numeric7_128",
+      "Erdos708.H97.Proofs.Numeric4_256",
+      "Erdos708.H97.Proofs.Numeric5_256",
+      "Erdos708.H97.Proofs.Numeric6_256",
+      "Erdos708.H97.Proofs.Numeric7_256",
+      "Erdos708.H97.Proofs.Numeric4_512",
+      "Erdos708.H97.Proofs.Numeric5_512",
+      "Erdos708.H97.Proofs.Numeric6_512",
+      "Erdos708.H97.Proofs.Numeric7_512"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Lemma8",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Lemma8.lean",
+    "sha256": "df6e51d6ff8eb61545e16dafdc25a0e7586b8181d318c9fbb8abb94db2305a4a",
+    "lines": 10,
+    "bytes": 471,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.TailSum"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Lemma9",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Lemma9.lean",
+    "sha256": "b7926acb00b30fef847cea97a421d8880fca386c07638a205cabcb71181f5372",
+    "lines": 91,
+    "bytes": 4414,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Certificate"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.LevelModel",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/LevelModel.lean",
+    "sha256": "dc0225f488c95cda5e79d730772d5c4ab00a5d264d962a1dc7f8d94c2e553e0e",
+    "lines": 72,
+    "bytes": 3396,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Retention"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Levels",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Levels.lean",
+    "sha256": "ddc19ec7c5e5d9d8143ed2fbb15f79798bafaa4cb8d5bcb1b7abaed2b61161bd",
+    "lines": 134,
+    "bytes": 5379,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Defs",
+      "Erdos708.H17.Proofs.Lemma4"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.MomentBasics",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/MomentBasics.lean",
+    "sha256": "8b9821854642b3b3c5c74e047c73a16741e2f80f4b5e488650bcec0d2dbd0d2b",
+    "lines": 30,
+    "bytes": 1275,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Defs",
+      "Erdos708.H17.Proofs.Moment",
+      "Erdos708.H17.Proofs.Lemma1"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric4_128",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric4_128.lean",
+    "sha256": "7ceebcf704774c18f2799b07ccd95aeae85eb237e6f2a4b6a4d6e017935ff950",
+    "lines": 301,
+    "bytes": 33615,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric4_128Rows",
+      "Erdos708.H97.Proofs.FastRecurrence"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric4_128Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric4_128Rows.lean",
+    "sha256": "61c786d6d2bc1a2efd187a22b12331933788bb53e84daf40b928b48dbc8826fe",
+    "lines": 736,
+    "bytes": 592047,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs",
+      "Erdos708.H97.Proofs.FastRecurrence"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric4_16",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric4_16.lean",
+    "sha256": "856bd37b1bfd83a8b135688ead7ff7789c7ec9b35b281096997020bd592a3dbe",
+    "lines": 94,
+    "bytes": 5846,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric4_16Rows"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric4_16Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric4_16Rows.lean",
+    "sha256": "f620582d31a81feda0c4e30ca1d6744ac42c42745b194f82d7fce027e1c1e378",
+    "lines": 115,
+    "bytes": 6237,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric4_256",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric4_256.lean",
+    "sha256": "3e4f458af6ff988a937d533672c26935acd7cac61331d41a3cd76120e7062fba",
+    "lines": 536,
+    "bytes": 91193,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric4_256Rows",
+      "Erdos708.H97.Proofs.PackedRecurrence",
+      "Erdos708.H97.Proofs.ShortExponents"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric4_256Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric4_256Rows.lean",
+    "sha256": "dd582b1eb28db02111731cbaaf0efc2bd621a521fd39b2aee97c7ffc5473cae9",
+    "lines": 2869,
+    "bytes": 4438542,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs",
+      "Erdos708.H97.Proofs.PackedRecurrence",
+      "Erdos708.H97.Proofs.ShortExponents"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric4_32",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric4_32.lean",
+    "sha256": "fc4f0aa04dfaaa194a8e4f16dbf155161de8f25ec4da7a5d0b184804b84c612e",
+    "lines": 124,
+    "bytes": 8565,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric4_32Rows"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric4_32Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric4_32Rows.lean",
+    "sha256": "b93f2d3e510662d5007b496f4792289f16277b117b647846e2d30c4f0425d34f",
+    "lines": 205,
+    "bytes": 18763,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric4_4",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric4_4.lean",
+    "sha256": "fd13d80e1cc4ea5ea7f6f66ba716820605cde7d726b31589eda6cd8d6514dba3",
+    "lines": 72,
+    "bytes": 4188,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric4_4Rows"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric4_4Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric4_4Rows.lean",
+    "sha256": "0862463bd19224852eeb048c104cf9aa2fe469055066583e370957fe27a016a6",
+    "lines": 49,
+    "bytes": 1981,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric4_512",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric4_512.lean",
+    "sha256": "0438592c874ce8d6eeb5c3cab66883f87b3821019f43c453709f5db2ff9518f4",
+    "lines": 1949,
+    "bytes": 357612,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric4_512Rows",
+      "Erdos708.H97.Proofs.PackedRecurrence",
+      "Erdos708.H97.Proofs.ShortExponents"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric4_512Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric4_512Rows.lean",
+    "sha256": "53cefdc12b8a2b4d45ab75ad27b5c2f3709a2b7a140ec85c806b44f27f49c802",
+    "lines": 5687,
+    "bytes": 33650624,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs",
+      "Erdos708.H97.Proofs.PackedRecurrence",
+      "Erdos708.H97.Proofs.ShortExponents"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric4_64",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric4_64.lean",
+    "sha256": "6600bd8b0d80ae767f03e3543e58f78ba36afb33dc63d5677fe0f193a35d14fa",
+    "lines": 182,
+    "bytes": 14996,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric4_64Rows"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric4_64Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric4_64Rows.lean",
+    "sha256": "55e4a2116e3bcc10c02a5b3955010c2da3b5dd50c25a7f90847fafd1cb0f76f2",
+    "lines": 379,
+    "bytes": 87662,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric4_8",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric4_8.lean",
+    "sha256": "af830f09577c3218a3f602f110c069f9d0bad5198d67c4a518110e81855b57bb",
+    "lines": 80,
+    "bytes": 4752,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric4_8Rows"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric4_8Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric4_8Rows.lean",
+    "sha256": "307e040750c7257b26ca7a27641ac39db2309948b3f738d69155fb65a679c32f",
+    "lines": 73,
+    "bytes": 3173,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric5_128",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric5_128.lean",
+    "sha256": "84f56858508f8c3e6347cbff0c802b91d8baf4c531348bcbc6902c537c037c54",
+    "lines": 263,
+    "bytes": 28989,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric5_128Rows",
+      "Erdos708.H97.Proofs.FastRecurrence"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric5_128Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric5_128Rows.lean",
+    "sha256": "5730422da8b05daaaeeab3ff2c23a607f837e0ba7420bd7814341f57da22b91d",
+    "lines": 592,
+    "bytes": 397973,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs",
+      "Erdos708.H97.Proofs.FastRecurrence"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric5_16",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric5_16.lean",
+    "sha256": "be09bf9dff3a0fb90670bd2a77cfdc443c6f3d26063ce43af2deae490a2c9233",
+    "lines": 98,
+    "bytes": 6111,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric5_16Rows"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric5_16Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric5_16Rows.lean",
+    "sha256": "05ead7b557182f0881e2cab12a25d524ec3e1c79b45476cbeb126d8bc1b5ac82",
+    "lines": 97,
+    "bytes": 5063,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric5_256",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric5_256.lean",
+    "sha256": "5026abb15a0e338e6eb4f3e5be95954531e606fe63beedb5a70cfc3bd7475bdd",
+    "lines": 453,
+    "bytes": 76296,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric5_256Rows",
+      "Erdos708.H97.Proofs.PackedRecurrence",
+      "Erdos708.H97.Proofs.ShortExponents"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric5_256Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric5_256Rows.lean",
+    "sha256": "2c15e7c1d77d70e5cdcea2b1f29658c124d8dd927248616df73a1de29854021b",
+    "lines": 2303,
+    "bytes": 2974335,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs",
+      "Erdos708.H97.Proofs.PackedRecurrence",
+      "Erdos708.H97.Proofs.ShortExponents"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric5_32",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric5_32.lean",
+    "sha256": "f4a81b83213bcf74f647f5fd2a7c687489b8fca89a7924d9c5cc7e738d56a60e",
+    "lines": 122,
+    "bytes": 8247,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric5_32Rows"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric5_32Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric5_32Rows.lean",
+    "sha256": "2e94447500067f1d8ef557bf6596fbc84403ecfeb7bb6e5d7e2ce1b7e05e2e97",
+    "lines": 169,
+    "bytes": 14084,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric5_512",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric5_512.lean",
+    "sha256": "0eeb4052dc0dd15e705cda637cad9eed8456e4b9c266cd21ea3fe78750fbe968",
+    "lines": 1583,
+    "bytes": 294994,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric5_512Rows",
+      "Erdos708.H97.Proofs.PackedRecurrence",
+      "Erdos708.H97.Proofs.ShortExponents"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric5_512Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric5_512Rows.lean",
+    "sha256": "050fb07186f1b0b9d927b7e246b630419819af5be0ddc6901d9fba8867f000b7",
+    "lines": 4559,
+    "bytes": 22317392,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs",
+      "Erdos708.H97.Proofs.PackedRecurrence",
+      "Erdos708.H97.Proofs.ShortExponents"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric5_64",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric5_64.lean",
+    "sha256": "c94413a983c4fe9591abcfdbaba475772b56c65102290a0d61ea4b9230dd5404",
+    "lines": 168,
+    "bytes": 13527,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric5_64Rows"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric5_64Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric5_64Rows.lean",
+    "sha256": "18fd1bd561ba2be7e12261fe906a0dba162e8a4c027b9b389ed321dd81a294f0",
+    "lines": 307,
+    "bytes": 60923,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric5_8",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric5_8.lean",
+    "sha256": "35708bbefae2fb15e880c0737a4fd474bd59d07cef0a495d2b7bb6e4a0a46262",
+    "lines": 86,
+    "bytes": 5109,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric5_8Rows"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric5_8Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric5_8Rows.lean",
+    "sha256": "22627aeaa7b6dd6ebe5a50c07113362eaa6c755459e4a48da81a4ea68d2db4a1",
+    "lines": 61,
+    "bytes": 2648,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric6_128",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric6_128.lean",
+    "sha256": "d3d3e0fd55a9fd76ffc72de683308d994c51982e5c544c9170c66f5158433883",
+    "lines": 243,
+    "bytes": 26014,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric6_128Rows",
+      "Erdos708.H97.Proofs.FastRecurrence"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric6_128Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric6_128Rows.lean",
+    "sha256": "c54a5cd57c19507d681c210fd760fa411075b363c3ef3de36583b89c2d1e94d9",
+    "lines": 502,
+    "bytes": 291518,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs",
+      "Erdos708.H97.Proofs.FastRecurrence"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric6_16",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric6_16.lean",
+    "sha256": "fb3843366d3601378ba3bf7611caa095db8faae8854530842d192ee4a162fd2e",
+    "lines": 104,
+    "bytes": 6454,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric6_16Rows"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric6_16Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric6_16Rows.lean",
+    "sha256": "fba37050e7327a972c361ac8cac982f4f6d0c70cffb768f5a34a2fadf63503ab",
+    "lines": 85,
+    "bytes": 4311,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric6_256",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric6_256.lean",
+    "sha256": "6b0df952f123e8abbfe3236fb5dd2954c79f45491d789af3d0624928e19ca549",
+    "lines": 401,
+    "bytes": 65622,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric6_256Rows",
+      "Erdos708.H97.Proofs.PackedRecurrence",
+      "Erdos708.H97.Proofs.ShortExponents"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric6_256Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric6_256Rows.lean",
+    "sha256": "4e1d536dd4a1f4a68d79392332362e69900a9d7a9be86d044d06c7cb6ff53709",
+    "lines": 1931,
+    "bytes": 2125304,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs",
+      "Erdos708.H97.Proofs.PackedRecurrence",
+      "Erdos708.H97.Proofs.ShortExponents"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric6_32",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric6_32.lean",
+    "sha256": "14141f78da7f271f7ab99e3b0f5e221ea9a2d3df1b228c5f73f72314888aee70",
+    "lines": 124,
+    "bytes": 8263,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric6_32Rows"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric6_32Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric6_32Rows.lean",
+    "sha256": "a0b2f73b40a41dfe1c43a06d279f87f4014f76c52a02f3360908aec8f81111ec",
+    "lines": 145,
+    "bytes": 11223,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric6_512",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric6_512.lean",
+    "sha256": "e2355d7e233a6e891e83f99dadc04be97c3ace3790679abd06c881a6bc1de282",
+    "lines": 1341,
+    "bytes": 248647,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric6_512Rows",
+      "Erdos708.H97.Proofs.PackedRecurrence",
+      "Erdos708.H97.Proofs.ShortExponents"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric6_512Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric6_512Rows.lean",
+    "sha256": "ac659c77e4c414896857cc8cb2f7ce58619ffc2f81b81bd02d5be33a6b589e4e",
+    "lines": 3803,
+    "bytes": 15714110,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs",
+      "Erdos708.H97.Proofs.PackedRecurrence",
+      "Erdos708.H97.Proofs.ShortExponents"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric6_64",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric6_64.lean",
+    "sha256": "accf48fe8d9606af1acd2ca1233a2452a90b758785f27a3a3882ba6992cca620",
+    "lines": 164,
+    "bytes": 12848,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric6_64Rows"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric6_64Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric6_64Rows.lean",
+    "sha256": "3edc6156a7cfe6228ed8b314bf2b57caf6d2d7f0e1ee24343f15bd3ee60cace6",
+    "lines": 265,
+    "bytes": 46473,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric6_8",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric6_8.lean",
+    "sha256": "848f48c56cb62ecc0d1430f31fe971635c087681a3a8f34abf7aff7ae23c5738",
+    "lines": 94,
+    "bytes": 5603,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric6_8Rows"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric6_8Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric6_8Rows.lean",
+    "sha256": "d2be487d7357060c9f5fb8c792bfca2ca40d65b98c4b811c4cacd9624e34e9bc",
+    "lines": 55,
+    "bytes": 2393,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric7_128",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric7_128.lean",
+    "sha256": "fe484f34b7f9c4b310274730afd3c609cc15b3381b2f9d049d9e11efde60c967",
+    "lines": 231,
+    "bytes": 23870,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric7_128Rows",
+      "Erdos708.H97.Proofs.FastRecurrence"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric7_128Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric7_128Rows.lean",
+    "sha256": "2a56e026d8132c29014425244874509df1ce375a497f6f1457c5eed4d2af5e69",
+    "lines": 436,
+    "bytes": 183975,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs",
+      "Erdos708.H97.Proofs.FastRecurrence"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric7_16",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric7_16.lean",
+    "sha256": "a2f19d8285a7d333773b24a1ca5a5642abb55afc2d410f0734db186a09e21259",
+    "lines": 112,
+    "bytes": 6938,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric7_16Rows"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric7_16Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric7_16Rows.lean",
+    "sha256": "22ab54a0eeafe2dbc2aca73e82157adfd2a993058121ed568544f22e37cb6d4b",
+    "lines": 79,
+    "bytes": 3941,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric7_256",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric7_256.lean",
+    "sha256": "76674bdb5177436657c98eca1d5625603bf2532009f9e21dbc178ea15d6deddf",
+    "lines": 367,
+    "bytes": 57562,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric7_256Rows",
+      "Erdos708.H97.Proofs.PackedRecurrence",
+      "Erdos708.H97.Proofs.ShortExponents"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric7_256Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric7_256Rows.lean",
+    "sha256": "96704f696b53265e401aa270f68452c6dcdf0a8ec2ae29401a74760bbe6d7982",
+    "lines": 1667,
+    "bytes": 1280599,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs",
+      "Erdos708.H97.Proofs.PackedRecurrence",
+      "Erdos708.H97.Proofs.ShortExponents"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric7_32",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric7_32.lean",
+    "sha256": "0899b6f621fe53e4d8406479dbb770cc8338070713e87dad6aef001147795f47",
+    "lines": 128,
+    "bytes": 8465,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric7_32Rows"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric7_32Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric7_32Rows.lean",
+    "sha256": "d968f69fac8f9c166eda24d8e877416a281d1df2c33d82b00476cc04f287608b",
+    "lines": 127,
+    "bytes": 8926,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric7_512",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric7_512.lean",
+    "sha256": "fa6893387aedbba0a217612702d0a941a538c9864eb5503fc821af188e3806b2",
+    "lines": 1175,
+    "bytes": 214577,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric7_512Rows",
+      "Erdos708.H97.Proofs.PackedRecurrence",
+      "Erdos708.H97.Proofs.ShortExponents"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric7_512Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric7_512Rows.lean",
+    "sha256": "430924937484c226d38620a2f0ad3ff59e0a73cfad241e11e51dcab743b1342f",
+    "lines": 3275,
+    "bytes": 9057702,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs",
+      "Erdos708.H97.Proofs.PackedRecurrence",
+      "Erdos708.H97.Proofs.ShortExponents"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric7_64",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric7_64.lean",
+    "sha256": "53d2c5acb8b38725c0dff587cf144343f66d239d8de9967321f5725659fa4405",
+    "lines": 162,
+    "bytes": 12351,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric7_64Rows"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric7_64Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric7_64Rows.lean",
+    "sha256": "118c841e95cef59412d6fa67c8258b2ea8795b6655ea30e3e295dcafc9075bc0",
+    "lines": 229,
+    "bytes": 32007,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric7_8",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric7_8.lean",
+    "sha256": "3bf1652d200de491a98e5f0ca1b51481194fab4ef712273d0afe3004871e0fe8",
+    "lines": 104,
+    "bytes": 6230,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Numeric7_8Rows"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Numeric7_8Rows",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Numeric7_8Rows.lean",
+    "sha256": "f5313458f1cfe18a5bfa20480375f2f664b29842ca847d54b4f7d974586fe15a",
+    "lines": 55,
+    "bytes": 2412,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.NumericDefs"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.NumericDefs",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/NumericDefs.lean",
+    "sha256": "5cc5d7b6a4be47ec5429c2d9ebb6a0e785d46bd9a6113367e17720a79a0a3dd2",
+    "lines": 58,
+    "bytes": 2715,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.CoefficientRecurrence",
+      "Erdos708.H97.Proofs.CountBounds"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.PackedRecurrence",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/PackedRecurrence.lean",
+    "sha256": "64cae34d87c1b8630ce42df41aa78758a400ba069d28ddc87879b4e224a0f56f",
+    "lines": 84,
+    "bytes": 3927,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.FastRecurrence",
+      "Mathlib.Data.Nat.Digits.Defs"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.PointwiseSupport",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/PointwiseSupport.lean",
+    "sha256": "b72cffcd44dfd8fb1dacda9be890c2fd967bb71ee54cb182c5f6b2faadd62611",
+    "lines": 79,
+    "bytes": 3916,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.CarrierCount",
+      "Erdos708.H97.Proofs.Lemma5"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Retention",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Retention.lean",
+    "sha256": "fab4efcfe0da67ded1b3037698acd315d1a2073584b5fd77b0e5e1014ca17312",
+    "lines": 53,
+    "bytes": 2560,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.RoundedBasics"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.RoundedBasics",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/RoundedBasics.lean",
+    "sha256": "6707ec76d6a6839ad08133e21a17a134332c7708bbcd5b1ffd0ec19bec9079d3",
+    "lines": 311,
+    "bytes": 13658,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Levels",
+      "Erdos708.H97.Proofs.Lemma2"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.Rounding",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/Rounding.lean",
+    "sha256": "5a2bc03e018ee503e28006dd0f7caa7be7447279bbd37d53e8304af4ef467db7",
+    "lines": 127,
+    "bytes": 6802,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.Retention"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.ScalarConstants",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/ScalarConstants.lean",
+    "sha256": "bc7d84421a4cfa395e98bcd1320b6d32fb54f30e3f4a154a7957c10848ec9be8",
+    "lines": 65,
+    "bytes": 2916,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Defs",
+      "Mathlib.Analysis.Complex.ExponentialBounds"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.ScalarHinge",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/ScalarHinge.lean",
+    "sha256": "6cad657ce825b6cebeed08fd97ec5de285f022f91ac55780d7afc33974061664",
+    "lines": 120,
+    "bytes": 5811,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.CubeReduction"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.ScaleEstimates",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/ScaleEstimates.lean",
+    "sha256": "998a5edb381ea6089c99e036f336825753177455271d19fc3cd99c6f4362d234",
+    "lines": 131,
+    "bytes": 6439,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.PointwiseSupport",
+      "Erdos708.H97.Proofs.CountBounds"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.ScaleGeometry",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/ScaleGeometry.lean",
+    "sha256": "4eea879fe4e232916c509410e95a834561acbefb05ffd22305ce0c3a6b325dfe",
+    "lines": 137,
+    "bytes": 6658,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.CarrierCore"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.ShortExponents",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/ShortExponents.lean",
+    "sha256": "55603844047e57b2a0e4097f1679325c00e973bf74431a9e68b03e98541c3c48",
+    "lines": 24,
+    "bytes": 984,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.CoefficientRecurrence"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.TailCoefficient",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/TailCoefficient.lean",
+    "sha256": "e8555e58ab02f4368d7d060cc6a5e8e9de6be46855e18280907eea6a211cd0cc",
+    "lines": 67,
+    "bytes": 3602,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.GeneratingSeries",
+      "Erdos708.H97.Proofs.Chernoff"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.TailScale",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/TailScale.lean",
+    "sha256": "e1287d67743ef63537c962e4eb61e55325a1418dd7e55b9daa2edf8b1ed46773",
+    "lines": 197,
+    "bytes": 10397,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.TailCoefficient",
+      "Erdos708.H97.Proofs.CountBounds"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.TailSum",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/TailSum.lean",
+    "sha256": "b9eba87f9ec5a4dfd97b993cf0f3c8d85fd2f616a854b8c3be482a0d153eba27",
+    "lines": 81,
+    "bytes": 4503,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Proofs.TailScale"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Proofs.WeightTransfer",
+    "path": "lean/proofenv/Erdos708/H97/Proofs/WeightTransfer.lean",
+    "sha256": "42fad2d7221c49d843e2d8e422cecfce24b6efc14cd2c9beeeb1ea15a450ff58",
+    "lines": 37,
+    "bytes": 1535,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H17.ChainParts.Weights"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  },
+  {
+    "module": "Erdos708.H97.Replay",
+    "path": "lean/proofenv/Erdos708/H97/Replay.lean",
+    "sha256": "2ee4067fb7997f25ed34036cb8ea58962acc1b30d768dfb42499f20c3e493cbf",
+    "lines": 29,
+    "bytes": 1479,
+    "olean_exists": true,
+    "compiled_source_current": true,
+    "imports": [
+      "Erdos708.H97.Audit",
+      "Lean.Replay"
+    ],
+    "sorry_lines": [],
+    "native_decide": false,
+    "new_axiom": false
+  }
+]
