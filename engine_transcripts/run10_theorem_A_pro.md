@@ -1,5 +1,5 @@
 # P22 HARVEST — #708 round 6, hinge inequality by explicit sieve bounds (ChatGPT Pro GPT-5.6 Sol, "Worked for 93m 23s", harvested 13:30 CDT 09-04)
-# Chat: https://chatgpt.com/c/6a999f80-2144-83ea-9654-c7791cb48673   Raw (Copy): erdos708_pro_r6_raw.md
+# Chat: [chat link removed]   Raw (Copy): erdos708_pro_r6_raw.md
 # Verdict: THEOREM A PROVED (dialogue audit PASS, every lemma re-derived; 52,850 numerical tests of the theorem and 51,775 of Lemma 3, no failure):
 #   for every finite prime set P, m ≥ 3, x ≥ 0:  Σ_{n≤m} (Ω_P(n) − c*(m))⁺ ≤ Σ_{b∈I} (Ω_P(b) − 1)⁺,  c*(m) = 5 + max(2, ⌈2e² ln(1 + ln m/6)⌉) ≤ 20 ln ln m (m ≥ 30).
 #   i.e. the 0/1 hinge inequality with threshold c = 20 ln ln m instead of 2 (target T4, 0/1 part). Fractional weights NOT covered (honestly stated).

@@ -1,7 +1,7 @@
 """Write the final report only after the complete source and axiom audits pass."""
 from pathlib import Path
 import json,re,datetime
-root=Path('/Users/roychen/workspace/claudecode/automath')
+root=Path('$HOME/workspace/claudecode/automath')
 out=root/'engine/out/astra_708_lean_h97'
 items=json.loads((out/'inventory.json').read_text())
 manifest=json.loads((out/'build_manifest.json').read_text())

@@ -1,7 +1,7 @@
 # Harvest index — Erdős #708, round 12, ChatGPT Pro (GPT-5.6 Sol), chat P28 'Prove Sparse Core Arithmetic'
 
 Raw: `erdos708_pro_r12_raw.md` (18,954 bytes, Chinese, ~105 min). Brief: `engine/briefs/erdos708_r12_pro.md` (arithmetic route after the
-counting limit). Chat: https://chatgpt.com/c/6a9a4baa-bd18-83ea-b5b0-0c5a4a0c1c74. Status: DONE 01:26 CDT; Opus referee launched 01:28.
+counting limit). Chat: [chat link removed]. Status: DONE 01:26 CDT; Opus referee launched 01:28.
 
 ## Main claims (engine PROVED)
 - Lemma 1 (32-group packing): masses in (0,1] with sum > 64 can be split into 32 disjoint groups each of mass in (4/3, 2].

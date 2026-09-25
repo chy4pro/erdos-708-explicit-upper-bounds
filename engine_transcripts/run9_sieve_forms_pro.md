@@ -1,5 +1,5 @@
 # P21 HARVEST — #708 round 5, (PQ′) ⇒ (TH) ⇒ 18n (ChatGPT Pro GPT-5.6 Sol, "Worked for 224m 23s", harvested 11:19 CDT 09-04)
-# Chat: https://chatgpt.com/c/6a9964d0-0130-83e9-a518-8505cb1f84e9   Raw (Copy): erdos708_pro_r5_raw.md
+# Chat: [chat link removed]   Raw (Copy): erdos708_pro_r5_raw.md
 # Verdict: NO proof of T1–T5, NO counterexample. Valid partial results + reformulations; one endorsed target is FALSE (see audit).
 
 ## Index (dialogue audit in brackets)

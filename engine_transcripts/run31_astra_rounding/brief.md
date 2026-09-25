@@ -2,7 +2,7 @@
 
 ## Where the constant now comes from
 g(n) ≤ (c+16)n is proved for the hinge threshold c = 17 (paper v13, all kernel-checked: lean/proofenv/Erdos708/H17/, lean/README.md in the repo):
-the fractional cover value τ*(A,x) of the LP of Section 7 (paper /Users/roychen/workspace/claudecode/automath/papers/erdos708/main.tex) is at
+the fractional cover value τ*(A,x) of the LP of Section 7 (paper $HOME/workspace/claudecode/automath/papers/erdos708/main.tex) is at
 most c·n, and Lemma round turns a fractional cover into an integral one with at most (number of primes dividing ∏A) extra elements, which is
 < 16n when a_n < 8n³ (Lemma fewprimes); for a_n ≥ 8n³, 2n suffice outright (Theorem long). The rounding term 16n is now LARGER than the
 threshold term. Every unit removed from it improves the world record for Erdős's $100 question directly. (The 2n campaign proved that τ*/n can

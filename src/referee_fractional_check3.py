@@ -1,5 +1,5 @@
 import numpy as np, random, math
-exec(open('/private/tmp/claude-501/-Users-roychen-workspace-claudecode-automath/457116fb-0921-45cf-974f-013eece5c1dc/scratchpad/ref708/check2.py').read().split("random.seed")[0])
+exec(open('/private/tmp/claude-501/-Users-user-workspace-claudecode-automath/457116fb-0921-45cf-974f-013eece5c1dc/scratchpad/ref708/check2.py').read().split("random.seed")[0])
 
 random.seed(7); np.random.seed(7)
 PR=primes_upto(300000)

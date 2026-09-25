@@ -1,5 +1,5 @@
 # P18 HARVEST — Erdős #708 Conjecture-S campaign, GPT-5.6 Sol Pro, chat 6a98e745, "Worked for 25m 49s", harvested 2026-09-03 22:5x CDT
-# Chat: https://chatgpt.com/c/6a98e745-5404-83ea-ae48-0e3825c340f2
+# Chat: [chat link removed]
 # VERDICT (dialogue audit, every step re-derived): T3 ACHIEVED (S itself not proved). Second explicit bound, better constants.
 
 ## Theorem. For n ≥ 2, with Λ(t) = ⌈log₂ t⌉ (least r with t ≤ 2^r):  g(n) ≤ F(n) := n(Λ(2n) + Λ(Λ(2n)) + 2) = n log₂ n + n log₂ log₂ n + O(n).

@@ -1,7 +1,7 @@
 # Harvest index — Erdős #708, round 11, ChatGPT Pro (GPT-5.6 Sol), chat P27 'Prove Or Refute Sparse Core'
 
 Raw: `erdos708_pro_r11_raw.md` (20,517 bytes, Chinese, 141 min). Brief: `engine/briefs/erdos708_r11_pro.md`.
-Chat: https://chatgpt.com/c/6a9a230b-28d4-83e9-b697-72b8e3248b25. Status: DONE 23:11 CDT; Opus referee launched 23:12 on all lemmas.
+Chat: [chat link removed]. Status: DONE 23:11 CDT; Opus referee launched 23:12 on all lemmas.
 
 ## Verdict on the targets
 - T1 (SC_r) for all m: NOT proved. T2 (RP_64): REFUTED (Lemma 2, explicit small in-core example, deficit exactly 1/4096).

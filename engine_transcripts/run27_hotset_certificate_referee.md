@@ -1,6 +1,6 @@
 # Referee report — Erdős #708, round 15 (hot-set-excluded prefix certificate for the sparse core)
 
-Target: `/Users/roychen/workspace/claudecode/automath/engine/out/claude_blitz_0905/F1_708/report.md`
+Target: `$HOME/workspace/claudecode/automath/engine/out/claude_blitz_0905/F1_708/report.md`
 Background: brief `engine/briefs/erdos708_r15_pro.md`; paper `papers/erdos708/main.tex` (Thm `four`, Prop `cert`,
 Cor `affine`, Thm `shadow`, Lem `largeatoms`, Cor `sparsecore`); round-14 referee `engine/harvest/erdos708_pro_r14_referee.md`.
 Date 2026-09-05. Every numeric claim below was recomputed independently

@@ -1,7 +1,7 @@
 # Harvest index — Erdős #708, round 10 follow-up 2, ChatGPT Pro (GPT-5.6 Sol), chat P26 (fractional case)
 
 Raw: `erdos708_pro_r10b_raw.md` (24,877 bytes, Chinese, 168 min). Brief: `engine/briefs/erdos708_r10_pro_followup2.md`.
-Chat: https://chatgpt.com/c/6a99e714-0b38-83ea-8434-7a5399bc839b. Status: DONE 20:43 CDT. Verdict: NO fractional theorem, no counterexample.
+Chat: [chat link removed]. Status: DONE 20:43 CDT. Verdict: NO fractional theorem, no counterexample.
 
 ## Rigorous partials (engine-tagged PROVED; Opus referee launched 20:5x on Lemmas 1–7, 9, 12, 13)
 - L1 prime-power atomisation of S(n) = Σ_p min(z_p v_p(n), 1) into atoms α_{p,j} = min(z_p j,1) − min(z_p(j−1),1) ≥ 0 with S = Σ α_{p,j} 1[p^j | n].

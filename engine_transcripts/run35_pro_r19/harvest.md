@@ -1,6 +1,6 @@
 # Harvest P33 — Erdős 708, hinge threshold below 97/10 (web ChatGPT GPT-6 Pro, 49m40s, 2026-09-07 17:47–18:37)
 
-Chat: https://chatgpt.com/c/6a9f3eaf-3c20-83ea-804f-50bc54b9963f (model "6 Pro" verified; brief engine/briefs/erdos708_r19_pro.md).
+Chat: [chat link removed] (model "6 Pro" verified; brief engine/briefs/erdos708_r19_pro.md).
 Status: CLAIMED — proof.md (25.6 KB) and exact_verifier.py captured verbatim; verifier runs clean (verifier_output.txt); Opus blind referee running (referee_opus.md).
 
 CLAIMS:

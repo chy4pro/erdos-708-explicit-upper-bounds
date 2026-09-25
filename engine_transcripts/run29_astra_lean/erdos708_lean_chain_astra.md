@@ -3,7 +3,7 @@
 Context. A parallel campaign (same project, directory Erdos708/Signed/) is formalising Section 14 (the sparse-core theorem
 Erdos708SparseCore.sparse_core: for every atom system with mean < 17/16, m > 4096 and window, (141/128)·L ≤ R). Do NOT touch
 Erdos708/Signed/ or Erdos708/Proofs/ or Erdos708/SparseCore.lean. Your directory is Erdos708/Chain/ (create it). Project lean/proofenv
-(Lean 4.34.0-rc1, Mathlib built; never lake update/build). Paper: /Users/roychen/workspace/claudecode/automath/papers/erdos708/main.tex —
+(Lean 4.34.0-rc1, Mathlib built; never lake update/build). Paper: $HOME/workspace/claudecode/automath/papers/erdos708/main.tex —
 read Sections 7 (sec:linear: Theorem thm:cond, Lemmas lem:dual, lem:round, lem:fewprimes), 5 (sec:long: Theorem thm:long) and 13
 (sec:sparse: Lemma lem:largeatoms, Theorem thm:dense, Corollary cor:sparsecore) in full. Every proof there was refereed.
 

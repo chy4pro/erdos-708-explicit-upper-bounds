@@ -1,5 +1,5 @@
 # P17 HARVEST — Erdős #708 campaign, GPT-5.6 Sol Pro, chat 6a98d479, "Worked for 90m 18s", harvested 2026-09-03 22:47 CDT (page text; answer in Chinese)
-# Chat: https://chatgpt.com/c/6a98d479-2934-83ea-8370-c71593afa22d
+# Chat: [chat link removed]
 # VERDICT (dialogue audit, every inequality re-derived): T3 ACHIEVED — first explicit upper bound depending on n alone. No gap found.
 
 ## Theorem 1 (explicit). For every n ≥ 1, with L = 81 + ln n, ℓ = ln L, R = √(L/ℓ):  g(n) ≤ ⌈48 n R⌉.

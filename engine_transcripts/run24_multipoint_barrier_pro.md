@@ -1,7 +1,7 @@
 # Harvest index — Erdős #708, round 13, ChatGPT Pro (GPT-5.6 Sol), chat P29 'Analyze Erdős Problem 708'
 
 Raw: `erdos708_pro_r13_raw.md` (25,806 bytes, Chinese, 44 min). Brief: `engine/briefs/erdos708_r13_pro.md` (multi-point charging).
-Chat: https://chatgpt.com/c/6a9a6ad3-8f34-83e9-abc5-25ee8655cdc7. Status: DONE ~02:45 CDT; harvested 07:4x (five-hour scheduling gap).
+Chat: [chat link removed]. Status: DONE ~02:45 CDT; harvested 07:4x (five-hour scheduling gap).
 
 ## Claims (engine PROVED unless noted)
 - T3 (Theorem A): an explicit infinite family of atom systems + congruence windows with m > 10^2958 for which EVERY nonnegative certificate

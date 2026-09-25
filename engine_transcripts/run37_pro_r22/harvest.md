@@ -1,6 +1,6 @@
 # Harvest P36 — Erdős 708, the 2n conjecture via the shared-prime incidence graph (web GPT-6 Pro, 46m02s, 2026-09-08)
 
-Chat: https://chatgpt.com/c/6aa042f5-489c-83e9-9cbb-8d1a38b173c8 (model "6 Pro" verified; brief engine/briefs/erdos708_r22_pro.md).
+Chat: [chat link removed] (model "6 Pro" verified; brief engine/briefs/erdos708_r22_pro.md).
 
 ## OUTCOME: NO uniform improvement. T1 (2n), T2 (a counterexample), a uniform 3n and a uniform 2n+o(n) were all NOT obtained; the uniform baseline stays at our published 12n kernel-verified / 11n refereed, and the run says so explicitly. What it did produce is a substantial strengthening of the restricted incidence-graph theorem.
 

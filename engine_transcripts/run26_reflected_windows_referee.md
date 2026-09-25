@@ -1,7 +1,7 @@
 # Referee report — Erdős #708, round 14 (window-adapted certificate LP)
 
-Source: `/Users/roychen/workspace/claudecode/automath/engine/harvest/erdos708_pro_r14_raw.md`
-Brief:  `/Users/roychen/workspace/claudecode/automath/engine/briefs/erdos708_r14_pro.md`
+Source: `$HOME/workspace/claudecode/automath/engine/harvest/erdos708_pro_r14_raw.md`
+Brief:  `$HOME/workspace/claudecode/automath/engine/briefs/erdos708_r14_pro.md`
 Date: 2026-09-04. All computations exact-integer / certified-rational unless flagged.
 
 ## 0. Verdict table

@@ -1,5 +1,5 @@
 import numpy as np, random, math
-exec(open('/private/tmp/claude-501/-Users-roychen-workspace-claudecode-automath/457116fb-0921-45cf-974f-013eece5c1dc/scratchpad/ref708/check2.py').read().split("random.seed")[0])
+exec(open('/private/tmp/claude-501/-Users-user-workspace-claudecode-automath/457116fb-0921-45cf-974f-013eece5c1dc/scratchpad/ref708/check2.py').read().split("random.seed")[0])
 PR=primes_upto(400000)
 print("=== C. adversarial extremes for Lemma 5: mass pushed onto p^j just below m/64 ===")
 print(f"{'m':>8} {'strategy':<26} {'H64':>7} {'cap/m':>8} {'slack/m':>9} {'>=1+1983/65536':>15} {'maxS0':>7}")

@@ -1,7 +1,7 @@
 # Harvest index — Erdős #708, round 10, ChatGPT Pro (GPT-5.6 Sol), chat P26 'Counting constant proof'
 
 Raw: `erdos708_pro_r10_raw.md` (21,244 bytes, Chinese, 65 min). Brief: `engine/briefs/erdos708_r10_pro.md` (+ follow-up 2 sent 17:47 for the
-fractional case). Chat: https://chatgpt.com/c/6a99e714-0b38-83ea-8434-7a5399bc839b. Status: DONE; independent Opus referee PASS (12.7 min, every
+fractional case). Chat: [chat link removed]. Status: DONE; independent Opus referee PASS (12.7 min, every
 step re-derived, 68,251 exhaustive instances m ≤ 43 + structured/random/deep-window scans: min(RHS−LHS) = 0, only degenerate).
 
 ## Main result (Theorem 6 → paper Theorem 'four', v8)

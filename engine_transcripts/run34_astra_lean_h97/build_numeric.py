@@ -5,7 +5,7 @@ parser.add_argument("--min-L",type=int,default=4)
 parser.add_argument("--reuse-rows",action="store_true")
 parser.add_argument("--reuse-existing",action="store_true")
 args=parser.parse_args()
-root=Path('/Users/roychen/workspace/claudecode/automath')
+root=Path('$HOME/workspace/claudecode/automath')
 out=root/'engine/out/astra_708_lean_h97'
 project=root/'lean/proofenv'
 for row in json.loads((out/'numeric_caps.json').read_text()):

@@ -6,7 +6,7 @@ your new files or keep each new file self-contained (import Mathlib; open Finset
 
 Goal theorem (card, compiles with sorry): Erdos708/SparseCore.lean, `Erdos708SparseCore.sparse_core` —
   ∀ A : AtomSystem, ∀ m > 4096, mean A < 17/16 → ∀ x, (141/128) * L A m ≤ R A x m.
-Paper source: /Users/roychen/workspace/claudecode/automath/papers/erdos708/sec_signed.tex (Section 14: Theorem 14.1 and Lemmas 14.2–14.10,
+Paper source: $HOME/workspace/claudecode/automath/papers/erdos708/sec_signed.tex (Section 14: Theorem 14.1 and Lemmas 14.2–14.10,
 with complete proofs). Read it in full first. The prose proof was refereed; your job is faithful formalisation, not new mathematics.
 
 Method (Prove2Me-style cards; this is the workflow used to formalise FLT):

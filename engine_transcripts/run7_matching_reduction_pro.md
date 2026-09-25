@@ -1,5 +1,5 @@
 # P20 HARVEST — #708 round 4, hinge inequality (TH) (ChatGPT Pro GPT-5.6 Sol, "Worked for 143m 36s")
-# Chat: https://chatgpt.com/c/6a993888-0590-83ea-adb6-1bb42db4e4bf   (started ~04:06 CDT 09-04, harvested 06:4x CDT)
+# Chat: [chat link removed]   (started ~04:06 CDT 09-04, harvested 06:4x CDT)
 # Verdict shape: NO proof of T1–T5, NO counterexample. Strongest result: a valid REDUCTION of (TH) to a weight-free
 # perfect-matching statement (NM) ⟺ (SB), plus a valid reduction of the 0/1 case T3 to a two-layer sieve statement (Tail21).
 # DIALOGUE VERDICT (see below): the reduction is correct but its target (NM)/(SB) is FALSE for large m

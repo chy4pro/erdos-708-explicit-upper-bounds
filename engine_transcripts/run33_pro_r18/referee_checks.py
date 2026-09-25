@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Independent exact-arithmetic referee checks for the claimed proof of H_{97/10}
-in /Users/roychen/workspace/claudecode/automath/engine/out/pro_708_r18/proof.md
+in $HOME/workspace/claudecode/automath/engine/out/pro_708_r18/proof.md
 
 Everything is recomputed from the DEFINITIONS in the manuscript, in
 fractions.Fraction / integer arithmetic only.  No floating point is used for

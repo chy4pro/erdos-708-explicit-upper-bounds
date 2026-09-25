@@ -1,7 +1,7 @@
 """Read-only campaign inventory and dependency/sorry audit; never runs git."""
 from pathlib import Path
 import re,json,hashlib
-root=Path('/Users/roychen/workspace/claudecode/automath')
+root=Path('$HOME/workspace/claudecode/automath')
 base=root/'lean/proofenv'
 folder=base/'Erdos708/H97'
 items=[]

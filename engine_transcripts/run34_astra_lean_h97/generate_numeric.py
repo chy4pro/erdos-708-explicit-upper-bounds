@@ -12,7 +12,7 @@ from fractions import Fraction as F
 import json,sys
 from math import comb, factorial
 if hasattr(sys, "set_int_max_str_digits"): sys.set_int_max_str_digits(0)
-ROOT=Path('/Users/roychen/workspace/claudecode/automath')
+ROOT=Path('$HOME/workspace/claudecode/automath')
 OUT=ROOT/'lean/proofenv/Erdos708/H97/Proofs'
 data=json.loads((ROOT/'engine/out/pro_708_r18/constants.json').read_text())
 def frac(v): return F(int(v['numerator']),int(v['denominator']))

@@ -1,6 +1,6 @@
 # PROOF CAMPAIGN (Lean 4) — Erdős 708: formalise the threshold-17 hinge inequality and derive g(n) ≤ 33n (no wall-clock cap)
 
-Source of the mathematics: /Users/roychen/workspace/claudecode/automath/engine/harvest/erdos708_r17_pro.md (Lemmas 1–9, a proof of
+Source of the mathematics: $HOME/workspace/claudecode/automath/engine/harvest/erdos708_r17_pro.md (Lemmas 1–9, a proof of
 (H_17): Σ_{k≤m}(S(k) − 17)^+ ≤ Σ_{b∈I}(S(b) − 1)^+ for every finite nonnegative prime-power atom system with per-prime total ≤ 1, every m ≥ 1
 and every window of m consecutive positive integers). Its constants are verified by engine/out/pro_708_r17/verify_constants.py. It mirrors
 the Section-14 development you already formalised (lean/proofenv/Erdos708/Signed/Cards.lean) with tightened constants: split at p^j ≤ m/2^16,

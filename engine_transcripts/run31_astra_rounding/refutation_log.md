@@ -125,7 +125,7 @@ These 13 additional jobs are retained in the R3-owned `r3_exact.jsonl` and indep
 | 12 | 11 | powers 2^1,...,2^11 | 2^660−2^11 | 1/10 | 1 | 1 | 11 | 11 |
 | 13 | 12 | powers 2^1,...,2^12 | 2^780−2^12 | 1/10 | 1 | 1 | 12 | 12 |
 
-Reproduction: run `python3 -B engine/out/astra_708_rounding/refutation_verify.py` for the independent rational verifier and ledger. The search generator used the existing interpreter `/Users/roychen/workspace/claudecode/hfreqtrade/venv/bin/python -B` with `engine/out/astra_708_rounding/refutation_exact.py` modes `baseline`, `spikes`, `repair`, and `route_witnesses`. Search modes append to the attempted-job ledger; the verifier does not append.
+Reproduction: run `python3 -B engine/out/astra_708_rounding/refutation_verify.py` for the independent rational verifier and ledger. The search generator used the existing interpreter `$HOME/workspace/claudecode/hfreqtrade/venv/bin/python -B` with `engine/out/astra_708_rounding/refutation_exact.py` modes `baseline`, `spikes`, `repair`, and `route_witnesses`. Search modes append to the attempted-job ledger; the verifier does not append.
 
 Independent mathematical audit completed: theory.md P1 exact CRT theorem and prime-band termination, P2 strict vertex rounding, F1 nonlaminar and determinant obstructions, F2 cycle-excess comparison counterexample; r2_large_prime_bounds.md support counts, explicit prime-count error, and resulting bounds 20n−2 and 19n+pi(2n)−1. All arguments checked without an unresolved logical step.
 

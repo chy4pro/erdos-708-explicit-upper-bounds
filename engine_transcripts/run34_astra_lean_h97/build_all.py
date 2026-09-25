@@ -9,7 +9,7 @@ parser=argparse.ArgumentParser()
 parser.add_argument('--reuse-numeric',action='store_true')
 parser.add_argument('--reuse-compiled',action='store_true',help='Reuse artifacts already compiled from their current source during this campaign')
 args=parser.parse_args()
-root=Path('/Users/roychen/workspace/claudecode/automath')
+root=Path('$HOME/workspace/claudecode/automath')
 project=root/'lean/proofenv'
 out=root/'engine/out/astra_708_lean_h97'
 paths={'.'.join(p.relative_to(project).with_suffix('').parts):p for p in (project/'Erdos708/H97').rglob('*.lean')}

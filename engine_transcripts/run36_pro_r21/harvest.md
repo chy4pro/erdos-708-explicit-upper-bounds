@@ -1,6 +1,6 @@
 # Harvest P35 — Erdős 708, (H_2) by induction on the number of primes (web GPT-6 Pro, 49m41s, 2026-09-08)
 
-Chat: https://chatgpt.com/c/6aa01e8e-9a84-83ea-87d5-20a3de3f3485 (model "6 Pro" verified; brief engine/briefs/erdos708_r21_pro.md).
+Chat: [chat link removed] (model "6 Pro" verified; brief engine/briefs/erdos708_r21_pro.md).
 
 ## OUTCOME: T1 NOT REACHED. The largest N for which (H_2) is proved for UNRESTRICTED atom systems is still N = 4. No counterexample. The global bound is unchanged: g(n) ≤ 12n kernel-verified, 11n refereed, threshold interval [2, 8.83]. What the run produced is a set of restricted theorems and one genuine impossibility result.
 

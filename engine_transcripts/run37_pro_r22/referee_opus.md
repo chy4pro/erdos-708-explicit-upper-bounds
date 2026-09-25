@@ -10,7 +10,7 @@
 **Referee:** blind adversarial re-derivation. Nothing in `exact_verifier.py` or
 `verifier_output.txt` was relied on. All arithmetic, all graph invariants and all
 exact optima below were recomputed from scratch by
-`/Users/roychen/workspace/claudecode/automath/engine/out/pro_708_r22/referee_checks.py`
+`$HOME/workspace/claudecode/automath/engine/out/pro_708_r22/referee_checks.py`
 (independent 0/1 element-by-element DP over capped valuation vectors, plus
 brute-force subset enumeration wherever feasible, plus an independent
 union-find/Kuhn computation of β, c, s, W_s, ν). Every displayed number in this
@@ -538,6 +538,6 @@ is published Lemma 2.1, and Lemma 2's δ_p half is astra P1.
   ones, not the 8 931-evaluation scan.
 * Lean formalisation of anything here.
 
-**Scripts:** `/Users/roychen/workspace/claudecode/automath/engine/out/pro_708_r22/referee_checks.py`
+**Scripts:** `$HOME/workspace/claudecode/automath/engine/out/pro_708_r22/referee_checks.py`
 (run `python3 referee_checks.py --slow`; sections 1–17 correspond to the sections
 of this report).

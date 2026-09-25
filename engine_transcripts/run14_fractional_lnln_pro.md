@@ -1,5 +1,5 @@
 # P24 HARVEST — #708 round 8, fractional hinge inequality (ChatGPT Pro GPT-5.6 Sol, "Worked for 31m 17s", harvested 14:53 CDT 09-04)
-# Chat: https://chatgpt.com/c/6a99c804-5e2c-83ea-aaa2-5464ab5c46b2   Raw (Copy): erdos708_pro_r8_raw.md
+# Chat: [chat link removed]   Raw (Copy): erdos708_pro_r8_raw.md
 # Verdict: THEOREM PROVED — dialogue step-by-step audit (no gap) + independent Opus referee (15:08 CDT): PASS on every item, numerical checks
 # L = 2^4..2^200000, constant 149 loose by ≈2.5×; one trivial omission (a_n ≤ 15) fixed in the paper.
 ## Statement

@@ -1,6 +1,6 @@
 # Harvest P32 — Erdős 708, hinge threshold 97/10 (web ChatGPT GPT-6 Pro, 44m58s, 2026-09-07)
 
-Chat: https://chatgpt.com/c/6a9ec9f0-88f8-83ea-95d1-db2495bd6c0d (model "6 Pro" verified before sending; brief engine/briefs/erdos708_r18_pro.md).
+Chat: [chat link removed] (model "6 Pro" verified before sending; brief engine/briefs/erdos708_r18_pro.md).
 Verbatim proof (copied from the seat's proof.md via the code-block copy button, 19655 bytes): engine/out/pro_708_r18/proof.md.
 Seat's own files still to fetch: exact_verifier.py, adversarial_audit.py, constants.json.
 

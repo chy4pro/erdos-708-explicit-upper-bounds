@@ -1,5 +1,5 @@
 import numpy as np, random, math
-exec(open('/private/tmp/claude-501/-Users-roychen-workspace-claudecode-automath/457116fb-0921-45cf-974f-013eece5c1dc/scratchpad/ref708/check2.py').read().split("random.seed")[0])
+exec(open('/private/tmp/claude-501/-Users-user-workspace-claudecode-automath/457116fb-0921-45cf-974f-013eece5c1dc/scratchpad/ref708/check2.py').read().split("random.seed")[0])
 PR=primes_upto(200000)
 random.seed(99); np.random.seed(99)
 print("=== I. counting transfer  sum_I (S-1)^+ >= V(c)  for the S_0-baseline certificate, adversarial x ===")

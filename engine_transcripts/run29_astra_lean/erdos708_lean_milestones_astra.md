@@ -1,7 +1,7 @@
 # PROOF CAMPAIGN (Lean 4) — Erdős 708 sparse-core mission: three milestone lemmas
 
-Project: /Users/roychen/workspace/claudecode/automath/lean/proofenv (Lean v4.34.0-rc1, Mathlib de5ce8a9; run `lake env lean <file>` from that directory; Mathlib is already built — never run `lake update` or `lake build` on Mathlib).
-Statements (already compiling with `sorry`): /Users/roychen/workspace/claudecode/automath/lean/proofenv/Erdos708/SparseCore.lean — theorems `hinge_le_esymm`, `numerical_bound`, `moment_bound` in namespace `Erdos708SparseCore`.
+Project: $HOME/workspace/claudecode/automath/lean/proofenv (Lean v4.34.0-rc1, Mathlib de5ce8a9; run `lake env lean <file>` from that directory; Mathlib is already built — never run `lake update` or `lake build` on Mathlib).
+Statements (already compiling with `sorry`): $HOME/workspace/claudecode/automath/lean/proofenv/Erdos708/SparseCore.lean — theorems `hinge_le_esymm`, `numerical_bound`, `moment_bound` in namespace `Erdos708SparseCore`.
 
 Task: produce complete, sorry-free Lean proofs of the three theorems, with EXACTLY the same statements (same names, binders, hypotheses and conclusions; do not weaken or restate). Write each proof in its own file
   Erdos708/Proofs/Hinge.lean      (theorem Erdos708SparseCore.hinge_le_esymm)
@@ -13,4 +13,4 @@ Order: Numerical first (pure real arithmetic; use (12t)! ≥ (12t/e)^{12t} or an
 
 Mathematical facts you may rely on (all standard): powers of distinct primes are coprime; the number of j ≤ N divisible by d ≥ 1 is ⌊N/d⌋ ≤ N/d; Finset.sum_powersetCard / Finset.prod over powersetCard lemmas in Mathlib (search with `exact?`/`apply?` and grep Mathlib for `powersetCard`, `esymm`, `Multiset.esymm`).
 
-Process: compile after every change; keep a log of what compiled; if a theorem resists after ~40 minutes, write down the exact remaining goal state and move to the next one. Wall-clock cap 2 hours. Write progress to /Users/roychen/workspace/claudecode/automath/engine/out/astra_708_lean/checkpoint.md every 30 minutes and a final /Users/roychen/workspace/claudecode/automath/engine/out/astra_708_lean/report.md listing, per theorem: PROVED (file, `#print axioms` output) or OPEN (remaining goal). Touch nothing outside Erdos708/Proofs/ and the output directory; no git.
+Process: compile after every change; keep a log of what compiled; if a theorem resists after ~40 minutes, write down the exact remaining goal state and move to the next one. Wall-clock cap 2 hours. Write progress to $HOME/workspace/claudecode/automath/engine/out/astra_708_lean/checkpoint.md every 30 minutes and a final $HOME/workspace/claudecode/automath/engine/out/astra_708_lean/report.md listing, per theorem: PROVED (file, `#print axioms` output) or OPEN (remaining goal). Touch nothing outside Erdos708/Proofs/ and the output directory; no git.

@@ -1,5 +1,5 @@
 # P23 HARVEST — #708 round 7, counting certificates (ChatGPT Pro GPT-5.6 Sol, "Worked for 42m 59s", harvested 14:12 CDT 09-04)
-# Chat: https://chatgpt.com/c/6a99b47f-4414-83e9-836e-c34969adf494   Raw (Copy): erdos708_pro_r7_raw.md
+# Chat: [chat link removed]   Raw (Copy): erdos708_pro_r7_raw.md
 # Verdict: only T3 REFUTED (as literally posed for all subsets P): for P = primes in [53,653], m = 10^8, the two-anchor certificate
 # gives V_2 = 1,595,615 < W_ω = 1,602,217 (dialogue re-verified both numbers independently: sieve over 10^8 and direct formula).
 # Nothing on T1/T2/T4/T5. Valid but low value: the target was mis-posed by the dialogue (V_2 with the two smallest primes of P as anchors);
