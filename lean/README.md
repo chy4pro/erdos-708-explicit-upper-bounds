@@ -101,11 +101,16 @@ and must not be introduced into the build dependency closure.
   last levels), `rounding_knapsack` (Lemma 18.4: 1440·R + 243·(720 − w) ≤ 259272 for total
   large-level cost w ≤ 719), `rounding_eq` (259272/92160 = 3601/1280), and `threshold_eq`
   (3601/1280 + (9/8)(401/75) = 56501/6400). Superadditive tables are checked by `decide +kernel`;
-  the bound for every multiset of levels follows by induction (`knapsack_le`).
-- `tools/gen_prime_density.py` generates `Erdos708/H883/PrimeDensity.lean` (Mathlib only, 1.2 MB):
+  the bound for every multiset of levels follows by induction (`knapsack_le`). The per-weight
+  row check is a structural walk (`rowOK`), not `List.range` with `getD`.
+- `tools/gen_prime_density.py` generates `Erdos708/H883/PrimeDensity.lean` and
+  `Erdos708/H883/PrimeDensity/{Run,Chunks0..7}.lean` (Mathlib only, 1.2 MB in total):
   `density_9_40`, `density_3_20`, `density_1_8`, the finite ranges of Lemma 18.6
-  (40π(ν) ≤ 9ν on [210, 32768), 20π(ν) ≤ 3ν on [2310, 2^17), 8π(ν) ≤ ν on [30030, 2^21)), from one
-  `decide +kernel` pass over n < 2^21 in 512 chunks; the prime list is only a hint (`run_spec`).
+  (40π(ν) ≤ 9ν on [210, 32768), 20π(ν) ≤ 3ν on [2310, 2^17), 8π(ν) ≤ ν on [30030, 2^21)), from a
+  walk over n < 2^21 in 512 chunks of 4096; the prime list is only a hint (`run_spec`). Each chunk
+  is its own theorem `chunk_i : ChunkOK i` with its own `decide +kernel` (64 per file, combined by
+  `block_k` and `all_chunks`). One kernel evaluation over all chunks exhausted the CI runner's memory
+  (run 38175709606); a single chunk takes about 5 s and 1.5 GB.
   The analytic part of Lemma 18.6 (ν beyond these ranges) is not formalised.
 - `Erdos708/H883/Bound.lean`: the reduction steps, conditional on the (unproved) hinge inequality:
   `bound883_of_hinge : Hinge883 → CeilingBound883` (Theorem 16.1 at c = 56501/6400, through the

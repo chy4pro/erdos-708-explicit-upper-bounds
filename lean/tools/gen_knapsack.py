@@ -118,9 +118,26 @@ theorem retention_knapsack (v : ℕ) (hv : v ∈ levels) (l : List ℕ)
 /-- Rounding certificate (items: all large levels, cost `E`, reward `succ`), `w ≤ 719`. -/
 def rndCert : List ℕ := {L(rnd)}
 
+/-- `rowOK w₀ g`: `1440 g[i] + 243 (720 - (w₀ + i)) ≤ 259272` at every index `i` of `g`.
+(A structural walk; `List.range` with `getD` exhausts the kernel's memory.) -/
+def rowOK : ℕ → List ℕ → Bool
+  | w, a :: t => decide (1440 * a + 243 * (720 - w) ≤ 259272) && rowOK (w + 1) t
+  | _, [] => true
+
+theorem rowOK_spec : ∀ {{g : List ℕ}} {{w₀ : ℕ}}, rowOK w₀ g = true →
+    ∀ i, i < g.length → 1440 * g.getD i 0 + 243 * (720 - (w₀ + i)) ≤ 259272
+  | [], _, _, i, hi => by simp at hi
+  | a :: t, w₀, h, i, hi => by
+      simp only [rowOK, Bool.and_eq_true, decide_eq_true_eq] at h
+      cases i with
+      | zero => simpa using h.1
+      | succ i =>
+          have h2 := rowOK_spec h.2 i (by simpa using hi)
+          rw [show w₀ + (i + 1) = w₀ + 1 + i by omega]
+          simpa using h2
+
 theorem rndCert_ok : certOK levels E succ rndCert = true ∧ rndCert.length = 720 ∧
-    (List.range 720).all (fun w => decide (1440 * rndCert.getD w 0 + 243 * (720 - w) ≤ 259272))
-      = true := by
+    rowOK 0 rndCert = true := by
   decide +kernel
 
 /-- Lemma 18.4 (exact knapsack): large unretained levels have total cost `w = ∑ E ≤ 719`
@@ -128,10 +145,10 @@ theorem rndCert_ok : certOK levels E succ rndCert = true ∧ rndCert.length = 72
 `(243/128) (720 - w)/720` from the small levels is at most `259272 / 92160`. -/
 theorem rounding_knapsack (l : List ℕ) (hl : ∀ u ∈ l, u ∈ levels) (hs : (l.map E).sum ≤ 719) :
     1440 * (l.map succ).sum + 243 * (720 - (l.map E).sum) ≤ 259272 := by
-  obtain ⟨hc, hlen, hall⟩ := rndCert_ok
+  obtain ⟨hc, hlen, hrow⟩ := rndCert_ok
   have hR := knapsack_le hc l hl _ (by omega) le_rfl
-  have hw := List.all_eq_true.mp hall (l.map E).sum (List.mem_range.mpr (by omega))
-  simp only [decide_eq_true_eq] at hw
+  have hw := rowOK_spec hrow (l.map E).sum (by omega)
+  rw [Nat.zero_add] at hw
   have := Nat.mul_le_mul_left 1440 hR
   omega
 
