@@ -94,4 +94,13 @@ and must not be introduced into the build dependency closure.
   log, and upload of the logs. Runs on every push touching `lean/**`.
 - `CI_LOG.md`: every CI run (id, commit, result).
 
-No Section 18 theorem is claimed kernel-checked yet.
+### Section 18 cards (2026-10-11)
+
+- `tools/gen_knapsack.py` generates `Erdos708/H883/Knapsack.lean` (imports Mathlib only):
+  `retention_knapsack` (Lemma 18.3: prefix budget at most 480/720 = 2/3 for each of the 24 large
+  last levels), `rounding_knapsack` (Lemma 18.4: 1440·R + 243·(720 − w) ≤ 259272 for total
+  large-level cost w ≤ 719), `rounding_eq` (259272/92160 = 3601/1280), and `threshold_eq`
+  (3601/1280 + (9/8)(401/75) = 56501/6400). Superadditive tables are checked by `decide +kernel`;
+  the bound for every multiset of levels follows by induction (`knapsack_le`).
+
+No Section 18 theorem is claimed kernel-checked until CI_LOG.md records a green run.
