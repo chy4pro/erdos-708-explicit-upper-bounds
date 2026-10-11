@@ -57,34 +57,30 @@ for i,v in enumerate(V):
     L.append(f"  {'if' if i==0 else 'else if'} v = {v} then {ret[v]}")
 L.append("  else []\n")
 L.append(f"def rndTable : List ℕ := {h}\n")
-L.append("""/-- Certificate check for one retention table. -/
-def retOK (v : ℕ) : Bool :=
-  (retTable v).length = 65 &&
-  (List.range 65).all (fun w => V.all (fun u =>
-    !(v ≤ u && u ≤ w) || decide ((retTable v).getD (w - u) 0 + E u ≤ (retTable v).getD w 0))) &&
-  decide ((retTable v).getD 64 0 + E v ≤ 480)
+L.append("""/-- Certificate check for one retention table (decidable, checked by the kernel). -/
+abbrev RetOK (v : ℕ) : Prop :=
+  (∀ w ∈ List.range 65, ∀ u ∈ V, v ≤ u → u ≤ w →
+    (retTable v).getD (w - u) 0 + E u ≤ (retTable v).getD w 0) ∧
+  (retTable v).getD 64 0 + E v ≤ 480
 
-def rndOK : Bool :=
-  rndTable.length = 720 &&
-  (List.range 720).all (fun w => V.all (fun u =>
-    !(E u ≤ w) || decide (rndTable.getD (w - E u) 0 + succ u ≤ rndTable.getD w 0))) &&
-  (List.range 720).all (fun w => decide (1440 * rndTable.getD w 0 + 243 * (720 - w) ≤ 259272))
+abbrev RndOK : Prop :=
+  (∀ w ∈ List.range 720, ∀ u ∈ V, E u ≤ w →
+    rndTable.getD (w - E u) 0 + succ u ≤ rndTable.getD w 0) ∧
+  (∀ w ∈ List.range 720, 1440 * rndTable.getD w 0 + 243 * (720 - w) ≤ 259272)
 """)
 for v in V:
-    L.append(f"theorem retOK_{v} : retOK {v} = true := by decide")
-L.append("theorem rndOK_true : rndOK = true := by decide\n")
-L.append("""theorem retOK_all : ∀ v ∈ V, retOK v = true := by
+    L.append(f"theorem retOK_{v} : RetOK {v} := by decide +kernel")
+L.append("theorem rndOK : RndOK := by decide +kernel\n")
+L.append("""theorem retOK_all : ∀ v ∈ V, RetOK v := by
   intro v hv
   simp only [V, List.mem_cons, List.not_mem_nil, or_false] at hv
   rcases hv with """ + " | ".join("rfl" for _ in V) + """
-  all_goals first | exact retOK_""" + "| exact retOK_".join(f"{v} " for v in V).rstrip() + """
+  all_goals first | """ + " | ".join(f"exact retOK_{v}" for v in V) + """
 
-theorem ret_bound (v : ℕ) (hv : retOK v = true) :
+theorem ret_bound (v : ℕ) (hv : RetOK v) :
     ∀ (l : List ℕ) (w : ℕ), w ≤ 64 → (∀ u ∈ l, u ∈ V ∧ v ≤ u) → l.sum ≤ w →
       (l.map E).sum ≤ (retTable v).getD w 0 := by
-  simp only [retOK, Bool.and_eq_true, decide_eq_true_eq, List.all_eq_true, List.mem_range,
-    Bool.or_eq_true, Bool.not_eq_true', Bool.and_eq_false_iff, decide_eq_false_iff_not] at hv
-  obtain ⟨⟨_, hstep⟩, _⟩ := hv
+  obtain ⟨hstep, _⟩ := hv
   intro l
   induction l with
   | nil => intro w _ _ _; simp
@@ -92,13 +88,10 @@ theorem ret_bound (v : ℕ) (hv : retOK v = true) :
     intro w hw hl hs
     have hu := hl u (by simp)
     simp only [List.sum_cons] at hs
-    have hle : u ≤ w := by omega
     have h1 := ih (w - u) (by omega) (fun x hx => hl x (by simp [hx])) (by omega)
-    have h2 := hstep w (by omega) u hu.1
+    have h2 := hstep w (List.mem_range.mpr (by omega)) u hu.1 hu.2 (by omega)
     simp only [List.map_cons, List.sum_cons]
-    rcases h2 with h2 | h2
-    · omega
-    · omega
+    omega
 
 /-- Lemma 18.3, exact knapsack: `720·(budget) ≤ 480` for every admissible prefix. -/
 theorem retention_budget (v : ℕ) (hv : v ∈ V) (l : List ℕ)
@@ -106,16 +99,13 @@ theorem retention_budget (v : ℕ) (hv : v ∈ V) (l : List ℕ)
     (l.map E).sum + E v ≤ 480 := by
   have hok := retOK_all v hv
   have h := ret_bound v hok l 64 le_rfl hl hs
-  simp only [retOK, Bool.and_eq_true, decide_eq_true_eq] at hok
+  have h2 := hok.2
   omega
 
 theorem rnd_bound :
     ∀ (l : List ℕ) (w : ℕ), w < 720 → (∀ u ∈ l, u ∈ V) → (l.map E).sum ≤ w →
       (l.map succ).sum ≤ rndTable.getD w 0 := by
-  have hv := rndOK_true
-  simp only [rndOK, Bool.and_eq_true, decide_eq_true_eq, List.all_eq_true, List.mem_range,
-    Bool.or_eq_true, Bool.not_eq_true', decide_eq_false_iff_not] at hv
-  obtain ⟨⟨_, hstep⟩, _⟩ := hv
+  obtain ⟨hstep, _⟩ := rndOK
   intro l
   induction l with
   | nil => intro w _ _ _; simp
@@ -124,19 +114,17 @@ theorem rnd_bound :
     have hu := hl u (by simp)
     simp only [List.map_cons, List.sum_cons] at hs ⊢
     have h1 := ih (w - E u) (by omega) (fun x hx => hl x (by simp [hx])) (by omega)
-    have h2 := hstep w hw u hu
-    rcases h2 with h2 | h2
-    · omega
-    · omega
+    have h2 := hstep w (List.mem_range.mpr hw) u hu (by omega)
+    omega
 
 /-- Lemma 18.4, exact knapsack: large levels of total cost `w ≤ 719` lose at most
 `(1440·Σ succ + 243·(720 - w))/92160 ≤ 259272/92160 = 3601/1280`. -/
 theorem rounding_budget (l : List ℕ) (hl : ∀ u ∈ l, u ∈ V) (hw : (l.map E).sum ≤ 719) :
     1440 * (l.map succ).sum + 243 * (720 - (l.map E).sum) ≤ 259272 := by
   have h := rnd_bound l _ (by omega) hl le_rfl
-  have hv := rndOK_true
-  simp only [rndOK, Bool.and_eq_true, decide_eq_true_eq, List.all_eq_true, List.mem_range] at hv
-  have h3 := hv.2 _ (by omega : (l.map E).sum < 720)
+  have h3 := rndOK.2 _ (List.mem_range.mpr (by omega : (l.map E).sum < 720))
+  have : 1440 * (l.map succ).sum ≤ 1440 * rndTable.getD (l.map E).sum 0 :=
+    Nat.mul_le_mul_left _ h
   omega
 
 theorem rounding_constant : (259272 : ℚ) / 92160 = 3601 / 1280 := by norm_num

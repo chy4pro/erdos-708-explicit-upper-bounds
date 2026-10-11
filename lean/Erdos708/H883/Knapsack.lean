@@ -58,57 +58,53 @@ def retTable (v : ℕ) : List ℕ :=
 
 def rndTable : List ℕ := [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 12, 13, 13, 13, 13, 14, 14, 14, 14, 15, 15, 15, 15, 15, 15, 15, 15, 16, 16, 16, 16, 16, 16, 16, 16, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 42, 43, 43, 43, 43, 44, 44, 44, 44, 45, 45, 45, 45, 45, 45, 45, 45, 46, 46, 46, 46, 46, 46, 46, 46, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 49, 49, 49, 49, 50, 50, 50, 50, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 76, 77, 77, 77, 77, 78, 78, 78, 78, 79, 79, 79, 79, 79, 79, 79, 79, 80, 80, 80, 80, 80, 80, 80, 80, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 94, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 105, 106, 107, 107, 107, 107, 108, 108, 108, 108, 109, 109, 109, 109, 109, 109, 109, 109, 110, 110, 110, 110, 110, 110, 110, 110, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 112, 113, 113, 113, 113, 114, 114, 114, 114, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 130, 130, 130, 130, 130, 130, 130, 130, 130, 130, 130, 130, 130, 130, 130, 130, 130, 130, 130, 130, 139, 139, 139, 139, 139, 139, 139, 139, 139, 139, 139, 140, 141, 141, 141, 141, 142, 142, 142, 142, 143, 143, 143, 143, 143, 143, 143, 143, 144, 144, 144, 144, 144, 144, 144, 144, 146, 146, 146, 146, 146, 146, 146, 146, 146, 146, 146, 146, 146, 146, 146, 146, 146, 146, 146, 146, 146, 146, 146, 146, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 158, 164, 164, 164, 164, 164, 164, 164, 164, 164, 164, 164, 164, 164, 164, 164, 164, 164, 164, 164, 164, 169, 169, 169, 169, 169, 169, 169, 169, 169, 169, 169, 170, 171, 171, 171, 171, 172, 172, 172, 172, 173, 173, 173, 173, 173, 173, 173, 173, 174, 174, 174, 174, 174, 174, 174, 174, 176, 176, 176, 176, 176, 176, 176, 176, 176, 176, 176, 176, 176, 176, 176, 176, 177, 177, 177, 177, 178, 178, 178, 178]
 
-/-- Certificate check for one retention table. -/
-def retOK (v : ℕ) : Bool :=
-  (retTable v).length = 65 &&
-  (List.range 65).all (fun w => V.all (fun u =>
-    !(v ≤ u && u ≤ w) || decide ((retTable v).getD (w - u) 0 + E u ≤ (retTable v).getD w 0))) &&
-  decide ((retTable v).getD 64 0 + E v ≤ 480)
+/-- Certificate check for one retention table (decidable, checked by the kernel). -/
+abbrev RetOK (v : ℕ) : Prop :=
+  (∀ w ∈ List.range 65, ∀ u ∈ V, v ≤ u → u ≤ w →
+    (retTable v).getD (w - u) 0 + E u ≤ (retTable v).getD w 0) ∧
+  (retTable v).getD 64 0 + E v ≤ 480
 
-def rndOK : Bool :=
-  rndTable.length = 720 &&
-  (List.range 720).all (fun w => V.all (fun u =>
-    !(E u ≤ w) || decide (rndTable.getD (w - E u) 0 + succ u ≤ rndTable.getD w 0))) &&
-  (List.range 720).all (fun w => decide (1440 * rndTable.getD w 0 + 243 * (720 - w) ≤ 259272))
+abbrev RndOK : Prop :=
+  (∀ w ∈ List.range 720, ∀ u ∈ V, E u ≤ w →
+    rndTable.getD (w - E u) 0 + succ u ≤ rndTable.getD w 0) ∧
+  (∀ w ∈ List.range 720, 1440 * rndTable.getD w 0 + 243 * (720 - w) ≤ 259272)
 
-theorem retOK_9 : retOK 9 = true := by decide
-theorem retOK_10 : retOK 10 = true := by decide
-theorem retOK_11 : retOK 11 = true := by decide
-theorem retOK_12 : retOK 12 = true := by decide
-theorem retOK_13 : retOK 13 = true := by decide
-theorem retOK_14 : retOK 14 = true := by decide
-theorem retOK_15 : retOK 15 = true := by decide
-theorem retOK_16 : retOK 16 = true := by decide
-theorem retOK_18 : retOK 18 = true := by decide
-theorem retOK_20 : retOK 20 = true := by decide
-theorem retOK_22 : retOK 22 = true := by decide
-theorem retOK_24 : retOK 24 = true := by decide
-theorem retOK_26 : retOK 26 = true := by decide
-theorem retOK_28 : retOK 28 = true := by decide
-theorem retOK_30 : retOK 30 = true := by decide
-theorem retOK_32 : retOK 32 = true := by decide
-theorem retOK_36 : retOK 36 = true := by decide
-theorem retOK_40 : retOK 40 = true := by decide
-theorem retOK_44 : retOK 44 = true := by decide
-theorem retOK_48 : retOK 48 = true := by decide
-theorem retOK_52 : retOK 52 = true := by decide
-theorem retOK_56 : retOK 56 = true := by decide
-theorem retOK_60 : retOK 60 = true := by decide
-theorem retOK_64 : retOK 64 = true := by decide
-theorem rndOK_true : rndOK = true := by decide
+theorem retOK_9 : RetOK 9 := by decide +kernel
+theorem retOK_10 : RetOK 10 := by decide +kernel
+theorem retOK_11 : RetOK 11 := by decide +kernel
+theorem retOK_12 : RetOK 12 := by decide +kernel
+theorem retOK_13 : RetOK 13 := by decide +kernel
+theorem retOK_14 : RetOK 14 := by decide +kernel
+theorem retOK_15 : RetOK 15 := by decide +kernel
+theorem retOK_16 : RetOK 16 := by decide +kernel
+theorem retOK_18 : RetOK 18 := by decide +kernel
+theorem retOK_20 : RetOK 20 := by decide +kernel
+theorem retOK_22 : RetOK 22 := by decide +kernel
+theorem retOK_24 : RetOK 24 := by decide +kernel
+theorem retOK_26 : RetOK 26 := by decide +kernel
+theorem retOK_28 : RetOK 28 := by decide +kernel
+theorem retOK_30 : RetOK 30 := by decide +kernel
+theorem retOK_32 : RetOK 32 := by decide +kernel
+theorem retOK_36 : RetOK 36 := by decide +kernel
+theorem retOK_40 : RetOK 40 := by decide +kernel
+theorem retOK_44 : RetOK 44 := by decide +kernel
+theorem retOK_48 : RetOK 48 := by decide +kernel
+theorem retOK_52 : RetOK 52 := by decide +kernel
+theorem retOK_56 : RetOK 56 := by decide +kernel
+theorem retOK_60 : RetOK 60 := by decide +kernel
+theorem retOK_64 : RetOK 64 := by decide +kernel
+theorem rndOK : RndOK := by decide +kernel
 
-theorem retOK_all : ∀ v ∈ V, retOK v = true := by
+theorem retOK_all : ∀ v ∈ V, RetOK v := by
   intro v hv
   simp only [V, List.mem_cons, List.not_mem_nil, or_false] at hv
   rcases hv with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
   all_goals first | exact retOK_9 | exact retOK_10 | exact retOK_11 | exact retOK_12 | exact retOK_13 | exact retOK_14 | exact retOK_15 | exact retOK_16 | exact retOK_18 | exact retOK_20 | exact retOK_22 | exact retOK_24 | exact retOK_26 | exact retOK_28 | exact retOK_30 | exact retOK_32 | exact retOK_36 | exact retOK_40 | exact retOK_44 | exact retOK_48 | exact retOK_52 | exact retOK_56 | exact retOK_60 | exact retOK_64
 
-theorem ret_bound (v : ℕ) (hv : retOK v = true) :
+theorem ret_bound (v : ℕ) (hv : RetOK v) :
     ∀ (l : List ℕ) (w : ℕ), w ≤ 64 → (∀ u ∈ l, u ∈ V ∧ v ≤ u) → l.sum ≤ w →
       (l.map E).sum ≤ (retTable v).getD w 0 := by
-  simp only [retOK, Bool.and_eq_true, decide_eq_true_eq, List.all_eq_true, List.mem_range,
-    Bool.or_eq_true, Bool.not_eq_true', Bool.and_eq_false_iff, decide_eq_false_iff_not] at hv
-  obtain ⟨⟨_, hstep⟩, _⟩ := hv
+  obtain ⟨hstep, _⟩ := hv
   intro l
   induction l with
   | nil => intro w _ _ _; simp
@@ -116,13 +112,10 @@ theorem ret_bound (v : ℕ) (hv : retOK v = true) :
     intro w hw hl hs
     have hu := hl u (by simp)
     simp only [List.sum_cons] at hs
-    have hle : u ≤ w := by omega
     have h1 := ih (w - u) (by omega) (fun x hx => hl x (by simp [hx])) (by omega)
-    have h2 := hstep w (by omega) u hu.1
+    have h2 := hstep w (List.mem_range.mpr (by omega)) u hu.1 hu.2 (by omega)
     simp only [List.map_cons, List.sum_cons]
-    rcases h2 with h2 | h2
-    · omega
-    · omega
+    omega
 
 /-- Lemma 18.3, exact knapsack: `720·(budget) ≤ 480` for every admissible prefix. -/
 theorem retention_budget (v : ℕ) (hv : v ∈ V) (l : List ℕ)
@@ -130,16 +123,13 @@ theorem retention_budget (v : ℕ) (hv : v ∈ V) (l : List ℕ)
     (l.map E).sum + E v ≤ 480 := by
   have hok := retOK_all v hv
   have h := ret_bound v hok l 64 le_rfl hl hs
-  simp only [retOK, Bool.and_eq_true, decide_eq_true_eq] at hok
+  have h2 := hok.2
   omega
 
 theorem rnd_bound :
     ∀ (l : List ℕ) (w : ℕ), w < 720 → (∀ u ∈ l, u ∈ V) → (l.map E).sum ≤ w →
       (l.map succ).sum ≤ rndTable.getD w 0 := by
-  have hv := rndOK_true
-  simp only [rndOK, Bool.and_eq_true, decide_eq_true_eq, List.all_eq_true, List.mem_range,
-    Bool.or_eq_true, Bool.not_eq_true', decide_eq_false_iff_not] at hv
-  obtain ⟨⟨_, hstep⟩, _⟩ := hv
+  obtain ⟨hstep, _⟩ := rndOK
   intro l
   induction l with
   | nil => intro w _ _ _; simp
@@ -148,19 +138,17 @@ theorem rnd_bound :
     have hu := hl u (by simp)
     simp only [List.map_cons, List.sum_cons] at hs ⊢
     have h1 := ih (w - E u) (by omega) (fun x hx => hl x (by simp [hx])) (by omega)
-    have h2 := hstep w hw u hu
-    rcases h2 with h2 | h2
-    · omega
-    · omega
+    have h2 := hstep w (List.mem_range.mpr hw) u hu (by omega)
+    omega
 
 /-- Lemma 18.4, exact knapsack: large levels of total cost `w ≤ 719` lose at most
 `(1440·Σ succ + 243·(720 - w))/92160 ≤ 259272/92160 = 3601/1280`. -/
 theorem rounding_budget (l : List ℕ) (hl : ∀ u ∈ l, u ∈ V) (hw : (l.map E).sum ≤ 719) :
     1440 * (l.map succ).sum + 243 * (720 - (l.map E).sum) ≤ 259272 := by
   have h := rnd_bound l _ (by omega) hl le_rfl
-  have hv := rndOK_true
-  simp only [rndOK, Bool.and_eq_true, decide_eq_true_eq, List.all_eq_true, List.mem_range] at hv
-  have h3 := hv.2 _ (by omega : (l.map E).sum < 720)
+  have h3 := rndOK.2 _ (List.mem_range.mpr (by omega : (l.map E).sum < 720))
+  have : 1440 * (l.map succ).sum ≤ 1440 * rndTable.getD (l.map E).sum 0 :=
+    Nat.mul_le_mul_left _ h
   omega
 
 theorem rounding_constant : (259272 : ℚ) / 92160 = 3601 / 1280 := by norm_num

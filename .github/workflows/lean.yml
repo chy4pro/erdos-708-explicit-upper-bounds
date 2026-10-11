@@ -23,6 +23,12 @@ jobs:
         run: lean --version
       - name: Mathlib cache
         run: lake exe cache get
+      - name: Restore project build cache
+        uses: actions/cache/restore@v4
+        with:
+          path: lean/.lake/build
+          key: erdos708-build-${{ github.run_id }}
+          restore-keys: erdos708-build-
       - name: Build (includes FinalCheck axiom guards)
         run: |
           set -o pipefail
@@ -35,6 +41,12 @@ jobs:
       - name: No sorry / native_decide in the build closure
         run: |
           ! grep -n "declaration uses 'sorry'" build.log
+      - name: Save project build cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: lean/.lake/build
+          key: erdos708-build-${{ github.run_id }}
       - name: Upload build log
         if: always()
         uses: actions/upload-artifact@v4
