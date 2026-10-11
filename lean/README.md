@@ -86,9 +86,9 @@ and must not be introduced into the build dependency closure.
 
 - `lakefile.toml`, `lake-manifest.json`: Lake project pinned to `leanprover/lean4:v4.34.0-rc1`
   and Mathlib `de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11` (manifest identical in its package
-  pins to the one used for the Mathlib cache). The library roots are `Erdos708.FinalCheck`
-  (whose import closure is the whole verified development) and `Erdos708.H883.Statement`;
-  planning files with `sorry` are not in the closure.
+  pins to the one used for the Mathlib cache). The library root `Erdos708.lean` imports
+  `Erdos708.FinalCheck` (whose import closure is the whole verified development) and
+  `Erdos708.H883.Statement`; planning files with `sorry` are not in the closure.
 - `../.github/workflows/lean.yml`: elan, `lake exe cache get`, `lake build`, then
   `lake env lean Erdos708/FinalCheck.lean` (must print nothing), a `sorry` grep of the build
   log, and upload of the logs. Runs on every push touching `lean/**`.
