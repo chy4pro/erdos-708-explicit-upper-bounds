@@ -58,7 +58,7 @@ jobs:
         run: |
           ! grep -n "declaration uses 'sorry'" build.log
       - name: Save project build cache
-        if: always()
+        if: success() || failure()
         uses: actions/cache/save@v4
         with:
           path: lean/.lake/build
