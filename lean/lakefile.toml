@@ -1,0 +1,15 @@
+name = "erdos708"
+version = "0.1.0"
+defaultTargets = ["Erdos708"]
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11"
+
+# Only the verified closure is built: FinalCheck (which imports every headline chain and freezes
+# its axioms with #guard_msgs) and the Section 18 statement file. Planning files with `sorry`
+# (SparseCore.lean, H97/Cards.lean, H17/Chain19/Cards.lean) are outside this closure.
+[[lean_lib]]
+name = "Erdos708"
+roots = ["Erdos708.FinalCheck", "Erdos708.H883.Statement"]

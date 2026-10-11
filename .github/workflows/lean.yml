@@ -1,0 +1,45 @@
+name: erdos708-lean
+on:
+  push:
+    paths:
+      - 'lean/**'
+      - '.github/workflows/lean.yml'
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    defaults:
+      run:
+        shell: bash
+        working-directory: lean
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan
+        run: |
+          curl -sSf https://elan.lean-lang.org/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Toolchain
+        run: lean --version
+      - name: Mathlib cache
+        run: lake exe cache get
+      - name: Build (includes FinalCheck axiom guards)
+        run: |
+          set -o pipefail
+          lake build 2>&1 | tee build.log
+      - name: FinalCheck (success = no output)
+        run: |
+          set -o pipefail
+          lake env lean Erdos708/FinalCheck.lean 2>&1 | tee finalcheck.log
+          test ! -s finalcheck.log
+      - name: No sorry / native_decide in the build closure
+        run: |
+          ! grep -n "declaration uses 'sorry'" build.log
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: |
+            lean/build.log
+            lean/finalcheck.log

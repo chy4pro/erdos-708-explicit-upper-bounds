@@ -46,3 +46,52 @@ server-side by the Prove2Me platform (mission "Erdős 708: the sparse-core inequ
 `Erdos708SparseCore.{hinge_le_esymm, moment_bound, numerical_bound, sparse_core}`).
 Definitions were read against the paper by the orchestrator; the composition theorems contain no proof holes; the axiom
 audit above is the whole trust basis.
+
+## 2026-10-11 — Section 18 statement awaiting audit
+
+PARTIAL — [H883/Statement.lean](Erdos708/H883/Statement.lean) now records
+definitions of the exact Section 18 targets. These are specifications, not
+proved or compiled declarations:
+
+- `Erdos708H883.Hinge883`: for every existing `AtomSystem`, every `m >= 1`
+  and `x : Nat`, the threshold-`56501/6400` hinge sum over `[1,m]` is at
+  most the threshold-1 sum over `[x+1,x+m]`.
+- `Erdos708H883.CeilingBound883`: every nonempty finite set `A` of natural
+  numbers at least 2, every maximum `M` of `A`, and every `x : Nat` admit
+  `B` in `[x+1,x+M]` with `prod A` dividing `prod B` and
+  `B.card <= ceil((56501/6400) * A.card) + 2 * A.card`.
+- `Erdos708H883.Bound11`: the unchanged Mathlib-only reference proposition
+  `Erdos708Statement.g_le 11`. The eventual headline theorem will be
+  `Erdos708H883.g_le_11n : Erdos708Statement.g_le 11`.
+
+There is no additional onset, sparsity assumption, or rational-weight
+restriction in these targets. Section 18's optional barrier below 2 is
+deferred. The constants to preserve in the proof are `Q = 2^16`,
+`Hstar = 1025/1024`, `rho = 9/8`, `T = 401/75`, and `D0 = 3601/1280`.
+The numerical card must certify all 57 finite scales (one at `L = 8`,
+eight each at `L = 16,32,64,128,256,512,1024`), with total strictly below
+`990415/10^6`, and the tail starting at `L = 2048`, strictly below `1/1000`.
+The paper's combined factor remains exactly `198283/200000`.
+
+The coordinator must audit the statement file before proof implementation.
+After that gate, the first build milestone is GitHub Actions reproduction
+of the existing `g_le_12n` chain and its seven headline axiom guards with
+Lean `v4.34.0-rc1` and Mathlib
+`de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11`. Section 18 proof cards and
+guards for every new top-level theorem follow only after that baseline.
+Historical planning files with proof placeholders are not proof modules
+and must not be introduced into the build dependency closure.
+
+### Step 0: Lake project and GitHub Actions (2026-10-11)
+
+- `lakefile.toml`, `lake-manifest.json`: Lake project pinned to `leanprover/lean4:v4.34.0-rc1`
+  and Mathlib `de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11` (manifest identical in its package
+  pins to the one used for the Mathlib cache). The library roots are `Erdos708.FinalCheck`
+  (whose import closure is the whole verified development) and `Erdos708.H883.Statement`;
+  planning files with `sorry` are not in the closure.
+- `../.github/workflows/lean.yml`: elan, `lake exe cache get`, `lake build`, then
+  `lake env lean Erdos708/FinalCheck.lean` (must print nothing), a `sorry` grep of the build
+  log, and upload of the logs. Runs on every push touching `lean/**`.
+- `CI_LOG.md`: every CI run (id, commit, result).
+
+No Section 18 theorem is claimed kernel-checked yet.
