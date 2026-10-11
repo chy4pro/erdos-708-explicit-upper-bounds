@@ -130,7 +130,7 @@ theorem run_spec : ∀ (k n c : ℕ) (L : List ℕ) (c' : ℕ), run n k c L = so
                 refine ⟨c + 1, t, h, ?_, hd⟩
                 rw [Nat.count_succ]
                 split_ifs <;> omega
-              · rw [if_neg (by simpa using hd)] at h
+              · rw [if_neg (fun h' => hd (of_decide_eq_true h'))] at h
                 simp at h
             · rw [if_neg ha] at h
               by_cases hs : (hasSmall n && decide (densP n c)) = true
