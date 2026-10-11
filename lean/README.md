@@ -107,5 +107,11 @@ and must not be introduced into the build dependency closure.
   (40π(ν) ≤ 9ν on [210, 32768), 20π(ν) ≤ 3ν on [2310, 2^17), 8π(ν) ≤ ν on [30030, 2^21)), from one
   `decide +kernel` pass over n < 2^21 in 512 chunks; the prime list is only a hint (`run_spec`).
   The analytic part of Lemma 18.6 (ν beyond these ranges) is not formalised.
+- `Erdos708/H883/Bound.lean`: the reduction steps, conditional on the (unproved) hinge inequality:
+  `bound883_of_hinge : Hinge883 → CeilingBound883` (Theorem 16.1 at c = 56501/6400, through the
+  threshold-generic weight transfer of `H97/Proofs/WeightTransfer.lean`), `g_le_11n_of_bound :
+  CeilingBound883 → Bound11` (⌈cn⌉ + 2n ≤ 11n), and `g_le_11n_of_hinge`. Their axioms are frozen in
+  `FinalCheck.lean`. `H883/Statement.lean` passed the statement audit (AUT-137) and is frozen.
+- `Erdos708/H883/Audit.lean`: informational `#print axioms` for the card theorems.
 
 No Section 18 theorem is claimed kernel-checked until CI_LOG.md records a green run.

@@ -5,3 +5,5 @@ import Erdos708.FinalCheck
 import Erdos708.H883.Statement
 import Erdos708.H883.Knapsack
 import Erdos708.H883.PrimeDensity
+import Erdos708.H883.Bound
+import Erdos708.H883.Audit

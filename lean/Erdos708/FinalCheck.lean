@@ -15,6 +15,7 @@ import Erdos708.Final
 import Erdos708.H17.Chain
 import Erdos708.H17.Chain19.Results
 import Erdos708.H97.Chain
+import Erdos708.H883.Bound
 
 -- Section 14: g(n) ≤ 81n for all n.
 /--
@@ -88,3 +89,28 @@ info: 'reference_g_le_19' depends on axioms: [propext, Classical.choice, Quot.so
 -/
 #guard_msgs in
 #print axioms reference_g_le_19
+
+/-!
+### Section 18 (threshold 56501/6400): the reduction, conditional on the hinge inequality
+
+`Erdos708H883.Hinge883` is not yet proved. These guards freeze the axioms of the two reduction
+steps `Hinge883 → CeilingBound883 → Bound11` (with `Bound11 := Erdos708Statement.g_le 11`).
+-/
+
+/--
+info: 'Erdos708H883.bound883_of_hinge' depends on axioms: [propext, Classical.choice, Quot.sound]
+-/
+#guard_msgs in
+#print axioms Erdos708H883.bound883_of_hinge
+
+/--
+info: 'Erdos708H883.g_le_11n_of_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+-/
+#guard_msgs in
+#print axioms Erdos708H883.g_le_11n_of_bound
+
+/--
+info: 'Erdos708H883.g_le_11n_of_hinge' depends on axioms: [propext, Classical.choice, Quot.sound]
+-/
+#guard_msgs in
+#print axioms Erdos708H883.g_le_11n_of_hinge
