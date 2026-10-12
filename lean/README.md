@@ -119,4 +119,7 @@ and must not be introduced into the build dependency closure.
   `FinalCheck.lean`. `H883/Statement.lean` passed the statement audit (AUT-137) and is frozen.
 - `Erdos708/H883/Audit.lean`: informational `#print axioms` for the card theorems.
 
-No Section 18 theorem is claimed kernel-checked until CI_LOG.md records a green run.
+Kernel-checked on CI (run 38186242356, 2026-10-12): the Knapsack and PrimeDensity cards and the
+conditional reduction `g_le_11n_of_hinge`. `Hinge883` itself, and hence `g_le 11`, is **not**
+proved: the Section 18 rounding/carrier layers, the analytic part of Lemma 18.6, the window-value
+and pointwise bounds, and the 57 exact scales are not formalised.
